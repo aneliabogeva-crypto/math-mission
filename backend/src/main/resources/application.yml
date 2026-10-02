@@ -16,6 +16,8 @@ spring:
     time-zone: Europe/Sofia
 
 server:
+  # Behind Render/Codespaces proxies: use X-Forwarded-* so rate limiting sees the real client address.
+  forward-headers-strategy: framework
   error:
     include-stacktrace: never
     include-message: always

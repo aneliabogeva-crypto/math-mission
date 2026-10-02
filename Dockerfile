@@ -24,4 +24,4 @@ COPY --from=api /src/target/math-mission-backend-*.jar /app/app.jar
 # For real use set SPRING_PROFILES_ACTIVE=postgres and DB_URL/DB_USER/DB_PASSWORD.
 ENV SPRING_PROFILES_ACTIVE=dev PORT=8080
 EXPOSE 8080
-ENTRYPOINT ["sh", "-c", "java -XX:MaxRAMPercentage=75 -Dserver.port=${PORT} -jar /app/app.jar"]
+ENTRYPOINT ["sh", "-c", "java -XX:MaxRAMPercentage=70 -XX:+UseSerialGC -Xss512k -XX:TieredStopAtLevel=1 -Dserver.port=${PORT} -jar /app/app.jar"]

@@ -6,6 +6,15 @@ A mobile-first PWA for Grade 7 algebra in Bulgaria. It covers rational expressio
 * **backend/**: Java 21+ / Spring Boot 3.5 modular monolith, REST + OpenAPI, Flyway, PostgreSQL (H2 for zero-setup dev and tests)
 * **frontend/**: React 18 + TypeScript + Vite PWA, written in Bulgarian, mobile-first from 320 px, light and dark themes
 
+## Open it
+
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/aneliabogeva-crypto/math-mission)
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/aneliabogeva-crypto/math-mission)
+
+* **Deploy to Render** creates a permanent public link (free plan). The first build takes about 5–10 minutes. After 15 minutes
+  without visitors the free service sleeps, and the next visit takes about a minute to wake it. Demo data resets on every redeploy.
+* **Codespaces** gives you a private, temporary copy that runs in your browser.
+
 ## Run it
 
 ### In the browser, with nothing installed (GitHub Codespaces)
