@@ -110,6 +110,20 @@ jobs:
         run: |
           eval jpackage $JP_OPTS --type deb --icon packaging/math-mission.png --linux-shortcut --linux-menu-group Education
           mv out/*.deb MathMission-${APP_VERSION}-linux-amd64.deb
+      - name: Smoke test the installed app
+        if: runner.os == 'Linux'
+        shell: bash
+        run: |
+          sudo dpkg -i MathMission-${APP_VERSION}-linux-amd64.deb
+          LAUNCHER=$(dpkg -L mathmission | grep '/bin/MathMission$')
+          "$LAUNCHER" > app.log 2>&1 &
+          for i in $(seq 1 60); do curl -fs http://localhost:18080/actuator/health > /dev/null && break; sleep 2; done
+          curl -fs http://localhost:18080/actuator/health || { echo "::error title=smoke::$(tail -c 1500 app.log | tr '\n' ' ')"; exit 1; }
+          curl -fs http://localhost:18080/ | grep -q '<div id="root">' || { echo "::error title=smoke::web app not served"; exit 1; }
+          curl -fs http://localhost:18080/manifest.webmanifest | grep -q icon-512.png
+          curl -fs http://localhost:18080/api/public/curriculum | grep -q B3
+          test -d ~/MathMission/data
+          echo "::notice title=smoke::Installed app started, served the PWA and API, and stored data in ~/MathMission"
 
       - uses: actions/upload-artifact@v4
         with:
