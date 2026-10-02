@@ -33,12 +33,12 @@ public class GuardianController {
 
     @GetMapping("/children")
     public List<GuardianService.ChildSummary> children() {
-        return guardian.summaries(CurrentUser.id());
+        return guardian.summaries(CurrentUser.currentId());
     }
 
     @PostMapping("/consents/{id}/withdraw")
     public Map<String, Object> withdraw(@PathVariable UUID id) {
-        consent.withdraw(CurrentUser.id(), id);
+        consent.withdraw(CurrentUser.currentId(), id);
         return Map.of("status", "WITHDRAWN", "consequences", bg.mathmission.consent.ConsentTexts.withdrawalConsequences());
     }
 
@@ -46,19 +46,19 @@ public class GuardianController {
 
     @PutMapping("/consents/{id}/notifications")
     public Map<String, String> notifications(@PathVariable UUID id, @RequestBody Notifications req) {
-        consent.setNotifications(CurrentUser.id(), id, req.frequency());
+        consent.setNotifications(CurrentUser.currentId(), id, req.frequency());
         return Map.of("frequency", req.frequency().name());
     }
 
     @GetMapping("/consents/{id}/export")
     public Map<String, Object> export(@PathVariable UUID id) {
-        consent.recordExport(CurrentUser.id(), id);
-        return guardian.export(CurrentUser.id(), id);
+        consent.recordExport(CurrentUser.currentId(), id);
+        return guardian.export(CurrentUser.currentId(), id);
     }
 
     @PostMapping("/consents/{id}/deletion-request")
     public Map<String, Object> deletion(@PathVariable UUID id) {
-        PrivacyRequest r = consent.request(CurrentUser.id(), id, PrivacyRequest.Kind.DELETION);
+        PrivacyRequest r = consent.request(CurrentUser.currentId(), id, PrivacyRequest.Kind.DELETION);
         return Map.of("requestId", r.getId(), "status", r.getStatus(),
                 "message", "Заявката е приета. Данните ще бъдат изтрити по документираната процедура и ще получите потвърждение.");
     }

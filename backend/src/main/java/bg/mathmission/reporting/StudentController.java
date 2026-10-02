@@ -82,7 +82,7 @@ public class StudentController {
 
     @GetMapping("/home")
     public StudentHomeService.Home home() {
-        return home.home(CurrentUser.id());
+        return home.home(CurrentUser.currentId());
     }
 
     public record ProfileUpdate(String avatar, UserAccount.LearningGoal goal, @Min(1) @Max(7) Integer weeklyGoal,
@@ -91,7 +91,7 @@ public class StudentController {
     @PatchMapping("/profile")
     @Transactional
     public StudentHomeService.Profile updateProfile(@Valid @RequestBody ProfileUpdate req) {
-        UserAccount u = users.findById(CurrentUser.id()).orElseThrow();
+        UserAccount u = users.findById(CurrentUser.currentId()).orElseThrow();
         if (req.avatar() != null) {
             if (!AuthController.AVATARS.contains(req.avatar())) throw ApiException.badRequest("AVATAR", "Избери аватар от списъка.");
             u.setAvatar(req.avatar());
@@ -106,12 +106,12 @@ public class StudentController {
 
     @GetMapping("/map")
     public List<ProgressService.MapZone> map() {
-        return progress.map(CurrentUser.id());
+        return progress.map(CurrentUser.currentId());
     }
 
     @GetMapping("/plan")
     public List<ProgressService.PlanDay> plan() {
-        return progress.revisionPlan(CurrentUser.id());
+        return progress.revisionPlan(CurrentUser.currentId());
     }
 
     // ------------------------------------------------------------------ lessons
@@ -128,7 +128,7 @@ public class StudentController {
         LessonModel content = l.content();
         Map<String, StudentQuestionView> qs = practice.questions(content.allQuestionKeys()).stream()
                 .collect(Collectors.toMap(StudentQuestionView::key, Function.identity(), (a, b) -> a));
-        LessonProgress p = progress.lessonProgress(CurrentUser.id()).stream()
+        LessonProgress p = progress.lessonProgress(CurrentUser.currentId()).stream()
                 .filter(x -> x.getLessonKey().equals(key)).findFirst().orElse(null);
         return new LessonView(l.getLessonKey(), l.getPath(), l.getTitle(), l.getVersion(), l.getAcademicYear(),
                 l.getLearningOutcome(), content, qs, p == null ? 0 : p.getPosition(), p == null ? 0 : p.getMaxPosition(),
@@ -139,7 +139,7 @@ public class StudentController {
 
     @PutMapping("/lessons/{key}/position")
     public ProgressService.LessonPosition savePosition(@PathVariable String key, @Valid @RequestBody PositionUpdate req) {
-        return progress.saveLessonPosition(CurrentUser.id(), key, req.position(), req.completed());
+        return progress.saveLessonPosition(CurrentUser.currentId(), key, req.position(), req.completed());
     }
 
     // ------------------------------------------------------------------ practice
@@ -159,13 +159,13 @@ public class StudentController {
 
     @PostMapping("/practice/{key}/check")
     public PracticeService.Feedback check(@PathVariable String key, @Valid @RequestBody PracticeCheck req) {
-        return practice.check(CurrentUser.id(), key, req.answer(), req.hintsUsed(), req.requestId(), req.lessonKey());
+        return practice.check(CurrentUser.currentId(), key, req.answer(), req.hintsUsed(), req.requestId(), req.lessonKey());
     }
 
     @GetMapping("/mistakes")
     @Transactional(readOnly = true)
     public List<PracticeService.MistakeGroup> mistakes() {
-        UUID me = CurrentUser.id();
+        UUID me = CurrentUser.currentId();
         List<UUID> submitted = attempts.findByStudentIdOrderByStartedAtDesc(me).stream()
                 .filter(a -> a.getStatus() == TestAttempt.Status.SUBMITTED).map(TestAttempt::getId).toList();
         List<Misconception> fromTests = submitted.isEmpty() ? List.of() : responses.findByAttemptIdIn(submitted).stream()
@@ -184,26 +184,26 @@ public class StudentController {
 
     @GetMapping("/tests")
     public List<TestSummary> tests() {
-        return assessment.availableTests(CurrentUser.id());
+        return assessment.availableTests(CurrentUser.currentId());
     }
 
     public record StartAttempt(UUID attemptId, UUID assignmentId) {}
 
     @PostMapping("/tests/{testId}/attempts")
     public AttemptView start(@PathVariable UUID testId, @RequestBody(required = false) StartAttempt req) {
-        return assessment.start(CurrentUser.id(), testId, req == null ? null : req.attemptId(), req == null ? null : req.assignmentId());
+        return assessment.start(CurrentUser.currentId(), testId, req == null ? null : req.attemptId(), req == null ? null : req.assignmentId());
     }
 
     @GetMapping("/attempts")
     public List<Map<String, Object>> myAttempts() {
-        return attempts.findByStudentIdOrderByStartedAtDesc(CurrentUser.id()).stream().map(a -> Map.<String, Object>of(
+        return attempts.findByStudentIdOrderByStartedAtDesc(CurrentUser.currentId()).stream().map(a -> Map.<String, Object>of(
                 "id", a.getId(), "testId", a.getTestId(), "status", a.getStatus(), "startedAt", a.getStartedAt(),
                 "percent", a.getPercent() == null ? "" : a.getPercent())).toList();
     }
 
     @GetMapping("/attempts/{id}")
     public AttemptView attempt(@PathVariable UUID id) {
-        return assessment.get(CurrentUser.id(), id);
+        return assessment.get(CurrentUser.currentId(), id);
     }
 
     public record SaveItem(@NotBlank @Size(max = 64) String requestId, AnswerPayload answer, boolean markedForReview,
@@ -212,22 +212,22 @@ public class StudentController {
     /** Autosave after every answer. Retried requests with the same requestId are acknowledged without changes. */
     @PutMapping("/attempts/{id}/items/{position}")
     public SaveAck save(@PathVariable UUID id, @PathVariable int position, @Valid @RequestBody SaveItem req) {
-        return assessment.save(CurrentUser.id(), id, position, req.requestId(), req.answer(), req.markedForReview(), req.lastPosition());
+        return assessment.save(CurrentUser.currentId(), id, position, req.requestId(), req.answer(), req.markedForReview(), req.lastPosition());
     }
 
     @PostMapping("/attempts/{id}/items/{position}/hints/{level}")
     public Map<String, Object> testHint(@PathVariable UUID id, @PathVariable int position, @PathVariable int level) {
-        return Map.of("level", level, "text", assessment.hint(CurrentUser.id(), id, position, level));
+        return Map.of("level", level, "text", assessment.hint(CurrentUser.currentId(), id, position, level));
     }
 
     @PostMapping("/attempts/{id}/submit")
     public ResultView submit(@PathVariable UUID id) {
-        return assessment.submit(CurrentUser.id(), id);
+        return assessment.submit(CurrentUser.currentId(), id);
     }
 
     @GetMapping("/attempts/{id}/result")
     public ResultView result(@PathVariable UUID id) {
-        return assessment.result(CurrentUser.id(), id);
+        return assessment.result(CurrentUser.currentId(), id);
     }
 
     // ------------------------------------------------------------------ classes
@@ -236,7 +236,7 @@ public class StudentController {
 
     @PostMapping("/classes/join")
     public Map<String, Object> join(@Valid @RequestBody JoinClass req) {
-        ClassroomService.ClassView c = classroom.join(CurrentUser.id(), req.code());
+        ClassroomService.ClassView c = classroom.join(CurrentUser.currentId(), req.code());
         return Map.of("classId", c.id(), "name", c.name()); // no code or member list is exposed to students
     }
 }

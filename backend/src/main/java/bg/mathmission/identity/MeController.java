@@ -48,7 +48,7 @@ public class MeController {
 
     @PostMapping("/logout")
     public Map<String, String> logout() {
-        sessions.closeAll(CurrentUser.id());
+        sessions.closeAll(CurrentUser.currentId());
         return Map.of("status", "ok");
     }
 }

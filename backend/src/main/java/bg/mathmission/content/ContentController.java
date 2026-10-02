@@ -84,7 +84,7 @@ public class ContentController {
     @PreAuthorize("hasRole('AUTHOR')")
     @Transactional
     public QuestionAdminView create(@RequestBody NewQuestion req) {
-        Question q = content.createQuestion(CurrentUser.id(), req.existingKey(), req.draft());
+        Question q = content.createQuestion(CurrentUser.currentId(), req.existingKey(), req.draft());
         return QuestionAdminView.of(q, content.validateQuestion(q.toDraft()));
     }
 
@@ -92,7 +92,7 @@ public class ContentController {
     @PreAuthorize("hasRole('AUTHOR')")
     @Transactional
     public QuestionAdminView update(@PathVariable UUID id, @RequestBody QuestionDraft draft) {
-        Question q = content.updateQuestionDraft(CurrentUser.id(), id, draft);
+        Question q = content.updateQuestionDraft(CurrentUser.currentId(), id, draft);
         return QuestionAdminView.of(q, content.validateQuestion(q.toDraft()));
     }
 
@@ -100,7 +100,7 @@ public class ContentController {
     @PreAuthorize("hasRole('AUTHOR')")
     @Transactional
     public QuestionAdminView submit(@PathVariable UUID id) {
-        return QuestionAdminView.of(content.submitQuestion(CurrentUser.id(), id), List.of());
+        return QuestionAdminView.of(content.submitQuestion(CurrentUser.currentId(), id), List.of());
     }
 
     public record Review(boolean approve, String comment) {}
@@ -109,7 +109,7 @@ public class ContentController {
     @PreAuthorize("hasRole('REVIEWER')")
     @Transactional
     public QuestionAdminView review(@PathVariable UUID id, @RequestBody Review req) {
-        return QuestionAdminView.of(content.reviewQuestion(CurrentUser.id(), id, req.approve(), req.comment()), List.of());
+        return QuestionAdminView.of(content.reviewQuestion(CurrentUser.currentId(), id, req.approve(), req.comment()), List.of());
     }
 
     public record Withdraw(String reason) {}
@@ -118,7 +118,7 @@ public class ContentController {
     @PreAuthorize("hasAnyRole('REVIEWER','ADMIN')")
     @Transactional
     public QuestionAdminView withdraw(@PathVariable String key, @RequestBody Withdraw req) {
-        return QuestionAdminView.of(content.withdrawQuestion(CurrentUser.id(), CurrentUser.get().role(), key, req.reason()), List.of());
+        return QuestionAdminView.of(content.withdrawQuestion(CurrentUser.currentId(), CurrentUser.get().role(), key, req.reason()), List.of());
     }
 
     public record Correction(QuestionModel.AnswerKey key, String reason) {}
@@ -127,7 +127,7 @@ public class ContentController {
     @PreAuthorize("hasAnyRole('REVIEWER','ADMIN')")
     @Transactional
     public QuestionAdminView correct(@PathVariable String key, @RequestBody Correction req) {
-        return QuestionAdminView.of(content.correctAnswerKey(CurrentUser.id(), CurrentUser.get().role(), key, req.key(), req.reason()), List.of());
+        return QuestionAdminView.of(content.correctAnswerKey(CurrentUser.currentId(), CurrentUser.get().role(), key, req.key(), req.reason()), List.of());
     }
 
     @GetMapping("/history/{key}")
@@ -153,7 +153,7 @@ public class ContentController {
     @PreAuthorize("hasRole('AUTHOR')")
     @Transactional
     public LessonAdminView createLesson(@RequestBody NewLesson req) {
-        return LessonAdminView.of(content.createLesson(CurrentUser.id(), req.lessonKey(), req.content()));
+        return LessonAdminView.of(content.createLesson(CurrentUser.currentId(), req.lessonKey(), req.content()));
     }
 
     public record LessonUpdate(String title, LessonModel content) {}
@@ -162,20 +162,20 @@ public class ContentController {
     @PreAuthorize("hasRole('AUTHOR')")
     @Transactional
     public LessonAdminView updateLesson(@PathVariable UUID id, @RequestBody LessonUpdate req) {
-        return LessonAdminView.of(content.updateLessonDraft(CurrentUser.id(), id, req.title(), req.content()));
+        return LessonAdminView.of(content.updateLessonDraft(CurrentUser.currentId(), id, req.title(), req.content()));
     }
 
     @PostMapping("/lessons/{id}/submit")
     @PreAuthorize("hasRole('AUTHOR')")
     @Transactional
     public LessonAdminView submitLesson(@PathVariable UUID id) {
-        return LessonAdminView.of(content.submitLesson(CurrentUser.id(), id));
+        return LessonAdminView.of(content.submitLesson(CurrentUser.currentId(), id));
     }
 
     @PostMapping("/lessons/{id}/review")
     @PreAuthorize("hasRole('REVIEWER')")
     @Transactional
     public LessonAdminView reviewLesson(@PathVariable UUID id, @RequestBody Review req) {
-        return LessonAdminView.of(content.reviewLesson(CurrentUser.id(), id, req.approve(), req.comment()));
+        return LessonAdminView.of(content.reviewLesson(CurrentUser.currentId(), id, req.approve(), req.comment()));
     }
 }

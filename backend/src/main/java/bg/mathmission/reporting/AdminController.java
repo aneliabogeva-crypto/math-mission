@@ -35,7 +35,7 @@ public class AdminController {
 
     @PostMapping("/staff")
     public AdminService.NewStaff createStaff(@RequestBody StaffRequest req) {
-        return admin.createStaff(CurrentUser.id(), req.role(), req.username(), req.displayName(), req.password());
+        return admin.createStaff(CurrentUser.currentId(), req.role(), req.username(), req.displayName(), req.password());
     }
 
     @GetMapping("/access-review")
@@ -45,7 +45,7 @@ public class AdminController {
 
     @PostMapping("/users/{id}/disable")
     public Map<String, String> disable(@PathVariable UUID id) {
-        admin.disable(CurrentUser.id(), id);
+        admin.disable(CurrentUser.currentId(), id);
         return Map.of("status", "RESTRICTED");
     }
 
@@ -63,17 +63,17 @@ public class AdminController {
 
     @PostMapping("/assessment-models")
     public AdminService.BlueprintView createBlueprint(@RequestBody BlueprintRequest req) {
-        return admin.createBlueprint(CurrentUser.id(), req.name(), req.academicYear(), req.composition(), req.timeLimitMin());
+        return admin.createBlueprint(CurrentUser.currentId(), req.name(), req.academicYear(), req.composition(), req.timeLimitMin());
     }
 
     @PostMapping("/assessment-models/{id}/approve")
     public AdminService.BlueprintView approve(@PathVariable UUID id) {
-        return admin.approveBlueprint(CurrentUser.id(), id);
+        return admin.approveBlueprint(CurrentUser.currentId(), id);
     }
 
     @PostMapping("/tests/{id}/publish")
     public TestAuthoringService.Preview publishTest(@PathVariable UUID id) {
-        return authoring.publish(CurrentUser.id(), id, true);
+        return authoring.publish(CurrentUser.currentId(), id, true);
     }
 
     @GetMapping("/privacy-requests")
@@ -83,7 +83,7 @@ public class AdminController {
 
     @PostMapping("/privacy-requests/{id}/complete")
     public Map<String, String> complete(@PathVariable UUID id) {
-        admin.completePrivacyRequest(CurrentUser.id(), id);
+        admin.completePrivacyRequest(CurrentUser.currentId(), id);
         return Map.of("status", "COMPLETED");
     }
 }

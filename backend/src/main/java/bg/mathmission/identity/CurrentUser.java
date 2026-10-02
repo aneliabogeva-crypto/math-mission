@@ -16,7 +16,7 @@ public record CurrentUser(UUID id, Role role, AccountStatus status) {
         throw new ApiException(org.springframework.http.HttpStatus.UNAUTHORIZED, "UNAUTHENTICATED", "Влез в профила си.");
     }
 
-    public static UUID id() {
+    public static UUID currentId() {
         return get().id();
     }
 }

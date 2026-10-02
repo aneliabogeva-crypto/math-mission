@@ -65,33 +65,33 @@ public class TeacherController {
 
     @PostMapping("/classes")
     public ClassroomService.ClassView createClass(@RequestBody NewClass req) {
-        return classroom.create(CurrentUser.id(), req.name());
+        return classroom.create(CurrentUser.currentId(), req.name());
     }
 
     @GetMapping("/classes")
     public List<ClassroomService.ClassView> classes() {
-        return classroom.mine(CurrentUser.id());
+        return classroom.mine(CurrentUser.currentId());
     }
 
     @PostMapping("/classes/{id}/code/revoke")
     public ClassroomService.ClassView revoke(@PathVariable UUID id) {
-        return classroom.revokeCode(CurrentUser.id(), id);
+        return classroom.revokeCode(CurrentUser.currentId(), id);
     }
 
     @PostMapping("/classes/{id}/code/regenerate")
     public ClassroomService.ClassView regenerate(@PathVariable UUID id) {
-        return classroom.newCode(CurrentUser.id(), id);
+        return classroom.newCode(CurrentUser.currentId(), id);
     }
 
     @GetMapping("/classes/{id}/members")
     public List<ClassroomService.MemberView> members(@PathVariable UUID id) {
-        return classroom.members(CurrentUser.id(), id);
+        return classroom.members(CurrentUser.currentId(), id);
     }
 
     @DeleteMapping("/classes/{id}/members/{studentId}")
     @Operation(summary = "Remove a student from the class (the student account is kept)")
     public Map<String, String> remove(@PathVariable UUID id, @PathVariable UUID studentId) {
-        classroom.removeStudent(CurrentUser.id(), id, studentId);
+        classroom.removeStudent(CurrentUser.currentId(), id, studentId);
         return Map.of("status", "REMOVED");
     }
 
@@ -99,12 +99,12 @@ public class TeacherController {
 
     @PostMapping("/classes/{id}/assignments")
     public ClassroomService.AssignmentView assign(@PathVariable UUID id, @RequestBody ClassroomService.AssignmentRequest req) {
-        return classroom.assign(CurrentUser.id(), id, req);
+        return classroom.assign(CurrentUser.currentId(), id, req);
     }
 
     @GetMapping("/classes/{id}/assignments")
     public List<ClassroomService.AssignmentView> assignments(@PathVariable UUID id) {
-        return classroom.forClass(CurrentUser.id(), id);
+        return classroom.forClass(CurrentUser.currentId(), id);
     }
 
     /** Exactly what students will see: the student-safe view, without answer keys. */
@@ -127,7 +127,7 @@ public class TeacherController {
 
     @GetMapping("/tests")
     public List<Map<String, Object>> catalog() {
-        UUID me = CurrentUser.id();
+        UUID me = CurrentUser.currentId();
         return tests.findAll().stream()
                 .filter(t -> t.getStatus() == TestDefinition.Status.PUBLISHED || t.getCreatedBy().equals(me))
                 .filter(t -> t.getKind() != TestDefinition.Kind.TEACHER || t.getCreatedBy().equals(me))
@@ -139,14 +139,14 @@ public class TeacherController {
 
     @PostMapping("/tests/generate")
     public TestAuthoringService.Preview generate(@RequestBody TestAuthoringService.GenerateRequest req) {
-        return authoring.generate(CurrentUser.id(), req);
+        return authoring.generate(CurrentUser.currentId(), req);
     }
 
     /** Full preview with scoring configuration and answer key (teacher only). */
     @GetMapping("/tests/{id}/preview")
     public TestAuthoringService.Preview preview(@PathVariable UUID id) {
         TestDefinition t = tests.findById(id).orElseThrow(() -> ApiException.notFound("Тест"));
-        if (t.getKind() == TestDefinition.Kind.TEACHER && !t.getCreatedBy().equals(CurrentUser.id())) {
+        if (t.getKind() == TestDefinition.Kind.TEACHER && !t.getCreatedBy().equals(CurrentUser.currentId())) {
             throw ApiException.forbidden("Тестът не е ваш.");
         }
         return authoring.preview(id);
@@ -154,7 +154,7 @@ public class TeacherController {
 
     @PostMapping("/tests/{id}/publish")
     public TestAuthoringService.Preview publish(@PathVariable UUID id) {
-        return authoring.publish(CurrentUser.id(), id, false);
+        return authoring.publish(CurrentUser.currentId(), id, false);
     }
 
     @GetMapping("/assessment-models")
@@ -169,18 +169,18 @@ public class TeacherController {
 
     @GetMapping("/classes/{classId}/tests/{testId}/report")
     public TeacherAnalyticsService.TestReport report(@PathVariable UUID classId, @PathVariable UUID testId) {
-        return analytics.testReport(CurrentUser.id(), classId, testId);
+        return analytics.testReport(CurrentUser.currentId(), classId, testId);
     }
 
     @GetMapping("/classes/{classId}/skills")
     public List<TeacherAnalyticsService.ClassSkillOverview> skills(@PathVariable UUID classId) {
-        return analytics.skillOverview(CurrentUser.id(), classId);
+        return analytics.skillOverview(CurrentUser.currentId(), classId);
     }
 
     @GetMapping("/attempts/{attemptId}")
     public ResultView attempt(@PathVariable UUID attemptId) {
         TestAttempt a = attempts.findById(attemptId).orElseThrow(() -> ApiException.notFound("Опит"));
-        if (!classroom.studentsOfTeacher(CurrentUser.id()).contains(a.getStudentId())) {
+        if (!classroom.studentsOfTeacher(CurrentUser.currentId()).contains(a.getStudentId())) {
             throw ApiException.forbidden("Ученикът не е във ваш клас.");
         }
         return assessment.resultForStaff(attemptId);
@@ -190,13 +190,13 @@ public class TeacherController {
 
     @GetMapping("/review-queue")
     public List<AssessmentService.ReviewQueueItem> queue() {
-        return assessment.reviewQueue(classroom.studentsOfTeacher(CurrentUser.id()));
+        return assessment.reviewQueue(classroom.studentsOfTeacher(CurrentUser.currentId()));
     }
 
     public record Score(double points, String comment) {}
 
     @PostMapping("/review-queue/{itemId}")
     public ResultView score(@PathVariable UUID itemId, @RequestBody Score req) {
-        return assessment.teacherScore(CurrentUser.id(), classroom.studentsOfTeacher(CurrentUser.id()), itemId, req.points(), req.comment());
+        return assessment.teacherScore(CurrentUser.currentId(), classroom.studentsOfTeacher(CurrentUser.currentId()), itemId, req.points(), req.comment());
     }
 }
