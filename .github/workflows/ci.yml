@@ -17,6 +17,10 @@ jobs:
         run: |
           set -o pipefail
           mvn -B test 2>&1 | tee ../maven.log
+      - name: Test summary
+        if: always()
+        shell: bash
+        run: grep -E 'Tests run:.*Fail' maven.log | grep -v ' in ' | tail -1 | sed -E 's#.*(Tests run.*)#::notice title=Backend tests::\1#' || true
       - name: Report build errors as annotations
         if: failure()
         shell: bash
