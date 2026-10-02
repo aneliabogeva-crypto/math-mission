@@ -180,10 +180,12 @@ function mapZones(studentId: string) {
   }));
 }
 
+const kindLabel = (k: string) => (k === 'DIAGNOSTIC' ? 'Диагностичен тест' : k === 'INTEGRATED' ? 'Обобщителен тест' : 'Тематичен тест');
+
 function testSummary(t: (typeof TESTS)[number], studentId: string) {
   const mine = db().attempts.filter((a) => a.studentId === studentId && a.testId === t.testKey);
   const percents = mine.map((a) => a.percent).filter((x): x is number => x != null);
-  return { id: t.testKey, key: t.testKey, title: t.title, kind: t.kind, kindLabel: t.kind === 'DIAGNOSTIC' ? 'Диагностичен тест' : t.kind === 'INTEGRATED' ? 'Обобщителен тест' : 'Тематичен тест',
+  return { id: t.testKey, key: t.testKey, title: t.title, kind: t.kind, kindLabel: kindLabel(t.kind),
     path: t.path, questionCount: t.questionKeys.length, timeLimitMin: t.timeLimitMin, gradingBands: GRADING, hintPolicy: t.hintPolicy,
     scoringNote: NOT_OFFICIAL, scopeNote: NOT_NEA, inProgressAttemptId: mine.find((a) => a.status === 'IN_PROGRESS')?.id,
     bestPercent: percents.length ? Math.max(...percents) : undefined, completedAttempts: mine.filter((a) => a.status === 'SUBMITTED').length };
@@ -198,7 +200,7 @@ function ownedAttempt(user: User, id: string): Attempt {
 
 function attemptView(a: Attempt) {
   const t = TESTS.find((x) => x.testKey === a.testId)!;
-  return { attemptId: a.id, testId: a.testId, title: t.title, kindLabel: 'Тематичен тест', status: a.status, startedAt: a.startedAt,
+  return { attemptId: a.id, testId: a.testId, title: t.title, kindLabel: kindLabel(t.kind), status: a.status, startedAt: a.startedAt,
     deadlineAt: a.deadlineAt, serverNow: now(), lastPosition: a.lastPosition, hintPolicy: t.hintPolicy,
     items: a.items.map((it) => { const q = QUESTIONS.get(it.questionKey)!; return { position: it.position, question: view(q), answer: it.answer,
       markedForReview: it.marked, answered: it.answer != null, hintsUsed: it.hintsUsed, revealedHints: q.hints.slice(0, it.hintsUsed), lastRequestId: it.lastRequestId }; }) };
@@ -216,7 +218,7 @@ function resultView(a: Attempt) {
       feedback: it.feedback, misconception: it.misconception ? MISCONCEPTION_BG[it.misconception] : undefined, correctAnswer: correctAnswer(q),
       solution: q.key.solution, theoryLessonKey: stopBySkill(q.skill)?.key, scoredBy: 'Автоматична проверка' };
   });
-  return { attemptId: a.id, title: t.title, kindLabel: 'Тематичен тест', points: a.points, maxPoints: a.maxPoints, percent: a.percent, grade: a.grade,
+  return { attemptId: a.id, title: t.title, kindLabel: kindLabel(t.kind), points: a.points, maxPoints: a.maxPoints, percent: a.percent, grade: a.grade,
     gradeLabel: GRADING.find((g) => g.grade === a.grade)?.labelBg, disclaimer: NOT_OFFICIAL, scoringSource: a.scoringSource,
     skills: [...skill.entries()].map(([s, [p, m]]) => ({ skill: s, title: skillTitle(s), points: round(p), maxPoints: m, percent: m ? Math.round((p / m) * 100) : 0, lessonKey: stopBySkill(s)?.key })),
     misconceptions: [...misc.entries()].sort((x, y) => y[1] - x[1]).map(([c, n]) => ({ code: c, label: MISCONCEPTION_BG[c], count: n, lessonKey: MISTAKE_LESSON[c] })),

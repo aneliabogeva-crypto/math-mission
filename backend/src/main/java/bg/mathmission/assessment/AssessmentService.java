@@ -81,6 +81,7 @@ public class AssessmentService {
         List<TestAttempt> mine = attempts.findByStudentIdOrderByStartedAtDesc(studentId);
         return tests.findByStatus(TestDefinition.Status.PUBLISHED).stream()
                 .filter(t -> t.getKind() != TestDefinition.Kind.TEACHER)
+                .sorted(java.util.Comparator.comparing(TestDefinition::getTestKey))
                 .map(t -> summary(t, mine.stream().filter(a -> a.getTestId().equals(t.getId())).toList()))
                 .toList();
     }

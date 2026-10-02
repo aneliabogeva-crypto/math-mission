@@ -145,6 +145,9 @@ public final class MathEngine {
         if (t instanceof Expr.Neg n) t = n.operand();
         List<Expr> factors = new ArrayList<>();
         flattenProduct(t, factors);
+        if (!factors.isEmpty() && factors.get(0) instanceof Expr.Neg n0) {
+            factors.set(0, n0.operand()); // −a·b: the sign belongs to the coefficient
+        }
         Set<Character> seen = new HashSet<>();
         for (int i = 0; i < factors.size(); i++) {
             Expr f = unwrapSignedNumber(factors.get(i));

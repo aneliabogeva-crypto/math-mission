@@ -318,6 +318,7 @@ const unwrapSigned = (e: Expr): Expr => (e.k === 'neg' && e.e.k === 'num' ? e.e 
 function isNormalMonomial(t: Expr) {
   if (t.k === 'neg') t = t.e;
   const fs: Expr[] = []; flattenProd(t, fs);
+  if (fs.length && fs[0].k === 'neg') fs[0] = fs[0].e; // −a·b: the sign belongs to the coefficient
   const seen = new Set<string>();
   for (let i = 0; i < fs.length; i++) {
     const f = unwrapSigned(fs[i]);

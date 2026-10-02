@@ -49,6 +49,9 @@ class MathEngineTest {
         assertThat(MathEngine.isNormalForm("3x^2 - 2x + 1")).isTrue();
         assertThat(MathEngine.isNormalForm("-2xy + 5")).isTrue();
         assertThat(MathEngine.isNormalForm("-7")).isTrue();
+        assertThat(MathEngine.isNormalForm("-ab")).isTrue();
+        assertThat(MathEngine.isNormalForm("-6a^2b + 3")).isTrue();
+        assertThat(MathEngine.isNormalForm("x - ab")).isTrue();
         assertThat(MathEngine.isNormalForm("2x + 3x")).isFalse();
         assertThat(MathEngine.isNormalForm("x(x + 1)")).isFalse();
         assertThat(MathEngine.isNormalForm("3x·2")).isFalse();

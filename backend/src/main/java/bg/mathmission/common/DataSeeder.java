@@ -60,19 +60,21 @@ public class DataSeeder implements ApplicationRunner {
     private final PasswordEncoder encoder;
     private final ContentService content;
     private final QuestionRepository questions;
+    private final bg.mathmission.content.LessonRepository lessons;
     private final TestBlueprintRepository blueprints;
     private final TestDefinitionRepository tests;
     private final TestAuthoringService authoring;
     private final TransactionTemplate tx;
 
     public DataSeeder(AppProperties props, UserAccountRepository users, PasswordEncoder encoder, ContentService content,
-                      QuestionRepository questions, TestBlueprintRepository blueprints, TestDefinitionRepository tests,
+                      QuestionRepository questions, bg.mathmission.content.LessonRepository lessons, TestBlueprintRepository blueprints, TestDefinitionRepository tests,
                       TestAuthoringService authoring, TransactionTemplate tx) {
         this.props = props;
         this.users = users;
         this.encoder = encoder;
         this.content = content;
         this.questions = questions;
+        this.lessons = lessons;
         this.blueprints = blueprints;
         this.tests = tests;
         this.authoring = authoring;
@@ -82,13 +84,17 @@ public class DataSeeder implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
         tx.executeWithoutResult(s -> seedAccounts());
-        if (props.seed() != null && props.seed().enabled() && questions.count() == 0) {
+        // Incremental: content missing from this database (new questions, lessons, tests) is added on start-up.
+        if (props.seed() != null && props.seed().enabled()) {
             Seed seed;
             try (InputStream in = new ClassPathResource("seed/content.json").getInputStream()) {
                 seed = Json.MAPPER.readValue(new String(in.readAllBytes(), StandardCharsets.UTF_8), new TypeReference<Seed>() {});
             }
-            tx.executeWithoutResult(s -> seedContent(seed));
-            log.info("Seeded {} questions, {} lessons, {} tests", seed.questions().size(), seed.lessons().size(), seed.tests().size());
+            int[] added = new int[3];
+            tx.executeWithoutResult(s -> seedContent(seed, added));
+            if (added[0] + added[1] + added[2] > 0) {
+                log.info("Seed content added: {} questions, {} lessons, {} tests", added[0], added[1], added[2]);
+            }
         }
     }
 
@@ -111,33 +117,43 @@ public class DataSeeder implements ApplicationRunner {
         log.warn("Dev demo staff accounts are enabled (teacher/author/reviewer/admin). Never enable this in production.");
     }
 
-    private void seedContent(Seed seed) {
+    private void seedContent(Seed seed, int[] added) {
         UUID author = users.findByUsername("system-seed-author").orElseThrow().getId();
         UUID reviewer = users.findByUsername("system-seed-reviewer").orElseThrow().getId();
         Map<String, UUID> blueprintIds = new java.util.HashMap<>();
+        for (TestBlueprint existing : blueprints.findAll()) {
+            blueprintIds.putIfAbsent(existing.getName(), existing.getId());
+        }
         for (SeedBlueprint b : seed.blueprints()) {
+            if (blueprintIds.containsKey(b.name())) continue;
             TestBlueprint bp = new TestBlueprint(b.name(), b.academicYear(), 1, b.composition(), b.timeLimitMin());
             bp.setStatus(TestBlueprint.Status.APPROVED);
             blueprints.save(bp);
             blueprintIds.put(b.name(), bp.getId());
         }
         for (SeedQuestion sq : seed.questions()) {
+            if (questions.maxVersion(sq.key()) > 0) continue;
             Question keyed = content.createQuestionWithKey(author, sq.key(), sq.draft());
             content.submitQuestion(author, keyed.getId());
             content.reviewQuestion(reviewer, keyed.getId(), true, DEMO_REVIEW_NOTE);
+            added[0]++;
         }
         for (SeedLesson sl : seed.lessons()) {
+            if (lessons.maxVersion(sl.lessonKey()) > 0) continue;
             Lesson l = content.createLesson(author, sl.lessonKey(), sl.content());
             content.submitLesson(author, l.getId());
             content.reviewLesson(reviewer, l.getId(), true, DEMO_REVIEW_NOTE);
+            added[1]++;
         }
         for (SeedTest st : seed.tests()) {
+            if (tests.findByTestKey(st.testKey()).isPresent()) continue;
             List<UUID> ids = st.questionKeys().stream()
                     .map(k -> questions.findByQuestionKeyAndStatus(k, ContentStatus.PUBLISHED).orElseThrow().getId()).toList();
             TestDefinition t = tests.save(new TestDefinition(st.testKey(), st.title(), st.kind(), st.path(),
                     blueprintIds.get(st.blueprint()), st.timeLimitMin(), GradingScale.defaultScale(), ids,
                     st.hintPolicy(), st.reviewMoment(), author, props.academicYear()));
             authoring.publish(author, t.getId(), true);
+            added[2]++;
         }
         // Sanity: every seeded lesson key exists in the curriculum.
         seed.lessons().forEach(l -> CurriculumCatalog.lesson(l.lessonKey()).orElseThrow());

@@ -313,7 +313,7 @@ lesson = {
     "nextStep": {"lessonKey": "B4", "text": "Следва: умножение на едночлени — там показателите вече се събират."}}}
 
 tests = [{
-  "testKey": "BT1", "title": "Едночлени — тематичен тест 1", "kind": "THEMATIC", "path": "B",
+  "testKey": "BT1", "title": "Ден 1 · Едночлени — тест 1", "kind": "THEMATIC", "path": "B",
   "blueprint": "Тематичен тест (20)", "timeLimitMin": 40, "hintPolicy": "NONE", "reviewMoment": "AFTER_SUBMIT",
   "questionKeys": [x["key"] for x in T]}]
 
@@ -323,7 +323,14 @@ blueprints = [
   {"name": "Обобщителен тест (24)", "academicYear": "2026/2027", "timeLimitMin": 60,
    "composition": {"MULTIPLE_CHOICE": 14, "SHORT_ANSWER": 7, "MULTI_STEP": 3}}]
 
-out = {"questions": lesson_questions + T, "lessons": [lesson], "tests": tests, "blueprints": blueprints}
+import sys
+sys.path.insert(0, os.path.dirname(__file__))
+import gen_tests
+gen_q, gen_t = gen_tests.generate({x["draft"]["prompt"]["text"] for x in lesson_questions + T})
+tests += gen_t
+out = {"questions": lesson_questions + T + gen_q, "lessons": [lesson], "tests": tests, "blueprints": blueprints}
+with open(os.path.join(os.path.dirname(__file__), "generated-checks.json"), "w", encoding="utf-8") as f:
+    json.dump(gen_tests.SIDE, f, ensure_ascii=False)
 path = os.path.join(os.path.dirname(__file__), "..", "backend", "src", "main", "resources", "seed", "content.json")
 with open(path, "w", encoding="utf-8") as f:
     json.dump(out, f, ensure_ascii=False, indent=1)

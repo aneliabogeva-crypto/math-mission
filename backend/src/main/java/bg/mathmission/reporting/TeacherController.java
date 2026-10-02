@@ -129,6 +129,7 @@ public class TeacherController {
     public List<Map<String, Object>> catalog() {
         UUID me = CurrentUser.currentId();
         return tests.findAll().stream()
+                .sorted(java.util.Comparator.comparing(TestDefinition::getTestKey))
                 .filter(t -> t.getStatus() == TestDefinition.Status.PUBLISHED || t.getCreatedBy().equals(me))
                 .filter(t -> t.getKind() != TestDefinition.Kind.TEACHER || t.getCreatedBy().equals(me))
                 .map(t -> Map.<String, Object>of("id", t.getId(), "key", t.getTestKey(), "title", t.getTitle(),

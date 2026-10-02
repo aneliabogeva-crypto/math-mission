@@ -47,6 +47,11 @@ jobs:
       - name: Type-check and build
         run: npm run build
         working-directory: frontend
+      - name: Verify every question and test (answer keys, wrong options, blueprints)
+        run: |
+          cmp backend/src/main/resources/seed/content.json frontend/src/local/data/content.json
+          frontend/node_modules/.bin/esbuild tools/validate_content.ts --bundle --platform=node --outfile=/tmp/validate.js --log-level=error
+          node /tmp/validate.js
 
   image:
     needs: [backend, frontend]

@@ -4,23 +4,45 @@ import { api, ApiError, uuid, type AttemptView, type TestSummary } from '../api'
 import { ErrorNote, Loading } from '../components/Layout';
 import { useApi } from '../session';
 
+/** Tests grouped into the 7-day programme ("Ден N · …" titles); other tests follow. */
 export function TestsPage() {
   const { data, error, loading, reload } = useApi<TestSummary[]>('/api/student/tests');
   if (loading && !data) return <Loading />;
   if (!data) return <ErrorNote error={error} onRetry={reload} />;
+  const days = new Map<number, TestSummary[]>();
+  const other: TestSummary[] = [];
+  for (const t of data) {
+    const m = /^Ден (\d+) · /.exec(t.title);
+    if (m) days.set(Number(m[1]), [...(days.get(Number(m[1])) ?? []), t]);
+    else other.push(t);
+  }
+  const done = data.filter((t) => t.completedAttempts > 0).length;
+  const card = (t: TestSummary) => (
+    <div key={t.id} className="card" style={{ marginBottom: 8 }}>
+      <div className="row" style={{ justifyContent: 'space-between' }}>
+        <span className="chip info">{t.kindLabel}</span>
+        {t.completedAttempts > 0 && <span className="chip ok">✓ Решен{t.bestPercent != null ? ` · ${String(t.bestPercent).replace('.', ',')}%` : ''}</span>}
+      </div>
+      <h3 style={{ marginTop: '.5rem' }}>{t.title.replace(/^Ден \d+ · /, '')}</h3>
+      <p className="small muted">{t.questionCount} въпроса · {t.timeLimitMin} минути{t.hintPolicy === 'ALLOWED' ? ' · с подсказки' : ''}</p>
+      <Link className={`btn ${t.completedAttempts > 0 ? 'secondary' : ''}`} to={`/tests/${t.id}`}>
+        {t.inProgressAttemptId ? 'Продължи' : t.completedAttempts > 0 ? 'Реши отново' : 'Започни'}
+      </Link>
+    </div>
+  );
   return (
     <div>
       <h1>Тестове</h1>
-      <p className="muted">Кратките проверки в уроците не са тестове. Всеки тест тук има поне 20 въпроса и прозрачна скала.</p>
-      {data.length === 0 && <p>Все още няма публикувани тестове.</p>}
-      {data.map((t) => (
-        <div key={t.id} className="card">
-          <span className="chip info">{t.kindLabel}</span>
-          <h2 style={{ marginTop: '.5rem' }}>{t.title}</h2>
-          <p className="small muted">{t.questionCount} въпроса · {t.timeLimitMin} минути{t.bestPercent != null ? ` · най-добър резултат ${String(t.bestPercent).replace('.', ',')}%` : ''}</p>
-          <Link className="btn" to={`/tests/${t.id}`}>{t.inProgressAttemptId ? 'Продължи' : 'Подробности'}</Link>
-        </div>
+      <p className="muted">Програма за 7 дни: по два теста на ден. Решени: {done} от {data.length}.</p>
+      <div className="progress" aria-hidden="true" style={{ marginBottom: '1rem' }}><span style={{ width: `${data.length ? (done / data.length) * 100 : 0}%` }} /></div>
+      {[...days.entries()].sort((a, b) => a[0] - b[0]).map(([day, list]) => (
+        <section key={day} aria-labelledby={`day-${day}`} style={{ marginBottom: '1rem' }}>
+          <h2 id={`day-${day}`}>Ден {day} {list.every((t) => t.completedAttempts > 0) && <span className="chip ok">✓ изпълнен</span>}</h2>
+          {list.map(card)}
+        </section>
       ))}
+      {other.length > 0 && <section><h2>Още тестове</h2>{other.map(card)}</section>}
+      {data.length === 0 && <p>Все още няма публикувани тестове.</p>}
     </div>
   );
 }
