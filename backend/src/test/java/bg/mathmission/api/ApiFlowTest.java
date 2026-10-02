@@ -277,13 +277,20 @@ class ApiFlowTest {
         String author = staff("author");
         String reviewer = staff("reviewer");
 
-        Map<String, Object> draft = Map.of(
-                "path", "B", "skill", "B.like-terms", "learningOutcome", "Събира подобни едночлени",
-                "responseType", "EXPRESSION", "difficulty", "FOUNDATIONAL", "estimatedSeconds", 30, "maxPoints", 1,
-                "misconception", "LIKE_TERMS", "prompt", Map.of("text", "Опрости: 2y + 3y (проверка " + UUID.randomUUID() + ")"),
-                "key", Map.of("answer", "5y", "form", "NORMAL_FORM", "solution", "(2 + 3)y = 5y",
-                        "distractors", List.of(Map.of("match", "5y^2", "misconception", "LIKE_TERMS", "explanation", "Степента не се променя."))),
-                "hints", List.of("h1", "h2", "h3"), "sourceDeclaration", "Оригинално");
+        Map<String, Object> draft = new HashMap<>();
+        draft.put("path", "B");
+        draft.put("skill", "B.like-terms");
+        draft.put("learningOutcome", "Събира подобни едночлени");
+        draft.put("responseType", "EXPRESSION");
+        draft.put("difficulty", "FOUNDATIONAL");
+        draft.put("estimatedSeconds", 30);
+        draft.put("maxPoints", 1);
+        draft.put("misconception", "LIKE_TERMS");
+        draft.put("prompt", Map.of("text", "Опрости: 2y + 3y (проверка " + UUID.randomUUID() + ")"));
+        draft.put("key", Map.of("answer", "5y", "form", "NORMAL_FORM", "solution", "(2 + 3)y = 5y",
+                "distractors", List.of(Map.of("match", "5y^2", "misconception", "LIKE_TERMS", "explanation", "Степента не се променя."))));
+        draft.put("hints", List.of("h1", "h2", "h3"));
+        draft.put("sourceDeclaration", "Оригинално");
         JsonNode created = ok(post("/api/content/questions"), author, Map.of("draft", draft));
         String qid = created.get("id").asText();
         assertThat(created.get("validationProblems").size()).isZero();
