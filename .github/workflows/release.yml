@@ -80,7 +80,7 @@ jobs:
           trap 'echo "::warning title=msi::$(tail -c 1500 err.log | tr "\n" " ")"' ERR
           rm -rf out/MathMission
           eval jpackage $JP_OPTS --type msi --icon packaging/math-mission.ico --win-menu --win-shortcut \
-            --win-per-user-install --win-dir-chooser --win-menu-group "Math Mission" \
+            --win-per-user-install --win-dir-chooser --win-menu-group MathMission \
             --win-upgrade-uuid 6f0b6a1e-2c55-4c55-9a8e-3c2b8d1e7a10
           mv out/*.msi MathMission-${APP_VERSION}-windows.msi
 
@@ -100,7 +100,7 @@ jobs:
           cp icon.iconset/icon_512x512.png icon.iconset/icon_256x256@2x.png
           rm icon.iconset/icon_64x64.png
           iconutil -c icns icon.iconset -o math-mission.icns
-          eval jpackage $JP_OPTS --type dmg --icon math-mission.icns --mac-package-name "Math Mission"
+          eval jpackage $JP_OPTS --type dmg --icon math-mission.icns --mac-package-name MathMission
           mv out/*.dmg MathMission-${APP_VERSION}-macos-apple-silicon.dmg
 
       # ---------------- Linux
