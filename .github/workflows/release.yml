@@ -162,6 +162,8 @@ jobs:
             | Windows | `MathMission-…-windows.msi` (installer), or `…-windows-portable.zip` (unzip, then run `MathMission\MathMission.exe`) |
             | Mac (Apple Silicon) | `MathMission-…-macos-apple-silicon.dmg` |
             | Linux | `MathMission-…-linux-amd64.deb` |
+            | Android phone/tablet | `MathMission-android.apk` (allow "install from unknown sources" when asked) |
+            | iPhone / iPad / any phone | open https://aneliabogeva-crypto.github.io/math-mission/ → Share → "Add to Home Screen" |
 
             Starting the app opens Math Mission in your browser at http://localhost:18080 and adds an icon to the system tray or menu bar (Open / Quit).
             Your data stays on this computer in the `MathMission` folder in your home directory.

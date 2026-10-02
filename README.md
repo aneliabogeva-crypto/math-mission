@@ -15,6 +15,13 @@ Mac (.dmg) and Linux (.deb) are available. Each one bundles its own Java runtime
 browser at http://localhost:18080 and shows a tray/menu-bar icon with *Open* and *Quit*. In Chrome or Edge, click **⤓ Инсталирай**
 to give it its own app window and icon.
 
+### On a phone (works offline, no server)
+* **Any phone (iPhone, Android):** open https://aneliabogeva-crypto.github.io/math-mission/ and choose *Add to Home Screen*.
+* **Android app:** `MathMission-android.apk` from the latest release.
+
+The phone version runs the student and parent features on the device itself (`frontend/src/local`, a port of the Java
+maths engine and scoring) and keeps all data on the phone. Teacher, content-review and admin features need the server.
+
 ### Online
 
 [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/aneliabogeva-crypto/math-mission)
