@@ -1,6 +1,7 @@
 import { useEffect, useState, type ReactNode } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { subscribe } from '../offline';
+import { InstallButton } from './InstallButton';
 import { useSession } from '../session';
 
 const STUDENT_NAV = [
@@ -46,6 +47,7 @@ export function Layout({ children }: { children: ReactNode }) {
         <Link className="brand" to="/"><img src="/icon.svg" alt="" width={28} height={28} /> Math Mission</Link>
         <span className="spacer" />
         {me && me.role !== 'STUDENT' && staffLinks[me.role]?.map((l) => <NavLink key={l.to} className="btn ghost" to={l.to}>{l.label}</NavLink>)}
+        <InstallButton />
         <ThemeToggle />
         {me && <button type="button" className="btn ghost" onClick={() => void signOut()}>Изход</button>}
       </header>

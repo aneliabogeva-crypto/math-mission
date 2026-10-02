@@ -8,6 +8,15 @@ A mobile-first PWA for Grade 7 algebra in Bulgaria. It covers rational expressio
 
 ## Open it
 
+### Install on your computer (recommended)
+Download the installer for your computer from the
+[latest release](https://github.com/aneliabogeva-crypto/math-mission/releases/latest). Windows (.msi or portable .zip),
+Mac (.dmg) and Linux (.deb) are available. Each one bundles its own Java runtime and works offline. The app opens in your
+browser at http://localhost:18080 and shows a tray/menu-bar icon with *Open* and *Quit*. In Chrome or Edge, click **⤓ Инсталирай**
+to give it its own app window and icon.
+
+### Online
+
 [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/aneliabogeva-crypto/math-mission)
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/aneliabogeva-crypto/math-mission)
 

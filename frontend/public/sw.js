@@ -4,9 +4,9 @@
  *   lesson and its practice items keep working when the connection drops (US-STU-12).
  * - Writes (answers) are never handled here: the app keeps an idempotent outbox and resends them.
  */
-const SHELL = 'mm-shell-v1';
+const SHELL = 'mm-shell-v2';
 const DATA = 'mm-data-v1';
-const SHELL_URLS = ['/', '/index.html', '/manifest.webmanifest', '/icon.svg'];
+const SHELL_URLS = ['/', '/index.html', '/manifest.webmanifest', '/icon.svg', '/icon-192.png', '/icon-512.png'];
 
 self.addEventListener('install', (e) => {
   e.waitUntil(caches.open(SHELL).then((c) => c.addAll(SHELL_URLS)).then(() => self.skipWaiting()));

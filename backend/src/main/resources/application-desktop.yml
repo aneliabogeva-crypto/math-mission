@@ -1,0 +1,18 @@
+# Installed desktop app: data stays on this computer, server is reachable only from this computer.
+server:
+  address: 127.0.0.1
+  port: 18080
+spring:
+  datasource:
+    url: jdbc:h2:file:${user.home}/MathMission/data/mathmission;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH
+    username: sa
+    password: ""
+logging:
+  file:
+    name: ${user.home}/MathMission/logs/math-mission.log
+mathmission:
+  dev-accounts:
+    # Local-only demo staff accounts so a teacher/reviewer/admin view can be tried on this computer.
+    enabled: true
+    password: "Demo-2026!"
+    admin-totp-secret: "JBSWY3DPEHPK3PXP"
