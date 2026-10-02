@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/mathmission}
+    username: ${DB_USER:mathmission}
+    password: ${DB_PASSWORD:mathmission}
+
+mathmission:
+  dev-accounts:
+    enabled: ${DEV_ACCOUNTS:false}
+    password: ${DEV_ACCOUNTS_PASSWORD:}
+    admin-totp-secret: ${ADMIN_TOTP_SECRET:}

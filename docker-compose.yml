@@ -1,0 +1,14 @@
+# Local PostgreSQL for the "postgres" profile. The default "dev" profile needs no database server.
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: mathmission
+      POSTGRES_USER: mathmission
+      POSTGRES_PASSWORD: mathmission
+    ports:
+      - "5432:5432"
+    volumes:
+      - mathmission-db:/var/lib/postgresql/data
+volumes:
+  mathmission-db:

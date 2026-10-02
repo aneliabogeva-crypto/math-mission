@@ -1,0 +1,55 @@
+spring:
+  application:
+    name: math-mission
+  profiles:
+    default: dev
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate.jdbc.time_zone: UTC
+  flyway:
+    locations: classpath:db/migration/common,classpath:db/migration/{vendor}
+  jackson:
+    default-property-inclusion: non_null
+    time-zone: Europe/Sofia
+
+server:
+  error:
+    include-stacktrace: never
+    include-message: always
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      probes:
+        enabled: true
+
+springdoc:
+  api-docs:
+    path: /api/docs
+  swagger-ui:
+    path: /api/docs/ui
+
+mathmission:
+  academic-year: "2026/2027"
+  timezone: Europe/Sofia
+  # Account model decision (Section 14): school-managed, direct-to-consumer or hybrid.
+  # When guardian consent is required, under-age profiles stay PENDING_CONSENT until a guardian grants it.
+  consent:
+    required-under-age: 14
+    text-version: "2026-10-v1"
+  session:
+    ttl-hours: 720
+  # Seed demo content (one lesson, one 20-question thematic test). Seeded content is marked as
+  # demo-reviewed and must go through a real mathematics review before production use.
+  seed:
+    enabled: true
+  auth-rate-limit-per-minute: 20
+  cors:
+    allowed-origins: "http://localhost:5173"

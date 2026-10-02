@@ -1,0 +1,14 @@
+{
+  "name": "Math Mission: алгебра за 7. клас",
+  "short_name": "Math Mission",
+  "lang": "bg",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#f6f5fb",
+  "theme_color": "#4338ca",
+  "icons": [
+    { "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

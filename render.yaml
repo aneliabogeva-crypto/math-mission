@@ -1,0 +1,11 @@
+# Optional public demo on Render (free plan): New → Blueprint → select this repo.
+# Uses the zero-setup H2 demo profile; data resets when the service restarts.
+services:
+  - type: web
+    name: math-mission
+    runtime: docker
+    plan: free
+    healthCheckPath: /actuator/health
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: dev

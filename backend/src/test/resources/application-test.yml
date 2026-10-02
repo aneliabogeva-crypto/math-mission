@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:mmtest;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH;DB_CLOSE_DELAY=-1
+    username: sa
+    password: ""
+mathmission:
+  dev-accounts:
+    enabled: true
+    password: "Test-Password-1"
+    admin-totp-secret: "JBSWY3DPEHPK3PXP"
+  auth-rate-limit-per-minute: 10000

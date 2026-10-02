@@ -1,0 +1,17 @@
+{
+  "name": "Math Mission",
+  "image": "mcr.microsoft.com/devcontainers/java:1-21-bookworm",
+  "features": {
+    "ghcr.io/devcontainers/features/java:1": { "version": "none", "installMaven": "true" },
+    "ghcr.io/devcontainers/features/node:1": { "version": "22" }
+  },
+  "forwardPorts": [8080],
+  "portsAttributes": {
+    "8080": { "label": "Math Mission", "onAutoForward": "openBrowser" }
+  },
+  "postCreateCommand": "cd frontend && npm install --no-audit --no-fund && cd ../backend && mvn -q -B dependency:go-offline",
+  "postAttachCommand": "./run.sh",
+  "customizations": {
+    "vscode": { "extensions": ["vscjava.vscode-java-pack", "vmware.vscode-spring-boot"] }
+  }
+}
