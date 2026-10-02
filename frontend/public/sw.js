@@ -4,9 +4,11 @@
  *   lesson and its practice items keep working when the connection drops (US-STU-12).
  * - Writes (answers) are never handled here: the app keeps an idempotent outbox and resends them.
  */
-const SHELL = 'mm-shell-v2';
+const SHELL = 'mm-shell-v3';
 const DATA = 'mm-data-v1';
-const SHELL_URLS = ['/', '/index.html', '/manifest.webmanifest', '/icon.svg', '/icon-192.png', '/icon-512.png'];
+// Relative to the service worker's own location, so it works at / and under a sub-path.
+const SHELL_URLS = ['./', './index.html', './manifest.webmanifest', './icon.svg', './icon-192.png', './icon-512.png'];
+const INDEX = new URL('./index.html', self.location).pathname;
 
 self.addEventListener('install', (e) => {
   e.waitUntil(caches.open(SHELL).then((c) => c.addAll(SHELL_URLS)).then(() => self.skipWaiting()));
@@ -28,7 +30,7 @@ self.addEventListener('fetch', (e) => {
   const url = new URL(req.url);
   if (url.origin !== self.location.origin) return;
 
-  if (url.pathname.startsWith('/api/')) {
+  if (url.pathname.includes('/api/')) {
     if (!CACHEABLE_API.some((r) => r.test(url.pathname))) return;
     e.respondWith(
       fetch(req).then((res) => {
@@ -47,12 +49,12 @@ self.addEventListener('fetch', (e) => {
   e.respondWith(
     caches.match(req).then((hit) => {
       const network = fetch(req).then((res) => {
-        if (res.ok && (req.mode === 'navigate' || url.pathname.startsWith('/assets/'))) {
+        if (res.ok && (req.mode === 'navigate' || url.pathname.includes('/assets/'))) {
           const copy = res.clone();
-          caches.open(SHELL).then((c) => c.put(req.mode === 'navigate' ? '/index.html' : req, copy));
+          caches.open(SHELL).then((c) => c.put(req.mode === 'navigate' ? INDEX : req, copy));
         }
         return res;
-      }).catch(() => (req.mode === 'navigate' ? caches.match('/index.html') : undefined));
+      }).catch(() => (req.mode === 'navigate' ? caches.match(INDEX) : undefined));
       return hit || network;
     }),
   );

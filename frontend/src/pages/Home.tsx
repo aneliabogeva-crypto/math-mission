@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import type { TestSummary } from '../api';
+import { STANDALONE, type TestSummary } from '../api';
 import { Avatar } from '../components/Avatar';
 import { Helper } from '../components/Helper';
 import { JoinClass } from '../components/JoinClass';
@@ -134,7 +134,8 @@ export function HomePage() {
         </div>
       </div>
 
-      <JoinClass onJoined={() => void reload()} />
+      {!STANDALONE && <JoinClass onJoined={() => void reload()} />}
+      {STANDALONE && <p className="small muted">Версия за телефон: всичко се пази само на това устройство и работи без интернет.</p>}
 
       {data.badges.length > 0 && (
         <div className="card">

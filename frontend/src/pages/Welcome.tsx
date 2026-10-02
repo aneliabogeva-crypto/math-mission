@@ -52,7 +52,7 @@ export function Welcome() {
         {done.status === 'PENDING_CONSENT' ? (
           <div className="card">
             <h2>Нужно е съгласие от родител</h2>
-            <p>Покажи този код на родител или настойник. Той/тя трябва да отвори <strong>{location.origin}/consent/{done.consentCode}</strong> и да прочете информацията.</p>
+            <p>Покажи този код на родител или настойник. На следващия екран натиснете заедно „Родителят е до мен — отвори съгласието“.</p>
             <p className="math-block">{done.consentCode}</p>
             <p className="small muted">Докато няма съгласие, профилът не е активен.</p>
             <button className="btn" onClick={async () => { await signIn(done.token); nav('/'); }}>Разбрах</button>

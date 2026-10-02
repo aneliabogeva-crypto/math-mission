@@ -13,13 +13,14 @@ try {
 
 startSync();
 
-if ('serviceWorker' in navigator && import.meta.env.PROD) {
-  window.addEventListener('load', () => { void navigator.serviceWorker.register('/sw.js'); });
+const isNativeApp = Boolean((window as Window & { Capacitor?: unknown }).Capacitor);
+if ('serviceWorker' in navigator && import.meta.env.PROD && !isNativeApp) {
+  window.addEventListener('load', () => { void navigator.serviceWorker.register(`${import.meta.env.BASE_URL}sw.js`); });
 }
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.BASE_URL.replace(/\/$/, '')}>
       <SessionProvider>
         <App />
       </SessionProvider>

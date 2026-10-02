@@ -20,7 +20,19 @@ export function setToken(token: string | null) {
   } catch { /* storage unavailable: session-only login */ }
 }
 
+/** Phone/standalone build: the API runs on the device (no server, works offline). */
+export const STANDALONE = import.meta.env.VITE_STANDALONE === '1';
+
 export async function api<T>(path: string, init: { method?: string; body?: unknown; signal?: AbortSignal } = {}): Promise<T> {
+  if (STANDALONE) {
+    const { handleLocal, LocalError } = await import('./local/server');
+    try {
+      return (await handleLocal(init.method ?? 'GET', path, init.body, getToken())) as T;
+    } catch (e) {
+      if (e instanceof LocalError) throw new ApiError(e.status, e.code, e.message);
+      throw new ApiError(500, 'ERROR', 'Нещо се обърка. Опитай отново.');
+    }
+  }
   const headers: Record<string, string> = {};
   const token = getToken();
   if (token) headers.Authorization = `Bearer ${token}`;

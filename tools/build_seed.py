@@ -327,4 +327,7 @@ out = {"questions": lesson_questions + T, "lessons": [lesson], "tests": tests, "
 path = os.path.join(os.path.dirname(__file__), "..", "backend", "src", "main", "resources", "seed", "content.json")
 with open(path, "w", encoding="utf-8") as f:
     json.dump(out, f, ensure_ascii=False, indent=1)
+fpath = os.path.join(os.path.dirname(__file__), "..", "frontend", "src", "local", "data", "content.json")
+with open(fpath, "w", encoding="utf-8") as f:
+    json.dump(out, f, ensure_ascii=False, indent=1)
 print("questions:", len(out["questions"]), "test items:", len(T))

@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { api, ApiError } from '../api';
+import { api, ApiError, STANDALONE } from '../api';
 import { useSession } from '../session';
 
 export function Login() {
@@ -47,7 +47,7 @@ export function Login() {
         <button className="btn block" disabled={!code}>Влез</button>
       </form>
       <form className="card" onSubmit={staffLogin}>
-        <h2>Учител, родител или екип</h2>
+        <h2>{STANDALONE ? 'Родител' : 'Учител, родител или екип'}</h2>
         <label className="field"><span>Потребителско име</span><input value={username} onChange={(e) => setUsername(e.target.value)} autoComplete="username" /></label>
         <label className="field"><span>Парола</span><input type="password" value={password} onChange={(e) => setPassword(e.target.value)} autoComplete="current-password" /></label>
         {needTotp && (

@@ -1,0 +1,6 @@
+{
+  "appId": "bg.mathmission.app",
+  "appName": "Math Mission",
+  "webDir": "dist",
+  "android": { "allowMixedContent": false }
+}

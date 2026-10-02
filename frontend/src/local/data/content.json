@@ -1,0 +1,2048 @@
+{
+ "questions": [
+  {
+   "key": "B3-P1",
+   "draft": {
+    "path": "B",
+    "skill": "B.definition",
+    "learningOutcome": "Определя коефициента на едночлен",
+    "responseType": "SINGLE_CHOICE",
+    "difficulty": "FOUNDATIONAL",
+    "estimatedSeconds": 30,
+    "maxPoints": 1,
+    "misconception": "SIGN",
+    "prompt": {
+     "text": "Какъв е коефициентът на едночлена −3x²y?",
+     "options": [
+      {
+       "id": "a",
+       "text": "−3"
+      },
+      {
+       "id": "b",
+       "text": "3"
+      },
+      {
+       "id": "c",
+       "text": "x²y"
+      },
+      {
+       "id": "d",
+       "text": "2"
+      }
+     ]
+    },
+    "key": {
+     "solution": "Едночленът −3x²y = (−3)·x²·y. Числовият множител е −3, затова коефициентът е −3.",
+     "distractors": [
+      {
+       "match": "b",
+       "misconception": "SIGN",
+       "explanation": "Знакът минус е част от коефициента. Коефициентът е −3."
+      },
+      {
+       "match": "c",
+       "misconception": "REASONING",
+       "explanation": "x²y е буквената част. Коефициентът е числото пред нея."
+      },
+      {
+       "match": "d",
+       "misconception": "REASONING",
+       "explanation": "2 е степенният показател на x, а не коефициент."
+      }
+     ],
+     "correctOptionId": "a",
+     "confirmation": "Точно така: коефициентът включва и знака.",
+     "defaultMisconception": "SIGN"
+    },
+    "hints": [
+     "Коефициентът е числото, с което започва едночленът.",
+     "Не забравяй знака пред числото.",
+     "Числото пред x²y е −3."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026)"
+   }
+  },
+  {
+   "key": "B3-P2",
+   "draft": {
+    "path": "B",
+    "skill": "B.normal-form",
+    "learningOutcome": "Записва едночлен в нормален вид",
+    "responseType": "EXPRESSION",
+    "difficulty": "FOUNDATIONAL",
+    "estimatedSeconds": 45,
+    "maxPoints": 1,
+    "misconception": "LIKE_TERMS",
+    "prompt": {
+     "text": "Запиши в нормален вид: 2x · 3x",
+     "inputHint": "Пример: 6x^2"
+    },
+    "key": {
+     "solution": "2x · 3x = (2·3)·(x·x) = 6x².",
+     "distractors": [
+      {
+       "match": "5x",
+       "misconception": "REASONING",
+       "explanation": "При умножение коефициентите се умножават (2·3 = 6), а не се събират."
+      },
+      {
+       "match": "6x",
+       "misconception": "TECHNICAL",
+       "explanation": "x·x = x², а не x. Показателите се събират: 1 + 1 = 2."
+      },
+      {
+       "match": "5x^2",
+       "misconception": "REASONING",
+       "explanation": "Коефициентите се умножават: 2·3 = 6."
+      }
+     ],
+     "answer": "6x^2",
+     "form": "NORMAL_FORM",
+     "defaultMisconception": "LIKE_TERMS"
+    },
+    "hints": [
+     "Умножи числата отделно и буквите отделно.",
+     "2·3 = ? и x·x = ?",
+     "2·3 = 6, x·x = x²."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026)"
+   }
+  },
+  {
+   "key": "B3-G1",
+   "draft": {
+    "path": "B",
+    "skill": "B.like-terms",
+    "learningOutcome": "Разпознава подобни едночлени и ги събира и изважда",
+    "responseType": "EXPRESSION",
+    "difficulty": "FOUNDATIONAL",
+    "estimatedSeconds": 30,
+    "maxPoints": 1,
+    "misconception": "LIKE_TERMS",
+    "prompt": {
+     "text": "Събери подобните едночлени: 4a + 7a"
+    },
+    "key": {
+     "solution": "4a + 7a = (4 + 7)a = 11a. Буквената част остава същата.",
+     "distractors": [
+      {
+       "match": "11a^2",
+       "misconception": "LIKE_TERMS",
+       "explanation": "При събиране буквената част не се променя: a остава a, не става a²."
+      },
+      {
+       "match": "28a",
+       "misconception": "REASONING",
+       "explanation": "Коефициентите се събират (4 + 7), не се умножават."
+      }
+     ],
+     "answer": "11a",
+     "form": "NORMAL_FORM",
+     "confirmation": "Вярно! Събра коефициентите и запази буквената част.",
+     "defaultMisconception": "LIKE_TERMS"
+    },
+    "hints": [
+     "Буквената част и на двата едночлена е a.",
+     "Събери само коефициентите: 4 + 7.",
+     "4a + 7a = (4 + 7)a."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026)"
+   }
+  },
+  {
+   "key": "B3-G2",
+   "draft": {
+    "path": "B",
+    "skill": "B.like-terms",
+    "learningOutcome": "Разпознава подобни едночлени и ги събира и изважда",
+    "responseType": "EXPRESSION",
+    "difficulty": "INTERMEDIATE",
+    "estimatedSeconds": 40,
+    "maxPoints": 1,
+    "misconception": "SIGN",
+    "prompt": {
+     "text": "Опрости: 5x²y − 8x²y"
+    },
+    "key": {
+     "solution": "5x²y − 8x²y = (5 − 8)x²y = −3x²y.",
+     "distractors": [
+      {
+       "match": "3x^2y",
+       "misconception": "SIGN",
+       "explanation": "5 − 8 е отрицателно число: −3."
+      },
+      {
+       "match": "-3",
+       "misconception": "LIKE_TERMS",
+       "explanation": "Буквената част x²y не изчезва — тя остава в отговора."
+      },
+      {
+       "match": "-3x^4y^2",
+       "misconception": "LIKE_TERMS",
+       "explanation": "При събиране и изваждане степените не се променят."
+      }
+     ],
+     "answer": "-3x^2y",
+     "form": "NORMAL_FORM",
+     "defaultMisconception": "SIGN"
+    },
+    "hints": [
+     "Двата едночлена имат еднаква буквена част x²y.",
+     "Пресметни 5 − 8.",
+     "5 − 8 = −3, затова отговорът е −3 по x²y."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026)"
+   }
+  },
+  {
+   "key": "B3-G3",
+   "draft": {
+    "path": "B",
+    "skill": "B.like-terms",
+    "learningOutcome": "Разпознава подобни едночлени и ги събира и изважда",
+    "responseType": "EXPRESSION",
+    "difficulty": "INTERMEDIATE",
+    "estimatedSeconds": 60,
+    "maxPoints": 1,
+    "misconception": "LIKE_TERMS",
+    "prompt": {
+     "text": "Приведи подобните едночлени: 3a − 2b + 5a + 4b"
+    },
+    "key": {
+     "solution": "3a − 2b + 5a + 4b = (3a + 5a) + (−2b + 4b) = 8a + 2b. 8a и 2b не са подобни, затова това е крайният отговор.",
+     "distractors": [
+      {
+       "match": "10ab",
+       "misconception": "LIKE_TERMS",
+       "explanation": "a и b са различни буквени части: 8a и 2b не се събират в едно."
+      },
+      {
+       "match": "8a-6b",
+       "misconception": "SIGN",
+       "explanation": "−2b + 4b = +2b. Внимавай със знаците."
+      },
+      {
+       "match": "2a+2b",
+       "misconception": "SIGN",
+       "explanation": "3a + 5a = 8a."
+      }
+     ],
+     "answer": "8a+2b",
+     "form": "NORMAL_FORM",
+     "defaultMisconception": "LIKE_TERMS"
+    },
+    "hints": [
+     "Подреди: членовете с a заедно, с b заедно.",
+     "(3a + 5a) + (−2b + 4b).",
+     "3a + 5a = 8a, −2b + 4b = 2b."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026)"
+   }
+  },
+  {
+   "key": "B3-C1",
+   "draft": {
+    "path": "B",
+    "skill": "B.like-terms",
+    "learningOutcome": "Разпознава подобни едночлени и ги събира и изважда",
+    "responseType": "SINGLE_CHOICE",
+    "difficulty": "FOUNDATIONAL",
+    "estimatedSeconds": 30,
+    "maxPoints": 1,
+    "misconception": "LIKE_TERMS",
+    "prompt": {
+     "text": "Кой едночлен е подобен на 3x²y?",
+     "options": [
+      {
+       "id": "a",
+       "text": "3xy²"
+      },
+      {
+       "id": "b",
+       "text": "−x²y"
+      },
+      {
+       "id": "c",
+       "text": "3x²"
+      },
+      {
+       "id": "d",
+       "text": "x²y²"
+      }
+     ]
+    },
+    "key": {
+     "solution": "Подобни са едночлени с еднаква буквена част. Буквената част на 3x²y е x²y; само −x²y има същата.",
+     "distractors": [
+      {
+       "match": "a",
+       "misconception": "LIKE_TERMS",
+       "explanation": "В 3xy² степените на x и y са разменени — буквените части са различни."
+      },
+      {
+       "match": "c",
+       "misconception": "LIKE_TERMS",
+       "explanation": "Еднаквият коефициент не е важен. В 3x² липсва y."
+      },
+      {
+       "match": "d",
+       "misconception": "LIKE_TERMS",
+       "explanation": "В x²y² степента на y е 2, а в 3x²y е 1."
+      }
+     ],
+     "correctOptionId": "b",
+     "defaultMisconception": "LIKE_TERMS"
+    },
+    "hints": [
+     "Сравни само буквените части, не коефициентите.",
+     "Търсим точно x²y — x на втора и y на първа.",
+     "−x²y има буквена част x²y."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026)"
+   }
+  },
+  {
+   "key": "B3-C2",
+   "draft": {
+    "path": "B",
+    "skill": "B.like-terms",
+    "learningOutcome": "Разпознава подобни едночлени и ги събира и изважда",
+    "responseType": "EXPRESSION",
+    "difficulty": "FOUNDATIONAL",
+    "estimatedSeconds": 30,
+    "maxPoints": 1,
+    "misconception": "LIKE_TERMS",
+    "prompt": {
+     "text": "Опрости: 7m − m"
+    },
+    "key": {
+     "solution": "7m − m = 7m − 1·m = (7 − 1)m = 6m.",
+     "distractors": [
+      {
+       "match": "7",
+       "misconception": "LIKE_TERMS",
+       "explanation": "m = 1·m. Изваждаме коефициентите: 7 − 1 = 6, и пазим m."
+      },
+      {
+       "match": "7m",
+       "misconception": "LIKE_TERMS",
+       "explanation": "m не е нула — коефициентът ѝ е 1. 7 − 1 = 6."
+      },
+      {
+       "match": "6",
+       "misconception": "LIKE_TERMS",
+       "explanation": "Буквената част m остава в отговора."
+      }
+     ],
+     "answer": "6m",
+     "form": "NORMAL_FORM",
+     "defaultMisconception": "LIKE_TERMS"
+    },
+    "hints": [
+     "Какъв е коефициентът на m?",
+     "m = 1·m.",
+     "7m − 1m = (7 − 1)m."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026)"
+   }
+  },
+  {
+   "key": "B3-C3",
+   "draft": {
+    "path": "B",
+    "skill": "B.like-terms",
+    "learningOutcome": "Разпознава подобни едночлени и ги събира и изважда",
+    "responseType": "EXPRESSION",
+    "difficulty": "INTERMEDIATE",
+    "estimatedSeconds": 45,
+    "maxPoints": 1,
+    "misconception": "SIGN",
+    "prompt": {
+     "text": "Опрости: −2ab + 5ab − 4ab"
+    },
+    "key": {
+     "solution": "−2ab + 5ab − 4ab = (−2 + 5 − 4)ab = −1·ab = −ab.",
+     "distractors": [
+      {
+       "match": "ab",
+       "misconception": "SIGN",
+       "explanation": "−2 + 5 − 4 = −1, затова резултатът е −ab."
+      },
+      {
+       "match": "-11ab",
+       "misconception": "SIGN",
+       "explanation": "+5ab е положителен: −2 + 5 − 4 = −1."
+      },
+      {
+       "match": "-1",
+       "misconception": "LIKE_TERMS",
+       "explanation": "Буквената част ab остава."
+      }
+     ],
+     "answer": "-ab",
+     "form": "NORMAL_FORM",
+     "defaultMisconception": "SIGN"
+    },
+    "hints": [
+     "Всички членове имат буквена част ab.",
+     "Пресметни −2 + 5 − 4.",
+     "−2 + 5 = 3, 3 − 4 = −1."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026)"
+   }
+  },
+  {
+   "key": "B3-C4",
+   "draft": {
+    "path": "B",
+    "skill": "B.like-terms",
+    "learningOutcome": "Разпознава подобни едночлени и ги събира и изважда",
+    "responseType": "EXPRESSION",
+    "difficulty": "FOUNDATIONAL",
+    "estimatedSeconds": 30,
+    "maxPoints": 1,
+    "misconception": "LIKE_TERMS",
+    "prompt": {
+     "text": "Събери: 0,5x + 1,5x"
+    },
+    "key": {
+     "solution": "0,5x + 1,5x = (0,5 + 1,5)x = 2x.",
+     "distractors": [
+      {
+       "match": "2x^2",
+       "misconception": "LIKE_TERMS",
+       "explanation": "Буквената част x не се променя при събиране."
+      },
+      {
+       "match": "1,5x",
+       "misconception": "TECHNICAL",
+       "explanation": "0,5 + 1,5 = 2."
+      }
+     ],
+     "answer": "2x",
+     "form": "NORMAL_FORM",
+     "defaultMisconception": "LIKE_TERMS"
+    },
+    "hints": [
+     "Можеш да пишеш десетична запетая или точка.",
+     "Събери 0,5 + 1,5.",
+     "0,5 + 1,5 = 2."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026)"
+   }
+  },
+  {
+   "key": "B3-C5",
+   "draft": {
+    "path": "B",
+    "skill": "B.like-terms",
+    "learningOutcome": "Разпознава подобни едночлени и ги събира и изважда",
+    "responseType": "EXPRESSION",
+    "difficulty": "INTERMEDIATE",
+    "estimatedSeconds": 60,
+    "maxPoints": 1,
+    "misconception": "LIKE_TERMS",
+    "prompt": {
+     "text": "Приведи подобните едночлени: 2x² + 3x − x² + x"
+    },
+    "key": {
+     "solution": "2x² + 3x − x² + x = (2x² − x²) + (3x + x) = x² + 4x.",
+     "distractors": [
+      {
+       "match": "5x^3",
+       "misconception": "LIKE_TERMS",
+       "explanation": "x² и x не са подобни — събирай само еднакви буквени части."
+      },
+      {
+       "match": "x^2+3x",
+       "misconception": "LIKE_TERMS",
+       "explanation": "3x + x = 4x (x има коефициент 1)."
+      },
+      {
+       "match": "3x^2+4x",
+       "misconception": "SIGN",
+       "explanation": "2x² − x² = x², защото −x² е с минус."
+      }
+     ],
+     "answer": "x^2+4x",
+     "form": "NORMAL_FORM",
+     "defaultMisconception": "LIKE_TERMS"
+    },
+    "hints": [
+     "Групирай x² с x² и x с x.",
+     "(2x² − x²) + (3x + x).",
+     "2x² − x² = x², 3x + x = 4x."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026)"
+   }
+  },
+  {
+   "key": "B3-S1",
+   "draft": {
+    "path": "B",
+    "skill": "B.like-terms",
+    "learningOutcome": "Разпознава подобни едночлени и ги събира и изважда",
+    "responseType": "EXPRESSION",
+    "difficulty": "FOUNDATIONAL",
+    "estimatedSeconds": 30,
+    "maxPoints": 1,
+    "misconception": "LIKE_TERMS",
+    "prompt": {
+     "text": "Опрости: 9y − 4y"
+    },
+    "key": {
+     "solution": "9y − 4y = (9 − 4)y = 5y.",
+     "distractors": [
+      {
+       "match": "5",
+       "misconception": "LIKE_TERMS",
+       "explanation": "Буквената част y остава."
+      },
+      {
+       "match": "13y",
+       "misconception": "SIGN",
+       "explanation": "Това е изваждане: 9 − 4 = 5."
+      }
+     ],
+     "answer": "5y",
+     "form": "NORMAL_FORM",
+     "defaultMisconception": "LIKE_TERMS"
+    },
+    "hints": [
+     "Еднаква буквена част: y.",
+     "9 − 4 = ?",
+     "(9 − 4)y = 5y."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026)"
+   }
+  },
+  {
+   "key": "B3-S2",
+   "draft": {
+    "path": "B",
+    "skill": "B.like-terms",
+    "learningOutcome": "Разпознава подобни едночлени и ги събира и изважда",
+    "responseType": "EXPRESSION",
+    "difficulty": "FOUNDATIONAL",
+    "estimatedSeconds": 30,
+    "maxPoints": 1,
+    "misconception": "SIGN",
+    "prompt": {
+     "text": "Опрости: −x + 4x"
+    },
+    "key": {
+     "solution": "−x + 4x = (−1 + 4)x = 3x.",
+     "distractors": [
+      {
+       "match": "-5x",
+       "misconception": "SIGN",
+       "explanation": "−1 + 4 = 3."
+      },
+      {
+       "match": "4x",
+       "misconception": "LIKE_TERMS",
+       "explanation": "−x има коефициент −1, не 0."
+      }
+     ],
+     "answer": "3x",
+     "form": "NORMAL_FORM",
+     "defaultMisconception": "SIGN"
+    },
+    "hints": [
+     "Какъв е коефициентът на −x?",
+     "−x = −1·x.",
+     "−1 + 4 = 3."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026)"
+   }
+  },
+  {
+   "key": "B3-S3",
+   "draft": {
+    "path": "B",
+    "skill": "B.like-terms",
+    "learningOutcome": "Разпознава подобни едночлени и ги събира и изважда",
+    "responseType": "EXPRESSION",
+    "difficulty": "INTERMEDIATE",
+    "estimatedSeconds": 45,
+    "maxPoints": 1,
+    "misconception": "LIKE_TERMS",
+    "prompt": {
+     "text": "Опрости: 6ab² − 2ab² + ab²"
+    },
+    "key": {
+     "solution": "6ab² − 2ab² + ab² = (6 − 2 + 1)ab² = 5ab².",
+     "distractors": [
+      {
+       "match": "4ab^2",
+       "misconception": "LIKE_TERMS",
+       "explanation": "ab² има коефициент 1: 6 − 2 + 1 = 5."
+      },
+      {
+       "match": "5a^3b^6",
+       "misconception": "LIKE_TERMS",
+       "explanation": "При събиране степените не се събират."
+      }
+     ],
+     "answer": "5ab^2",
+     "form": "NORMAL_FORM",
+     "defaultMisconception": "LIKE_TERMS"
+    },
+    "hints": [
+     "Всички имат буквена част ab².",
+     "6 − 2 + 1 = ?",
+     "(6 − 2 + 1)ab² = 5ab²."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026)"
+   }
+  },
+  {
+   "key": "B3-S4",
+   "draft": {
+    "path": "B",
+    "skill": "B.like-terms",
+    "learningOutcome": "Разпознава подобни едночлени и ги събира и изважда",
+    "responseType": "EXPRESSION",
+    "difficulty": "INTERMEDIATE",
+    "estimatedSeconds": 60,
+    "maxPoints": 1,
+    "misconception": "LIKE_TERMS",
+    "prompt": {
+     "text": "Приведи подобните едночлени: 4p − 3q − p + 5q"
+    },
+    "key": {
+     "solution": "4p − 3q − p + 5q = (4p − p) + (−3q + 5q) = 3p + 2q.",
+     "distractors": [
+      {
+       "match": "5pq",
+       "misconception": "LIKE_TERMS",
+       "explanation": "p и q са различни — не се събират."
+      },
+      {
+       "match": "5p+2q",
+       "misconception": "SIGN",
+       "explanation": "4p − p = 3p."
+      }
+     ],
+     "answer": "3p+2q",
+     "form": "NORMAL_FORM",
+     "defaultMisconception": "LIKE_TERMS"
+    },
+    "hints": [
+     "Групирай p с p и q с q.",
+     "(4p − p) + (−3q + 5q).",
+     "3p + 2q."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026)"
+   }
+  },
+  {
+   "key": "BT1-01",
+   "draft": {
+    "path": "B",
+    "skill": "B.definition",
+    "learningOutcome": "Разпознава едночлен",
+    "responseType": "SINGLE_CHOICE",
+    "difficulty": "FOUNDATIONAL",
+    "estimatedSeconds": 60,
+    "maxPoints": 1,
+    "misconception": "REASONING",
+    "prompt": {
+     "text": "Кой от изразите е едночлен?",
+     "options": [
+      {
+       "id": "a",
+       "text": "3x + 1"
+      },
+      {
+       "id": "b",
+       "text": "−5a²b"
+      },
+      {
+       "id": "c",
+       "text": "2 : x"
+      },
+      {
+       "id": "d",
+       "text": "x − y"
+      }
+     ]
+    },
+    "key": {
+     "solution": "−5a²b = (−5)·a·a·b е произведение на число и променливи, затова е едночлен.",
+     "distractors": [
+      {
+       "match": "a",
+       "misconception": "REASONING",
+       "explanation": "3x + 1 е сбор на два члена — това е многочлен."
+      },
+      {
+       "match": "c",
+       "misconception": "REASONING",
+       "explanation": "Деление на променлива дава дробен израз, а не едночлен."
+      },
+      {
+       "match": "d",
+       "misconception": "REASONING",
+       "explanation": "x − y е разлика на два члена."
+      }
+     ],
+     "correctOptionId": "b",
+     "defaultMisconception": "REASONING"
+    },
+    "hints": [
+     "Едночленът е произведение на число и степени на променливи.",
+     "Има ли събиране, изваждане или деление на буква?",
+     "Само −5a²b е произведение."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026)"
+   }
+  },
+  {
+   "key": "BT1-02",
+   "draft": {
+    "path": "B",
+    "skill": "B.definition",
+    "learningOutcome": "Определя коефициент на едночлен",
+    "responseType": "SINGLE_CHOICE",
+    "difficulty": "FOUNDATIONAL",
+    "estimatedSeconds": 60,
+    "maxPoints": 1,
+    "misconception": "SIGN",
+    "prompt": {
+     "text": "Коефициентът на едночлена −x³y е:",
+     "options": [
+      {
+       "id": "a",
+       "text": "−1"
+      },
+      {
+       "id": "b",
+       "text": "1"
+      },
+      {
+       "id": "c",
+       "text": "3"
+      },
+      {
+       "id": "d",
+       "text": "0"
+      }
+     ]
+    },
+    "key": {
+     "solution": "−x³y = (−1)·x³y, коефициентът е −1.",
+     "distractors": [
+      {
+       "match": "b",
+       "misconception": "SIGN",
+       "explanation": "Минусът пред x³y е част от коефициента: −1."
+      },
+      {
+       "match": "c",
+       "misconception": "REASONING",
+       "explanation": "3 е степенният показател на x."
+      },
+      {
+       "match": "d",
+       "misconception": "REASONING",
+       "explanation": "Ако коефициентът беше 0, едночленът би бил 0."
+      }
+     ],
+     "correctOptionId": "a",
+     "defaultMisconception": "SIGN"
+    },
+    "hints": [
+     "Какво число стои пред буквите?",
+     "−x³y = (−1)·x³y.",
+     "Коефициентът е −1."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026)"
+   }
+  },
+  {
+   "key": "BT1-03",
+   "draft": {
+    "path": "B",
+    "skill": "B.normal-form",
+    "learningOutcome": "Определя степен на едночлен",
+    "responseType": "SINGLE_CHOICE",
+    "difficulty": "FOUNDATIONAL",
+    "estimatedSeconds": 60,
+    "maxPoints": 1,
+    "misconception": "REASONING",
+    "prompt": {
+     "text": "Степента на едночлена 4x²y³ е:",
+     "options": [
+      {
+       "id": "a",
+       "text": "4"
+      },
+      {
+       "id": "b",
+       "text": "5"
+      },
+      {
+       "id": "c",
+       "text": "6"
+      },
+      {
+       "id": "d",
+       "text": "9"
+      }
+     ]
+    },
+    "key": {
+     "solution": "Степента е 2 + 3 = 5.",
+     "distractors": [
+      {
+       "match": "a",
+       "misconception": "REASONING",
+       "explanation": "4 е коефициентът, а не степента."
+      },
+      {
+       "match": "c",
+       "misconception": "REASONING",
+       "explanation": "Показателите се събират: 2 + 3, а не 2·3."
+      },
+      {
+       "match": "d",
+       "misconception": "REASONING",
+       "explanation": "Коефициентът не участва в степента."
+      }
+     ],
+     "correctOptionId": "b",
+     "defaultMisconception": "REASONING"
+    },
+    "hints": [
+     "Степента е сборът на показателите на променливите.",
+     "Показателите са 2 и 3.",
+     "2 + 3 = 5."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026)"
+   }
+  },
+  {
+   "key": "BT1-04",
+   "draft": {
+    "path": "B",
+    "skill": "B.normal-form",
+    "learningOutcome": "Записва едночлен в нормален вид",
+    "responseType": "SINGLE_CHOICE",
+    "difficulty": "INTERMEDIATE",
+    "estimatedSeconds": 60,
+    "maxPoints": 1,
+    "misconception": "SIGN",
+    "prompt": {
+     "text": "Нормалният вид на 2a · (−3) · a² · b е:",
+     "options": [
+      {
+       "id": "a",
+       "text": "−6a³b"
+      },
+      {
+       "id": "b",
+       "text": "−6a²b"
+      },
+      {
+       "id": "c",
+       "text": "6a³b"
+      },
+      {
+       "id": "d",
+       "text": "−5a³b"
+      }
+     ]
+    },
+    "key": {
+     "solution": "2·(−3)·a·a²·b = −6a³b.",
+     "distractors": [
+      {
+       "match": "b",
+       "misconception": "TECHNICAL",
+       "explanation": "a · a² = a³ (показателите се събират: 1 + 2)."
+      },
+      {
+       "match": "c",
+       "misconception": "SIGN",
+       "explanation": "2·(−3) = −6 — произведението е отрицателно."
+      },
+      {
+       "match": "d",
+       "misconception": "REASONING",
+       "explanation": "Числата се умножават: 2·(−3) = −6."
+      }
+     ],
+     "correctOptionId": "a",
+     "defaultMisconception": "SIGN"
+    },
+    "hints": [
+     "Умножи числата, после еднаквите букви.",
+     "2·(−3) = ?, a·a² = ?",
+     "−6 и a³, после b."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026)"
+   }
+  },
+  {
+   "key": "BT1-05",
+   "draft": {
+    "path": "B",
+    "skill": "B.like-terms",
+    "learningOutcome": "Разпознава подобни едночлени",
+    "responseType": "SINGLE_CHOICE",
+    "difficulty": "FOUNDATIONAL",
+    "estimatedSeconds": 60,
+    "maxPoints": 1,
+    "misconception": "LIKE_TERMS",
+    "prompt": {
+     "text": "Кой едночлен е подобен на 5xy²?",
+     "options": [
+      {
+       "id": "a",
+       "text": "5x²y"
+      },
+      {
+       "id": "b",
+       "text": "−xy²"
+      },
+      {
+       "id": "c",
+       "text": "5xy"
+      },
+      {
+       "id": "d",
+       "text": "xy²z"
+      }
+     ]
+    },
+    "key": {
+     "solution": "Подобни са едночлени с еднаква буквена част; xy² има само −xy².",
+     "distractors": [
+      {
+       "match": "a",
+       "misconception": "LIKE_TERMS",
+       "explanation": "Степените на x и y са разменени."
+      },
+      {
+       "match": "c",
+       "misconception": "LIKE_TERMS",
+       "explanation": "Еднаквият коефициент не прави едночлените подобни."
+      },
+      {
+       "match": "d",
+       "misconception": "LIKE_TERMS",
+       "explanation": "Има допълнителна променлива z."
+      }
+     ],
+     "correctOptionId": "b",
+     "defaultMisconception": "LIKE_TERMS"
+    },
+    "hints": [
+     "Сравни буквените части.",
+     "Търсим точно xy².",
+     "−xy²."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026)"
+   }
+  },
+  {
+   "key": "BT1-06",
+   "draft": {
+    "path": "B",
+    "skill": "B.like-terms",
+    "learningOutcome": "Събира и изважда подобни едночлени",
+    "responseType": "SINGLE_CHOICE",
+    "difficulty": "INTERMEDIATE",
+    "estimatedSeconds": 60,
+    "maxPoints": 1,
+    "misconception": "LIKE_TERMS",
+    "prompt": {
+     "text": "3x² − 7x² е равно на:",
+     "options": [
+      {
+       "id": "a",
+       "text": "−4x²"
+      },
+      {
+       "id": "b",
+       "text": "4x²"
+      },
+      {
+       "id": "c",
+       "text": "−4x⁴"
+      },
+      {
+       "id": "d",
+       "text": "−4"
+      }
+     ]
+    },
+    "key": {
+     "solution": "3x² − 7x² = (3 − 7)x² = −4x².",
+     "distractors": [
+      {
+       "match": "b",
+       "misconception": "SIGN",
+       "explanation": "3 − 7 = −4."
+      },
+      {
+       "match": "c",
+       "misconception": "LIKE_TERMS",
+       "explanation": "При изваждане степента не се променя."
+      },
+      {
+       "match": "d",
+       "misconception": "LIKE_TERMS",
+       "explanation": "x² остава в отговора."
+      }
+     ],
+     "correctOptionId": "a",
+     "defaultMisconception": "LIKE_TERMS"
+    },
+    "hints": [
+     "Буквената част е еднаква.",
+     "3 − 7 = ?",
+     "(3 − 7)x² = −4x²."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026)"
+   }
+  },
+  {
+   "key": "BT1-07",
+   "draft": {
+    "path": "B",
+    "skill": "B.multiplication",
+    "learningOutcome": "Умножава едночлени",
+    "responseType": "SINGLE_CHOICE",
+    "difficulty": "INTERMEDIATE",
+    "estimatedSeconds": 60,
+    "maxPoints": 1,
+    "misconception": "SIGN",
+    "prompt": {
+     "text": "(−2x³) · (5x²) е равно на:",
+     "options": [
+      {
+       "id": "a",
+       "text": "−10x⁵"
+      },
+      {
+       "id": "b",
+       "text": "−10x⁶"
+      },
+      {
+       "id": "c",
+       "text": "3x⁵"
+      },
+      {
+       "id": "d",
+       "text": "10x⁵"
+      }
+     ]
+    },
+    "key": {
+     "solution": "(−2)·5 = −10, x³·x² = x⁵ → −10x⁵.",
+     "distractors": [
+      {
+       "match": "b",
+       "misconception": "TECHNICAL",
+       "explanation": "x³·x² = x⁵ — показателите се събират."
+      },
+      {
+       "match": "c",
+       "misconception": "REASONING",
+       "explanation": "Коефициентите се умножават, не се събират."
+      },
+      {
+       "match": "d",
+       "misconception": "SIGN",
+       "explanation": "Отрицателно по положително е отрицателно."
+      }
+     ],
+     "correctOptionId": "a",
+     "defaultMisconception": "SIGN"
+    },
+    "hints": [
+     "Умножи коефициентите и степените поотделно.",
+     "(−2)·5 = ?, x³·x² = ?",
+     "−10 и x⁵."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026)"
+   }
+  },
+  {
+   "key": "BT1-08",
+   "draft": {
+    "path": "B",
+    "skill": "B.multiplication",
+    "learningOutcome": "Умножава едночлени",
+    "responseType": "SINGLE_CHOICE",
+    "difficulty": "INTERMEDIATE",
+    "estimatedSeconds": 60,
+    "maxPoints": 1,
+    "misconception": "SIGN",
+    "prompt": {
+     "text": "3ab · (−ab²) · 2a е равно на:",
+     "options": [
+      {
+       "id": "a",
+       "text": "−6a³b³"
+      },
+      {
+       "id": "b",
+       "text": "−6a²b³"
+      },
+      {
+       "id": "c",
+       "text": "6a³b³"
+      },
+      {
+       "id": "d",
+       "text": "−5a³b³"
+      }
+     ]
+    },
+    "key": {
+     "solution": "3·(−1)·2 = −6; a·a·a = a³; b·b² = b³ → −6a³b³.",
+     "distractors": [
+      {
+       "match": "b",
+       "misconception": "TECHNICAL",
+       "explanation": "a·a·a = a³ — има три множителя a."
+      },
+      {
+       "match": "c",
+       "misconception": "SIGN",
+       "explanation": "Има един отрицателен множител — произведението е отрицателно."
+      },
+      {
+       "match": "d",
+       "misconception": "REASONING",
+       "explanation": "3·(−1)·2 = −6."
+      }
+     ],
+     "correctOptionId": "a",
+     "defaultMisconception": "SIGN"
+    },
+    "hints": [
+     "Преброй множителите a и b.",
+     "Коефициенти: 3·(−1)·2.",
+     "−6, a³, b³."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026)"
+   }
+  },
+  {
+   "key": "BT1-09",
+   "draft": {
+    "path": "B",
+    "skill": "B.powers",
+    "learningOutcome": "Степенува едночлен",
+    "responseType": "SINGLE_CHOICE",
+    "difficulty": "INTERMEDIATE",
+    "estimatedSeconds": 60,
+    "maxPoints": 1,
+    "misconception": "SIGN",
+    "prompt": {
+     "text": "(−3x²)² е равно на:",
+     "options": [
+      {
+       "id": "a",
+       "text": "9x⁴"
+      },
+      {
+       "id": "b",
+       "text": "−9x⁴"
+      },
+      {
+       "id": "c",
+       "text": "6x⁴"
+      },
+      {
+       "id": "d",
+       "text": "9x²"
+      }
+     ]
+    },
+    "key": {
+     "solution": "(−3x²)² = (−3)²·(x²)² = 9x⁴.",
+     "distractors": [
+      {
+       "match": "b",
+       "misconception": "SIGN",
+       "explanation": "Четна степен на отрицателно число е положителна: (−3)² = 9."
+      },
+      {
+       "match": "c",
+       "misconception": "REASONING",
+       "explanation": "(−3)² = (−3)·(−3) = 9, не 2·3."
+      },
+      {
+       "match": "d",
+       "misconception": "TECHNICAL",
+       "explanation": "(x²)² = x⁴ — показателите се умножават."
+      }
+     ],
+     "correctOptionId": "a",
+     "defaultMisconception": "SIGN"
+    },
+    "hints": [
+     "Степенувай всеки множител.",
+     "(−3)² = ?, (x²)² = ?",
+     "9 и x⁴."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026)"
+   }
+  },
+  {
+   "key": "BT1-10",
+   "draft": {
+    "path": "B",
+    "skill": "B.powers",
+    "learningOutcome": "Степенува едночлен",
+    "responseType": "SINGLE_CHOICE",
+    "difficulty": "ADVANCED",
+    "estimatedSeconds": 60,
+    "maxPoints": 1,
+    "misconception": "SIGN",
+    "prompt": {
+     "text": "(−2a³b)³ е равно на:",
+     "options": [
+      {
+       "id": "a",
+       "text": "−8a⁹b³"
+      },
+      {
+       "id": "b",
+       "text": "−6a⁹b³"
+      },
+      {
+       "id": "c",
+       "text": "8a⁹b³"
+      },
+      {
+       "id": "d",
+       "text": "−8a⁶b³"
+      }
+     ]
+    },
+    "key": {
+     "solution": "(−2)³·(a³)³·b³ = −8a⁹b³.",
+     "distractors": [
+      {
+       "match": "b",
+       "misconception": "REASONING",
+       "explanation": "(−2)³ = −8, не −2·3."
+      },
+      {
+       "match": "c",
+       "misconception": "SIGN",
+       "explanation": "Нечетна степен на отрицателно число е отрицателна."
+      },
+      {
+       "match": "d",
+       "misconception": "TECHNICAL",
+       "explanation": "(a³)³ = a⁹ — показателите се умножават."
+      }
+     ],
+     "correctOptionId": "a",
+     "defaultMisconception": "SIGN"
+    },
+    "hints": [
+     "Всеки множител на трета степен.",
+     "(−2)³ = ?, (a³)³ = ?",
+     "−8, a⁹, b³."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026)"
+   }
+  },
+  {
+   "key": "BT1-11",
+   "draft": {
+    "path": "B",
+    "skill": "B.division",
+    "learningOutcome": "Дели едночлен на едночлен",
+    "responseType": "SINGLE_CHOICE",
+    "difficulty": "INTERMEDIATE",
+    "estimatedSeconds": 60,
+    "maxPoints": 1,
+    "misconception": "REASONING",
+    "prompt": {
+     "text": "12x⁵ : 4x² е равно на:",
+     "options": [
+      {
+       "id": "a",
+       "text": "3x³"
+      },
+      {
+       "id": "b",
+       "text": "8x³"
+      },
+      {
+       "id": "c",
+       "text": "3x⁷"
+      },
+      {
+       "id": "d",
+       "text": "48x⁷"
+      }
+     ]
+    },
+    "key": {
+     "solution": "12 : 4 = 3; x⁵ : x² = x³ → 3x³.",
+     "distractors": [
+      {
+       "match": "b",
+       "misconception": "REASONING",
+       "explanation": "Коефициентите се делят: 12 : 4 = 3."
+      },
+      {
+       "match": "c",
+       "misconception": "TECHNICAL",
+       "explanation": "При деление показателите се изваждат: 5 − 2."
+      },
+      {
+       "match": "d",
+       "misconception": "REASONING",
+       "explanation": "Това е деление, не умножение."
+      }
+     ],
+     "correctOptionId": "a",
+     "defaultMisconception": "REASONING"
+    },
+    "hints": [
+     "Раздели коефициентите и степените поотделно.",
+     "12 : 4 = ?, x⁵ : x² = ?",
+     "3 и x³."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026)"
+   }
+  },
+  {
+   "key": "BT1-12",
+   "draft": {
+    "path": "B",
+    "skill": "B.applications",
+    "learningOutcome": "Прилага действията с едночлени",
+    "responseType": "SINGLE_CHOICE",
+    "difficulty": "ADVANCED",
+    "estimatedSeconds": 60,
+    "maxPoints": 1,
+    "misconception": "REASONING",
+    "prompt": {
+     "text": "Правоъгълник има страни 3a и 4ab. Лицето му е:",
+     "options": [
+      {
+       "id": "a",
+       "text": "12a²b"
+      },
+      {
+       "id": "b",
+       "text": "7a²b"
+      },
+      {
+       "id": "c",
+       "text": "12ab"
+      },
+      {
+       "id": "d",
+       "text": "14ab"
+      }
+     ]
+    },
+    "key": {
+     "solution": "S = 3a · 4ab = 12a²b.",
+     "distractors": [
+      {
+       "match": "b",
+       "misconception": "REASONING",
+       "explanation": "Лицето е произведение на страните: 3·4 = 12."
+      },
+      {
+       "match": "c",
+       "misconception": "TECHNICAL",
+       "explanation": "a·a = a²."
+      },
+      {
+       "match": "d",
+       "misconception": "REASONING",
+       "explanation": "Коефициентите се умножават (3·4 = 12), а a·a = a²."
+      }
+     ],
+     "correctOptionId": "a",
+     "defaultMisconception": "REASONING"
+    },
+    "hints": [
+     "Лице на правоъгълник = дължина · ширина.",
+     "3a · 4ab.",
+     "12a²b."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026)"
+   }
+  },
+  {
+   "key": "BT1-13",
+   "draft": {
+    "path": "B",
+    "skill": "B.like-terms",
+    "learningOutcome": "Събира и изважда подобни едночлени",
+    "responseType": "EXPRESSION",
+    "difficulty": "INTERMEDIATE",
+    "estimatedSeconds": 60,
+    "maxPoints": 2,
+    "misconception": "SIGN",
+    "prompt": {
+     "text": "Опрости: 4xy − 9xy + 2xy"
+    },
+    "key": {
+     "solution": "(4 − 9 + 2)xy = −3xy.",
+     "distractors": [
+      {
+       "match": "3xy",
+       "misconception": "SIGN",
+       "explanation": "4 − 9 + 2 = −3."
+      },
+      {
+       "match": "-3",
+       "misconception": "LIKE_TERMS",
+       "explanation": "xy остава в отговора."
+      }
+     ],
+     "answer": "-3xy",
+     "form": "NORMAL_FORM",
+     "defaultMisconception": "SIGN"
+    },
+    "hints": [
+     "Еднаква буквена част xy.",
+     "4 − 9 + 2 = ?",
+     "−3xy."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026)"
+   }
+  },
+  {
+   "key": "BT1-14",
+   "draft": {
+    "path": "B",
+    "skill": "B.normal-form",
+    "learningOutcome": "Определя степен на едночлен",
+    "responseType": "NUMERIC",
+    "difficulty": "FOUNDATIONAL",
+    "estimatedSeconds": 45,
+    "maxPoints": 2,
+    "misconception": "REASONING",
+    "prompt": {
+     "text": "Каква е степента на едночлена 7a³b²c?"
+    },
+    "key": {
+     "solution": "3 + 2 + 1 = 6.",
+     "distractors": [
+      {
+       "match": "7",
+       "misconception": "REASONING",
+       "explanation": "7 е коефициентът."
+      },
+      {
+       "match": "5",
+       "misconception": "REASONING",
+       "explanation": "c има показател 1 — не го пропускай."
+      }
+     ],
+     "answer": "6",
+     "defaultMisconception": "REASONING"
+    },
+    "hints": [
+     "Събери показателите на всички букви.",
+     "c = c¹.",
+     "3 + 2 + 1."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026)"
+   }
+  },
+  {
+   "key": "BT1-15",
+   "draft": {
+    "path": "B",
+    "skill": "B.multiplication",
+    "learningOutcome": "Умножава едночлени",
+    "responseType": "EXPRESSION",
+    "difficulty": "INTERMEDIATE",
+    "estimatedSeconds": 75,
+    "maxPoints": 2,
+    "misconception": "SIGN",
+    "prompt": {
+     "text": "Умножи и запиши в нормален вид: (−0,5x²y) · (4xy³)"
+    },
+    "key": {
+     "solution": "(−0,5)·4 = −2; x²·x = x³; y·y³ = y⁴ → −2x³y⁴.",
+     "distractors": [
+      {
+       "match": "2x^3y^4",
+       "misconception": "SIGN",
+       "explanation": "(−0,5)·4 = −2."
+      },
+      {
+       "match": "-2x^2y^3",
+       "misconception": "TECHNICAL",
+       "explanation": "x²·x = x³ и y·y³ = y⁴."
+      }
+     ],
+     "answer": "-2x^3y^4",
+     "form": "NORMAL_FORM",
+     "defaultMisconception": "SIGN"
+    },
+    "hints": [
+     "Умножи коефициентите: (−0,5)·4.",
+     "Събери показателите при еднакви основи.",
+     "−2, x³, y⁴."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026)"
+   }
+  },
+  {
+   "key": "BT1-16",
+   "draft": {
+    "path": "B",
+    "skill": "B.division",
+    "learningOutcome": "Дели едночлен на едночлен",
+    "responseType": "EXPRESSION",
+    "difficulty": "ADVANCED",
+    "estimatedSeconds": 75,
+    "maxPoints": 2,
+    "misconception": "SIGN",
+    "prompt": {
+     "text": "Раздели: (−18a⁴b³) : (6a²b)"
+    },
+    "key": {
+     "solution": "−18 : 6 = −3; a⁴ : a² = a²; b³ : b = b² → −3a²b².",
+     "distractors": [
+      {
+       "match": "3a^2b^2",
+       "misconception": "SIGN",
+       "explanation": "Отрицателно делено на положително е отрицателно."
+      },
+      {
+       "match": "-3a^2b^3",
+       "misconception": "TECHNICAL",
+       "explanation": "b³ : b = b²."
+      },
+      {
+       "match": "-12a^2b^2",
+       "misconception": "REASONING",
+       "explanation": "Коефициентите се делят: −18 : 6 = −3."
+      }
+     ],
+     "answer": "-3a^2b^2",
+     "form": "NORMAL_FORM",
+     "defaultMisconception": "SIGN"
+    },
+    "hints": [
+     "Раздели коефициентите, после степените.",
+     "−18 : 6 = ?, a⁴ : a² = ?, b³ : b = ?",
+     "−3a²b²."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026)"
+   }
+  },
+  {
+   "key": "BT1-17",
+   "draft": {
+    "path": "B",
+    "skill": "B.applications",
+    "learningOutcome": "Намира числена стойност на едночлен",
+    "responseType": "NUMERIC",
+    "difficulty": "FOUNDATIONAL",
+    "estimatedSeconds": 60,
+    "maxPoints": 2,
+    "misconception": "SIGN",
+    "prompt": {
+     "text": "Намери числената стойност на −2x²y при x = −1 и y = 3."
+    },
+    "key": {
+     "solution": "−2·(−1)²·3 = −2·1·3 = −6.",
+     "distractors": [
+      {
+       "match": "6",
+       "misconception": "SIGN",
+       "explanation": "(−1)² = 1, после −2·1·3 = −6."
+      },
+      {
+       "match": "-12",
+       "misconception": "ORDER_OF_OPERATIONS",
+       "explanation": "Първо степенувай: (−1)² = 1."
+      }
+     ],
+     "answer": "-6",
+     "defaultMisconception": "SIGN"
+    },
+    "hints": [
+     "Замести x с (−1) — в скоби.",
+     "(−1)² = 1.",
+     "−2·1·3."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026)"
+   }
+  },
+  {
+   "key": "BT1-18",
+   "draft": {
+    "path": "B",
+    "skill": "B.like-terms",
+    "learningOutcome": "Привежда подобни едночлени",
+    "responseType": "STEPS",
+    "difficulty": "INTERMEDIATE",
+    "estimatedSeconds": 180,
+    "maxPoints": 3,
+    "misconception": "LIKE_TERMS",
+    "prompt": {
+     "text": "Опрости стъпка по стъпка. Всеки ред трябва да е равен на предишния: 3x²y − 2xy² + 5x²y + 4xy² − x²y",
+     "startExpression": "3x^2y - 2xy^2 + 5x^2y + 4xy^2 - x^2y"
+    },
+    "key": {
+     "solution": "3x²y + 5x²y − x²y = 7x²y; −2xy² + 4xy² = 2xy². Отговор: 7x²y + 2xy².",
+     "distractors": [
+      {
+       "match": "9x^2y+2xy^2",
+       "misconception": "SIGN",
+       "explanation": "Внимавай за −x²y: 3 + 5 − 1 = 7."
+      },
+      {
+       "match": "7x^2y-6xy^2",
+       "misconception": "SIGN",
+       "explanation": "−2xy² + 4xy² = +2xy²."
+      },
+      {
+       "match": "9x^3y^3",
+       "misconception": "LIKE_TERMS",
+       "explanation": "x²y и xy² не са подобни."
+      }
+     ],
+     "answer": "7x^2y+2xy^2",
+     "form": "NORMAL_FORM",
+     "parts": [
+      {
+       "id": "start",
+       "type": "EXPRESSION",
+       "answer": "3x^2y-2xy^2+5x^2y+4xy^2-x^2y",
+       "points": 0
+      }
+     ],
+     "rubric": "3 т. за верни преходи и краен отговор в нормален вид; до 1,5 т. за верни преходи без довършване.",
+     "defaultMisconception": "LIKE_TERMS"
+    },
+    "hints": [
+     "Подчертай членовете с x²y и тези с xy².",
+     "(3 + 5 − 1)x²y + (−2 + 4)xy².",
+     "7x²y + 2xy²."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026)"
+   }
+  },
+  {
+   "key": "BT1-19",
+   "draft": {
+    "path": "B",
+    "skill": "B.powers",
+    "learningOutcome": "Умножава и степенува едночлени",
+    "responseType": "STRUCTURED",
+    "difficulty": "INTERMEDIATE",
+    "estimatedSeconds": 180,
+    "maxPoints": 3,
+    "misconception": "TECHNICAL",
+    "prompt": {
+     "text": "Дадени са A = 2x²y и B = −3xy³.",
+     "parts": [
+      {
+       "id": "a",
+       "label": "а) A · B",
+       "type": "EXPRESSION",
+       "points": 1
+      },
+      {
+       "id": "b",
+       "label": "б) A²",
+       "type": "EXPRESSION",
+       "points": 1
+      },
+      {
+       "id": "c",
+       "label": "в) Степента на A · B",
+       "type": "NUMERIC",
+       "points": 1
+      }
+     ]
+    },
+    "key": {
+     "solution": "а) 2·(−3)·x²·x·y·y³ = −6x³y⁴. б) (2x²y)² = 4x⁴y². в) 3 + 4 = 7.",
+     "distractors": [
+      {
+       "match": "6x^3y^4",
+       "misconception": "SIGN",
+       "explanation": "2·(−3) = −6."
+      },
+      {
+       "match": "4x^4y",
+       "misconception": "TECHNICAL",
+       "explanation": "y² — и y се степенува."
+      },
+      {
+       "match": "2x^4y^2",
+       "misconception": "REASONING",
+       "explanation": "2² = 4."
+      }
+     ],
+     "parts": [
+      {
+       "id": "a",
+       "type": "EXPRESSION",
+       "answer": "-6x^3y^4",
+       "form": "NORMAL_FORM",
+       "points": 1
+      },
+      {
+       "id": "b",
+       "type": "EXPRESSION",
+       "answer": "4x^4y^2",
+       "form": "NORMAL_FORM",
+       "points": 1
+      },
+      {
+       "id": "c",
+       "type": "NUMERIC",
+       "answer": "7",
+       "points": 1
+      }
+     ],
+     "rubric": "По 1 т. за всяка вярна част.",
+     "defaultMisconception": "TECHNICAL"
+    },
+    "hints": [
+     "При умножение събираш показателите.",
+     "При степенуване умножаваш показателите и степенуваш коефициента.",
+     "A·B = −6x³y⁴; степента е 3 + 4."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026)"
+   }
+  },
+  {
+   "key": "BT1-20",
+   "draft": {
+    "path": "B",
+    "skill": "B.applications",
+    "learningOutcome": "Прилага действията с едночлени в задача",
+    "responseType": "STRUCTURED",
+    "difficulty": "ADVANCED",
+    "estimatedSeconds": 240,
+    "maxPoints": 3,
+    "misconception": "REASONING",
+    "prompt": {
+     "text": "Правоъгълен паралелепипед има ръбове 2a, 3ab и 4b.",
+     "parts": [
+      {
+       "id": "a",
+       "label": "а) Запиши обема като едночлен",
+       "type": "EXPRESSION",
+       "points": 1
+      },
+      {
+       "id": "b",
+       "label": "б) Пресметни обема при a = 1 и b = 0,5",
+       "type": "NUMERIC",
+       "points": 1
+      },
+      {
+       "id": "c",
+       "label": "в) Колко пъти се увеличава обемът, ако a се удвои?",
+       "type": "NUMERIC",
+       "points": 1
+      }
+     ]
+    },
+    "key": {
+     "solution": "а) V = 2a·3ab·4b = 24a²b². б) 24·1²·0,5² = 24·0,25 = 6. в) (2a)² = 4a², обемът става 4 пъти по-голям.",
+     "distractors": [
+      {
+       "match": "24ab",
+       "misconception": "TECHNICAL",
+       "explanation": "a·a = a² и b·b = b²."
+      },
+      {
+       "match": "2",
+       "misconception": "REASONING",
+       "explanation": "Обемът зависи от a², затова при удвояване на a той става 4 пъти по-голям."
+      }
+     ],
+     "parts": [
+      {
+       "id": "a",
+       "type": "EXPRESSION",
+       "answer": "24a^2b^2",
+       "form": "NORMAL_FORM",
+       "points": 1
+      },
+      {
+       "id": "b",
+       "type": "NUMERIC",
+       "answer": "6",
+       "points": 1
+      },
+      {
+       "id": "c",
+       "type": "NUMERIC",
+       "answer": "4",
+       "points": 1
+      }
+     ],
+     "rubric": "По 1 т. за всяка вярна част.",
+     "defaultMisconception": "REASONING"
+    },
+    "hints": [
+     "Обемът е произведение на трите ръба.",
+     "V = 24a²b². Замести a = 1, b = 0,5.",
+     "Ако a → 2a, то a² → 4a²."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026)"
+   }
+  }
+ ],
+ "lessons": [
+  {
+   "lessonKey": "B3",
+   "content": {
+    "context": {
+     "title": "Пъзел с плочки",
+     "text": "Мира подрежда плочки: 4 сини квадрата, 3 зелени правоъгълника и още 2 сини квадрата. Колко сини квадрата има? Лесно — 6. Но можем ли да „съберем“ квадратите с правоъгълниците в едно число? Не: те са различни видове. Точно така работят подобните едночлени."
+    },
+    "objectives": [
+     "След този урок ще можеш да разпознаваш подобни едночлени.",
+     "След този урок ще можеш да събираш и изваждаш подобни едночлени.",
+     "След този урок ще можеш да привеждаш подобните членове в израз."
+    ],
+    "prerequisiteCheck": {
+     "intro": "Да проверим две неща, които ще ти трябват.",
+     "questionKeys": [
+      "B3-P1",
+      "B3-P2"
+     ]
+    },
+    "explanation": [
+     "Помниш ли, че всеки едночлен има две части: коефициент (числото) и буквена част (произведението на променливите)?",
+     "Два едночлена са подобни, когато буквените им части са напълно еднакви: същите букви със същите степени. Коефициентите може да са различни.",
+     "Например 5x²y и −2x²y са подобни. А 5x²y и 5xy² не са — степените на x и y са разменени.",
+     "Подобните едночлени се събират като плочки от един вид: събираме коефициентите, а буквената част остава същата. 5x²y + (−2x²y) = 3x²y.",
+     "Защо е вярно? Защото това е разпределителното свойство: 5·M + (−2)·M = (5 − 2)·M, където M = x²y."
+    ],
+    "definition": {
+     "title": "Подобни едночлени",
+     "text": "Едночлени в нормален вид с еднаква буквена част се наричат подобни. Сборът на подобни едночлени е едночлен със същата буквена част и коефициент, равен на сбора от коефициентите: a·M + b·M = (a + b)·M."
+    },
+    "visual": {
+     "kind": "tiles",
+     "title": "Сортиране по вид",
+     "description": "Три кутии. В първата са едночлените 4x², −x² и 2x² — общо 5x². Във втората са 3xy и −5xy — общо −2xy. В третата е само 7y. Едночлени от различни кутии не се събират.",
+     "groups": [
+      {
+       "label": "x²",
+       "items": [
+        "4x²",
+        "−x²",
+        "2x²"
+       ],
+       "colour": "purple"
+      },
+      {
+       "label": "xy",
+       "items": [
+        "3xy",
+        "−5xy"
+       ],
+       "colour": "blue"
+      },
+      {
+       "label": "y",
+       "items": [
+        "7y"
+       ],
+       "colour": "coral"
+      }
+     ]
+    },
+    "workedExamples": [
+     {
+      "level": "BASIC",
+      "problem": "6a + 3a",
+      "answer": "9a",
+      "steps": [
+       {
+        "expression": "6a + 3a",
+        "why": "И двата члена имат буквена част a, значи са подобни."
+       },
+       {
+        "expression": "(6 + 3)a",
+        "why": "Разпределително свойство: изнасяме общата буквена част a."
+       },
+       {
+        "expression": "9a",
+        "why": "Пресмятаме 6 + 3 = 9; буквената част не се променя."
+       }
+      ]
+     },
+     {
+      "level": "TYPICAL",
+      "problem": "2x² − 5x + 4x² + 3x",
+      "answer": "6x² − 2x",
+      "steps": [
+       {
+        "expression": "(2x² + 4x²) + (−5x + 3x)",
+        "why": "Разместително и съдружително свойство: групираме подобните членове, като всеки носи знака пред себе си."
+       },
+       {
+        "expression": "(2 + 4)x² + (−5 + 3)x",
+        "why": "Изнасяме буквените части x² и x."
+       },
+       {
+        "expression": "6x² − 2x",
+        "why": "6x² и −2x не са подобни (x² ≠ x), затова спираме тук."
+       }
+      ]
+     },
+     {
+      "level": "CHALLENGE",
+      "problem": "3ab² − a²b + 0,5ab² − 2a²b − ab²",
+      "answer": "2,5ab² − 3a²b",
+      "steps": [
+       {
+        "expression": "(3ab² + 0,5ab² − ab²) + (−a²b − 2a²b)",
+        "why": "ab² и a²b са различни буквени части — внимаваме къде е квадратът."
+       },
+       {
+        "expression": "(3 + 0,5 − 1)ab² + (−1 − 2)a²b",
+        "why": "−ab² има коефициент −1, а −a²b — също −1."
+       },
+       {
+        "expression": "2,5ab² − 3a²b",
+        "why": "Пресмятаме коефициентите. Двата резултата не са подобни."
+       }
+      ]
+     }
+    ],
+    "watchOut": [
+     {
+      "wrong": "3x + 2x = 5x²",
+      "right": "3x + 2x = 5x",
+      "why": "При събиране буквената част не се променя. Показателите се събират само при умножение."
+     },
+     {
+      "wrong": "4x² + 3x = 7x³",
+      "right": "4x² + 3x не се опростява",
+      "why": "x² и x не са подобни, затова не ги събираме."
+     },
+     {
+      "wrong": "7m − m = 7",
+      "right": "7m − m = 6m",
+      "why": "m има коефициент 1, а буквената част остава."
+     },
+     {
+      "wrong": "5a − 8a = 3a",
+      "right": "5a − 8a = −3a",
+      "why": "5 − 8 е отрицателно. Пази знаците."
+     }
+    ],
+    "guidedPractice": [
+     {
+      "questionKey": "B3-G1",
+      "support": "FULL",
+      "coaching": "Буквените части са еднакви — събери само числата пред тях."
+     },
+     {
+      "questionKey": "B3-G2",
+      "support": "PARTIAL",
+      "coaching": "Внимавай със знака на разликата."
+     },
+     {
+      "questionKey": "B3-G3",
+      "support": "NONE",
+      "coaching": "Сега сам(а): групирай и приведи."
+     }
+    ],
+    "check": {
+     "intro": "Кратка проверка без оценка — само за теб.",
+     "questionKeys": [
+      "B3-C1",
+      "B3-C2",
+      "B3-C3",
+      "B3-C4",
+      "B3-C5"
+     ]
+    },
+    "summary": [
+     "Подобните едночлени имат еднаква буквена част.",
+     "Събираме/изваждаме коефициентите, а буквената част остава същата.",
+     "Неподобни членове остават отделно — така изразът е в нормален вид.",
+     "Проверка: замести с число (напр. x = 2) в началния и крайния израз — трябва да получиш едно и също."
+    ],
+    "nextStep": {
+     "lessonKey": "B4",
+     "text": "Следва: умножение на едночлени — там показателите вече се събират."
+    }
+   }
+  }
+ ],
+ "tests": [
+  {
+   "testKey": "BT1",
+   "title": "Едночлени — тематичен тест 1",
+   "kind": "THEMATIC",
+   "path": "B",
+   "blueprint": "Тематичен тест (20)",
+   "timeLimitMin": 40,
+   "hintPolicy": "NONE",
+   "reviewMoment": "AFTER_SUBMIT",
+   "questionKeys": [
+    "BT1-01",
+    "BT1-02",
+    "BT1-03",
+    "BT1-04",
+    "BT1-05",
+    "BT1-06",
+    "BT1-07",
+    "BT1-08",
+    "BT1-09",
+    "BT1-10",
+    "BT1-11",
+    "BT1-12",
+    "BT1-13",
+    "BT1-14",
+    "BT1-15",
+    "BT1-16",
+    "BT1-17",
+    "BT1-18",
+    "BT1-19",
+    "BT1-20"
+   ]
+  }
+ ],
+ "blueprints": [
+  {
+   "name": "Тематичен тест (20)",
+   "academicYear": "2026/2027",
+   "timeLimitMin": 40,
+   "composition": {
+    "MULTIPLE_CHOICE": 12,
+    "SHORT_ANSWER": 5,
+    "MULTI_STEP": 3
+   }
+  },
+  {
+   "name": "Обобщителен тест (24)",
+   "academicYear": "2026/2027",
+   "timeLimitMin": 60,
+   "composition": {
+    "MULTIPLE_CHOICE": 14,
+    "SHORT_ANSWER": 7,
+    "MULTI_STEP": 3
+   }
+  }
+ ]
+}

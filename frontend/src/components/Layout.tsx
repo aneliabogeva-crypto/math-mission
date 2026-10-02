@@ -44,7 +44,7 @@ export function Layout({ children }: { children: ReactNode }) {
     <div className="app">
       <a className="skip-link" href="#main">Към съдържанието</a>
       <header className="topbar">
-        <Link className="brand" to="/"><img src="/icon.svg" alt="" width={28} height={28} /> Math Mission</Link>
+        <Link className="brand" to="/"><img src={`${import.meta.env.BASE_URL}icon.svg`} alt="" width={28} height={28} /> Math Mission</Link>
         <span className="spacer" />
         {me && me.role !== 'STUDENT' && staffLinks[me.role]?.map((l) => <NavLink key={l.to} className="btn ghost" to={l.to}>{l.label}</NavLink>)}
         <InstallButton />

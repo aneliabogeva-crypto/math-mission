@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Link, Navigate, Route, Routes } from 'react-router-dom';
 import { Helper } from './components/Helper';
 import { Layout, Loading } from './components/Layout';
 import { AdminPage } from './pages/AdminPage';
@@ -38,9 +38,9 @@ function PendingConsent() {
       <Helper mood="thinking">Почти сме готови! Нужно е родител или настойник да даде съгласие.</Helper>
       {me?.consentCode ? (
         <div className="card">
-          <p>Покажи този код на родител. Той/тя трябва да отвори <strong>{location.origin}/consent/{me.consentCode}</strong>.</p>
+          <p>Покажи този код на родител и натиснете бутона по-долу заедно.</p>
           <p className="math-block">{me.consentCode}</p>
-          <a className="btn" href={`/consent/${me.consentCode}`}>Родителят е до мен — отвори съгласието</a>
+          <Link className="btn" to={`/consent/${me.consentCode}`}>Родителят е до мен — отвори съгласието</Link>
         </div>
       ) : <div className="card"><p>Профилът е ограничен. Попитай родителя си.</p></div>}
       <button className="btn" onClick={() => void refresh()}>Провери отново</button>

@@ -1,0 +1,321 @@
+{
+ "paths": {
+  "A": "Рационални изрази",
+  "B": "Едночлени",
+  "C": "Многочлени",
+  "D": "Обобщителен преговор"
+ },
+ "lessons": [
+  {
+   "key": "A1",
+   "path": "A",
+   "order": 1,
+   "title": "Числови изрази и изрази с променливи",
+   "skill": "A.expressions",
+   "learningOutcome": "Разпознава числов израз и израз с променливи",
+   "prerequisites": []
+  },
+  {
+   "key": "A2",
+   "path": "A",
+   "order": 2,
+   "title": "Променливи и константи. Цели и дробни изрази",
+   "skill": "A.rational-integral",
+   "learningOutcome": "Различава цели и дробни рационални изрази",
+   "prerequisites": [
+    "A1"
+   ]
+  },
+  {
+   "key": "A3",
+   "path": "A",
+   "order": 3,
+   "title": "Заместване и числена стойност на израз",
+   "skill": "A.substitution",
+   "learningOutcome": "Намира числена стойност на израз при дадени стойности на променливите",
+   "prerequisites": [
+    "A2"
+   ]
+  },
+  {
+   "key": "A4",
+   "path": "A",
+   "order": 4,
+   "title": "Ред на действията в изрази с променливи",
+   "skill": "A.order-of-operations",
+   "learningOutcome": "Спазва реда на действията при пресмятане",
+   "prerequisites": [
+    "A3"
+   ]
+  },
+  {
+   "key": "A5",
+   "path": "A",
+   "order": 5,
+   "title": "Съставяне на изрази по условие",
+   "skill": "A.applications",
+   "learningOutcome": "Съставя израз по текстово условие",
+   "prerequisites": [
+    "A4"
+   ]
+  },
+  {
+   "key": "B1",
+   "path": "B",
+   "order": 1,
+   "title": "Едночлен. Коефициент и буквена част",
+   "skill": "B.definition",
+   "learningOutcome": "Разпознава едночлен и определя коефициента и буквената част",
+   "prerequisites": [
+    "A3"
+   ]
+  },
+  {
+   "key": "B2",
+   "path": "B",
+   "order": 2,
+   "title": "Нормален вид и степен на едночлен",
+   "skill": "B.normal-form",
+   "learningOutcome": "Записва едночлен в нормален вид и определя степента му",
+   "prerequisites": [
+    "B1"
+   ]
+  },
+  {
+   "key": "B3",
+   "path": "B",
+   "order": 3,
+   "title": "Подобни едночлени. Събиране и изваждане",
+   "skill": "B.like-terms",
+   "learningOutcome": "Разпознава подобни едночлени и ги събира и изважда",
+   "prerequisites": [
+    "B2"
+   ]
+  },
+  {
+   "key": "B4",
+   "path": "B",
+   "order": 4,
+   "title": "Умножение на едночлени",
+   "skill": "B.multiplication",
+   "learningOutcome": "Умножава едночлени",
+   "prerequisites": [
+    "B2"
+   ]
+  },
+  {
+   "key": "B5",
+   "path": "B",
+   "order": 5,
+   "title": "Степенуване на едночлен",
+   "skill": "B.powers",
+   "learningOutcome": "Степенува едночлен с естествен степенен показател",
+   "prerequisites": [
+    "B4"
+   ]
+  },
+  {
+   "key": "B6",
+   "path": "B",
+   "order": 6,
+   "title": "Деление на едночлен с едночлен",
+   "skill": "B.division",
+   "learningOutcome": "Дели едночлен на едночлен, когато частното е едночлен",
+   "prerequisites": [
+    "B5"
+   ]
+  },
+  {
+   "key": "B7",
+   "path": "B",
+   "order": 7,
+   "title": "Едночлени: обобщение и приложения",
+   "skill": "B.applications",
+   "learningOutcome": "Прилага действията с едночлени в задачи",
+   "prerequisites": [
+    "B3",
+    "B6"
+   ]
+  },
+  {
+   "key": "C1",
+   "path": "C",
+   "order": 1,
+   "title": "Многочлен. Членове и коефициенти",
+   "skill": "C.definition",
+   "learningOutcome": "Разпознава многочлен, неговите членове и коефициенти",
+   "prerequisites": [
+    "B3"
+   ]
+  },
+  {
+   "key": "C2",
+   "path": "C",
+   "order": 2,
+   "title": "Нормален вид и степен на многочлен",
+   "skill": "C.normal-form",
+   "learningOutcome": "Привежда многочлен в нормален вид и определя степента му",
+   "prerequisites": [
+    "C1"
+   ]
+  },
+  {
+   "key": "C3",
+   "path": "C",
+   "order": 3,
+   "title": "Събиране и изваждане на многочлени",
+   "skill": "C.add-subtract",
+   "learningOutcome": "Събира и изважда многочлени, като разкрива скоби",
+   "prerequisites": [
+    "C2"
+   ]
+  },
+  {
+   "key": "C4",
+   "path": "C",
+   "order": 4,
+   "title": "Умножение на многочлен с едночлен",
+   "skill": "C.multiply-monomial",
+   "learningOutcome": "Умножава многочлен с едночлен",
+   "prerequisites": [
+    "C3",
+    "B4"
+   ]
+  },
+  {
+   "key": "C5",
+   "path": "C",
+   "order": 5,
+   "title": "Умножение на многочлени",
+   "skill": "C.multiply",
+   "learningOutcome": "Умножава многочлени",
+   "prerequisites": [
+    "C4"
+   ]
+  },
+  {
+   "key": "C6",
+   "path": "C",
+   "order": 6,
+   "title": "Квадрат на двучлен",
+   "skill": "C.square-binomial",
+   "learningOutcome": "Прилага формулите (a ± b)²",
+   "prerequisites": [
+    "C5"
+   ]
+  },
+  {
+   "key": "C7",
+   "path": "C",
+   "order": 7,
+   "title": "Разлика на квадрати",
+   "skill": "C.difference-squares",
+   "learningOutcome": "Прилага формулата (a − b)(a + b) = a² − b²",
+   "prerequisites": [
+    "C5"
+   ]
+  },
+  {
+   "key": "C8",
+   "path": "C",
+   "order": 8,
+   "title": "Куб на двучлен",
+   "skill": "C.cube-binomial",
+   "learningOutcome": "Прилага формулите (a ± b)³",
+   "prerequisites": [
+    "C6"
+   ]
+  },
+  {
+   "key": "C9",
+   "path": "C",
+   "order": 9,
+   "title": "Сбор и разлика на кубове",
+   "skill": "C.sum-cubes",
+   "learningOutcome": "Прилага формулите a³ ± b³",
+   "prerequisites": [
+    "C8"
+   ]
+  },
+  {
+   "key": "C10",
+   "path": "C",
+   "order": 10,
+   "title": "Тъждества",
+   "skill": "C.identities",
+   "learningOutcome": "Доказва тъждества чрез тъждествени преобразувания",
+   "prerequisites": [
+    "C7",
+    "C9"
+   ]
+  },
+  {
+   "key": "C11",
+   "path": "C",
+   "order": 11,
+   "title": "Разлагане чрез изнасяне на общ множител",
+   "skill": "C.common-factor",
+   "learningOutcome": "Разлага многочлен чрез изнасяне на общ множител",
+   "prerequisites": [
+    "C4"
+   ]
+  },
+  {
+   "key": "C12",
+   "path": "C",
+   "order": 12,
+   "title": "Разлагане чрез формули и групиране",
+   "skill": "C.factor-formulas",
+   "learningOutcome": "Разлага многочлен чрез формули и групиране",
+   "prerequisites": [
+    "C11",
+    "C7"
+   ]
+  },
+  {
+   "key": "C13",
+   "path": "C",
+   "order": 13,
+   "title": "Числена стойност и приложения на многочлени",
+   "skill": "C.applications",
+   "learningOutcome": "Използва преобразувания за пресмятане на числена стойност",
+   "prerequisites": [
+    "C12"
+   ]
+  },
+  {
+   "key": "D1",
+   "path": "D",
+   "order": 1,
+   "title": "Карта на понятията и формулите",
+   "skill": "D.concept-map",
+   "learningOutcome": "Свързва понятията от трите теми",
+   "prerequisites": [
+    "B7",
+    "C13"
+   ]
+  },
+  {
+   "key": "D2",
+   "path": "D",
+   "order": 2,
+   "title": "Типични грешки и как да се проверяваме",
+   "skill": "D.checking",
+   "learningOutcome": "Открива и поправя типични грешки",
+   "prerequisites": [
+    "D1"
+   ]
+  },
+  {
+   "key": "D3",
+   "path": "D",
+   "order": 3,
+   "title": "Смесена практика",
+   "skill": "D.mixed",
+   "learningOutcome": "Решава смесени задачи от трите теми",
+   "prerequisites": [
+    "D2"
+   ]
+  }
+ ]
+}
