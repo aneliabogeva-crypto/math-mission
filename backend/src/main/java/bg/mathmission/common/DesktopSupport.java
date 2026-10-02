@@ -74,7 +74,7 @@ public class DesktopSupport {
             String[] cmd = os.contains("win") ? new String[] {"rundll32", "url.dll,FileProtocolHandler", url}
                     : os.contains("mac") ? new String[] {"open", url} : new String[] {"xdg-open", url};
             new ProcessBuilder(cmd).start();
-        } catch (Exception e) {
+        } catch (Exception | Error e) {
             log.warn("Could not open the browser automatically. Open {} manually.", url);
         }
     }
@@ -98,8 +98,9 @@ public class DesktopSupport {
             icon.setImageAutoSize(true);
             icon.addActionListener(e -> openBrowser(url));
             SystemTray.getSystemTray().add(icon);
-        } catch (AWTException | RuntimeException e) {
-            log.warn("System tray not available: {}", e.getMessage());
+        } catch (AWTException | RuntimeException | Error e) {
+            // No display or no tray (e.g. a headless machine): the server keeps running without it.
+            log.warn("System tray not available: {}", e.toString());
         }
     }
 }
