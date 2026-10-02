@@ -127,7 +127,7 @@ public final class AnswerChecker {
      * the required form. Otherwise credit for the valid prefix, capped at half the points.
      */
     private static Result checkSteps(AnswerKey key, double max, List<String> steps) {
-        List<String> nonEmpty = steps.stream().filter(s -> !blank(s)).toList();
+        List<String> nonEmpty = steps == null ? List.of() : steps.stream().filter(s -> !blank(s)).toList();
         if (nonEmpty.isEmpty()) {
             return new Result(Status.UNANSWERED, 0, max, null, "Няма отговор.", null, List.of());
         }

@@ -97,4 +97,13 @@ class AnswerCheckerTest {
         assertThat(msg).doesNotContain("грешно!", "провал", "слаб");
         assertThat(msg).contains("опитай");
     }
+
+    @Test
+    void mismatchedPayloadShapeNeverThrows() {
+        AnswerKey steps = new AnswerKey(null, "x", AnswerForm.NORMAL_FORM, List.of(), List.of(), Misconception.LIKE_TERMS, null, "s", null);
+        AnswerPayload choiceOnly = new AnswerPayload("b", null, null, null, null);
+        for (ResponseType t : List.of(ResponseType.STEPS, ResponseType.EXPRESSION, ResponseType.NUMERIC)) {
+            assertThat(AnswerChecker.check(t, steps, 1, choiceOnly).points()).isZero();
+        }
+    }
 }
