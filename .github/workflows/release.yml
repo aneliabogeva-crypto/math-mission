@@ -76,6 +76,8 @@ jobs:
         continue-on-error: true
         shell: bash
         run: |
+          exec 2> >(tee err.log >&2)
+          trap 'echo "::warning title=msi::$(tail -c 1500 err.log | tr "\n" " ")"' ERR
           rm -rf out/MathMission
           eval jpackage $JP_OPTS --type msi --icon packaging/math-mission.ico --win-menu --win-shortcut \
             --win-per-user-install --win-dir-chooser --win-menu-group "Math Mission" \
@@ -87,6 +89,9 @@ jobs:
         if: runner.os == 'macOS'
         shell: bash
         run: |
+          exec 2> >(tee err.log >&2)
+          trap 'echo "::error title=dmg::$(tail -c 1500 err.log | tr "\n" " ")"' ERR
+          set -x
           mkdir -p icon.iconset
           for s in 16 32 64 128 256 512; do sips -z $s $s packaging/math-mission.png --out icon.iconset/icon_${s}x${s}.png > /dev/null; done
           cp icon.iconset/icon_32x32.png icon.iconset/icon_16x16@2x.png
