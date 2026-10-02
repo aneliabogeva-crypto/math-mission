@@ -117,6 +117,7 @@ jobs:
           exec 2> >(tee err.log >&2)
           trap 'echo "::error title=smoke::$(tail -c 1200 err.log | tr "\n" " ") APP: $(tail -c 1500 app.log 2>/dev/null | tr "\n" " ")"' ERR
           set -x
+          sudo mkdir -p /usr/share/applications /usr/share/desktop-directories /usr/share/icons/hicolor  # present on real desktops, missing on CI
           sudo dpkg -i MathMission-${APP_VERSION}-linux-amd64.deb
           LAUNCHER=$(dpkg -L mathmission | grep '/bin/MathMission$')
           "$LAUNCHER" > app.log 2>&1 &
