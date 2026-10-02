@@ -59,7 +59,11 @@ public class DesktopSupport {
     public void ready() {
         String url = "http://localhost:" + env.getProperty("local.server.port", env.getProperty("server.port", "18080")) + "/";
         log.info("Math Mission is running at {}", url);
-        installTray(url);
+        try {
+            installTray(url);
+        } catch (Throwable t) {
+            log.warn("System tray not available: {}", t.toString());
+        }
         openBrowser(url);
     }
 
@@ -80,8 +84,8 @@ public class DesktopSupport {
     }
 
     private void installTray(String url) {
-        if (GraphicsEnvironment.isHeadless() || !SystemTray.isSupported()) return;
         try {
+            if (GraphicsEnvironment.isHeadless() || !SystemTray.isSupported()) return;
             Image image = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/static/icon-192.png"));
             PopupMenu menu = new PopupMenu();
             MenuItem open = new MenuItem("Open Math Mission");
