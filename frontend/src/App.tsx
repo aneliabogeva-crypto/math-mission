@@ -40,6 +40,7 @@ function PendingConsent() {
         <div className="card">
           <p>Покажи този код на родител. Той/тя трябва да отвори <strong>{location.origin}/consent/{me.consentCode}</strong>.</p>
           <p className="math-block">{me.consentCode}</p>
+          <a className="btn" href={`/consent/${me.consentCode}`}>Родителят е до мен — отвори съгласието</a>
         </div>
       ) : <div className="card"><p>Профилът е ограничен. Попитай родителя си.</p></div>}
       <button className="btn" onClick={() => void refresh()}>Провери отново</button>

@@ -19,16 +19,31 @@ export function ConsentPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
+  const [doneForChild, setDoneForChild] = useState(false);
 
   if (lookup.loading || adult.loading) return <Loading />;
   if (!lookup.data || !adult.data) return <ErrorNote error={lookup.error ?? adult.error} />;
   const isGuardian = me?.role === 'GUARDIAN';
+  if (doneForChild) {
+    return (
+      <div className="card stack">
+        <h1>Благодарим! Съгласието е дадено.</h1>
+        <p>Профилът на детето вече е активен. Родителският портал се отваря от „Вход“ с потребителското име и паролата, които избрахте.</p>
+        <button className="btn" onClick={() => nav('/')}>Към профила на детето</button>
+      </div>
+    );
+  }
 
   async function grant() {
     setError(null);
     try {
       const r = await api<{ token?: string }>(`/api/consent/code/${code}/grant`, { method: 'POST',
         body: { acceptedVersion: adult.data!.version, username: isGuardian ? undefined : username, password: isGuardian ? undefined : password } });
+      if (me?.role === 'STUDENT') {
+        // Shared family computer: keep the child signed in; the parent can open the portal later via "Вход".
+        setDoneForChild(true);
+        return;
+      }
       if (r.token) await signIn(r.token);
       nav('/guardian');
     } catch (e) { setError((e as ApiError).message); }
