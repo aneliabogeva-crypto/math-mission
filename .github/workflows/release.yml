@@ -1,11 +1,17 @@
 name: Desktop installers
 
 # Builds self-contained installers (bundled Java runtime) and attaches them to a GitHub Release.
-# Run: push a tag like v1.0.0, or Actions → "Desktop installers" → Run workflow.
+# Runs on every push to main (updates the "Math Mission <version>" release), on version tags, or manually.
 on:
   push:
+    branches: [main]
     tags: ['v*']
+    paths-ignore: ['**.md']
   workflow_dispatch:
+
+concurrency:
+  group: release
+  cancel-in-progress: true
 
 permissions:
   contents: write
@@ -122,6 +128,8 @@ jobs:
           tag_name: ${{ startsWith(github.ref, 'refs/tags/v') && github.ref_name || format('v{0}', env.APP_VERSION) }}
           name: Math Mission ${{ env.APP_VERSION }}
           make_latest: true
+          target_commitish: ${{ github.sha }}
+          overwrite_files: true
           files: dist/*
           body: |
             **Install Math Mission on your computer.** Each download contains everything it needs, including its own Java runtime.
