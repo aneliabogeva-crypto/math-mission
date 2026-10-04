@@ -485,7 +485,7 @@ const ROUTES: [string, RegExp, Handler][] = [
   }],
   ['GET', /^\/api\/student\/map$/, ({ user }) => mapZones(requireStudent(user).id)],
   ['GET', /^\/api\/student\/plan$/, ({ user }) => plan(requireStudent(user))],
-  ['GET', /^\/api\/student\/lessons\/(\w+)$/, ({ user, params }) => {
+  ['GET', /^\/api\/student\/lessons\/([\w-]+)$/, ({ user, params }) => {
     const u = requireStudent(user);
     const l = LESSONS.find((x) => x.lessonKey === params[0]); if (!l) throw notFound('Урок');
     const stop = CURRICULUM.lessons.find((x) => x.key === l.lessonKey)!;
@@ -495,7 +495,7 @@ const ROUTES: [string, RegExp, Handler][] = [
     return { key: l.lessonKey, path: stop.path, title: stop.title, version: 1, academicYear: ACADEMIC_YEAR, learningOutcome: stop.learningOutcome,
       content: l.content, questions, position: p?.position ?? 0, maxPosition: p?.maxPosition ?? 0, status: p?.status ?? 'NOT_STARTED' };
   }],
-  ['PUT', /^\/api\/student\/lessons\/(\w+)\/position$/, ({ user, params, body }) => {
+  ['PUT', /^\/api\/student\/lessons\/([\w-]+)\/position$/, ({ user, params, body }) => {
     const u = requireStudent(user);
     if (!LESSONS.some((l) => l.lessonKey === params[0])) throw notFound('Урок');
     const d = db();
@@ -552,7 +552,7 @@ const ROUTES: [string, RegExp, Handler][] = [
       .filter((e) => !path || e.path === path).filter((e) => !q || `${e.title} ${e.meaning} ${e.formula} ${e.example}`.toLowerCase().includes(q));
   }],
   ['GET', /^\/api\/student\/tests$/, ({ user }) => { const u = requireStudent(user); return TESTS.map((t) => testSummary(t, u.id)); }],
-  ['POST', /^\/api\/student\/tests\/(\w+)\/attempts$/, ({ user, params, body }) => {
+  ['POST', /^\/api\/student\/tests\/([\w-]+)\/attempts$/, ({ user, params, body }) => {
     const u = requireStudent(user);
     const d = db();
     const id = body?.attemptId ?? uid();

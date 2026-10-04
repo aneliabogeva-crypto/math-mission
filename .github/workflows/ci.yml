@@ -52,6 +52,8 @@ jobs:
           cmp backend/src/main/resources/seed/content.json frontend/src/local/data/content.json
           frontend/node_modules/.bin/esbuild tools/validate_content.ts --bundle --platform=node --outfile=/tmp/validate.js --log-level=error
           node /tmp/validate.js
+          frontend/node_modules/.bin/esbuild tools/check_phone_api.ts --bundle --platform=node --outfile=/tmp/phone.js --log-level=error
+          node /tmp/phone.js
 
   image:
     needs: [backend, frontend]
