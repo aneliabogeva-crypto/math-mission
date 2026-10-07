@@ -1,6 +1,6 @@
 // On-device port of bg.mathmission.assessment.AnswerChecker: deterministic scoring with
 // explanatory, non-shaming feedback.
-import { MathInputError, Q, asPoly, equivalent, isFullyFactorised, isNormalForm, isPolynomial, normalise, safeEquivalent, checkSteps } from './math';
+import { MathInputError, Q, asPoly, counterexample, equivalent, isFullyFactorised, isNormalForm, isPolynomial, normalise, safeEquivalent, checkSteps } from './math';
 
 export type Misconception = 'SIGN' | 'BRACKETS' | 'ORDER_OF_OPERATIONS' | 'LIKE_TERMS' | 'FORMULA_APPLICATION' | 'FACTORISATION' | 'REASONING' | 'TECHNICAL';
 export const MISCONCEPTION_BG: Record<Misconception, string> = {
@@ -9,7 +9,7 @@ export const MISCONCEPTION_BG: Record<Misconception, string> = {
   TECHNICAL: 'Техническа грешка',
 };
 export const MISTAKE_LESSON: Record<Misconception, string> = {
-  SIGN: 'C3', BRACKETS: 'C4', ORDER_OF_OPERATIONS: 'A4', LIKE_TERMS: 'B3', FORMULA_APPLICATION: 'C6', FACTORISATION: 'C11', REASONING: 'D2', TECHNICAL: 'D2',
+  SIGN: 'C3', BRACKETS: 'C4', ORDER_OF_OPERATIONS: 'A4', LIKE_TERMS: 'B3', FORMULA_APPLICATION: 'C6', FACTORISATION: 'C11', REASONING: 'A5', TECHNICAL: 'A3',
 };
 
 export type ResponseType = 'SINGLE_CHOICE' | 'NUMERIC' | 'EXPRESSION' | 'STEPS' | 'STRUCTURED' | 'FREE_TEXT';
@@ -60,6 +60,7 @@ function checkNumeric(k: AnswerKey, max: number, value?: string): Result {
   if (got.eq(expected)) return R('CORRECT', max, max, confirmation(k));
   let d = findDistractor(k, (s) => safeEquivalent(s, value!));
   if (!d && got.eq(expected.neg())) d = { misconception: 'SIGN', explanation: 'Получи същото число, но с обратен знак. Провери знаците.' };
+  if (!d) d = { misconception: k.defaultMisconception, explanation: `Получи ${got.display()}, а верният отговор е ${expected.display()}. Сравни пресмятанията си с решението стъпка по стъпка — грешката обикновено е в знак или в реда на действията.` };
   return incorrect(k, max, d);
 }
 
@@ -75,6 +76,10 @@ function checkExpression(k: AnswerKey, expected: string, form: Form, max: number
   }
   let d = findDistractor(k, (s) => safeEquivalent(s, value!));
   if (!d && safeEquivalent(expected, `-(${value})`)) d = { misconception: 'SIGN', explanation: 'Отговорът ти е с обратен знак. Провери знака пред скобите.' };
+  if (!d) {
+    const ce = counterexample(expected, value ?? '');
+    d = { misconception: k.defaultMisconception, explanation: ce ? `Изразът ти не е равен на верния: ${ce}. Сравни преобразуванията си с решението стъпка по стъпка.` : 'Изразът ти не е равен на верния. Сравни го с решението стъпка по стъпка.' };
+  }
   return incorrect(k, max, d);
 }
 

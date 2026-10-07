@@ -16,6 +16,23 @@ const call = (m: string, p: string, b: unknown, t: string | null) => handleLocal
   await call('POST', '/api/student/practice/B3-C2/check', { requestId: 'r1', answer: { value: '7' }, hintsUsed: 0 }, t);
   ok('idempotent', (await call('GET', '/api/student/home', null, t)).profile.xp === xp);
   let reservedBlocked = false; try { await call('GET', '/api/student/practice/BT1-13', null, t); } catch { reservedBlocked = true; } ok('reserved', reservedBlocked);
+  const lessonKeys = (await import('../frontend/src/local/data/lesson-keys.json')).default as string[];
+  let lessonItems = 0;
+  for (const lk of lessonKeys) {
+    const L = await call('GET', `/api/student/lessons/${lk}`, null, t);
+    const keys = [...L.content.prerequisiteCheck.questionKeys, ...L.content.guidedPractice.map((g: any) => g.questionKey), ...L.content.check.questionKeys];
+    ok(`lesson ${lk} questions`, keys.every((k: string) => L.questions[k]));
+    for (const k of keys) {
+      const q = L.questions[k];
+      const ans = q.responseType === 'SINGLE_CHOICE' ? { optionId: q.prompt.options[0].id } : q.responseType === 'STRUCTURED' ? { parts: { a: '12345' } }
+        : q.responseType === 'STEPS' ? { steps: ['12345'] } : { value: '12345' };
+      const fb = await call('POST', `/api/student/practice/${k}/check`, { requestId: 'L' + k, answer: ans, hintsUsed: 0 }, t);
+      ok(`lesson item ${k} feedback`, fb.message && fb.solution && (fb.correct || (fb.correctAnswer && fb.message.length > 20)));
+      if (!fb.correct && !(fb.correctAnswer && fb.message.length > 20)) console.log(k, fb.status, fb.message, fb.correctAnswer);
+      lessonItems++;
+    }
+  }
+  console.log(`${lessonKeys.length} lessons, ${lessonItems} lesson items answered`);
   await call('PUT', '/api/student/lessons/B3/position', { position: 10, completed: true }, t);
   ok('map', JSON.stringify(await call('GET', '/api/student/map', null, t)).includes('"COMPLETED"'));
   const tests = await call('GET', '/api/student/tests', null, t); ok('tests', tests[0].questionCount === 20);

@@ -7,6 +7,7 @@ import { MathText } from '../components/MathText';
 import { QuestionCard } from '../components/QuestionCard';
 import { send } from '../offline';
 import { useApi } from '../session';
+import lessonKeys from '../local/data/lesson-keys.json';
 
 interface Step { expression: string; why: string }
 interface LessonContent {
@@ -151,7 +152,9 @@ export function LessonPlayer() {
           <ul>{c.summary.map((s) => <li key={s}>{s}</li>)}</ul>
           <div className="alert ok"><strong>Следваща стъпка:</strong> {c.nextStep.text}</div>
           <div className="row">
-            <Link className="btn" to="/map">Към картата</Link>
+            {c.nextStep.lessonKey && (lessonKeys as string[]).includes(c.nextStep.lessonKey)
+              && <Link className="btn" reloadDocument to={`/lesson/${c.nextStep.lessonKey}`}>Към следващия урок</Link>}
+            <Link className="btn secondary" to="/map">Към картата</Link>
             <Link className="btn secondary" to="/mistakes">Прегледай грешките си</Link>
           </div>
         </>

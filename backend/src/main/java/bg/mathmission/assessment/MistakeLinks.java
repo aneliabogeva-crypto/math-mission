@@ -15,8 +15,8 @@ public final class MistakeLinks {
             case LIKE_TERMS -> "B3";
             case FORMULA_APPLICATION -> "C6";
             case FACTORISATION -> "C11";
-            case REASONING -> "D2";
-            case TECHNICAL -> "D2";
+            case REASONING -> "A5";
+            case TECHNICAL -> "A3";
         };
     }
 }

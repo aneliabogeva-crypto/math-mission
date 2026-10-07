@@ -4,9 +4,9 @@ import { ErrorNote, Loading } from '../components/Layout';
 import { MathText, RichText } from '../components/MathText';
 import { useApi } from '../session';
 
-function answerText(a?: AnswerPayload): string {
+function answerText(a?: AnswerPayload, options?: { id: string; text: string }[]): string {
   if (!a) return '—';
-  if (a.optionId) return a.optionId;
+  if (a.optionId) { const o = options?.find((x) => x.id === a.optionId); return o ? `${o.id}) ${o.text}` : a.optionId; }
   if (a.value) return a.value;
   if (a.steps) return a.steps.filter(Boolean).join('  ⟶  ');
   if (a.parts) return Object.entries(a.parts).map(([k, v]) => `${k}: ${v}`).join('; ');
@@ -63,22 +63,38 @@ export function ResultPage() {
 
       <h2>Преглед на въпросите</h2>
       {!data.answerKeyVisible && <div className="alert info">Верните отговори ще се покажат след крайния срок на заданието.</div>}
-      {data.items.map((it) => (
-        <details key={it.position} className="card">
-          <summary>
-            <strong>{it.position + 1}.</strong> {STATUS[it.status ?? 'UNANSWERED']} · {fmt(it.points ?? 0)} / {fmt(it.maxPoints)} т.
-          </summary>
-          <p><RichText text={it.question.prompt.text} /></p>
-          <p>Твоят отговор: <MathText>{answerText(it.answer)}</MathText></p>
-          {it.feedback && <p>{it.feedback}</p>}
-          {it.misconception && <p className="small">Вид грешка: <span className="chip warn">{it.misconception}</span></p>}
-          {it.correctAnswer && <p>Верен отговор: <MathText>{it.correctAnswer}</MathText></p>}
-          {it.solution && <p className="small">Решение: {it.solution}</p>}
-          {it.teacherComment && <p className="small">Коментар от учителя: {it.teacherComment}</p>}
-          <p className="small muted">{it.scoredBy}</p>
-          {it.theoryLessonKey && <Link className="small" to={`/lesson/${it.theoryLessonKey}`}>Теория →</Link>}
-        </details>
-      ))}
+      {data.items.map((it) => {
+        const wrong = it.status !== 'CORRECT';
+        return (
+          <details key={it.position} className="card" open={wrong && data.answerKeyVisible}>
+            <summary>
+              <strong>{it.position + 1}.</strong> {STATUS[it.status ?? 'UNANSWERED']} · {fmt(it.points ?? 0)} / {fmt(it.maxPoints)} т.
+            </summary>
+            <p><RichText text={it.question.prompt.text} /></p>
+            <p>Твоят отговор: <MathText>{answerText(it.answer, it.question.prompt.options)}</MathText></p>
+            {wrong && it.feedback && (
+              <div className="alert bad">
+                <div className="small" style={{ fontWeight: 700 }}>Защо не е вярно</div>
+                <p style={{ margin: 0 }}>{it.status === 'UNANSWERED' ? 'Въпросът е без отговор.' : it.feedback}</p>
+                {it.misconception && <p className="small" style={{ margin: '.25rem 0 0' }}>Вид грешка: <span className="chip warn">{it.misconception}</span></p>}
+              </div>
+            )}
+            {!wrong && it.feedback && <p className="small">{it.feedback}</p>}
+            {it.correctAnswer && (
+              <div className="alert ok">
+                <div className="small" style={{ fontWeight: 700 }}>Верен отговор</div>
+                <p style={{ margin: 0 }}><MathText>{it.correctAnswer}</MathText></p>
+                {it.solution && <><div className="small" style={{ fontWeight: 700, marginTop: '.4rem' }}>Как се решава</div><p style={{ margin: 0 }}>{it.solution}</p></>}
+              </div>
+            )}
+            {it.teacherComment && <p className="small">Коментар от учителя: {it.teacherComment}</p>}
+            <div className="row">
+              <span className="small muted">{it.scoredBy}</span>
+              {wrong && it.theoryLessonKey && <Link className="btn secondary" to={`/lesson/${it.theoryLessonKey}`}>Прочети урока</Link>}
+            </div>
+          </details>
+        );
+      })}
     </div>
   );
 }

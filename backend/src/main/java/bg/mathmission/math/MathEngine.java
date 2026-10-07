@@ -114,6 +114,43 @@ public final class MathEngine {
         return n.numerator.evaluate(values).divide(den);
     }
 
+    /**
+     * A concrete numeric check that shows why two expressions differ, e.g.
+     * "при x = 2 твоят израз дава 10, а верният — 12". Returns null if none is found.
+     */
+    public static String counterexample(String expected, String given) {
+        try {
+            Normalised e = normalise(expected);
+            Normalised g = normalise(given);
+            java.util.TreeSet<Character> vars = new java.util.TreeSet<>();
+            for (Normalised n : List.of(e, g)) {
+                for (Polynomial p : List.of(n.numerator(), n.denominator())) {
+                    p.terms().keySet().forEach(m -> vars.addAll(m.powers().keySet()));
+                }
+            }
+            if (vars.isEmpty()) return null;
+            int[][] tries = {{2, 3, 5, 7}, {3, 2, 4, 5}, {-1, 2, 3, 4}, {5, -2, 2, 3}, {1, 4, -3, 2}};
+            for (int[] t : tries) {
+                Map<Character, Rational> vals = new java.util.LinkedHashMap<>();
+                int i = 0;
+                for (char v : vars) vals.put(v, Rational.of(t[i++ % t.length]));
+                Rational ed = e.denominator().evaluate(vals);
+                Rational gd = g.denominator().evaluate(vals);
+                if (ed.isZero() || gd.isZero()) continue;
+                Rational ev = e.numerator().evaluate(vals).divide(ed);
+                Rational gv = g.numerator().evaluate(vals).divide(gd);
+                if (!ev.equals(gv)) {
+                    StringBuilder at = new StringBuilder();
+                    vals.forEach((v, q) -> at.append(at.isEmpty() ? "" : ", ").append(v).append(" = ").append(q.display()));
+                    return "при " + at + " твоят израз дава " + gv.display() + ", а верният — " + ev.display();
+                }
+            }
+        } catch (MathInputException ignored) {
+            // not comparable
+        }
+        return null;
+    }
+
     // ------------------------------------------------------------------ form checks
 
     /**

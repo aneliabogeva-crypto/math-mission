@@ -60,6 +60,57 @@ for (const t of tests) {
   if (g('MC') !== want[0] || g('SA') !== want[1] || g('MS') !== want[2]) err(t.testKey, `blueprint ${g('MC')}/${g('SA')}/${g('MS')} ≠ ${want.join('/')}`);
 }
 if (new Set(qs.map((q) => q.key)).size !== qs.length) errors.push('duplicate question keys');
+
+// Lessons: the 12-step pattern (as LessonModel.validatePattern), referenced items exist and are
+// not used in tests, and every worked-example step is mathematically equal to the previous one.
+type Step = { expression: string; why: string };
+type Lesson = { lessonKey: string; content: {
+  context?: { text: string }; objectives?: string[]; prerequisiteCheck?: { questionKeys: string[] }; explanation?: string[];
+  definition?: { text: string }; visual?: { description: string }; workedExamples?: { level: string; problem: string; steps: Step[]; answer: string }[];
+  watchOut?: unknown[]; guidedPractice?: { questionKey: string; support: string }[]; check?: { questionKeys: string[] };
+  summary?: string[]; nextStep?: { text: string } } };
+const lessons = (content as unknown as { lessons: Lesson[] }).lessons;
+const inTests = new Set(tests.flatMap((t) => t.questionKeys));
+const letters = (s: string) => /[a-z]/i.test(s.replace(/при.*/, ''));
+const asExpr = (s: string) => s.replace(/,/g, '.').replace(/−/g, '-').replace(/·/g, '*').replace(/[⁰¹²³⁴⁵⁶⁷⁸⁹]+/g, (m) => '^' + [...m].map((ch) => '⁰¹²³⁴⁵⁶⁷⁸⁹'.indexOf(ch)).join('')).replace(/:/g, '/');
+const parses = (s: string) => { if (/[=а-яА-Я]/.test(s)) return false; try { parse(asExpr(s)); return true; } catch { return false; } };
+let lessonSteps = 0;
+for (const l of lessons) {
+  const c = l.content; const k = `lesson ${l.lessonKey}`;
+  if (!c.context?.text) err(k, '1 context');
+  if (!c.objectives?.length) err(k, '2 objectives');
+  if (!c.prerequisiteCheck?.questionKeys?.length) err(k, '3 prerequisite check');
+  if (!c.explanation?.length) err(k, '4 explanation');
+  if (!c.definition?.text) err(k, '5 definition');
+  if (!c.visual?.description) err(k, '6 visual');
+  const ex = c.workedExamples ?? [];
+  if (ex.length < 3 || !['BASIC', 'TYPICAL', 'CHALLENGE'].every((lv) => ex.some((e) => e.level === lv))) err(k, '7 examples');
+  if (!c.watchOut?.length) err(k, '9 watch out');
+  const gp = c.guidedPractice ?? [];
+  if (!gp.length || gp[0].support !== 'FULL' || gp[gp.length - 1].support === 'FULL') err(k, '10 guided practice');
+  const ck = c.check?.questionKeys ?? [];
+  if (ck.length < 3 || ck.length > 7) err(k, '11 check size');
+  if (!c.summary?.length || !c.nextStep?.text) err(k, '12 summary/next');
+  for (const qk of [...(c.prerequisiteCheck?.questionKeys ?? []), ...gp.map((g) => g.questionKey), ...ck]) {
+    if (!byKey.has(qk)) err(k, `missing question ${qk}`);
+    if (inTests.has(qk)) err(k, `question ${qk} is also used in a test`);
+  }
+  for (const e of ex) {
+    if (!e.steps.length || e.steps.some((s) => !s.why || !s.expression)) err(k, `example "${e.problem}" step without why`);
+    const chain = [e.problem, ...e.steps.map((s) => s.expression)];
+    for (let i = 1; i < chain.length; i++) {
+      const a = chain[i - 1]; const b = chain[i];
+      if (!parses(a) || !parses(b)) continue;
+      if (letters(a) && !letters(b)) continue; // substitution step
+      lessonSteps++;
+      if (!equivalent(asExpr(a), asExpr(b))) err(k, `example "${e.problem}": "${a}" ≠ "${b}"`);
+    }
+    const last = e.steps[e.steps.length - 1]?.expression;
+    if (last && parses(last) && parses(e.answer) && !equivalent(asExpr(last), asExpr(e.answer))) err(k, `example "${e.problem}": answer ${e.answer} ≠ last step ${last}`);
+  }
+}
+if (new Set(lessons.map((l) => l.lessonKey)).size !== lessons.length) errors.push('duplicate lesson keys');
+console.log(`${lessons.length} lessons, ${lessonSteps} worked-example steps checked`);
 console.log(`${qs.length} questions, ${tests.length} tests checked`);
 if (errors.length) { console.log(errors.join('\n')); process.exit(1); }
 console.log('CONTENT OK');

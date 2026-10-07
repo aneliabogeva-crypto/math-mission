@@ -124,6 +124,7 @@ public class ProgressService {
                     pct = Math.min(95, Math.round(p.getMaxPosition() * 100f / LESSON_SECTIONS));
                 }
                 List<String> missing = l.prerequisites().stream()
+                        .filter(published::contains)
                         .filter(pre -> progress.get(pre) == null || progress.get(pre).getStatus() != LessonProgress.Status.COMPLETED)
                         .toList();
                 // Soft progression: lessons are never locked, the map recommends prerequisites first.

@@ -407,3 +407,26 @@ export function checkSteps(steps: string[]): { ok: boolean; firstInvalid: number
   }
   return { ok: true, firstInvalid: -1 };
 }
+
+/** Concrete numeric check that shows why two expressions differ (or null). */
+export function counterexample(expected: string, given: string): string | null {
+  try {
+    const e = normalise(expected), g = normalise(given);
+    const vars = new Set<string>();
+    for (const n of [e, g]) for (const p of [n.num, n.den]) for (const t of p.t.values()) Object.keys(t.p).forEach((v) => vars.add(v));
+    if (!vars.size) return null;
+    const names = [...vars].sort();
+    const tries = [[2, 3, 5, 7], [3, 2, 4, 5], [-1, 2, 3, 4], [5, -2, 2, 3], [1, 4, -3, 2]];
+    for (const t of tries) {
+      const vals: Record<string, Q> = {};
+      names.forEach((v, i) => { vals[v] = Q.of(t[i % t.length]); });
+      const ed = e.den.evaluate(vals), gd = g.den.evaluate(vals);
+      if (ed.isZero() || gd.isZero()) continue;
+      const ev = e.num.evaluate(vals).div(ed), gv = g.num.evaluate(vals).div(gd);
+      if (!ev.eq(gv)) {
+        return `при ${names.map((v) => `${v} = ${vals[v].display()}`).join(', ')} твоят израз дава ${gv.display()}, а верният — ${ev.display()}`;
+      }
+    }
+  } catch { /* not comparable */ }
+  return null;
+}

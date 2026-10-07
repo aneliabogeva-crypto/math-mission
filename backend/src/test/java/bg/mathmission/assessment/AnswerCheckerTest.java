@@ -95,7 +95,14 @@ class AnswerCheckerTest {
         AnswerKey k = new AnswerKey(null, "5", null, null, List.of(), Misconception.REASONING, null, "s", null);
         String msg = AnswerChecker.check(ResponseType.NUMERIC, k, 1, value("4")).message().toLowerCase();
         assertThat(msg).doesNotContain("грешно!", "провал", "слаб");
-        assertThat(msg).contains("опитай");
+        assertThat(msg).contains("верният отговор е 5").contains("решението");
+    }
+
+    @Test
+    void wrongExpressionGetsAConcreteNumericExplanation() {
+        AnswerKey k = new AnswerKey(null, "x^2 + 4x", AnswerForm.NORMAL_FORM, null, List.of(), Misconception.LIKE_TERMS, null, "s", null);
+        String msg = AnswerChecker.check(ResponseType.EXPRESSION, k, 1, value("x^2 + 3x")).message();
+        assertThat(msg).contains("при x = 2").contains("10").contains("12");
     }
 
     @Test

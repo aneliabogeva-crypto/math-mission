@@ -172,7 +172,7 @@ function mapZones(studentId: string) {
       if (!available) { status = 'COMING_SOON'; label = 'Подготвя се'; }
       else if (p?.status === 'COMPLETED') { status = 'COMPLETED'; label = 'Завършен'; pct = 100; }
       else if (p) { status = 'IN_PROGRESS'; label = 'Започнат'; pct = Math.min(95, Math.round((p.maxPosition * 100) / LESSON_SECTIONS)); }
-      const missing = l.prerequisites.filter((k) => prog.get(k)?.status !== 'COMPLETED');
+      const missing = l.prerequisites.filter((k) => published_.has(k) && prog.get(k)?.status !== 'COMPLETED');
       return { key: l.key, order: l.order, title: l.title, skill: l.skill, status, statusLabel: label, progressPercent: pct, available,
         prerequisites: l.prerequisites,
         recommendation: missing.length ? 'Препоръчваме първо: ' + missing.map((k) => `${k} ${CURRICULUM.lessons.find((x) => x.key === k)?.title ?? ''}`).join(', ') : undefined };

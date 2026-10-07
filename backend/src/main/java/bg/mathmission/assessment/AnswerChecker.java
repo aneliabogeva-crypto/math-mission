@@ -97,6 +97,11 @@ public final class AnswerChecker {
         if (d == null && got.equals(expected.negate())) {
             d = new Distractor(null, Misconception.SIGN, "Получи същото число, но с обратен знак. Провери знаците.");
         }
+        if (d == null) {
+            d = new Distractor(null, key.defaultMisconception(),
+                    "Получи " + got.display() + ", а верният отговор е " + expected.display()
+                            + ". Сравни пресмятанията си с решението стъпка по стъпка — грешката обикновено е в знак или в реда на действията.");
+        }
         return incorrect(key, max, d);
     }
 
@@ -118,6 +123,12 @@ public final class AnswerChecker {
         Distractor d = findDistractor(key, s -> safeEquivalent(s, value));
         if (d == null && safeEquivalent(expected, "-(" + value + ")")) {
             d = new Distractor(null, Misconception.SIGN, "Отговорът ти е с обратен знак. Провери знака пред скобите.");
+        }
+        if (d == null) {
+            String ce = MathEngine.counterexample(expected, value);
+            d = new Distractor(null, key.defaultMisconception(), ce == null
+                    ? "Изразът ти не е равен на верния. Сравни го с решението стъпка по стъпка."
+                    : "Изразът ти не е равен на верния: " + ce + ". Сравни преобразуванията си с решението стъпка по стъпка.");
         }
         return incorrect(key, max, d);
     }

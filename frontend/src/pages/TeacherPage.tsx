@@ -2,6 +2,10 @@ import { useState } from 'react';
 import { api, ApiError } from '../api';
 import { ErrorNote, Loading } from '../components/Layout';
 import { useApi } from '../session';
+import curriculum from '../local/data/curriculum.json';
+import lessonKeys from '../local/data/lesson-keys.json';
+
+const LESSON_OPTIONS = (curriculum as { lessons: { key: string; title: string }[] }).lessons.filter((l) => (lessonKeys as string[]).includes(l.key));
 
 interface ClassView { id: string; name: string; code: string; codeRevoked: boolean; activeStudents: number }
 interface Member { studentId: string; nickname: string; avatar: string; joinedAt: string }
@@ -97,7 +101,7 @@ function ClassDetail({ cls, tests, onChanged }: { cls: ClassView; tests: TestRow
       <label className="field"><span>Урок или тест</span>
         <select value={target} onChange={(e) => setTarget(e.target.value)}>
           <option value="">Избери…</option>
-          <option value="LESSON:B3">Урок B3 — Подобни едночлени</option>
+          {LESSON_OPTIONS.map((l) => <option key={l.key} value={`LESSON:${l.key}`}>Урок {l.key} — {l.title}</option>)}
           {tests.filter((t) => t.status === 'PUBLISHED').map((t) => <option key={t.id} value={`TEST:${t.key}`}>Тест: {t.title} ({t.questionCount} в.)</option>)}
         </select>
       </label>
