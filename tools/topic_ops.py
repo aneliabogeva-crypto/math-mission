@@ -293,6 +293,8 @@ def p_coef_mc(rng, key):
 
 def p_expr(rng, key, pts=2):
     a, b, c, d = nz(rng, 1, 4), nz(rng, -7, 7), nz(rng, 1, 3), nz(rng, -7, 7)
+    if a * d + b * c == 0:
+        raise ValueError
     p1, p2 = lin(a, b), lin(c, d)
     r = p1 * p2
     return q(key, PP, PP_OUT, "EXPRESSION", "INTERMEDIATE", 90, pts, "BRACKETS",

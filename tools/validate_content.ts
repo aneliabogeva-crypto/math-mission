@@ -18,6 +18,8 @@ for (const q of qs) {
   const d = q.draft; const k = d.key;
   if (d.hints.length !== 3) err(q.key, 'needs 3 hints');
   if (!k.solution) err(q.key, 'no solution');
+  if (!k.distractors?.length) err(q.key, 'no distractor explanation (server rejects it)');
+  if (d.responseType === 'STRUCTURED' && !k.rubric) err(q.key, 'no rubric');
   let payload: Payload;
   switch (d.responseType) {
     case 'SINGLE_CHOICE': payload = { optionId: k.correctOptionId }; break;
