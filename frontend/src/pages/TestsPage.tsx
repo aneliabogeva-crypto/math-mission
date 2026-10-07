@@ -4,16 +4,28 @@ import { api, ApiError, uuid, type AttemptView, type TestSummary } from '../api'
 import { ErrorNote, Loading } from '../components/Layout';
 import { useApi } from '../session';
 
-/** Tests grouped into the 7-day programme ("Ден N · …" titles); other tests follow. */
+/** Lessons to revise before a topic group of tests. */
+const GROUP_LESSONS: Record<string, { key: string; title: string }[]> = {
+  'Действия с многочлени': [{ key: 'C3', title: 'Събиране и изваждане' }, { key: 'C4', title: 'Многочлен по едночлен' }, { key: 'C5', title: 'Многочлен по многочлен' }],
+};
+const GROUP_NOTE: Record<string, string> = {
+  'Действия с многочлени': 'Тренировки по всяко действие поотделно — с подсказки.',
+  'Подготовка за контролно': 'Като истинско контролно: 20 задачи от трите действия, 40 минути, без подсказки. Реши поне два варианта.',
+};
+
+/** Tests grouped into the 7-day programme ("Ден N · …" titles) and topic groups ("Тема · …"). */
 export function TestsPage() {
   const { data, error, loading, reload } = useApi<TestSummary[]>('/api/student/tests');
   if (loading && !data) return <Loading />;
   if (!data) return <ErrorNote error={error} onRetry={reload} />;
   const days = new Map<number, TestSummary[]>();
+  const groups = new Map<string, TestSummary[]>();
   const other: TestSummary[] = [];
   for (const t of data) {
     const m = /^Ден (\d+) · /.exec(t.title);
+    const g = /^([^·]+) · /.exec(t.title);
     if (m) days.set(Number(m[1]), [...(days.get(Number(m[1])) ?? []), t]);
+    else if (g) groups.set(g[1].trim(), [...(groups.get(g[1].trim()) ?? []), t]);
     else other.push(t);
   }
   const done = data.filter((t) => t.completedAttempts > 0).length;
@@ -23,7 +35,7 @@ export function TestsPage() {
         <span className="chip info">{t.kindLabel}</span>
         {t.completedAttempts > 0 && <span className="chip ok">✓ Решен{t.bestPercent != null ? ` · ${String(t.bestPercent).replace('.', ',')}%` : ''}</span>}
       </div>
-      <h3 style={{ marginTop: '.5rem' }}>{t.title.replace(/^Ден \d+ · /, '')}</h3>
+      <h3 style={{ marginTop: '.5rem' }}>{t.title.replace(/^[^·]+ · /, '')}</h3>
       <p className="small muted">{t.questionCount} въпроса · {t.timeLimitMin} минути{t.hintPolicy === 'ALLOWED' ? ' · с подсказки' : ''}</p>
       <Link className={`btn ${t.completedAttempts > 0 ? 'secondary' : ''}`} to={`/tests/${t.id}`}>
         {t.inProgressAttemptId ? 'Продължи' : t.completedAttempts > 0 ? 'Реши отново' : 'Започни'}
@@ -33,11 +45,24 @@ export function TestsPage() {
   return (
     <div>
       <h1>Тестове</h1>
-      <p className="muted">Програма за 7 дни: по два теста на ден. Решени: {done} от {data.length}.</p>
+      <p className="muted">Програма за 7 дни, тренировки по теми и подготовка за контролно. Решени: {done} от {data.length}.</p>
       <div className="progress" aria-hidden="true" style={{ marginBottom: '1rem' }}><span style={{ width: `${data.length ? (done / data.length) * 100 : 0}%` }} /></div>
       {[...days.entries()].sort((a, b) => a[0] - b[0]).map(([day, list]) => (
         <section key={day} aria-labelledby={`day-${day}`} style={{ marginBottom: '1rem' }}>
           <h2 id={`day-${day}`}>Ден {day} {list.every((t) => t.completedAttempts > 0) && <span className="chip ok">✓ изпълнен</span>}</h2>
+          {list.map(card)}
+        </section>
+      ))}
+      {[...groups.entries()].map(([name, list]) => (
+        <section key={name} style={{ marginBottom: '1rem' }}>
+          <h2>{name} {list.every((t) => t.completedAttempts > 0) && <span className="chip ok">✓ изпълнено</span>}</h2>
+          {GROUP_NOTE[name] && <p className="small muted">{GROUP_NOTE[name]}</p>}
+          {GROUP_LESSONS[name] && (
+            <div className="row" style={{ flexWrap: 'wrap', gap: 6, marginBottom: 8 }}>
+              <span className="small muted">Преговори уроците:</span>
+              {GROUP_LESSONS[name].map((l) => <Link key={l.key} className="btn secondary" to={`/lesson/${l.key}`}>{l.key} · {l.title}</Link>)}
+            </div>
+          )}
           {list.map(card)}
         </section>
       ))}

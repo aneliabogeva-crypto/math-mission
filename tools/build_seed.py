@@ -331,7 +331,10 @@ tests += gen_t
 import lessons as lessons_mod
 all_prompts = {x["draft"]["prompt"]["text"] for x in lesson_questions + T + gen_q}
 lq, ll = lessons_mod.build(all_prompts)
-out = {"questions": lesson_questions + T + gen_q + lq, "lessons": [lesson] + ll, "tests": tests, "blueprints": blueprints}
+import topic_ops
+oq, ot = topic_ops.build(all_prompts | {x["draft"]["prompt"]["text"] for x in lq})
+tests += ot
+out = {"questions": lesson_questions + T + gen_q + lq + oq, "lessons": [lesson] + ll, "tests": tests, "blueprints": blueprints}
 with open(os.path.join(os.path.dirname(__file__), "generated-checks.json"), "w", encoding="utf-8") as f:
     json.dump(gen_tests.SIDE, f, ensure_ascii=False)
 path = os.path.join(os.path.dirname(__file__), "..", "backend", "src", "main", "resources", "seed", "content.json")

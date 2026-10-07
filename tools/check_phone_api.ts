@@ -69,7 +69,7 @@ const call = (m: string, p: string, b: unknown, t: string | null) => handleLocal
     const rr = await call('POST', `/api/student/attempts/x-${tt.id}/submit`, null, t);
     ok('submit ' + tt.id, rr.maxPoints > 0 && rr.grade >= 2);
   }
-  ok('12 tests', tests.length === 12);
+  ok('22 tests', tests.length === 22);
   console.log(fail === 0 ? "ALL PHONE API CHECKS PASS" : `${fail} failures`);
   if (fail) process.exit(1);
 })().catch((e) => { console.log("CRASH", e); process.exit(1); });
