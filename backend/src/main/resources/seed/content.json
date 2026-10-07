@@ -24203,6 +24203,3168 @@
     ],
     "sourceDeclaration": "Оригинално съдържание, Math Mission (2026), генерирано по шаблон и проверено автоматично"
    }
+  },
+  {
+   "key": "LA1-P1",
+   "draft": {
+    "path": "A",
+    "skill": "A.order-of-operations",
+    "learningOutcome": "Спазва реда на действията",
+    "responseType": "SINGLE_CHOICE",
+    "difficulty": "FOUNDATIONAL",
+    "estimatedSeconds": 60,
+    "maxPoints": 1,
+    "misconception": "ORDER_OF_OPERATIONS",
+    "prompt": {
+     "text": "Пресметни: 9 + 5·3²",
+     "options": [
+      {
+       "id": "a",
+       "text": "234"
+      },
+      {
+       "id": "b",
+       "text": "54"
+      },
+      {
+       "id": "c",
+       "text": "39"
+      },
+      {
+       "id": "d",
+       "text": "126"
+      }
+     ]
+    },
+    "key": {
+     "solution": "9 + 5·3² = 9 + 5·9 = 9 + 45 = 54.",
+     "distractors": [
+      {
+       "match": "a",
+       "misconception": "ORDER_OF_OPERATIONS",
+       "explanation": "Степента е само на 3: 5·3² = 5·9."
+      },
+      {
+       "match": "c",
+       "misconception": "TECHNICAL",
+       "explanation": "3² = 3·3 = 9, не 3·2."
+      },
+      {
+       "match": "d",
+       "misconception": "ORDER_OF_OPERATIONS",
+       "explanation": "Умножението е преди събирането: първо b·c², после +a."
+      }
+     ],
+     "defaultMisconception": "ORDER_OF_OPERATIONS",
+     "correctOptionId": "b"
+    },
+    "hints": [
+     "Ред: степени → умножение → събиране.",
+     "3² = 9.",
+     "5·9 = 45."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026), генерирано по шаблон и проверено автоматично"
+   }
+  },
+  {
+   "key": "LA1-P2",
+   "draft": {
+    "path": "A",
+    "skill": "A.order-of-operations",
+    "learningOutcome": "Спазва реда на действията",
+    "responseType": "SINGLE_CHOICE",
+    "difficulty": "FOUNDATIONAL",
+    "estimatedSeconds": 60,
+    "maxPoints": 1,
+    "misconception": "ORDER_OF_OPERATIONS",
+    "prompt": {
+     "text": "Пресметни: 6 + 4·3²",
+     "options": [
+      {
+       "id": "a",
+       "text": "90"
+      },
+      {
+       "id": "b",
+       "text": "30"
+      },
+      {
+       "id": "c",
+       "text": "150"
+      },
+      {
+       "id": "d",
+       "text": "42"
+      }
+     ]
+    },
+    "key": {
+     "solution": "6 + 4·3² = 6 + 4·9 = 6 + 36 = 42.",
+     "distractors": [
+      {
+       "match": "a",
+       "misconception": "ORDER_OF_OPERATIONS",
+       "explanation": "Умножението е преди събирането: първо b·c², после +a."
+      },
+      {
+       "match": "b",
+       "misconception": "TECHNICAL",
+       "explanation": "3² = 3·3 = 9, не 3·2."
+      },
+      {
+       "match": "c",
+       "misconception": "ORDER_OF_OPERATIONS",
+       "explanation": "Степента е само на 3: 4·3² = 4·9."
+      }
+     ],
+     "defaultMisconception": "ORDER_OF_OPERATIONS",
+     "correctOptionId": "d"
+    },
+    "hints": [
+     "Ред: степени → умножение → събиране.",
+     "3² = 9.",
+     "4·9 = 36."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026), генерирано по шаблон и проверено автоматично"
+   }
+  },
+  {
+   "key": "LA1-G1",
+   "draft": {
+    "path": "A",
+    "skill": "A.expressions",
+    "learningOutcome": "Разпознава числов израз и израз с променливи",
+    "responseType": "SINGLE_CHOICE",
+    "difficulty": "FOUNDATIONAL",
+    "estimatedSeconds": 30,
+    "maxPoints": 1,
+    "misconception": "REASONING",
+    "prompt": {
+     "text": "Кой от изразите е числов израз (без променливи)?",
+     "options": [
+      {
+       "id": "a",
+       "text": "(7 + n)·8"
+      },
+      {
+       "id": "b",
+       "text": "2·(7 + 8) − 6"
+      },
+      {
+       "id": "c",
+       "text": "6n² − 8"
+      },
+      {
+       "id": "d",
+       "text": "2n + 7"
+      }
+     ]
+    },
+    "key": {
+     "solution": "2·(7 + 8) − 6 съдържа само числа и действия, затова е числов израз. Стойността му е 24.",
+     "distractors": [
+      {
+       "match": "a",
+       "misconception": "REASONING",
+       "explanation": "В израза има буква (n) — това е израз с променливи, а не числов израз."
+      },
+      {
+       "match": "c",
+       "misconception": "REASONING",
+       "explanation": "В израза има буква (n) — това е израз с променливи, а не числов израз."
+      },
+      {
+       "match": "d",
+       "misconception": "REASONING",
+       "explanation": "В израза има буква (n) — това е израз с променливи, а не числов израз."
+      }
+     ],
+     "defaultMisconception": "REASONING",
+     "correctOptionId": "b"
+    },
+    "hints": [
+     "Числовият израз съдържа само числа, знаци за действия и скоби.",
+     "Потърси израза без букви.",
+     "Изразите с x, a, m и т.н. са с променливи."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026), генерирано по шаблон и проверено автоматично"
+   }
+  },
+  {
+   "key": "LA1-G2",
+   "draft": {
+    "path": "A",
+    "skill": "A.expressions",
+    "learningOutcome": "Разпознава променливите в израз",
+    "responseType": "SINGLE_CHOICE",
+    "difficulty": "FOUNDATIONAL",
+    "estimatedSeconds": 30,
+    "maxPoints": 1,
+    "misconception": "REASONING",
+    "prompt": {
+     "text": "Кои са променливите в израза 7a² − 2ab + 5?",
+     "options": [
+      {
+       "id": "a",
+       "text": "a и b"
+      },
+      {
+       "id": "b",
+       "text": "7, 2 и 5"
+      },
+      {
+       "id": "c",
+       "text": "a, b и 5"
+      },
+      {
+       "id": "d",
+       "text": "само a"
+      }
+     ]
+    },
+    "key": {
+     "solution": "Променливите са буквите a и b; числата 7, 2 и 5 са константи.",
+     "distractors": [
+      {
+       "match": "b",
+       "misconception": "REASONING",
+       "explanation": "Това са числата в израза — те са константи, а не променливи."
+      },
+      {
+       "match": "c",
+       "misconception": "REASONING",
+       "explanation": "5 е число — константа, а не променлива."
+      },
+      {
+       "match": "d",
+       "misconception": "REASONING",
+       "explanation": "b също е буква, която може да приема различни стойности — и тя е променлива."
+      }
+     ],
+     "defaultMisconception": "REASONING",
+     "correctOptionId": "a"
+    },
+    "hints": [
+     "Променливите са буквите в израза.",
+     "Числата са константи.",
+     "В израза има две различни букви."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026), генерирано по шаблон и проверено автоматично"
+   }
+  },
+  {
+   "key": "LA1-G3",
+   "draft": {
+    "path": "A",
+    "skill": "A.order-of-operations",
+    "learningOutcome": "Спазва реда на действията",
+    "responseType": "SINGLE_CHOICE",
+    "difficulty": "FOUNDATIONAL",
+    "estimatedSeconds": 60,
+    "maxPoints": 1,
+    "misconception": "ORDER_OF_OPERATIONS",
+    "prompt": {
+     "text": "Пресметни: 6 + 3·3²",
+     "options": [
+      {
+       "id": "a",
+       "text": "81"
+      },
+      {
+       "id": "b",
+       "text": "87"
+      },
+      {
+       "id": "c",
+       "text": "33"
+      },
+      {
+       "id": "d",
+       "text": "24"
+      }
+     ]
+    },
+    "key": {
+     "solution": "6 + 3·3² = 6 + 3·9 = 6 + 27 = 33.",
+     "distractors": [
+      {
+       "match": "a",
+       "misconception": "ORDER_OF_OPERATIONS",
+       "explanation": "Умножението е преди събирането: първо b·c², после +a."
+      },
+      {
+       "match": "b",
+       "misconception": "ORDER_OF_OPERATIONS",
+       "explanation": "Степента е само на 3: 3·3² = 3·9."
+      },
+      {
+       "match": "d",
+       "misconception": "TECHNICAL",
+       "explanation": "3² = 3·3 = 9, не 3·2."
+      }
+     ],
+     "defaultMisconception": "ORDER_OF_OPERATIONS",
+     "correctOptionId": "c"
+    },
+    "hints": [
+     "Ред: степени → умножение → събиране.",
+     "3² = 9.",
+     "3·9 = 27."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026), генерирано по шаблон и проверено автоматично"
+   }
+  },
+  {
+   "key": "LA1-C1",
+   "draft": {
+    "path": "A",
+    "skill": "A.expressions",
+    "learningOutcome": "Разпознава числов израз и израз с променливи",
+    "responseType": "SINGLE_CHOICE",
+    "difficulty": "FOUNDATIONAL",
+    "estimatedSeconds": 30,
+    "maxPoints": 1,
+    "misconception": "REASONING",
+    "prompt": {
+     "text": "Кой от изразите е числов израз (без променливи)?",
+     "options": [
+      {
+       "id": "a",
+       "text": "4·(4 + 8) − 9"
+      },
+      {
+       "id": "b",
+       "text": "4n + 4"
+      },
+      {
+       "id": "c",
+       "text": "9n² − 8"
+      },
+      {
+       "id": "d",
+       "text": "(4 + n)·8"
+      }
+     ]
+    },
+    "key": {
+     "solution": "4·(4 + 8) − 9 съдържа само числа и действия, затова е числов израз. Стойността му е 39.",
+     "distractors": [
+      {
+       "match": "b",
+       "misconception": "REASONING",
+       "explanation": "В израза има буква (n) — това е израз с променливи, а не числов израз."
+      },
+      {
+       "match": "c",
+       "misconception": "REASONING",
+       "explanation": "В израза има буква (n) — това е израз с променливи, а не числов израз."
+      },
+      {
+       "match": "d",
+       "misconception": "REASONING",
+       "explanation": "В израза има буква (n) — това е израз с променливи, а не числов израз."
+      }
+     ],
+     "defaultMisconception": "REASONING",
+     "correctOptionId": "a"
+    },
+    "hints": [
+     "Числовият израз съдържа само числа, знаци за действия и скоби.",
+     "Потърси израза без букви.",
+     "Изразите с x, a, m и т.н. са с променливи."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026), генерирано по шаблон и проверено автоматично"
+   }
+  },
+  {
+   "key": "LA1-C2",
+   "draft": {
+    "path": "A",
+    "skill": "A.expressions",
+    "learningOutcome": "Разпознава променливите в израз",
+    "responseType": "SINGLE_CHOICE",
+    "difficulty": "FOUNDATIONAL",
+    "estimatedSeconds": 30,
+    "maxPoints": 1,
+    "misconception": "REASONING",
+    "prompt": {
+     "text": "Кои са променливите в израза 6m² − 5mn + 9?",
+     "options": [
+      {
+       "id": "a",
+       "text": "6, 5 и 9"
+      },
+      {
+       "id": "b",
+       "text": "m и n"
+      },
+      {
+       "id": "c",
+       "text": "само m"
+      },
+      {
+       "id": "d",
+       "text": "m, n и 9"
+      }
+     ]
+    },
+    "key": {
+     "solution": "Променливите са буквите m и n; числата 6, 5 и 9 са константи.",
+     "distractors": [
+      {
+       "match": "a",
+       "misconception": "REASONING",
+       "explanation": "Това са числата в израза — те са константи, а не променливи."
+      },
+      {
+       "match": "c",
+       "misconception": "REASONING",
+       "explanation": "n също е буква, която може да приема различни стойности — и тя е променлива."
+      },
+      {
+       "match": "d",
+       "misconception": "REASONING",
+       "explanation": "9 е число — константа, а не променлива."
+      }
+     ],
+     "defaultMisconception": "REASONING",
+     "correctOptionId": "b"
+    },
+    "hints": [
+     "Променливите са буквите в израза.",
+     "Числата са константи.",
+     "В израза има две различни букви."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026), генерирано по шаблон и проверено автоматично"
+   }
+  },
+  {
+   "key": "LA1-C3",
+   "draft": {
+    "path": "A",
+    "skill": "A.expressions",
+    "learningOutcome": "Разпознава променливите в израз",
+    "responseType": "SINGLE_CHOICE",
+    "difficulty": "FOUNDATIONAL",
+    "estimatedSeconds": 30,
+    "maxPoints": 1,
+    "misconception": "REASONING",
+    "prompt": {
+     "text": "Кои са променливите в израза 7x² − 3xy + 6?",
+     "options": [
+      {
+       "id": "a",
+       "text": "x, y и 6"
+      },
+      {
+       "id": "b",
+       "text": "x и y"
+      },
+      {
+       "id": "c",
+       "text": "само x"
+      },
+      {
+       "id": "d",
+       "text": "7, 3 и 6"
+      }
+     ]
+    },
+    "key": {
+     "solution": "Променливите са буквите x и y; числата 7, 3 и 6 са константи.",
+     "distractors": [
+      {
+       "match": "a",
+       "misconception": "REASONING",
+       "explanation": "6 е число — константа, а не променлива."
+      },
+      {
+       "match": "c",
+       "misconception": "REASONING",
+       "explanation": "y също е буква, която може да приема различни стойности — и тя е променлива."
+      },
+      {
+       "match": "d",
+       "misconception": "REASONING",
+       "explanation": "Това са числата в израза — те са константи, а не променливи."
+      }
+     ],
+     "defaultMisconception": "REASONING",
+     "correctOptionId": "b"
+    },
+    "hints": [
+     "Променливите са буквите в израза.",
+     "Числата са константи.",
+     "В израза има две различни букви."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026), генерирано по шаблон и проверено автоматично"
+   }
+  },
+  {
+   "key": "LA1-C4",
+   "draft": {
+    "path": "A",
+    "skill": "A.order-of-operations",
+    "learningOutcome": "Спазва реда на действията",
+    "responseType": "SINGLE_CHOICE",
+    "difficulty": "FOUNDATIONAL",
+    "estimatedSeconds": 60,
+    "maxPoints": 1,
+    "misconception": "ORDER_OF_OPERATIONS",
+    "prompt": {
+     "text": "Пресметни: 5 + 4·3²",
+     "options": [
+      {
+       "id": "a",
+       "text": "29"
+      },
+      {
+       "id": "b",
+       "text": "41"
+      },
+      {
+       "id": "c",
+       "text": "81"
+      },
+      {
+       "id": "d",
+       "text": "149"
+      }
+     ]
+    },
+    "key": {
+     "solution": "5 + 4·3² = 5 + 4·9 = 5 + 36 = 41.",
+     "distractors": [
+      {
+       "match": "a",
+       "misconception": "TECHNICAL",
+       "explanation": "3² = 3·3 = 9, не 3·2."
+      },
+      {
+       "match": "c",
+       "misconception": "ORDER_OF_OPERATIONS",
+       "explanation": "Умножението е преди събирането: първо b·c², после +a."
+      },
+      {
+       "match": "d",
+       "misconception": "ORDER_OF_OPERATIONS",
+       "explanation": "Степента е само на 3: 4·3² = 4·9."
+      }
+     ],
+     "defaultMisconception": "ORDER_OF_OPERATIONS",
+     "correctOptionId": "b"
+    },
+    "hints": [
+     "Ред: степени → умножение → събиране.",
+     "3² = 9.",
+     "4·9 = 36."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026), генерирано по шаблон и проверено автоматично"
+   }
+  },
+  {
+   "key": "LC1-P1",
+   "draft": {
+    "path": "B",
+    "skill": "B.like-terms",
+    "learningOutcome": "Разпознава подобни едночлени",
+    "responseType": "SINGLE_CHOICE",
+    "difficulty": "FOUNDATIONAL",
+    "estimatedSeconds": 60,
+    "maxPoints": 1,
+    "misconception": "LIKE_TERMS",
+    "prompt": {
+     "text": "Кой едночлен е подобен на 5x²y?",
+     "options": [
+      {
+       "id": "a",
+       "text": "5xy²"
+      },
+      {
+       "id": "b",
+       "text": "5x²"
+      },
+      {
+       "id": "c",
+       "text": "−3x²y"
+      },
+      {
+       "id": "d",
+       "text": "5ax²y"
+      }
+     ]
+    },
+    "key": {
+     "solution": "Подобен е −3x²y: буквената част е x²y.",
+     "distractors": [
+      {
+       "match": "a",
+       "misconception": "LIKE_TERMS",
+       "explanation": "Степените на x и y са разменени."
+      },
+      {
+       "match": "b",
+       "misconception": "LIKE_TERMS",
+       "explanation": "Липсва y — буквените части са различни."
+      },
+      {
+       "match": "d",
+       "misconception": "LIKE_TERMS",
+       "explanation": "Има допълнителна буква."
+      }
+     ],
+     "defaultMisconception": "LIKE_TERMS",
+     "correctOptionId": "c"
+    },
+    "hints": [
+     "Сравни само буквените части.",
+     "Еднакви букви с еднакви показатели.",
+     "Търсим x²y."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026), генерирано по шаблон и проверено автоматично"
+   }
+  },
+  {
+   "key": "LC1-P2",
+   "draft": {
+    "path": "B",
+    "skill": "B.definition",
+    "learningOutcome": "Определя коефициента на едночлен",
+    "responseType": "SINGLE_CHOICE",
+    "difficulty": "FOUNDATIONAL",
+    "estimatedSeconds": 60,
+    "maxPoints": 1,
+    "misconception": "SIGN",
+    "prompt": {
+     "text": "Какъв е коефициентът на едночлена −6ab³x³y³?",
+     "options": [
+      {
+       "id": "a",
+       "text": "6"
+      },
+      {
+       "id": "b",
+       "text": "ab³x³y³"
+      },
+      {
+       "id": "c",
+       "text": "−6"
+      },
+      {
+       "id": "d",
+       "text": "10"
+      }
+     ]
+    },
+    "key": {
+     "solution": "−6ab³x³y³ = (−6)·ab³x³y³, коефициентът е −6.",
+     "distractors": [
+      {
+       "match": "a",
+       "misconception": "SIGN",
+       "explanation": "Знакът е част от коефициента."
+      },
+      {
+       "match": "b",
+       "misconception": "REASONING",
+       "explanation": "Това е буквената част."
+      },
+      {
+       "match": "d",
+       "misconception": "REASONING",
+       "explanation": "Това е степента, не коефициентът."
+      }
+     ],
+     "defaultMisconception": "SIGN",
+     "correctOptionId": "c"
+    },
+    "hints": [
+     "Коефициентът е числото пред буквите.",
+     "Знакът се включва.",
+     "Числото пред буквите е −6."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026), генерирано по шаблон и проверено автоматично"
+   }
+  },
+  {
+   "key": "LC1-G1",
+   "draft": {
+    "path": "C",
+    "skill": "C.definition",
+    "learningOutcome": "Разпознава многочлен",
+    "responseType": "SINGLE_CHOICE",
+    "difficulty": "FOUNDATIONAL",
+    "estimatedSeconds": 40,
+    "maxPoints": 1,
+    "misconception": "REASONING",
+    "prompt": {
+     "text": "Кой от изразите е многочлен?",
+     "options": [
+      {
+       "id": "a",
+       "text": "2x² − 1/y"
+      },
+      {
+       "id": "b",
+       "text": "x + 5/(x − 2)"
+      },
+      {
+       "id": "c",
+       "text": "2/x + 5"
+      },
+      {
+       "id": "d",
+       "text": "5x² − 6x − 8"
+      }
+     ]
+    },
+    "key": {
+     "solution": "5x² − 6x − 8 е сбор от едночлените, затова е многочлен. В другите изрази се дели на израз с променлива.",
+     "distractors": [
+      {
+       "match": "a",
+       "misconception": "REASONING",
+       "explanation": "Тук има деление на израз с променлива — това е дробен израз, а не многочлен."
+      },
+      {
+       "match": "b",
+       "misconception": "REASONING",
+       "explanation": "Тук има деление на израз с променлива — това е дробен израз, а не многочлен."
+      },
+      {
+       "match": "c",
+       "misconception": "REASONING",
+       "explanation": "Тук има деление на израз с променлива — това е дробен израз, а не многочлен."
+      }
+     ],
+     "defaultMisconception": "REASONING",
+     "correctOptionId": "d"
+    },
+    "hints": [
+     "Многочленът е сбор от едночлени.",
+     "В едночлена няма деление на променлива.",
+     "Потърси израза без променлива в знаменател."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026), генерирано по шаблон и проверено автоматично"
+   }
+  },
+  {
+   "key": "LC1-G2",
+   "draft": {
+    "path": "C",
+    "skill": "C.definition",
+    "learningOutcome": "Разпознава членовете на многочлен",
+    "responseType": "NUMERIC",
+    "difficulty": "FOUNDATIONAL",
+    "estimatedSeconds": 30,
+    "maxPoints": 1,
+    "misconception": "REASONING",
+    "prompt": {
+     "text": "Колко члена има многочленът 6xy + 2x + 6y?"
+    },
+    "key": {
+     "solution": "Членовете на 6xy + 2x + 6y са: 6xy, 2x, 6y. Те са 3.",
+     "distractors": [
+      {
+       "match": "2",
+       "misconception": "REASONING",
+       "explanation": "Броим всички едночлени, включително свободния член (числото без буква)."
+      },
+      {
+       "match": "4",
+       "misconception": "REASONING",
+       "explanation": "Знаците + и − не са членове — те стоят пред членовете."
+      }
+     ],
+     "defaultMisconception": "REASONING",
+     "answer": "3"
+    },
+    "hints": [
+     "Членовете са едночлените, разделени със знаците + и −.",
+     "Свободният член също се брои.",
+     "Преброй едночлените един по един."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026), генерирано по шаблон и проверено автоматично"
+   }
+  },
+  {
+   "key": "LC1-G3",
+   "draft": {
+    "path": "C",
+    "skill": "C.definition",
+    "learningOutcome": "Определя коефициентите на многочлен",
+    "responseType": "SINGLE_CHOICE",
+    "difficulty": "FOUNDATIONAL",
+    "estimatedSeconds": 30,
+    "maxPoints": 1,
+    "misconception": "SIGN",
+    "prompt": {
+     "text": "Какъв е коефициентът пред x в многочлена 5x² − 8x − 1?",
+     "options": [
+      {
+       "id": "a",
+       "text": "−8"
+      },
+      {
+       "id": "b",
+       "text": "−1"
+      },
+      {
+       "id": "c",
+       "text": "8"
+      },
+      {
+       "id": "d",
+       "text": "5"
+      }
+     ]
+    },
+    "key": {
+     "solution": "Членът с x е −8x, затова коефициентът е −8.",
+     "distractors": [
+      {
+       "match": "b",
+       "misconception": "REASONING",
+       "explanation": "Това е свободният член — той няма буквена част."
+      },
+      {
+       "match": "c",
+       "misconception": "SIGN",
+       "explanation": "Знакът пред члена е част от коефициента."
+      },
+      {
+       "match": "d",
+       "misconception": "REASONING",
+       "explanation": "Това е коефициентът пред x², а търсим коефициента пред x."
+      }
+     ],
+     "defaultMisconception": "SIGN",
+     "correctOptionId": "a"
+    },
+    "hints": [
+     "Намери члена, който съдържа x (без степен).",
+     "Коефициентът е числото пред буквената част.",
+     "Не забравяй знака пред члена."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026), генерирано по шаблон и проверено автоматично"
+   }
+  },
+  {
+   "key": "LC1-C1",
+   "draft": {
+    "path": "C",
+    "skill": "C.definition",
+    "learningOutcome": "Разпознава многочлен",
+    "responseType": "SINGLE_CHOICE",
+    "difficulty": "FOUNDATIONAL",
+    "estimatedSeconds": 40,
+    "maxPoints": 1,
+    "misconception": "REASONING",
+    "prompt": {
+     "text": "Кой от изразите е многочлен?",
+     "options": [
+      {
+       "id": "a",
+       "text": "2x² + 2x − 2"
+      },
+      {
+       "id": "b",
+       "text": "x + 8/(x − 2)"
+      },
+      {
+       "id": "c",
+       "text": "2x² − 1/y"
+      },
+      {
+       "id": "d",
+       "text": "2/x + 8"
+      }
+     ]
+    },
+    "key": {
+     "solution": "2x² + 2x − 2 е сбор от едночлените, затова е многочлен. В другите изрази се дели на израз с променлива.",
+     "distractors": [
+      {
+       "match": "b",
+       "misconception": "REASONING",
+       "explanation": "Тук има деление на израз с променлива — това е дробен израз, а не многочлен."
+      },
+      {
+       "match": "c",
+       "misconception": "REASONING",
+       "explanation": "Тук има деление на израз с променлива — това е дробен израз, а не многочлен."
+      },
+      {
+       "match": "d",
+       "misconception": "REASONING",
+       "explanation": "Тук има деление на израз с променлива — това е дробен израз, а не многочлен."
+      }
+     ],
+     "defaultMisconception": "REASONING",
+     "correctOptionId": "a"
+    },
+    "hints": [
+     "Многочленът е сбор от едночлени.",
+     "В едночлена няма деление на променлива.",
+     "Потърси израза без променлива в знаменател."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026), генерирано по шаблон и проверено автоматично"
+   }
+  },
+  {
+   "key": "LC1-C2",
+   "draft": {
+    "path": "C",
+    "skill": "C.definition",
+    "learningOutcome": "Определя коефициентите на многочлен",
+    "responseType": "SINGLE_CHOICE",
+    "difficulty": "FOUNDATIONAL",
+    "estimatedSeconds": 30,
+    "maxPoints": 1,
+    "misconception": "SIGN",
+    "prompt": {
+     "text": "Какъв е коефициентът пред x в многочлена x² + 4x − 1?",
+     "options": [
+      {
+       "id": "a",
+       "text": "1"
+      },
+      {
+       "id": "b",
+       "text": "−4"
+      },
+      {
+       "id": "c",
+       "text": "−1"
+      },
+      {
+       "id": "d",
+       "text": "4"
+      }
+     ]
+    },
+    "key": {
+     "solution": "Членът с x е 4x, затова коефициентът е 4.",
+     "distractors": [
+      {
+       "match": "a",
+       "misconception": "REASONING",
+       "explanation": "Това е коефициентът пред x², а търсим коефициента пред x."
+      },
+      {
+       "match": "b",
+       "misconception": "SIGN",
+       "explanation": "Знакът пред члена е част от коефициента."
+      },
+      {
+       "match": "c",
+       "misconception": "REASONING",
+       "explanation": "Това е свободният член — той няма буквена част."
+      }
+     ],
+     "defaultMisconception": "SIGN",
+     "correctOptionId": "d"
+    },
+    "hints": [
+     "Намери члена, който съдържа x (без степен).",
+     "Коефициентът е числото пред буквената част.",
+     "Не забравяй знака пред члена."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026), генерирано по шаблон и проверено автоматично"
+   }
+  },
+  {
+   "key": "LC1-C3",
+   "draft": {
+    "path": "C",
+    "skill": "C.definition",
+    "learningOutcome": "Разпознава членовете на многочлен",
+    "responseType": "NUMERIC",
+    "difficulty": "FOUNDATIONAL",
+    "estimatedSeconds": 30,
+    "maxPoints": 1,
+    "misconception": "REASONING",
+    "prompt": {
+     "text": "Колко члена има многочленът 2x³ − 3x²y − 9xy?"
+    },
+    "key": {
+     "solution": "Членовете на 2x³ − 3x²y − 9xy са: 2x³, −3x²y, −9xy. Те са 3.",
+     "distractors": [
+      {
+       "match": "2",
+       "misconception": "REASONING",
+       "explanation": "Броим всички едночлени, включително свободния член (числото без буква)."
+      },
+      {
+       "match": "4",
+       "misconception": "REASONING",
+       "explanation": "Знаците + и − не са членове — те стоят пред членовете."
+      }
+     ],
+     "defaultMisconception": "REASONING",
+     "answer": "3"
+    },
+    "hints": [
+     "Членовете са едночлените, разделени със знаците + и −.",
+     "Свободният член също се брои.",
+     "Преброй едночлените един по един."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026), генерирано по шаблон и проверено автоматично"
+   }
+  },
+  {
+   "key": "LC1-C4",
+   "draft": {
+    "path": "C",
+    "skill": "C.definition",
+    "learningOutcome": "Намира свободния член на многочлен",
+    "responseType": "NUMERIC",
+    "difficulty": "FOUNDATIONAL",
+    "estimatedSeconds": 30,
+    "maxPoints": 1,
+    "misconception": "SIGN",
+    "prompt": {
+     "text": "Кой е свободният член на многочлена −9x²y + 7xy − 7y² − 2? Запиши числото."
+    },
+    "key": {
+     "solution": "Членът без променлива в −9x²y + 7xy − 7y² − 2 е −2.",
+     "distractors": [
+      {
+       "match": "2",
+       "misconception": "SIGN",
+       "explanation": "Знакът пред свободния член е част от него."
+      }
+     ],
+     "defaultMisconception": "SIGN",
+     "answer": "-2"
+    },
+    "hints": [
+     "Свободният член е членът без буква.",
+     "Обикновено е последен в нормалния вид.",
+     "Запиши го заедно със знака."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026), генерирано по шаблон и проверено автоматично"
+   }
+  },
+  {
+   "key": "LC1-C5",
+   "draft": {
+    "path": "C",
+    "skill": "C.definition",
+    "learningOutcome": "Определя коефициентите на многочлен",
+    "responseType": "SINGLE_CHOICE",
+    "difficulty": "FOUNDATIONAL",
+    "estimatedSeconds": 30,
+    "maxPoints": 1,
+    "misconception": "SIGN",
+    "prompt": {
+     "text": "Какъв е коефициентът пред x в многочлена −2x² + 8x + 6?",
+     "options": [
+      {
+       "id": "a",
+       "text": "6"
+      },
+      {
+       "id": "b",
+       "text": "−8"
+      },
+      {
+       "id": "c",
+       "text": "−2"
+      },
+      {
+       "id": "d",
+       "text": "8"
+      }
+     ]
+    },
+    "key": {
+     "solution": "Членът с x е 8x, затова коефициентът е 8.",
+     "distractors": [
+      {
+       "match": "a",
+       "misconception": "REASONING",
+       "explanation": "Това е свободният член — той няма буквена част."
+      },
+      {
+       "match": "b",
+       "misconception": "SIGN",
+       "explanation": "Знакът пред члена е част от коефициента."
+      },
+      {
+       "match": "c",
+       "misconception": "REASONING",
+       "explanation": "Това е коефициентът пред x², а търсим коефициента пред x."
+      }
+     ],
+     "defaultMisconception": "SIGN",
+     "correctOptionId": "d"
+    },
+    "hints": [
+     "Намери члена, който съдържа x (без степен).",
+     "Коефициентът е числото пред буквената част.",
+     "Не забравяй знака пред члена."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026), генерирано по шаблон и проверено автоматично"
+   }
+  },
+  {
+   "key": "LC9-P1",
+   "draft": {
+    "path": "C",
+    "skill": "C.cube-binomial",
+    "learningOutcome": "Прилага формулите (a ± b)³",
+    "responseType": "SINGLE_CHOICE",
+    "difficulty": "ADVANCED",
+    "estimatedSeconds": 60,
+    "maxPoints": 1,
+    "misconception": "FORMULA_APPLICATION",
+    "prompt": {
+     "text": "(x + 1)³ е равно на:",
+     "options": [
+      {
+       "id": "a",
+       "text": "x³ + 3x² + 3x + 1"
+      },
+      {
+       "id": "b",
+       "text": "x³ + 1"
+      },
+      {
+       "id": "c",
+       "text": "x³ + 3x² − 3x + 1"
+      },
+      {
+       "id": "d",
+       "text": "x³ + x² + x + 1"
+      }
+     ]
+    },
+    "key": {
+     "solution": "(x + 1)³ = x³ + 3x² + 3x + 1.",
+     "distractors": [
+      {
+       "match": "b",
+       "misconception": "FORMULA_APPLICATION",
+       "explanation": "(x + b)³ има четири члена: x³ + 3x²b + 3xb² + b³."
+      },
+      {
+       "match": "c",
+       "misconception": "SIGN",
+       "explanation": "3xb² е винаги положително (b² ≥ 0)."
+      },
+      {
+       "match": "d",
+       "misconception": "FORMULA_APPLICATION",
+       "explanation": "Коефициентите са 1, 3, 3, 1."
+      }
+     ],
+     "defaultMisconception": "FORMULA_APPLICATION",
+     "correctOptionId": "a"
+    },
+    "hints": [
+     "(a + b)³ = a³ + 3a²b + 3ab² + b³.",
+     "Тук a = x, b = 1.",
+     "Коефициентите са 1, 3, 3, 1."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026), генерирано по шаблон и проверено автоматично"
+   }
+  },
+  {
+   "key": "LC9-P2",
+   "draft": {
+    "path": "C",
+    "skill": "C.difference-squares",
+    "learningOutcome": "Прилага (a − b)(a + b) = a² − b²",
+    "responseType": "EXPRESSION",
+    "difficulty": "FOUNDATIONAL",
+    "estimatedSeconds": 60,
+    "maxPoints": 2,
+    "misconception": "FORMULA_APPLICATION",
+    "prompt": {
+     "text": "Умножи: (5x − 8)(5x + 8)"
+    },
+    "key": {
+     "solution": "= (5x)² − 8² = 25x² − 64.",
+     "distractors": [
+      {
+       "match": "25x^2+64",
+       "misconception": "SIGN",
+       "explanation": "Получава се разлика на квадрати."
+      }
+     ],
+     "defaultMisconception": "FORMULA_APPLICATION",
+     "answer": "25x^2-64",
+     "form": "NORMAL_FORM"
+    },
+    "hints": [
+     "(a − b)(a + b) = a² − b².",
+     "a = 5x, b = 8.",
+     "a² = 25x²."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026), генерирано по шаблон и проверено автоматично"
+   }
+  },
+  {
+   "key": "LC9-G1",
+   "draft": {
+    "path": "C",
+    "skill": "C.sum-cubes",
+    "learningOutcome": "Прилага формулите a³ ± b³",
+    "responseType": "SINGLE_CHOICE",
+    "difficulty": "INTERMEDIATE",
+    "estimatedSeconds": 60,
+    "maxPoints": 1,
+    "misconception": "FORMULA_APPLICATION",
+    "prompt": {
+     "text": "(x + 1)(x² − x + 1) е равно на:",
+     "options": [
+      {
+       "id": "a",
+       "text": "x³ + 2x² + 2x + 1"
+      },
+      {
+       "id": "b",
+       "text": "x³ + 3x² + 3x + 1"
+      },
+      {
+       "id": "c",
+       "text": "x³ − 1"
+      },
+      {
+       "id": "d",
+       "text": "x³ + 1"
+      }
+     ]
+    },
+    "key": {
+     "solution": "(x + 1)(x² − x + 1) = x³ + 1 — средните членове се унищожават.",
+     "distractors": [
+      {
+       "match": "a",
+       "misconception": "SIGN",
+       "explanation": "Това би се получило, ако средният член във втората скоба беше със същия знак. Във формулата той е с обратен знак и средните членове се унищожават."
+      },
+      {
+       "match": "b",
+       "misconception": "FORMULA_APPLICATION",
+       "explanation": "Това е (x + 1)³ — кубът на двучлена има четири члена, а произведението тук дава само два."
+      },
+      {
+       "match": "c",
+       "misconception": "SIGN",
+       "explanation": "Знакът пред b³ е същият като в първата скоба."
+      }
+     ],
+     "defaultMisconception": "FORMULA_APPLICATION",
+     "correctOptionId": "d"
+    },
+    "hints": [
+     "Това е формулата за сбор или разлика на кубове.",
+     "a³ + b³ = (a + b)(a² − ab + b²), a³ − b³ = (a − b)(a² + ab + b²).",
+     "Тук a = x, b = 1."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026), генерирано по шаблон и проверено автоматично"
+   }
+  },
+  {
+   "key": "LC9-G2",
+   "draft": {
+    "path": "C",
+    "skill": "C.sum-cubes",
+    "learningOutcome": "Прилага формулите a³ ± b³",
+    "responseType": "EXPRESSION",
+    "difficulty": "INTERMEDIATE",
+    "estimatedSeconds": 90,
+    "maxPoints": 2,
+    "misconception": "FORMULA_APPLICATION",
+    "prompt": {
+     "text": "Умножи и запиши в нормален вид: (x − 1)(x² + x + 1)"
+    },
+    "key": {
+     "solution": "По формулата: (x − 1)(x² + x + 1) = x³ − 1³ = x³ − 1.",
+     "distractors": [
+      {
+       "match": "x^3-3x^2+3x-1",
+       "misconception": "FORMULA_APPLICATION",
+       "explanation": "Това е кубът на двучлена, а не произведението от формулата."
+      }
+     ],
+     "defaultMisconception": "FORMULA_APPLICATION",
+     "answer": "x^3-1",
+     "form": "NORMAL_FORM"
+    },
+    "hints": [
+     "Разпознай формулата за сбор/разлика на кубове.",
+     "Средните членове ще се унищожат.",
+     "Остават x³ и −1."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026), генерирано по шаблон и проверено автоматично"
+   }
+  },
+  {
+   "key": "LC9-G3",
+   "draft": {
+    "path": "C",
+    "skill": "C.sum-cubes",
+    "learningOutcome": "Разлага сбор и разлика на кубове",
+    "responseType": "SINGLE_CHOICE",
+    "difficulty": "ADVANCED",
+    "estimatedSeconds": 60,
+    "maxPoints": 1,
+    "misconception": "FORMULA_APPLICATION",
+    "prompt": {
+     "text": "Разложи на множители: x³ + 64",
+     "options": [
+      {
+       "id": "a",
+       "text": "(x + 4)(x² + 4x + 16)"
+      },
+      {
+       "id": "b",
+       "text": "(x + 4)(x² − 4x + 16)"
+      },
+      {
+       "id": "c",
+       "text": "(x − 4)(x² + 4x + 16)"
+      },
+      {
+       "id": "d",
+       "text": "(x + 4)³"
+      }
+     ]
+    },
+    "key": {
+     "solution": "x³ + 64 = x³ + 4³ = (x + 4)(x² − 4x + 16).",
+     "distractors": [
+      {
+       "match": "a",
+       "misconception": "SIGN",
+       "explanation": "Средният член в непълния квадрат е с обратния знак на този в първата скоба."
+      },
+      {
+       "match": "c",
+       "misconception": "SIGN",
+       "explanation": "Това е разлагането на x³ − 64 — знаците са разменени."
+      },
+      {
+       "match": "d",
+       "misconception": "FORMULA_APPLICATION",
+       "explanation": "(x + 4)³ = x³ + 12x² + 48x + 64 — има и средни членове, затова не е равно на x³ + 64."
+      }
+     ],
+     "defaultMisconception": "FORMULA_APPLICATION",
+     "correctOptionId": "b"
+    },
+    "hints": [
+     "Запиши 64 като куб: 64 = 4³.",
+     "Приложи формулата за сбор или разлика на кубове.",
+     "Средният член в непълния квадрат е с обратен знак."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026), генерирано по шаблон и проверено автоматично"
+   }
+  },
+  {
+   "key": "LC9-C1",
+   "draft": {
+    "path": "C",
+    "skill": "C.sum-cubes",
+    "learningOutcome": "Прилага формулите a³ ± b³",
+    "responseType": "SINGLE_CHOICE",
+    "difficulty": "INTERMEDIATE",
+    "estimatedSeconds": 60,
+    "maxPoints": 1,
+    "misconception": "FORMULA_APPLICATION",
+    "prompt": {
+     "text": "(x + 4)(x² − 4x + 16) е равно на:",
+     "options": [
+      {
+       "id": "a",
+       "text": "x³ + 8x² + 32x + 64"
+      },
+      {
+       "id": "b",
+       "text": "x³ + 64"
+      },
+      {
+       "id": "c",
+       "text": "x³ + 12x² + 48x + 64"
+      },
+      {
+       "id": "d",
+       "text": "x³ − 64"
+      }
+     ]
+    },
+    "key": {
+     "solution": "(x + 4)(x² − 4x + 16) = x³ + 64 — средните членове се унищожават.",
+     "distractors": [
+      {
+       "match": "a",
+       "misconception": "SIGN",
+       "explanation": "Това би се получило, ако средният член във втората скоба беше със същия знак. Във формулата той е с обратен знак и средните членове се унищожават."
+      },
+      {
+       "match": "c",
+       "misconception": "FORMULA_APPLICATION",
+       "explanation": "Това е (x + 4)³ — кубът на двучлена има четири члена, а произведението тук дава само два."
+      },
+      {
+       "match": "d",
+       "misconception": "SIGN",
+       "explanation": "Знакът пред b³ е същият като в първата скоба."
+      }
+     ],
+     "defaultMisconception": "FORMULA_APPLICATION",
+     "correctOptionId": "b"
+    },
+    "hints": [
+     "Това е формулата за сбор или разлика на кубове.",
+     "a³ + b³ = (a + b)(a² − ab + b²), a³ − b³ = (a − b)(a² + ab + b²).",
+     "Тук a = x, b = 4."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026), генерирано по шаблон и проверено автоматично"
+   }
+  },
+  {
+   "key": "LC9-C2",
+   "draft": {
+    "path": "C",
+    "skill": "C.sum-cubes",
+    "learningOutcome": "Разлага сбор и разлика на кубове",
+    "responseType": "SINGLE_CHOICE",
+    "difficulty": "ADVANCED",
+    "estimatedSeconds": 60,
+    "maxPoints": 1,
+    "misconception": "FORMULA_APPLICATION",
+    "prompt": {
+     "text": "Разложи на множители: x³ + 1",
+     "options": [
+      {
+       "id": "a",
+       "text": "(x + 1)(x² + x + 1)"
+      },
+      {
+       "id": "b",
+       "text": "(x + 1)³"
+      },
+      {
+       "id": "c",
+       "text": "(x − 1)(x² + x + 1)"
+      },
+      {
+       "id": "d",
+       "text": "(x + 1)(x² − x + 1)"
+      }
+     ]
+    },
+    "key": {
+     "solution": "x³ + 1 = x³ + 1³ = (x + 1)(x² − x + 1).",
+     "distractors": [
+      {
+       "match": "a",
+       "misconception": "SIGN",
+       "explanation": "Средният член в непълния квадрат е с обратния знак на този в първата скоба."
+      },
+      {
+       "match": "b",
+       "misconception": "FORMULA_APPLICATION",
+       "explanation": "(x + 1)³ = x³ + 3x² + 3x + 1 — има и средни членове, затова не е равно на x³ + 1."
+      },
+      {
+       "match": "c",
+       "misconception": "SIGN",
+       "explanation": "Това е разлагането на x³ − 1 — знаците са разменени."
+      }
+     ],
+     "defaultMisconception": "FORMULA_APPLICATION",
+     "correctOptionId": "d"
+    },
+    "hints": [
+     "Запиши 1 като куб: 1 = 1³.",
+     "Приложи формулата за сбор или разлика на кубове.",
+     "Средният член в непълния квадрат е с обратен знак."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026), генерирано по шаблон и проверено автоматично"
+   }
+  },
+  {
+   "key": "LC9-C3",
+   "draft": {
+    "path": "C",
+    "skill": "C.sum-cubes",
+    "learningOutcome": "Прилага формулите a³ ± b³",
+    "responseType": "EXPRESSION",
+    "difficulty": "INTERMEDIATE",
+    "estimatedSeconds": 90,
+    "maxPoints": 2,
+    "misconception": "FORMULA_APPLICATION",
+    "prompt": {
+     "text": "Умножи и запиши в нормален вид: (x − 2)(x² + 2x + 4)"
+    },
+    "key": {
+     "solution": "По формулата: (x − 2)(x² + 2x + 4) = x³ − 2³ = x³ − 8.",
+     "distractors": [
+      {
+       "match": "x^3-6x^2+12x-8",
+       "misconception": "FORMULA_APPLICATION",
+       "explanation": "Това е кубът на двучлена, а не произведението от формулата."
+      }
+     ],
+     "defaultMisconception": "FORMULA_APPLICATION",
+     "answer": "x^3-8",
+     "form": "NORMAL_FORM"
+    },
+    "hints": [
+     "Разпознай формулата за сбор/разлика на кубове.",
+     "Средните членове ще се унищожат.",
+     "Остават x³ и −8."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026), генерирано по шаблон и проверено автоматично"
+   }
+  },
+  {
+   "key": "LC9-C4",
+   "draft": {
+    "path": "C",
+    "skill": "C.sum-cubes",
+    "learningOutcome": "Разлага сбор и разлика на кубове",
+    "responseType": "SINGLE_CHOICE",
+    "difficulty": "ADVANCED",
+    "estimatedSeconds": 60,
+    "maxPoints": 1,
+    "misconception": "FORMULA_APPLICATION",
+    "prompt": {
+     "text": "Разложи на множители: x³ + 125",
+     "options": [
+      {
+       "id": "a",
+       "text": "(x + 5)(x² − 5x + 25)"
+      },
+      {
+       "id": "b",
+       "text": "(x + 5)(x² + 5x + 25)"
+      },
+      {
+       "id": "c",
+       "text": "(x − 5)(x² + 5x + 25)"
+      },
+      {
+       "id": "d",
+       "text": "(x + 5)³"
+      }
+     ]
+    },
+    "key": {
+     "solution": "x³ + 125 = x³ + 5³ = (x + 5)(x² − 5x + 25).",
+     "distractors": [
+      {
+       "match": "b",
+       "misconception": "SIGN",
+       "explanation": "Средният член в непълния квадрат е с обратния знак на този в първата скоба."
+      },
+      {
+       "match": "c",
+       "misconception": "SIGN",
+       "explanation": "Това е разлагането на x³ − 125 — знаците са разменени."
+      },
+      {
+       "match": "d",
+       "misconception": "FORMULA_APPLICATION",
+       "explanation": "(x + 5)³ = x³ + 15x² + 75x + 125 — има и средни членове, затова не е равно на x³ + 125."
+      }
+     ],
+     "defaultMisconception": "FORMULA_APPLICATION",
+     "correctOptionId": "a"
+    },
+    "hints": [
+     "Запиши 125 като куб: 125 = 5³.",
+     "Приложи формулата за сбор или разлика на кубове.",
+     "Средният член в непълния квадрат е с обратен знак."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026), генерирано по шаблон и проверено автоматично"
+   }
+  },
+  {
+   "key": "LD1-P1",
+   "draft": {
+    "path": "B",
+    "skill": "B.like-terms",
+    "learningOutcome": "Разпознава подобни едночлени",
+    "responseType": "SINGLE_CHOICE",
+    "difficulty": "FOUNDATIONAL",
+    "estimatedSeconds": 60,
+    "maxPoints": 1,
+    "misconception": "LIKE_TERMS",
+    "prompt": {
+     "text": "Кой едночлен е подобен на 3xy²?",
+     "options": [
+      {
+       "id": "a",
+       "text": "3x"
+      },
+      {
+       "id": "b",
+       "text": "3x²y"
+      },
+      {
+       "id": "c",
+       "text": "−2xy²"
+      },
+      {
+       "id": "d",
+       "text": "3axy²"
+      }
+     ]
+    },
+    "key": {
+     "solution": "Подобен е −2xy²: буквената част е xy².",
+     "distractors": [
+      {
+       "match": "a",
+       "misconception": "LIKE_TERMS",
+       "explanation": "Липсва y — буквените части са различни."
+      },
+      {
+       "match": "b",
+       "misconception": "LIKE_TERMS",
+       "explanation": "Степените на x и y са разменени."
+      },
+      {
+       "match": "d",
+       "misconception": "LIKE_TERMS",
+       "explanation": "Има допълнителна буква."
+      }
+     ],
+     "defaultMisconception": "LIKE_TERMS",
+     "correctOptionId": "c"
+    },
+    "hints": [
+     "Сравни само буквените части.",
+     "Еднакви букви с еднакви показатели.",
+     "Търсим xy²."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026), генерирано по шаблон и проверено автоматично"
+   }
+  },
+  {
+   "key": "LD1-P2",
+   "draft": {
+    "path": "C",
+    "skill": "C.normal-form",
+    "learningOutcome": "Определя степен на многочлен",
+    "responseType": "SINGLE_CHOICE",
+    "difficulty": "FOUNDATIONAL",
+    "estimatedSeconds": 60,
+    "maxPoints": 1,
+    "misconception": "REASONING",
+    "prompt": {
+     "text": "Каква е степента на многочлена −x²y² + 2x³ + 6x + 8?",
+     "options": [
+      {
+       "id": "a",
+       "text": "4"
+      },
+      {
+       "id": "b",
+       "text": "8"
+      },
+      {
+       "id": "c",
+       "text": "2"
+      },
+      {
+       "id": "d",
+       "text": "3"
+      }
+     ]
+    },
+    "key": {
+     "solution": "Степените на членовете са 3, 4, 1 и 0; най-голямата е 4.",
+     "distractors": [
+      {
+       "match": "b",
+       "misconception": "REASONING",
+       "explanation": "Не събираме степените на всички членове — взимаме най-голямата."
+      },
+      {
+       "match": "c",
+       "misconception": "REASONING",
+       "explanation": "2 е показателят на y в един член, а не степента на многочлена."
+      },
+      {
+       "match": "d",
+       "misconception": "REASONING",
+       "explanation": "Степента на x²y² е 2 + 2 = 4."
+      }
+     ],
+     "defaultMisconception": "REASONING",
+     "correctOptionId": "a"
+    },
+    "hints": [
+     "Намери степента на всеки член.",
+     "x²y² има степен 4.",
+     "Степента на многочлена е най-голямата от тях."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026), генерирано по шаблон и проверено автоматично"
+   }
+  },
+  {
+   "key": "LD1-G1",
+   "draft": {
+    "path": "C",
+    "skill": "C.identities",
+    "learningOutcome": "Разпознава тъждества",
+    "responseType": "SINGLE_CHOICE",
+    "difficulty": "INTERMEDIATE",
+    "estimatedSeconds": 60,
+    "maxPoints": 1,
+    "misconception": "FORMULA_APPLICATION",
+    "prompt": {
+     "text": "Кое равенство е тъждество (вярно за всяко x)?",
+     "options": [
+      {
+       "id": "a",
+       "text": "(x − 3)² = x² − 9"
+      },
+      {
+       "id": "b",
+       "text": "(x + 3)² = x² + 6x + 9"
+      },
+      {
+       "id": "c",
+       "text": "(x + 3)² = x² + 9"
+      },
+      {
+       "id": "d",
+       "text": "(x − 3)(x + 3) = x² + 9"
+      }
+     ]
+    },
+    "key": {
+     "solution": "(x + 3)² = x² + 6x + 9 — вярно е по формулата за квадрат на сбор.",
+     "distractors": [
+      {
+       "match": "a",
+       "misconception": "FORMULA_APPLICATION",
+       "explanation": "(x − a)² ≠ x² − a²."
+      },
+      {
+       "match": "c",
+       "misconception": "FORMULA_APPLICATION",
+       "explanation": "Липсва удвоеното произведение."
+      },
+      {
+       "match": "d",
+       "misconception": "SIGN",
+       "explanation": "Разликата на квадрати е x² − a²."
+      }
+     ],
+     "defaultMisconception": "FORMULA_APPLICATION",
+     "correctOptionId": "b"
+    },
+    "hints": [
+     "Провери с число, напр. x = 1.",
+     "Тъждество е вярно за всяко x.",
+     "Използвай формулите за съкратено умножение."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026), генерирано по шаблон и проверено автоматично"
+   }
+  },
+  {
+   "key": "LD1-G2",
+   "draft": {
+    "path": "B",
+    "skill": "B.multiplication",
+    "learningOutcome": "Умножава едночлени",
+    "responseType": "SINGLE_CHOICE",
+    "difficulty": "INTERMEDIATE",
+    "estimatedSeconds": 60,
+    "maxPoints": 1,
+    "misconception": "SIGN",
+    "prompt": {
+     "text": "(2x⁴) · (−4x³y²) е равно на:",
+     "options": [
+      {
+       "id": "a",
+       "text": "8x⁷y²"
+      },
+      {
+       "id": "b",
+       "text": "−2x⁷y²"
+      },
+      {
+       "id": "c",
+       "text": "−8x⁷y²"
+      },
+      {
+       "id": "d",
+       "text": "−8x¹²y²"
+      }
+     ]
+    },
+    "key": {
+     "solution": "(2x⁴)·(−4x³y²) = −8x⁷y².",
+     "distractors": [
+      {
+       "match": "a",
+       "misconception": "SIGN",
+       "explanation": "Провери знака на произведението."
+      },
+      {
+       "match": "b",
+       "misconception": "REASONING",
+       "explanation": "Коефициентите се умножават."
+      },
+      {
+       "match": "d",
+       "misconception": "TECHNICAL",
+       "explanation": "При умножение показателите се събират."
+      }
+     ],
+     "defaultMisconception": "SIGN",
+     "correctOptionId": "c"
+    },
+    "hints": [
+     "Умножи коефициентите и степените поотделно.",
+     "2·(−4) = −8.",
+     "Показателите на еднаквите букви се събират."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026), генерирано по шаблон и проверено автоматично"
+   }
+  },
+  {
+   "key": "LD1-G3",
+   "draft": {
+    "path": "C",
+    "skill": "C.factor-formulas",
+    "learningOutcome": "Разлага чрез формули",
+    "responseType": "EXPRESSION",
+    "difficulty": "ADVANCED",
+    "estimatedSeconds": 90,
+    "maxPoints": 2,
+    "misconception": "FACTORISATION",
+    "prompt": {
+     "text": "Разложи на множители: 16x² − 56x + 49"
+    },
+    "key": {
+     "solution": "16x² − 56x + 49 = (4x-7)².",
+     "distractors": [
+      {
+       "match": "(4x+7)^2",
+       "misconception": "FORMULA_APPLICATION",
+       "explanation": "Знакът в скобата е като знака на средния член."
+      }
+     ],
+     "defaultMisconception": "FACTORISATION",
+     "answer": "(4x-7)^2",
+     "form": "FACTORISED"
+    },
+    "hints": [
+     "Кои формули за съкратено умножение познаваш?",
+     "Точен квадрат: a² ± 2ab + b² = (a ± b)².",
+     "Корен от 16x² е 4x."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026), генерирано по шаблон и проверено автоматично"
+   }
+  },
+  {
+   "key": "LD1-C1",
+   "draft": {
+    "path": "A",
+    "skill": "A.rational-integral",
+    "learningOutcome": "Различава цели и дробни рационални изрази",
+    "responseType": "SINGLE_CHOICE",
+    "difficulty": "FOUNDATIONAL",
+    "estimatedSeconds": 60,
+    "maxPoints": 1,
+    "misconception": "REASONING",
+    "prompt": {
+     "text": "Кой от изразите е цял (не съдържа деление на израз с променлива)?",
+     "options": [
+      {
+       "id": "a",
+       "text": "8/x + 2"
+      },
+      {
+       "id": "b",
+       "text": "(a + 2)/a"
+      },
+      {
+       "id": "c",
+       "text": "x²/8 − 2x"
+      },
+      {
+       "id": "d",
+       "text": "8/(x − 2)"
+      }
+     ]
+    },
+    "key": {
+     "solution": "В „x²/8 − 2x“ делим само на числото 8, затова изразът е цял. Останалите съдържат деление на израз с променлива.",
+     "distractors": [
+      {
+       "match": "a",
+       "misconception": "REASONING",
+       "explanation": "Членът 8/x съдържа деление на x — изразът е дробен."
+      },
+      {
+       "match": "b",
+       "misconception": "REASONING",
+       "explanation": "Делим на променливата a — изразът е дробен."
+      },
+      {
+       "match": "d",
+       "misconception": "REASONING",
+       "explanation": "Тук делим на израз с променлива (x − 2) — това е дробен израз."
+      }
+     ],
+     "defaultMisconception": "REASONING",
+     "correctOptionId": "c"
+    },
+    "hints": [
+     "Цял израз: няма деление на променлива.",
+     "Делението на число е позволено (x²/3 = ⅓·x²).",
+     "Само в „x²/8 − 2x“ делим на число."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026), генерирано по шаблон и проверено автоматично"
+   }
+  },
+  {
+   "key": "LD1-C2",
+   "draft": {
+    "path": "B",
+    "skill": "B.normal-form",
+    "learningOutcome": "Определя степен на едночлен",
+    "responseType": "SINGLE_CHOICE",
+    "difficulty": "FOUNDATIONAL",
+    "estimatedSeconds": 60,
+    "maxPoints": 1,
+    "misconception": "REASONING",
+    "prompt": {
+     "text": "Каква е степента на едночлена 3b²x²y²?",
+     "options": [
+      {
+       "id": "a",
+       "text": "2"
+      },
+      {
+       "id": "b",
+       "text": "6"
+      },
+      {
+       "id": "c",
+       "text": "8"
+      },
+      {
+       "id": "d",
+       "text": "9"
+      }
+     ]
+    },
+    "key": {
+     "solution": "Степента е 2 + 2 + 2 = 6.",
+     "distractors": [
+      {
+       "match": "a",
+       "misconception": "REASONING",
+       "explanation": "Събираме показателите на всички букви."
+      },
+      {
+       "match": "c",
+       "misconception": "REASONING",
+       "explanation": "Показателите се събират, не се умножават."
+      },
+      {
+       "match": "d",
+       "misconception": "REASONING",
+       "explanation": "Коефициентът не участва в степента."
+      }
+     ],
+     "defaultMisconception": "REASONING",
+     "correctOptionId": "b"
+    },
+    "hints": [
+     "Степента е сборът от показателите.",
+     "Буква без показател има показател 1.",
+     "Сбор: 2 + 2 + 2."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026), генерирано по шаблон и проверено автоматично"
+   }
+  },
+  {
+   "key": "LD1-C3",
+   "draft": {
+    "path": "C",
+    "skill": "C.square-binomial",
+    "learningOutcome": "Прилага формулите за квадрат на двучлен",
+    "responseType": "SINGLE_CHOICE",
+    "difficulty": "INTERMEDIATE",
+    "estimatedSeconds": 60,
+    "maxPoints": 1,
+    "misconception": "FORMULA_APPLICATION",
+    "prompt": {
+     "text": "(x − 7)² е равно на:",
+     "options": [
+      {
+       "id": "a",
+       "text": "x² − 14x + 49"
+      },
+      {
+       "id": "b",
+       "text": "x² − 7x + 49"
+      },
+      {
+       "id": "c",
+       "text": "x² + 49"
+      },
+      {
+       "id": "d",
+       "text": "x² + 14x + 49"
+      }
+     ]
+    },
+    "key": {
+     "solution": "(x − 7)² = x² − 14x + 49.",
+     "distractors": [
+      {
+       "match": "b",
+       "misconception": "FORMULA_APPLICATION",
+       "explanation": "Средният член е 2ab — удвоен."
+      },
+      {
+       "match": "c",
+       "misconception": "FORMULA_APPLICATION",
+       "explanation": "Липсва удвоеното произведение 2·a·b."
+      },
+      {
+       "match": "d",
+       "misconception": "SIGN",
+       "explanation": "Знакът на средния член е като знака в скобата."
+      }
+     ],
+     "defaultMisconception": "FORMULA_APPLICATION",
+     "correctOptionId": "a"
+    },
+    "hints": [
+     "(a ± b)² = a² ± 2ab + b².",
+     "Тук a = x, b = 7.",
+     "Не забравяй удвоеното произведение."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026), генерирано по шаблон и проверено автоматично"
+   }
+  },
+  {
+   "key": "LD1-C4",
+   "draft": {
+    "path": "C",
+    "skill": "C.cube-binomial",
+    "learningOutcome": "Прилага формулите (a ± b)³",
+    "responseType": "SINGLE_CHOICE",
+    "difficulty": "ADVANCED",
+    "estimatedSeconds": 60,
+    "maxPoints": 1,
+    "misconception": "FORMULA_APPLICATION",
+    "prompt": {
+     "text": "(x + 1)³ е равно на:",
+     "options": [
+      {
+       "id": "a",
+       "text": "x³ + x² + x + 1"
+      },
+      {
+       "id": "b",
+       "text": "x³ + 3x² + 3x + 1"
+      },
+      {
+       "id": "c",
+       "text": "x³ + 3x² − 3x + 1"
+      },
+      {
+       "id": "d",
+       "text": "x³ + 1"
+      }
+     ]
+    },
+    "key": {
+     "solution": "(x + 1)³ = x³ + 3x² + 3x + 1.",
+     "distractors": [
+      {
+       "match": "a",
+       "misconception": "FORMULA_APPLICATION",
+       "explanation": "Коефициентите са 1, 3, 3, 1."
+      },
+      {
+       "match": "c",
+       "misconception": "SIGN",
+       "explanation": "3xb² е винаги положително (b² ≥ 0)."
+      },
+      {
+       "match": "d",
+       "misconception": "FORMULA_APPLICATION",
+       "explanation": "(x + b)³ има четири члена: x³ + 3x²b + 3xb² + b³."
+      }
+     ],
+     "defaultMisconception": "FORMULA_APPLICATION",
+     "correctOptionId": "b"
+    },
+    "hints": [
+     "(a + b)³ = a³ + 3a²b + 3ab² + b³.",
+     "Тук a = x, b = 1.",
+     "Коефициентите са 1, 3, 3, 1."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026), генерирано по шаблон и проверено автоматично"
+   }
+  },
+  {
+   "key": "LD1-C5",
+   "draft": {
+    "path": "B",
+    "skill": "B.powers",
+    "learningOutcome": "Степенува едночлен",
+    "responseType": "SINGLE_CHOICE",
+    "difficulty": "INTERMEDIATE",
+    "estimatedSeconds": 60,
+    "maxPoints": 1,
+    "misconception": "SIGN",
+    "prompt": {
+     "text": "(−3a³b)² е равно на:",
+     "options": [
+      {
+       "id": "a",
+       "text": "9a⁶b²"
+      },
+      {
+       "id": "b",
+       "text": "−6a⁶b²"
+      },
+      {
+       "id": "c",
+       "text": "−9a⁶b²"
+      },
+      {
+       "id": "d",
+       "text": "9a⁵b³"
+      }
+     ]
+    },
+    "key": {
+     "solution": "(−3a³b)² = (−3)²·a⁶·b² = 9a⁶b².",
+     "distractors": [
+      {
+       "match": "b",
+       "misconception": "REASONING",
+       "explanation": "(−3)^2 ≠ −3·2: коефициентът се степенува."
+      },
+      {
+       "match": "c",
+       "misconception": "SIGN",
+       "explanation": "Четна степен на отрицателно е положително; нечетна — отрицателно."
+      },
+      {
+       "match": "d",
+       "misconception": "TECHNICAL",
+       "explanation": "При степенуване показателите се умножават."
+      }
+     ],
+     "defaultMisconception": "SIGN",
+     "correctOptionId": "a"
+    },
+    "hints": [
+     "Степенувай всеки множител.",
+     "(−3)² = 9.",
+     "Показателите се умножават по степента."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026), генерирано по шаблон и проверено автоматично"
+   }
+  },
+  {
+   "key": "LD2-P1",
+   "draft": {
+    "path": "A",
+    "skill": "A.order-of-operations",
+    "learningOutcome": "Спазва реда на действията",
+    "responseType": "SINGLE_CHOICE",
+    "difficulty": "FOUNDATIONAL",
+    "estimatedSeconds": 60,
+    "maxPoints": 1,
+    "misconception": "ORDER_OF_OPERATIONS",
+    "prompt": {
+     "text": "Пресметни: 9 + 2·3²",
+     "options": [
+      {
+       "id": "a",
+       "text": "99"
+      },
+      {
+       "id": "b",
+       "text": "27"
+      },
+      {
+       "id": "c",
+       "text": "45"
+      },
+      {
+       "id": "d",
+       "text": "21"
+      }
+     ]
+    },
+    "key": {
+     "solution": "9 + 2·3² = 9 + 2·9 = 9 + 18 = 27.",
+     "distractors": [
+      {
+       "match": "a",
+       "misconception": "ORDER_OF_OPERATIONS",
+       "explanation": "Умножението е преди събирането: първо b·c², после +a."
+      },
+      {
+       "match": "c",
+       "misconception": "ORDER_OF_OPERATIONS",
+       "explanation": "Степента е само на 3: 2·3² = 2·9."
+      },
+      {
+       "match": "d",
+       "misconception": "TECHNICAL",
+       "explanation": "3² = 3·3 = 9, не 3·2."
+      }
+     ],
+     "defaultMisconception": "ORDER_OF_OPERATIONS",
+     "correctOptionId": "b"
+    },
+    "hints": [
+     "Ред: степени → умножение → събиране.",
+     "3² = 9.",
+     "2·9 = 18."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026), генерирано по шаблон и проверено автоматично"
+   }
+  },
+  {
+   "key": "LD2-P2",
+   "draft": {
+    "path": "B",
+    "skill": "B.like-terms",
+    "learningOutcome": "Събира и изважда подобни едночлени",
+    "responseType": "EXPRESSION",
+    "difficulty": "INTERMEDIATE",
+    "estimatedSeconds": 60,
+    "maxPoints": 2,
+    "misconception": "SIGN",
+    "prompt": {
+     "text": "Опрости: 2a²b³ − 9a²b³ + 2a²b³"
+    },
+    "key": {
+     "solution": "(2 − 9 + 2)·a²b³ = −5a²b³.",
+     "distractors": [
+      {
+       "match": "13a^2b^3",
+       "misconception": "SIGN",
+       "explanation": "Вторият член е със знак минус: 2 − 9 + 2."
+      },
+      {
+       "match": "-5",
+       "misconception": "LIKE_TERMS",
+       "explanation": "Буквената част остава в отговора."
+      }
+     ],
+     "defaultMisconception": "SIGN",
+     "answer": "-5a^2b^3",
+     "form": "NORMAL_FORM"
+    },
+    "hints": [
+     "Всички членове са подобни.",
+     "Пресметни 2 − 9 + 2.",
+     "= -5, буквената част остава."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026), генерирано по шаблон и проверено автоматично"
+   }
+  },
+  {
+   "key": "LD2-G1",
+   "draft": {
+    "path": "D",
+    "skill": "D.checking",
+    "learningOutcome": "Открива и поправя типични грешки",
+    "responseType": "SINGLE_CHOICE",
+    "difficulty": "INTERMEDIATE",
+    "estimatedSeconds": 90,
+    "maxPoints": 1,
+    "misconception": "REASONING",
+    "prompt": {
+     "text": "Кое от преобразуванията е ГРЕШНО?",
+     "options": [
+      {
+       "id": "a",
+       "text": "3x + 3x = 6x"
+      },
+      {
+       "id": "b",
+       "text": "3x·3x = 6x²"
+      },
+      {
+       "id": "c",
+       "text": "(x − 3)(x + 3) = x² − 9"
+      },
+      {
+       "id": "d",
+       "text": "−(x − 3) = −x + 3"
+      }
+     ]
+    },
+    "key": {
+     "solution": "Грешно е „3x·3x = 6x²“: коефициентите се умножават: 3·3 = 9. Вярно е: 3x·3x = 9x².",
+     "distractors": [
+      {
+       "match": "a",
+       "misconception": "REASONING",
+       "explanation": "Това преобразувание е вярно — провери го с x = 2. Грешното е друго."
+      },
+      {
+       "match": "c",
+       "misconception": "REASONING",
+       "explanation": "Това преобразувание е вярно — провери го с x = 2. Грешното е друго."
+      },
+      {
+       "match": "d",
+       "misconception": "REASONING",
+       "explanation": "Това преобразувание е вярно — провери го с x = 2. Грешното е друго."
+      }
+     ],
+     "defaultMisconception": "REASONING",
+     "correctOptionId": "b"
+    },
+    "hints": [
+     "Провери всяко равенство, като заместиш x = 2 от двете страни.",
+     "Където двете страни дават различни числа, има грешка.",
+     "Внимавай за знаци, удвоено произведение и подобни членове."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026), генерирано по шаблон и проверено автоматично"
+   }
+  },
+  {
+   "key": "LD2-G2",
+   "draft": {
+    "path": "C",
+    "skill": "C.add-subtract",
+    "learningOutcome": "Изважда многочлени",
+    "responseType": "SINGLE_CHOICE",
+    "difficulty": "INTERMEDIATE",
+    "estimatedSeconds": 60,
+    "maxPoints": 1,
+    "misconception": "BRACKETS",
+    "prompt": {
+     "text": "(5x² + x + 2) − (3x² + 6x + 1) е равно на:",
+     "options": [
+      {
+       "id": "a",
+       "text": "8x² + 7x + 3"
+      },
+      {
+       "id": "b",
+       "text": "2x² + 7x + 3"
+      },
+      {
+       "id": "c",
+       "text": "2x² − 5x + 1"
+      },
+      {
+       "id": "d",
+       "text": "2x² − 5x + 3"
+      }
+     ]
+    },
+    "key": {
+     "solution": "Разкриваме втората скоба със сменени знаци: 5x² + x + 2 + (−3x² − 6x − 1) = 2x² − 5x + 1.",
+     "distractors": [
+      {
+       "match": "a",
+       "misconception": "SIGN",
+       "explanation": "Това е сборът, а търсим разликата."
+      },
+      {
+       "match": "b",
+       "misconception": "BRACKETS",
+       "explanation": "Минусът пред скобата сменя знака на всеки член в нея."
+      },
+      {
+       "match": "d",
+       "misconception": "TECHNICAL",
+       "explanation": "Провери свободния член."
+      }
+     ],
+     "defaultMisconception": "BRACKETS",
+     "correctOptionId": "c"
+    },
+    "hints": [
+     "Разкрий скобите внимателно.",
+     "Минусът пред скобата сменя всички знаци в нея.",
+     "После приведи подобните."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026), генерирано по шаблон и проверено автоматично"
+   }
+  },
+  {
+   "key": "LD2-G3",
+   "draft": {
+    "path": "C",
+    "skill": "C.square-binomial",
+    "learningOutcome": "Опростява изрази с формули",
+    "responseType": "STEPS",
+    "difficulty": "ADVANCED",
+    "estimatedSeconds": 180,
+    "maxPoints": 3,
+    "misconception": "FORMULA_APPLICATION",
+    "prompt": {
+     "text": "Опрости стъпка по стъпка: (x + 1)² − (x − 1)(x + 1)",
+     "startExpression": "(x+1)^2-(x-1)(x+1)"
+    },
+    "key": {
+     "solution": "= x² + 2x + 1 − x² + 1 = 2x + 2.",
+     "distractors": [
+      {
+       "match": "2x",
+       "misconception": "BRACKETS",
+       "explanation": "Минусът пред скобата сменя знака и на −b²."
+      }
+     ],
+     "defaultMisconception": "FORMULA_APPLICATION",
+     "answer": "2x+2",
+     "form": "NORMAL_FORM",
+     "parts": [
+      {
+       "id": "start",
+       "type": "EXPRESSION",
+       "answer": "(x+1)^2-(x-1)(x+1)",
+       "points": 0
+      }
+     ],
+     "rubric": "3 т. за верни преходи и нормален вид."
+    },
+    "hints": [
+     "Разкрий (x + a)² по формулата.",
+     "(x − 1)(x + 1) = x² − 1.",
+     "Внимавай с минуса пред втората скоба."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026), генерирано по шаблон и проверено автоматично"
+   }
+  },
+  {
+   "key": "LD2-C1",
+   "draft": {
+    "path": "D",
+    "skill": "D.checking",
+    "learningOutcome": "Открива и поправя типични грешки",
+    "responseType": "SINGLE_CHOICE",
+    "difficulty": "INTERMEDIATE",
+    "estimatedSeconds": 90,
+    "maxPoints": 1,
+    "misconception": "REASONING",
+    "prompt": {
+     "text": "Кое от преобразуванията е ГРЕШНО?",
+     "options": [
+      {
+       "id": "a",
+       "text": "(x + 4)² = x² + 8x + 16"
+      },
+      {
+       "id": "b",
+       "text": "4x·4x = 8x²"
+      },
+      {
+       "id": "c",
+       "text": "−(x − 4) = −x + 4"
+      },
+      {
+       "id": "d",
+       "text": "(x − 4)(x + 4) = x² − 16"
+      }
+     ]
+    },
+    "key": {
+     "solution": "Грешно е „4x·4x = 8x²“: коефициентите се умножават: 4·4 = 16. Вярно е: 4x·4x = 16x².",
+     "distractors": [
+      {
+       "match": "a",
+       "misconception": "REASONING",
+       "explanation": "Това преобразувание е вярно — провери го с x = 2. Грешното е друго."
+      },
+      {
+       "match": "c",
+       "misconception": "REASONING",
+       "explanation": "Това преобразувание е вярно — провери го с x = 2. Грешното е друго."
+      },
+      {
+       "match": "d",
+       "misconception": "REASONING",
+       "explanation": "Това преобразувание е вярно — провери го с x = 2. Грешното е друго."
+      }
+     ],
+     "defaultMisconception": "REASONING",
+     "correctOptionId": "b"
+    },
+    "hints": [
+     "Провери всяко равенство, като заместиш x = 2 от двете страни.",
+     "Където двете страни дават различни числа, има грешка.",
+     "Внимавай за знаци, удвоено произведение и подобни членове."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026), генерирано по шаблон и проверено автоматично"
+   }
+  },
+  {
+   "key": "LD2-C2",
+   "draft": {
+    "path": "C",
+    "skill": "C.square-binomial",
+    "learningOutcome": "Прилага формулите за квадрат на двучлен",
+    "responseType": "SINGLE_CHOICE",
+    "difficulty": "INTERMEDIATE",
+    "estimatedSeconds": 60,
+    "maxPoints": 1,
+    "misconception": "FORMULA_APPLICATION",
+    "prompt": {
+     "text": "(4x + 1)² е равно на:",
+     "options": [
+      {
+       "id": "a",
+       "text": "16x² − 8x + 1"
+      },
+      {
+       "id": "b",
+       "text": "16x² + 8x + 1"
+      },
+      {
+       "id": "c",
+       "text": "16x² + 4x + 1"
+      },
+      {
+       "id": "d",
+       "text": "16x² + 1"
+      }
+     ]
+    },
+    "key": {
+     "solution": "(4x + 1)² = 16x² + 8x + 1.",
+     "distractors": [
+      {
+       "match": "a",
+       "misconception": "SIGN",
+       "explanation": "Знакът на средния член е като знака в скобата."
+      },
+      {
+       "match": "c",
+       "misconception": "FORMULA_APPLICATION",
+       "explanation": "Средният член е 2ab — удвоен."
+      },
+      {
+       "match": "d",
+       "misconception": "FORMULA_APPLICATION",
+       "explanation": "Липсва удвоеното произведение 2·a·b."
+      }
+     ],
+     "defaultMisconception": "FORMULA_APPLICATION",
+     "correctOptionId": "b"
+    },
+    "hints": [
+     "(a ± b)² = a² ± 2ab + b².",
+     "Тук a = 4x, b = 1.",
+     "Не забравяй удвоеното произведение."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026), генерирано по шаблон и проверено автоматично"
+   }
+  },
+  {
+   "key": "LD2-C3",
+   "draft": {
+    "path": "C",
+    "skill": "C.difference-squares",
+    "learningOutcome": "Прилага (a − b)(a + b) = a² − b²",
+    "responseType": "EXPRESSION",
+    "difficulty": "FOUNDATIONAL",
+    "estimatedSeconds": 60,
+    "maxPoints": 2,
+    "misconception": "FORMULA_APPLICATION",
+    "prompt": {
+     "text": "Умножи: (2x − 7)(2x + 7)"
+    },
+    "key": {
+     "solution": "= (2x)² − 7² = 4x² − 49.",
+     "distractors": [
+      {
+       "match": "4x^2+49",
+       "misconception": "SIGN",
+       "explanation": "Получава се разлика на квадрати."
+      }
+     ],
+     "defaultMisconception": "FORMULA_APPLICATION",
+     "answer": "4x^2-49",
+     "form": "NORMAL_FORM"
+    },
+    "hints": [
+     "(a − b)(a + b) = a² − b².",
+     "a = 2x, b = 7.",
+     "a² = 4x²."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026), генерирано по шаблон и проверено автоматично"
+   }
+  },
+  {
+   "key": "LD2-C4",
+   "draft": {
+    "path": "D",
+    "skill": "D.checking",
+    "learningOutcome": "Открива и поправя типични грешки",
+    "responseType": "SINGLE_CHOICE",
+    "difficulty": "INTERMEDIATE",
+    "estimatedSeconds": 90,
+    "maxPoints": 1,
+    "misconception": "REASONING",
+    "prompt": {
+     "text": "Кое от преобразуванията е ГРЕШНО?",
+     "options": [
+      {
+       "id": "a",
+       "text": "(x + 4)² = x² + 8x + 16"
+      },
+      {
+       "id": "b",
+       "text": "(x − 4)(x + 4) = x² + 16"
+      },
+      {
+       "id": "c",
+       "text": "4x + 4x = 8x"
+      },
+      {
+       "id": "d",
+       "text": "−(x − 4) = −x + 4"
+      }
+     ]
+    },
+    "key": {
+     "solution": "Грешно е „(x − 4)(x + 4) = x² + 16“: разликата на квадрати е x² − 16. Вярно е: (x − 4)(x + 4) = x² − 16.",
+     "distractors": [
+      {
+       "match": "a",
+       "misconception": "REASONING",
+       "explanation": "Това преобразувание е вярно — провери го с x = 2. Грешното е друго."
+      },
+      {
+       "match": "c",
+       "misconception": "REASONING",
+       "explanation": "Това преобразувание е вярно — провери го с x = 2. Грешното е друго."
+      },
+      {
+       "match": "d",
+       "misconception": "REASONING",
+       "explanation": "Това преобразувание е вярно — провери го с x = 2. Грешното е друго."
+      }
+     ],
+     "defaultMisconception": "REASONING",
+     "correctOptionId": "b"
+    },
+    "hints": [
+     "Провери всяко равенство, като заместиш x = 2 от двете страни.",
+     "Където двете страни дават различни числа, има грешка.",
+     "Внимавай за знаци, удвоено произведение и подобни членове."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026), генерирано по шаблон и проверено автоматично"
+   }
+  },
+  {
+   "key": "LD2-C5",
+   "draft": {
+    "path": "C",
+    "skill": "C.multiply-monomial",
+    "learningOutcome": "Умножава многочлен с едночлен",
+    "responseType": "EXPRESSION",
+    "difficulty": "INTERMEDIATE",
+    "estimatedSeconds": 75,
+    "maxPoints": 2,
+    "misconception": "BRACKETS",
+    "prompt": {
+     "text": "Умножи и запиши в нормален вид: 3x(4x² + 5x + 4)"
+    },
+    "key": {
+     "solution": "3x(4x² + 5x + 4) = 12x³ + 15x² + 12x.",
+     "distractors": [
+      {
+       "match": "12x^3+5x+4",
+       "misconception": "BRACKETS",
+       "explanation": "Умножи едночлена по всеки член в скобата."
+      }
+     ],
+     "defaultMisconception": "BRACKETS",
+     "answer": "12x^3+15x^2+12x",
+     "form": "NORMAL_FORM"
+    },
+    "hints": [
+     "Умножи едночлена по всеки член.",
+     "Пази знаците.",
+     "Първият член е 12x³."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026), генерирано по шаблон и проверено автоматично"
+   }
+  },
+  {
+   "key": "LD3-P1",
+   "draft": {
+    "path": "A",
+    "skill": "A.substitution",
+    "learningOutcome": "Намира числена стойност на израз",
+    "responseType": "SINGLE_CHOICE",
+    "difficulty": "INTERMEDIATE",
+    "estimatedSeconds": 60,
+    "maxPoints": 1,
+    "misconception": "SIGN",
+    "prompt": {
+     "text": "Каква е стойността на израза −4x² − 2x − 5 при x = −2?",
+     "options": [
+      {
+       "id": "a",
+       "text": "−17"
+      },
+      {
+       "id": "b",
+       "text": "15"
+      },
+      {
+       "id": "c",
+       "text": "63"
+      },
+      {
+       "id": "d",
+       "text": "−12"
+      }
+     ]
+    },
+    "key": {
+     "solution": "−4x² − 2x − 5 при x = −2: −4·(−2)² + (−2)·(−2) − 5 = −16 + 4 − 5 = −17.",
+     "distractors": [
+      {
+       "match": "b",
+       "misconception": "SIGN",
+       "explanation": "Отрицателното число се замества в скоби: (−2)² = 4, не −4."
+      },
+      {
+       "match": "c",
+       "misconception": "ORDER_OF_OPERATIONS",
+       "explanation": "Първо степенуваме x, после умножаваме по коефициента."
+      },
+      {
+       "match": "d",
+       "misconception": "TECHNICAL",
+       "explanation": "Не забравяй свободния член."
+      }
+     ],
+     "defaultMisconception": "SIGN",
+     "correctOptionId": "a"
+    },
+    "hints": [
+     "Замести x навсякъде с числото — в скоби.",
+     "(−2)² = 4.",
+     "Пресметни по реда на действията: степен, умножение, събиране."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026), генерирано по шаблон и проверено автоматично"
+   }
+  },
+  {
+   "key": "LD3-P2",
+   "draft": {
+    "path": "B",
+    "skill": "B.multiplication",
+    "learningOutcome": "Умножава едночлени",
+    "responseType": "SINGLE_CHOICE",
+    "difficulty": "INTERMEDIATE",
+    "estimatedSeconds": 60,
+    "maxPoints": 1,
+    "misconception": "SIGN",
+    "prompt": {
+     "text": "(4x³) · (−2x²y²) е равно на:",
+     "options": [
+      {
+       "id": "a",
+       "text": "−8x⁵y²"
+      },
+      {
+       "id": "b",
+       "text": "2x⁵y²"
+      },
+      {
+       "id": "c",
+       "text": "8x⁵y²"
+      },
+      {
+       "id": "d",
+       "text": "−8x⁶y²"
+      }
+     ]
+    },
+    "key": {
+     "solution": "(4x³)·(−2x²y²) = −8x⁵y².",
+     "distractors": [
+      {
+       "match": "b",
+       "misconception": "REASONING",
+       "explanation": "Коефициентите се умножават."
+      },
+      {
+       "match": "c",
+       "misconception": "SIGN",
+       "explanation": "Провери знака на произведението."
+      },
+      {
+       "match": "d",
+       "misconception": "TECHNICAL",
+       "explanation": "При умножение показателите се събират."
+      }
+     ],
+     "defaultMisconception": "SIGN",
+     "correctOptionId": "a"
+    },
+    "hints": [
+     "Умножи коефициентите и степените поотделно.",
+     "4·(−2) = −8.",
+     "Показателите на еднаквите букви се събират."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026), генерирано по шаблон и проверено автоматично"
+   }
+  },
+  {
+   "key": "LD3-G1",
+   "draft": {
+    "path": "C",
+    "skill": "C.multiply",
+    "learningOutcome": "Умножава многочлени",
+    "responseType": "SINGLE_CHOICE",
+    "difficulty": "INTERMEDIATE",
+    "estimatedSeconds": 60,
+    "maxPoints": 1,
+    "misconception": "BRACKETS",
+    "prompt": {
+     "text": "(4x − 4)(2x − 5) е равно на:",
+     "options": [
+      {
+       "id": "a",
+       "text": "8x² + 20"
+      },
+      {
+       "id": "b",
+       "text": "8x² − 28x + 20"
+      },
+      {
+       "id": "c",
+       "text": "8x² − 28x − 20"
+      },
+      {
+       "id": "d",
+       "text": "8x² − 12x + 20"
+      }
+     ]
+    },
+    "key": {
+     "solution": "(4x − 4)(2x − 5) = 8x² − 28x + 20.",
+     "distractors": [
+      {
+       "match": "a",
+       "misconception": "BRACKETS",
+       "explanation": "Всеки член от първата скоба се умножава по всеки от втората — липсват средните членове."
+      },
+      {
+       "match": "c",
+       "misconception": "SIGN",
+       "explanation": "Провери знака на свободния член."
+      },
+      {
+       "match": "d",
+       "misconception": "SIGN",
+       "explanation": "Провери знаците на средните членове."
+      }
+     ],
+     "defaultMisconception": "BRACKETS",
+     "correctOptionId": "b"
+    },
+    "hints": [
+     "Всеки член по всеки член.",
+     "Получаваш 4 произведения.",
+     "Приведи подобните (средните членове)."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026), генерирано по шаблон и проверено автоматично"
+   }
+  },
+  {
+   "key": "LD3-G2",
+   "draft": {
+    "path": "B",
+    "skill": "B.division",
+    "learningOutcome": "Дели едночлен на едночлен",
+    "responseType": "EXPRESSION",
+    "difficulty": "ADVANCED",
+    "estimatedSeconds": 75,
+    "maxPoints": 2,
+    "misconception": "SIGN",
+    "prompt": {
+     "text": "Раздели: (−10a³b²) : (2a²b)"
+    },
+    "key": {
+     "solution": "(−10a³b²) : (2a²b) = −5ab.",
+     "distractors": [
+      {
+       "match": "5ab",
+       "misconception": "SIGN",
+       "explanation": "Провери знака на частното."
+      }
+     ],
+     "defaultMisconception": "SIGN",
+     "answer": "-5ab",
+     "form": "NORMAL_FORM"
+    },
+    "hints": [
+     "Раздели коефициентите, после степените.",
+     "При деление показателите се изваждат.",
+     "Коефициент: −10 : (2) = −5."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026), генерирано по шаблон и проверено автоматично"
+   }
+  },
+  {
+   "key": "LD3-G3",
+   "draft": {
+    "path": "C",
+    "skill": "C.common-factor",
+    "learningOutcome": "Разлага чрез изнасяне на общ множител",
+    "responseType": "EXPRESSION",
+    "difficulty": "INTERMEDIATE",
+    "estimatedSeconds": 75,
+    "maxPoints": 2,
+    "misconception": "FACTORISATION",
+    "prompt": {
+     "text": "Разложи на множители: 9x² + 12x"
+    },
+    "key": {
+     "solution": "9x² + 12x = 3x(3x + 4). Проверка: умножи обратно.",
+     "distractors": [
+      {
+       "match": "3x(3x-4)",
+       "misconception": "SIGN",
+       "explanation": "Провери знака на втория член в скобата — умножи обратно."
+      },
+      {
+       "match": "3(3x+4)",
+       "misconception": "FACTORISATION",
+       "explanation": "Изнесен е само числовият множител — забравено е x."
+      }
+     ],
+     "defaultMisconception": "FACTORISATION",
+     "answer": "3x(3x+4)",
+     "form": "FACTORISED"
+    },
+    "hints": [
+     "Намери най-големия общ множител на коефициентите.",
+     "Общата буква с най-малката степен.",
+     "Изнеси 3x."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026), генерирано по шаблон и проверено автоматично"
+   }
+  },
+  {
+   "key": "LD3-C1",
+   "draft": {
+    "path": "A",
+    "skill": "A.rational-integral",
+    "learningOutcome": "Определя кога дробен израз няма смисъл",
+    "responseType": "SINGLE_CHOICE",
+    "difficulty": "INTERMEDIATE",
+    "estimatedSeconds": 60,
+    "maxPoints": 1,
+    "misconception": "REASONING",
+    "prompt": {
+     "text": "За коя стойност на x изразът 5/(x + 1) няма смисъл?",
+     "options": [
+      {
+       "id": "a",
+       "text": "−1"
+      },
+      {
+       "id": "b",
+       "text": "5"
+      },
+      {
+       "id": "c",
+       "text": "0"
+      },
+      {
+       "id": "d",
+       "text": "1"
+      }
+     ]
+    },
+    "key": {
+     "solution": "Знаменателят x + 1 = 0 при x = −1. Тогава делим на нула и изразът няма смисъл.",
+     "distractors": [
+      {
+       "match": "b",
+       "misconception": "REASONING",
+       "explanation": "Числителят не влияе — гледаме кога знаменателят е 0."
+      },
+      {
+       "match": "c",
+       "misconception": "REASONING",
+       "explanation": "При x = 0 знаменателят не е нула."
+      },
+      {
+       "match": "d",
+       "misconception": "SIGN",
+       "explanation": "Знаменателят x + 1 е нула при x = −1, не при 1."
+      }
+     ],
+     "defaultMisconception": "REASONING",
+     "correctOptionId": "a"
+    },
+    "hints": [
+     "Израз няма смисъл, когато делим на нула.",
+     "Кога знаменателят е 0?",
+     "x + 1 = 0."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026), генерирано по шаблон и проверено автоматично"
+   }
+  },
+  {
+   "key": "LD3-C2",
+   "draft": {
+    "path": "B",
+    "skill": "B.applications",
+    "learningOutcome": "Намира стойност на едночлен",
+    "responseType": "NUMERIC",
+    "difficulty": "FOUNDATIONAL",
+    "estimatedSeconds": 60,
+    "maxPoints": 2,
+    "misconception": "SIGN",
+    "prompt": {
+     "text": "Намери стойността на −4x²y при x = 3 и y = −1."
+    },
+    "key": {
+     "solution": "−4·3²·(−1) = −4·9·(−1) = 36.",
+     "distractors": [
+      {
+       "match": "-36",
+       "misconception": "SIGN",
+       "explanation": "(3)² = 9 е положително."
+      }
+     ],
+     "defaultMisconception": "SIGN",
+     "answer": "36"
+    },
+    "hints": [
+     "Замести с числата в скоби.",
+     "x² = 3² = 9.",
+     "Умножи всичко."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026), генерирано по шаблон и проверено автоматично"
+   }
+  },
+  {
+   "key": "LD3-C3",
+   "draft": {
+    "path": "C",
+    "skill": "C.normal-form",
+    "learningOutcome": "Привежда многочлен в нормален вид",
+    "responseType": "EXPRESSION",
+    "difficulty": "FOUNDATIONAL",
+    "estimatedSeconds": 60,
+    "maxPoints": 2,
+    "misconception": "LIKE_TERMS",
+    "prompt": {
+     "text": "Запиши в нормален вид: 6x² − 4x + 3x − 1x² + 3"
+    },
+    "key": {
+     "solution": "6x² − 4x + 3x − 1x² + 3 = 5x² − x + 3.",
+     "distractors": [
+      {
+       "match": "7x^2-x+3",
+       "misconception": "SIGN",
+       "explanation": "−1x² е с минус."
+      }
+     ],
+     "defaultMisconception": "LIKE_TERMS",
+     "answer": "5x^2-x+3",
+     "form": "NORMAL_FORM"
+    },
+    "hints": [
+     "Групирай x² с x² и x с x.",
+     "6x² − 1x² = 5x².",
+     "−4x + 3x = −1x."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026), генерирано по шаблон и проверено автоматично"
+   }
+  },
+  {
+   "key": "LD3-C4",
+   "draft": {
+    "path": "C",
+    "skill": "C.applications",
+    "learningOutcome": "Пресмята стойност след опростяване",
+    "responseType": "NUMERIC",
+    "difficulty": "ADVANCED",
+    "estimatedSeconds": 120,
+    "maxPoints": 2,
+    "misconception": "FORMULA_APPLICATION",
+    "prompt": {
+     "text": "Опрости и пресметни: (x + 2)² − (x − 2)² при x = 6."
+    },
+    "key": {
+     "solution": "(x + 2)² − (x − 2)² = 8x; при x = 6: 48.",
+     "distractors": [
+      {
+       "match": "0",
+       "misconception": "FORMULA_APPLICATION",
+       "explanation": "Удвоените произведения не се унищожават — те се събират."
+      }
+     ],
+     "defaultMisconception": "FORMULA_APPLICATION",
+     "answer": "48"
+    },
+    "hints": [
+     "Разкрий двата квадрата.",
+     "Остава 4·2·x = 8x.",
+     "Замести x = 6."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026), генерирано по шаблон и проверено автоматично"
+   }
+  },
+  {
+   "key": "LD3-C5",
+   "draft": {
+    "path": "C",
+    "skill": "C.factor-formulas",
+    "learningOutcome": "Разлага чрез формули",
+    "responseType": "EXPRESSION",
+    "difficulty": "ADVANCED",
+    "estimatedSeconds": 90,
+    "maxPoints": 2,
+    "misconception": "FACTORISATION",
+    "prompt": {
+     "text": "Разложи на множители: 16x² − 49"
+    },
+    "key": {
+     "solution": "16x² − 49 = (4x-7)(4x+7).",
+     "distractors": [
+      {
+       "match": "(4x-7)^2",
+       "misconception": "FORMULA_APPLICATION",
+       "explanation": "(a − b)² ≠ a² − b²: разликата на квадрати е (a − b)(a + b)."
+      }
+     ],
+     "defaultMisconception": "FACTORISATION",
+     "answer": "(4x-7)(4x+7)",
+     "form": "FACTORISED"
+    },
+    "hints": [
+     "Кои формули за съкратено умножение познаваш?",
+     "Разлика на квадрати: a² − b² = (a − b)(a + b).",
+     "Корен от 16x² е 4x."
+    ],
+    "sourceDeclaration": "Оригинално съдържание, Math Mission (2026), генерирано по шаблон и проверено автоматично"
+   }
   }
  ],
  "lessons": [
@@ -25943,8 +29105,8 @@
      "Проверявай със заместване на число."
     ],
     "nextStep": {
-     "lessonKey": "C2",
-     "text": "Следва: многочлени — нормален вид и степен."
+     "lessonKey": "C1",
+     "text": "Следва: многочлени — членове и коефициенти."
     }
    }
   },
@@ -27011,8 +30173,8 @@
      "Не бъркай (a + b)³ с a³ + b³."
     ],
     "nextStep": {
-     "lessonKey": "C10",
-     "text": "Следва: тъждества."
+     "lessonKey": "C9",
+     "text": "Следва: сбор и разлика на кубове."
     }
    }
   },
@@ -27637,6 +30799,981 @@
     "nextStep": {
      "lessonKey": "D1",
      "text": "Следва: обобщение на трите теми и смесени задачи."
+    }
+   }
+  },
+  {
+   "lessonKey": "A1",
+   "content": {
+    "context": {
+     "title": "Сметката в магазина",
+     "text": "Една тетрадка струва 2 лв. За 3 тетрадки плащаме 3·2 = 6 лв. — това е числов израз. А ако купим n тетрадки? Плащаме 2·n лева. Буквата n може да бъде всяко число — това е израз с променлива."
+    },
+    "objectives": [
+     "След този урок ще можеш да разпознаваш числов израз.",
+     "След този урок ще можеш да разпознаваш израз с променливи и да посочваш променливите в него.",
+     "След този урок ще можеш да пресмяташ стойността на числов израз."
+    ],
+    "prerequisiteCheck": {
+     "intro": "Да проверим какво ще ти трябва.",
+     "questionKeys": [
+      "LA1-P1",
+      "LA1-P2"
+     ]
+    },
+    "explanation": [
+     "Числов израз е запис от числа, знаци за действия и скоби, например 3·(4 + 5) − 2.",
+     "Ако в записа има букви, които заместват числа, това е израз с променливи: 2n + 1, a·b, x² − 3.",
+     "Буквите се наричат променливи, защото могат да приемат различни стойности. Числата в израза са константи.",
+     "Между число и буква знакът за умножение обикновено се пропуска: 2n означава 2·n."
+    ],
+    "definition": {
+     "title": "Числов израз и израз с променливи",
+     "text": "Числов израз е запис, съставен от числа, знаци за действия и скоби. Израз с променливи е запис, в който освен числа участват и букви (променливи), свързани със знаци за действия. Стойността на числов израз е числото, което получаваме, като извършим действията."
+    },
+    "visual": {
+     "kind": "tiles",
+     "title": "Две кутии",
+     "description": "Вляво са числови изрази: 3·(4 + 5), 2³ − 1 и 12 : 4. Вдясно са изрази с променливи: 2n + 1, a·b и x² − 3.",
+     "groups": [
+      {
+       "label": "Числови",
+       "items": [
+        "3·(4 + 5)",
+        "2³ − 1",
+        "12 : 4"
+       ],
+       "colour": "blue"
+      },
+      {
+       "label": "С променливи",
+       "items": [
+        "2n + 1",
+        "a·b",
+        "x² − 3"
+       ],
+       "colour": "coral"
+      }
+     ]
+    },
+    "workedExamples": [
+     {
+      "level": "BASIC",
+      "problem": "3·(4 + 5) − 2",
+      "steps": [
+       {
+        "expression": "3·9 − 2",
+        "why": "Първо пресмятаме скобите."
+       },
+       {
+        "expression": "27 − 2",
+        "why": "После умножението."
+       },
+       {
+        "expression": "25",
+        "why": "Накрая изваждането."
+       }
+      ],
+      "answer": "25"
+     },
+     {
+      "level": "TYPICAL",
+      "problem": "2³ + 12 : 4",
+      "steps": [
+       {
+        "expression": "8 + 12 : 4",
+        "why": "Първо степента: 2³ = 8."
+       },
+       {
+        "expression": "8 + 3",
+        "why": "После делението: 12 : 4 = 3."
+       },
+       {
+        "expression": "11",
+        "why": "Накрая събирането."
+       }
+      ],
+      "answer": "11"
+     },
+     {
+      "level": "CHALLENGE",
+      "problem": "Цената на n тетрадки по 2 лв. и една химикалка за 3 лв.",
+      "steps": [
+       {
+        "expression": "2n + 3",
+        "why": "n тетрадки по 2 лв. струват 2·n лв.; прибавяме 3 лв. за химикалката."
+       },
+       {
+        "expression": "2·5 + 3",
+        "why": "Ако n = 5, заместваме n с 5."
+       },
+       {
+        "expression": "13",
+        "why": "Пресмятаме: 10 + 3 = 13."
+       }
+      ],
+      "answer": "2n + 3; при n = 5 — 13 лв."
+     }
+    ],
+    "watchOut": [
+     {
+      "wrong": "2n при n = 3 е 23",
+      "right": "2n при n = 3 е 2·3 = 6",
+      "why": "Между числото и буквата има умножение."
+     },
+     {
+      "wrong": "3 + 4·2 = 14",
+      "right": "3 + 4·2 = 11",
+      "why": "Умножението е преди събирането."
+     },
+     {
+      "wrong": "В 5x + 2 променливите са 5 и 2",
+      "right": "Променливата е x; 5 и 2 са константи",
+      "why": "Променливите са буквите."
+     }
+    ],
+    "guidedPractice": [
+     {
+      "questionKey": "LA1-G1",
+      "support": "FULL",
+      "coaching": "Следвай правилото от дефиницията стъпка по стъпка."
+     },
+     {
+      "questionKey": "LA1-G2",
+      "support": "PARTIAL",
+      "coaching": "Опитай сам(а); подсказките са тук, ако трябват."
+     },
+     {
+      "questionKey": "LA1-G3",
+      "support": "NONE",
+      "coaching": "Сега изцяло сам(а)."
+     }
+    ],
+    "check": {
+     "intro": "Кратка проверка без оценка — само за теб.",
+     "questionKeys": [
+      "LA1-C1",
+      "LA1-C2",
+      "LA1-C3",
+      "LA1-C4"
+     ]
+    },
+    "summary": [
+     "Числов израз — само числа, действия и скоби.",
+     "Израз с променливи — има и букви.",
+     "2n означава 2·n."
+    ],
+    "nextStep": {
+     "lessonKey": "A2",
+     "text": "Следва: променливи и константи, цели и дробни изрази."
+    }
+   }
+  },
+  {
+   "lessonKey": "C1",
+   "content": {
+    "context": {
+     "title": "Сметка за парти",
+     "text": "За парти купуваме x пици по 12 лв., y бутилки сок по 3 лв. и торта за 25 лв. Общата сума е 12x + 3y + 25. Това е сбор от едночлени — многочлен."
+    },
+    "objectives": [
+     "След този урок ще можеш да разпознаваш многочлен.",
+     "След този урок ще можеш да посочваш членовете и коефициентите на многочлен.",
+     "След този урок ще можеш да намираш свободния член."
+    ],
+    "prerequisiteCheck": {
+     "intro": "Да проверим какво ще ти трябва.",
+     "questionKeys": [
+      "LC1-P1",
+      "LC1-P2"
+     ]
+    },
+    "explanation": [
+     "Многочлен е сбор от едночлени. Всеки едночлен в сбора се нарича член на многочлена.",
+     "Разликата също е сбор: 3x² − 5x + 1 = 3x² + (−5x) + 1. Затова знакът пред члена е част от него.",
+     "Коефициентът на всеки член е числото пред буквената част, заедно със знака: в 3x² − 5x + 1 коефициентът пред x е −5.",
+     "Членът без променлива се нарича свободен член. В 3x² − 5x + 1 той е 1.",
+     "Ако в израза делим на израз с променлива, например 1/x, това не е многочлен."
+    ],
+    "definition": {
+     "title": "Многочлен",
+     "text": "Многочлен е сбор от едночлени. Едночлените се наричат членове на многочлена. Многочлен с два члена е двучлен, а с три — тричлен. Членът, който не съдържа променлива, е свободен член."
+    },
+    "visual": {
+     "kind": "tiles",
+     "title": "Членовете на 3x² − 5x + 1",
+     "description": "Многочленът 3x² − 5x + 1 е разделен на три плочки: 3x² с коефициент 3, −5x с коефициент −5 и свободният член 1.",
+     "groups": [
+      {
+       "label": "3x²",
+       "items": [
+        "коефициент 3"
+       ],
+       "colour": "purple"
+      },
+      {
+       "label": "−5x",
+       "items": [
+        "коефициент −5"
+       ],
+       "colour": "blue"
+      },
+      {
+       "label": "1",
+       "items": [
+        "свободен член"
+       ],
+       "colour": "coral"
+      }
+     ]
+    },
+    "workedExamples": [
+     {
+      "level": "BASIC",
+      "problem": "4x² − 7x + 2",
+      "steps": [
+       {
+        "expression": "4x² + (−7x) + 2",
+        "why": "Записваме разликата като сбор — знакът остава с члена."
+       }
+      ],
+      "answer": "3 члена: 4x², −7x и 2"
+     },
+     {
+      "level": "TYPICAL",
+      "problem": "−x³ + 5x − 9",
+      "steps": [
+       {
+        "expression": "(−1)·x³ + 5x + (−9)",
+        "why": "Пред x³ няма число, но има минус — коефициентът е −1. Свободният член е −9."
+       }
+      ],
+      "answer": "коефициенти −1 и 5, свободен член −9"
+     },
+     {
+      "level": "CHALLENGE",
+      "problem": "2a²b − ab + 3 − a²b",
+      "steps": [
+       {
+        "expression": "(2a²b − a²b) − ab + 3",
+        "why": "Първо групираме подобните членове 2a²b и −a²b."
+       },
+       {
+        "expression": "a²b − ab + 3",
+        "why": "Привеждаме: 2 − 1 = 1. Остават три члена."
+       }
+      ],
+      "answer": "тричлен: a²b, −ab и 3"
+     }
+    ],
+    "watchOut": [
+     {
+      "wrong": "В 3x² − 5x коефициентът пред x е 5",
+      "right": "Коефициентът е −5",
+      "why": "Знакът пред члена е част от коефициента."
+     },
+     {
+      "wrong": "x + 1/x е многочлен",
+      "right": "x + 1/x не е многочлен",
+      "why": "1/x е деление на променлива."
+     },
+     {
+      "wrong": "В x² + 4 коефициентът пред x² е 0",
+      "right": "Коефициентът е 1",
+      "why": "Когато няма число пред буквите, коефициентът е 1."
+     }
+    ],
+    "guidedPractice": [
+     {
+      "questionKey": "LC1-G1",
+      "support": "FULL",
+      "coaching": "Следвай правилото от дефиницията стъпка по стъпка."
+     },
+     {
+      "questionKey": "LC1-G2",
+      "support": "PARTIAL",
+      "coaching": "Опитай сам(а); подсказките са тук, ако трябват."
+     },
+     {
+      "questionKey": "LC1-G3",
+      "support": "NONE",
+      "coaching": "Сега изцяло сам(а)."
+     }
+    ],
+    "check": {
+     "intro": "Кратка проверка без оценка — само за теб.",
+     "questionKeys": [
+      "LC1-C1",
+      "LC1-C2",
+      "LC1-C3",
+      "LC1-C4",
+      "LC1-C5"
+     ]
+    },
+    "summary": [
+     "Многочленът е сбор от едночлени.",
+     "Знакът пред члена е част от коефициента.",
+     "Членът без променлива е свободният член."
+    ],
+    "nextStep": {
+     "lessonKey": "C2",
+     "text": "Следва: нормален вид и степен на многочлен."
+    }
+   }
+  },
+  {
+   "lessonKey": "C9",
+   "content": {
+    "context": {
+     "title": "Кубчета",
+     "text": "Голям куб със страна a и малък куб със страна b имат общ обем a³ + b³. Оказва се, че този сбор винаги може да се запише като произведение: (a + b)(a² − ab + b²)."
+    },
+    "objectives": [
+     "След този урок ще можеш да прилагаш формулите за сбор и разлика на кубове.",
+     "След този урок ще можеш да разпознаваш непълния квадрат.",
+     "След този урок ще можеш да разлагаш сбор и разлика на кубове."
+    ],
+    "prerequisiteCheck": {
+     "intro": "Да проверим какво ще ти трябва.",
+     "questionKeys": [
+      "LC9-P1",
+      "LC9-P2"
+     ]
+    },
+    "explanation": [
+     "Сбор на кубове: a³ + b³ = (a + b)(a² − ab + b²).",
+     "Разлика на кубове: a³ − b³ = (a − b)(a² + ab + b²).",
+     "Вторият множител прилича на квадрат на двучлен, но средният член е ab, а не 2ab. Наричаме го непълен квадрат.",
+     "Знаците: в първата скоба знакът е същият като в a³ ± b³, а средният член във втората скоба е с обратния знак.",
+     "Не бъркай: a³ + b³ не е равно на (a + b)³."
+    ],
+    "definition": {
+     "title": "Сбор и разлика на кубове",
+     "text": "За всички a и b: a³ + b³ = (a + b)(a² − ab + b²) и a³ − b³ = (a − b)(a² + ab + b²). Изразите a² − ab + b² и a² + ab + b² се наричат непълни квадрати."
+    },
+    "visual": {
+     "kind": "tiles",
+     "title": "Знаците във формулите",
+     "description": "Горе: a³ + b³ = (a + b)(a² − ab + b²) — същият знак в първата скоба, обратен пред ab. Долу: a³ − b³ = (a − b)(a² + ab + b²).",
+     "groups": [
+      {
+       "label": "a³ + b³",
+       "items": [
+        "(a + b)",
+        "(a² − ab + b²)"
+       ],
+       "colour": "blue"
+      },
+      {
+       "label": "a³ − b³",
+       "items": [
+        "(a − b)",
+        "(a² + ab + b²)"
+       ],
+       "colour": "coral"
+      }
+     ]
+    },
+    "workedExamples": [
+     {
+      "level": "BASIC",
+      "problem": "(x + 2)(x² − 2x + 4)",
+      "steps": [
+       {
+        "expression": "x³ − 2x² + 4x + 2x² − 4x + 8",
+        "why": "Умножаваме всеки член по всеки."
+       },
+       {
+        "expression": "x³ + 8",
+        "why": "Средните членове се унищожават."
+       }
+      ],
+      "answer": "x³ + 8"
+     },
+     {
+      "level": "TYPICAL",
+      "problem": "x³ − 27",
+      "steps": [
+       {
+        "expression": "x³ − 3³",
+        "why": "27 = 3³."
+       },
+       {
+        "expression": "(x − 3)(x² + 3x + 9)",
+        "why": "Формулата за разлика на кубове с a = x и b = 3."
+       }
+      ],
+      "answer": "(x − 3)(x² + 3x + 9)"
+     },
+     {
+      "level": "CHALLENGE",
+      "problem": "8a³ + 1",
+      "steps": [
+       {
+        "expression": "(2a)³ + 1³",
+        "why": "8a³ = (2a)³ и 1 = 1³."
+       },
+       {
+        "expression": "(2a + 1)((2a)² − 2a·1 + 1²)",
+        "why": "Сбор на кубове: на мястото на a стои 2a, а на мястото на b — 1."
+       },
+       {
+        "expression": "(2a + 1)(4a² − 2a + 1)",
+        "why": "Пресмятаме степените и произведението."
+       }
+      ],
+      "answer": "(2a + 1)(4a² − 2a + 1)"
+     }
+    ],
+    "watchOut": [
+     {
+      "wrong": "x³ + 8 = (x + 2)³",
+      "right": "x³ + 8 = (x + 2)(x² − 2x + 4)",
+      "why": "(x + 2)³ има още членове: 6x² + 12x."
+     },
+     {
+      "wrong": "a³ − b³ = (a − b)(a² + 2ab + b²)",
+      "right": "a³ − b³ = (a − b)(a² + ab + b²)",
+      "why": "В непълния квадрат средният член е ab, а не 2ab."
+     },
+     {
+      "wrong": "x³ − 1 = (x − 1)(x² − x + 1)",
+      "right": "x³ − 1 = (x − 1)(x² + x + 1)",
+      "why": "При разлика на кубове средният член е с плюс."
+     }
+    ],
+    "guidedPractice": [
+     {
+      "questionKey": "LC9-G1",
+      "support": "FULL",
+      "coaching": "Следвай правилото от дефиницията стъпка по стъпка."
+     },
+     {
+      "questionKey": "LC9-G2",
+      "support": "PARTIAL",
+      "coaching": "Опитай сам(а); подсказките са тук, ако трябват."
+     },
+     {
+      "questionKey": "LC9-G3",
+      "support": "NONE",
+      "coaching": "Сега изцяло сам(а)."
+     }
+    ],
+    "check": {
+     "intro": "Кратка проверка без оценка — само за теб.",
+     "questionKeys": [
+      "LC9-C1",
+      "LC9-C2",
+      "LC9-C3",
+      "LC9-C4"
+     ]
+    },
+    "summary": [
+     "a³ + b³ = (a + b)(a² − ab + b²).",
+     "a³ − b³ = (a − b)(a² + ab + b²).",
+     "Средният член е ab, с обратния знак."
+    ],
+    "nextStep": {
+     "lessonKey": "C10",
+     "text": "Следва: тъждества."
+    }
+   }
+  },
+  {
+   "lessonKey": "D1",
+   "content": {
+    "context": {
+     "title": "Карта на метрото",
+     "text": "Изминахме три теми: рационални изрази, едночлени и многочлени. Като на карта на метрото — всяка спирка е свързана със следващата. В този урок подреждаме всичко на едно място."
+    },
+    "objectives": [
+     "След този урок ще можеш да свързваш понятията от трите теми.",
+     "След този урок ще можеш да избираш правилната формула.",
+     "След този урок ще можеш да разпознаваш вида на всеки израз."
+    ],
+    "prerequisiteCheck": {
+     "intro": "Да проверим какво ще ти трябва.",
+     "questionKeys": [
+      "LD1-P1",
+      "LD1-P2"
+     ]
+    },
+    "explanation": [
+     "Рационалните изрази са най-широкото понятие: те са цели или дробни.",
+     "Едночленът е най-простият цял израз — произведение на число и степени на променливи.",
+     "Многочленът е сбор от едночлени. Действията с многочлени се свеждат до действия с едночлени.",
+     "Формулите за съкратено умножение са тъждества. Прочетени отдясно наляво, те служат за разлагане.",
+     "Разлагането е обратното на умножението: първо търсим общ множител, после формула."
+    ],
+    "definition": {
+     "title": "Шестте формули",
+     "text": "(a + b)² = a² + 2ab + b²; (a − b)² = a² − 2ab + b²; (a − b)(a + b) = a² − b²; (a ± b)³ = a³ ± 3a²b + 3ab² ± b³; a³ + b³ = (a + b)(a² − ab + b²); a³ − b³ = (a − b)(a² + ab + b²)."
+    },
+    "visual": {
+     "kind": "tiles",
+     "title": "Карта на понятията",
+     "description": "Три спирки: рационални изрази (цели и дробни, числена стойност) → едночлени (нормален вид, степен, действия) → многочлени (действия, формули, разлагане).",
+     "groups": [
+      {
+       "label": "Рационални изрази",
+       "items": [
+        "цели",
+        "дробни",
+        "числена стойност"
+       ],
+       "colour": "purple"
+      },
+      {
+       "label": "Едночлени",
+       "items": [
+        "нормален вид",
+        "степен",
+        "·, : и степенуване"
+       ],
+       "colour": "blue"
+      },
+      {
+       "label": "Многочлени",
+       "items": [
+        "+ и −",
+        "формули",
+        "разлагане"
+       ],
+       "colour": "coral"
+      }
+     ]
+    },
+    "workedExamples": [
+     {
+      "level": "BASIC",
+      "problem": "3x·(−2x²)",
+      "steps": [
+       {
+        "expression": "(3·(−2))·(x·x²)",
+        "why": "Умножаваме коефициентите и степените поотделно."
+       },
+       {
+        "expression": "−6x³",
+        "why": "Едночлен в нормален вид."
+       }
+      ],
+      "answer": "−6x³"
+     },
+     {
+      "level": "TYPICAL",
+      "problem": "(2x − 3)² − 4x²",
+      "steps": [
+       {
+        "expression": "4x² − 12x + 9 − 4x²",
+        "why": "Квадрат на разлика."
+       },
+       {
+        "expression": "−12x + 9",
+        "why": "Привеждаме подобните членове."
+       }
+      ],
+      "answer": "−12x + 9"
+     },
+     {
+      "level": "CHALLENGE",
+      "problem": "x³ − 4x",
+      "steps": [
+       {
+        "expression": "x(x² − 4)",
+        "why": "Първо изнасяме общия множител x."
+       },
+       {
+        "expression": "x(x − 2)(x + 2)",
+        "why": "После прилагаме разлика на квадрати."
+       }
+      ],
+      "answer": "x(x − 2)(x + 2)"
+     }
+    ],
+    "watchOut": [
+     {
+      "wrong": "(a + b)² = a² + b²",
+      "right": "(a + b)² = a² + 2ab + b²",
+      "why": "Удвоеното произведение не се губи."
+     },
+     {
+      "wrong": "При разлагане първо формула, после общ множител",
+      "right": "Първо общ множител, после формула",
+      "why": "Така разлагането е пълно."
+     },
+     {
+      "wrong": "x³ + 8 = (x + 2)³",
+      "right": "x³ + 8 = (x + 2)(x² − 2x + 4)",
+      "why": "Сбор на кубове не е куб на сбор."
+     }
+    ],
+    "guidedPractice": [
+     {
+      "questionKey": "LD1-G1",
+      "support": "FULL",
+      "coaching": "Следвай правилото от дефиницията стъпка по стъпка."
+     },
+     {
+      "questionKey": "LD1-G2",
+      "support": "PARTIAL",
+      "coaching": "Опитай сам(а); подсказките са тук, ако трябват."
+     },
+     {
+      "questionKey": "LD1-G3",
+      "support": "NONE",
+      "coaching": "Сега изцяло сам(а)."
+     }
+    ],
+    "check": {
+     "intro": "Кратка проверка без оценка — само за теб.",
+     "questionKeys": [
+      "LD1-C1",
+      "LD1-C2",
+      "LD1-C3",
+      "LD1-C4",
+      "LD1-C5"
+     ]
+    },
+    "summary": [
+     "Едночлените са вид многочлени, а многочлените — вид цели рационални изрази.",
+     "Формулите работят в двете посоки.",
+     "Разлагане: общ множител, после формула."
+    ],
+    "nextStep": {
+     "lessonKey": "D2",
+     "text": "Следва: типични грешки и как да се проверяваме."
+    }
+   }
+  },
+  {
+   "lessonKey": "D2",
+   "content": {
+    "context": {
+     "title": "Детектив на грешки",
+     "text": "Боби опрости (x + 3)² и получи x² + 9. Проверка с x = 2: (2 + 3)² = 25, а 2² + 9 = 13. Числата не съвпадат — значи има грешка! Една проверка с число отнема 30 секунди."
+    },
+    "objectives": [
+     "След този урок ще можеш да откриваш най-честите грешки.",
+     "След този урок ще можеш да проверяваш отговор чрез заместване с число.",
+     "След този урок ще можеш да проверяваш разлагане чрез обратно умножение."
+    ],
+    "prerequisiteCheck": {
+     "intro": "Да проверим какво ще ти трябва.",
+     "questionKeys": [
+      "LD2-P1",
+      "LD2-P2"
+     ]
+    },
+    "explanation": [
+     "Най-честите грешки са: знак пред скоби, забравено удвоено произведение и събиране на неподобни едночлени.",
+     "Проверка със заместване: избери число (например x = 2) и пресметни началния и крайния израз. Ако резултатите са различни, има грешка.",
+     "Ако резултатите съвпадат при едно число, това е добър знак, но не е доказателство. Провери и с второ число.",
+     "Разлагането проверяваме, като умножим обратно множителите.",
+     "Избягвай 0 и 1 при проверка — те често „скриват“ грешките."
+    ],
+    "definition": {
+     "title": "Проверка чрез заместване",
+     "text": "Два израза са тъждествено равни, ако имат еднаква стойност при всички стойности на променливите. Ако при някоя стойност резултатите са различни, изразите не са равни и преобразуванието е грешно."
+    },
+    "visual": {
+     "kind": "tiles",
+     "title": "Три стъпки на проверката",
+     "description": "Избери число → пресметни началния израз и отговора → сравни. Ако са равни — вероятно е вярно; ако не — търси грешката.",
+     "groups": [
+      {
+       "label": "1. Избери",
+       "items": [
+        "x = 2"
+       ],
+       "colour": "purple"
+      },
+      {
+       "label": "2. Пресметни",
+       "items": [
+        "началния израз",
+        "отговора"
+       ],
+       "colour": "blue"
+      },
+      {
+       "label": "3. Сравни",
+       "items": [
+        "равни ✔",
+        "различни ✘"
+       ],
+       "colour": "coral"
+      }
+     ]
+    },
+    "workedExamples": [
+     {
+      "level": "BASIC",
+      "problem": "(x + 3)² при x = 2",
+      "steps": [
+       {
+        "expression": "(2 + 3)²",
+        "why": "Заместваме в началния израз."
+       },
+       {
+        "expression": "25",
+        "why": "Пресмятаме. Отговорът x² + 9 дава 4 + 9 = 13 ≠ 25, значи е грешен."
+       }
+      ],
+      "answer": "25 ≠ 13, затова x² + 9 е грешно"
+     },
+     {
+      "level": "TYPICAL",
+      "problem": "5 − (2x − 3)",
+      "steps": [
+       {
+        "expression": "5 − 2x + 3",
+        "why": "Минусът пред скобата сменя знака на всеки член в нея."
+       },
+       {
+        "expression": "8 − 2x",
+        "why": "Събираме 5 + 3 = 8."
+       }
+      ],
+      "answer": "8 − 2x"
+     },
+     {
+      "level": "CHALLENGE",
+      "problem": "6x² + 3x",
+      "steps": [
+       {
+        "expression": "3x(2x + 1)",
+        "why": "Изнасяме общия множител 3x."
+       },
+       {
+        "expression": "6x² + 3x",
+        "why": "Проверка: умножаваме обратно 3x·2x + 3x·1 и получаваме началния израз."
+       }
+      ],
+      "answer": "3x(2x + 1)"
+     }
+    ],
+    "watchOut": [
+     {
+      "wrong": "5 − (2x − 3) = 5 − 2x − 3",
+      "right": "5 − (2x − 3) = 5 − 2x + 3",
+      "why": "Минусът сменя знака и на −3."
+     },
+     {
+      "wrong": "2x + 3x² = 5x³",
+      "right": "2x + 3x² не се опростява",
+      "why": "Неподобни едночлени не се събират."
+     },
+     {
+      "wrong": "Проверка само с x = 0",
+      "right": "Проверка с x = 2 или x = 3",
+      "why": "При 0 много членове изчезват и грешката не се вижда."
+     }
+    ],
+    "guidedPractice": [
+     {
+      "questionKey": "LD2-G1",
+      "support": "FULL",
+      "coaching": "Следвай правилото от дефиницията стъпка по стъпка."
+     },
+     {
+      "questionKey": "LD2-G2",
+      "support": "PARTIAL",
+      "coaching": "Опитай сам(а); подсказките са тук, ако трябват."
+     },
+     {
+      "questionKey": "LD2-G3",
+      "support": "NONE",
+      "coaching": "Сега изцяло сам(а)."
+     }
+    ],
+    "check": {
+     "intro": "Кратка проверка без оценка — само за теб.",
+     "questionKeys": [
+      "LD2-C1",
+      "LD2-C2",
+      "LD2-C3",
+      "LD2-C4",
+      "LD2-C5"
+     ]
+    },
+    "summary": [
+     "Провери с число — бързо и сигурно.",
+     "Разлагането провери с умножение.",
+     "Внимавай за знака пред скоби и за удвоеното произведение."
+    ],
+    "nextStep": {
+     "lessonKey": "D3",
+     "text": "Следва: смесена практика."
+    }
+   }
+  },
+  {
+   "lessonKey": "D3",
+   "content": {
+    "context": {
+     "title": "Тренировка",
+     "text": "Спортистите не тренират само едно упражнение — те смесват различни. Така и мозъкът се учи по-добре: в този урок задачите са разбъркани от трите теми и първо трябва да познаеш какъв тип е всяка."
+    },
+    "objectives": [
+     "След този урок ще можеш да разпознаваш типа на задачата.",
+     "След този урок ще можеш да избираш подходящ метод.",
+     "След този урок ще можеш да решаваш смесени задачи от трите теми."
+    ],
+    "prerequisiteCheck": {
+     "intro": "Да проверим какво ще ти трябва.",
+     "questionKeys": [
+      "LD3-P1",
+      "LD3-P2"
+     ]
+    },
+    "explanation": [
+     "Преди да решаваш, попитай се: какво се иска — стойност, опростяване или разлагане?",
+     "За стойност: първо опрости, после замести.",
+     "За опростяване: разкрий скобите (с формули, ако може) и приведи подобните.",
+     "За разлагане: първо общ множител, после формула."
+    ],
+    "definition": {
+     "title": "План за решаване",
+     "text": "1) Прочети и определи какво се иска. 2) Избери метод. 3) Реши стъпка по стъпка. 4) Провери със заместване или с обратно умножение."
+    },
+    "visual": {
+     "kind": "tiles",
+     "title": "Какво се иска?",
+     "description": "Три пътя: стойност → опрости и замести; опростяване → скоби и подобни; разлагане → общ множител и формули.",
+     "groups": [
+      {
+       "label": "Стойност",
+       "items": [
+        "опрости",
+        "замести"
+       ],
+       "colour": "purple"
+      },
+      {
+       "label": "Опростяване",
+       "items": [
+        "скоби",
+        "подобни"
+       ],
+       "colour": "blue"
+      },
+      {
+       "label": "Разлагане",
+       "items": [
+        "общ множител",
+        "формула"
+       ],
+       "colour": "coral"
+      }
+     ]
+    },
+    "workedExamples": [
+     {
+      "level": "BASIC",
+      "problem": "2a·3a² − a³",
+      "steps": [
+       {
+        "expression": "6a³ − a³",
+        "why": "Умножаваме едночлените: 2·3 = 6 и a·a² = a³."
+       },
+       {
+        "expression": "5a³",
+        "why": "Привеждаме подобните."
+       }
+      ],
+      "answer": "5a³"
+     },
+     {
+      "level": "TYPICAL",
+      "problem": "(x + 1)(x − 1) − x(x − 2) при x = 5",
+      "steps": [
+       {
+        "expression": "x² − 1 − x² + 2x",
+        "why": "Разлика на квадрати и разкриване на скоби."
+       },
+       {
+        "expression": "2x − 1",
+        "why": "Привеждаме подобните."
+       },
+       {
+        "expression": "2·5 − 1",
+        "why": "Заместваме x = 5."
+       },
+       {
+        "expression": "9",
+        "why": "Пресмятаме."
+       }
+      ],
+      "answer": "9"
+     },
+     {
+      "level": "CHALLENGE",
+      "problem": "a²b − b³",
+      "steps": [
+       {
+        "expression": "b(a² − b²)",
+        "why": "Изнасяме общия множител b."
+       },
+       {
+        "expression": "b(a − b)(a + b)",
+        "why": "Разлика на квадрати."
+       }
+      ],
+      "answer": "b(a − b)(a + b)"
+     }
+    ],
+    "watchOut": [
+     {
+      "wrong": "Заместваме веднага в дългия израз",
+      "right": "Първо опростяваме, после заместваме",
+      "why": "По-малко сметки — по-малко грешки."
+     },
+     {
+      "wrong": "x² − 9 = (x − 3)²",
+      "right": "x² − 9 = (x − 3)(x + 3)",
+      "why": "(x − 3)² = x² − 6x + 9."
+     },
+     {
+      "wrong": "2a·3a² = 6a²",
+      "right": "2a·3a² = 6a³",
+      "why": "Показателите се събират: 1 + 2 = 3."
+     }
+    ],
+    "guidedPractice": [
+     {
+      "questionKey": "LD3-G1",
+      "support": "FULL",
+      "coaching": "Следвай правилото от дефиницията стъпка по стъпка."
+     },
+     {
+      "questionKey": "LD3-G2",
+      "support": "PARTIAL",
+      "coaching": "Опитай сам(а); подсказките са тук, ако трябват."
+     },
+     {
+      "questionKey": "LD3-G3",
+      "support": "NONE",
+      "coaching": "Сега изцяло сам(а)."
+     }
+    ],
+    "check": {
+     "intro": "Кратка проверка без оценка — само за теб.",
+     "questionKeys": [
+      "LD3-C1",
+      "LD3-C2",
+      "LD3-C3",
+      "LD3-C4",
+      "LD3-C5"
+     ]
+    },
+    "summary": [
+     "Определи какво се иска.",
+     "Избери метода.",
+     "Провери отговора."
+    ],
+    "nextStep": {
+     "lessonKey": null,
+     "text": "Браво! Мина всички уроци. Решавай тестовете от програмата и преговаряй грешките си."
     }
    }
   }

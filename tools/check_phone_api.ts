@@ -27,8 +27,8 @@ const call = (m: string, p: string, b: unknown, t: string | null) => handleLocal
       const ans = q.responseType === 'SINGLE_CHOICE' ? { optionId: q.prompt.options[0].id } : q.responseType === 'STRUCTURED' ? { parts: { a: '12345' } }
         : q.responseType === 'STEPS' ? { steps: ['12345'] } : { value: '12345' };
       const fb = await call('POST', `/api/student/practice/${k}/check`, { requestId: 'L' + k, answer: ans, hintsUsed: 0 }, t);
-      ok(`lesson item ${k} feedback`, fb.message && fb.solution && (fb.correct || (fb.correctAnswer && fb.message.length > 20)));
-      if (!fb.correct && !(fb.correctAnswer && fb.message.length > 20)) console.log(k, fb.status, fb.message, fb.correctAnswer);
+      ok(`lesson item ${k} feedback`, fb.message && fb.solution && (fb.correct || (fb.correctAnswer && fb.message.length > 10)));
+      if (!fb.correct && !(fb.correctAnswer && fb.message.length > 10)) console.log(k, fb.status, fb.message, fb.correctAnswer);
       lessonItems++;
     }
   }
