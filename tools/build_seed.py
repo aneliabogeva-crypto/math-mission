@@ -334,6 +334,16 @@ lq, ll = lessons_mod.build(all_prompts)
 import topic_ops
 oq, ot = topic_ops.build(all_prompts | {x["draft"]["prompt"]["text"] for x in lq})
 tests += ot
+# Tests are grouped by topic ("Тема · Име") — no day-by-day programme.
+TOPIC_TITLES = {
+  "D1-A": "Рационални изрази · Тест 1", "D3-A": "Рационални изрази · Тест 2", "D4-A": "Рационални изрази · Тест 3",
+  "BT1": "Едночлени · Тест 1", "D2-B": "Едночлени · Тест 2", "D4-B": "Едночлени · Тест 3", "D5-B": "Едночлени · Тест 4",
+  "D2-C": "Многочлени · Тест 1", "D3-C": "Многочлени · Тест 2", "D5-C": "Многочлени · Тест 3",
+  "D6-M": "Обобщителни тестове · Смесен тест 1 (трите теми)", "D7-M": "Обобщителни тестове · Смесен тест 2 (трите теми)",
+}
+for t_ in tests:
+    t_["title"] = TOPIC_TITLES.get(t_["testKey"], t_["title"])
+    assert not t_["title"].startswith("Ден"), t_["testKey"]
 out = {"questions": lesson_questions + T + gen_q + lq + oq, "lessons": [lesson] + ll, "tests": tests, "blueprints": blueprints}
 with open(os.path.join(os.path.dirname(__file__), "generated-checks.json"), "w", encoding="utf-8") as f:
     json.dump(gen_tests.SIDE, f, ensure_ascii=False)

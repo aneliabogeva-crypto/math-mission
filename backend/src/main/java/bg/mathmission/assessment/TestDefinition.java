@@ -116,4 +116,9 @@ public class TestDefinition {
     public UUID getCreatedBy() { return createdBy; }
     public String getAcademicYear() { return academicYear; }
     public Instant getCreatedAt() { return createdAt; }
+
+    /** Seed content may rename a test (e.g. regrouping by topic); attempts and results are unaffected. */
+    public void setTitle(String title) {
+        this.title = title;
+    }
 }

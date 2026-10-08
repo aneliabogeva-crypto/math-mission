@@ -4,69 +4,88 @@ import { api, ApiError, uuid, type AttemptView, type TestSummary } from '../api'
 import { ErrorNote, Loading } from '../components/Layout';
 import { useApi } from '../session';
 
-/** Lessons to revise before a topic group of tests. */
+/** Topic groups in study order; test titles are "Тема · Име". */
+const GROUP_ORDER = ['Рационални изрази', 'Едночлени', 'Многочлени', 'Действия с многочлени', 'Обобщителни тестове', 'Подготовка за контролно'];
 const GROUP_LESSONS: Record<string, { key: string; title: string }[]> = {
+  'Рационални изрази': [{ key: 'A2', title: 'Цели и дробни изрази' }, { key: 'A3', title: 'Числена стойност' }],
+  'Едночлени': [{ key: 'B3', title: 'Подобни едночлени' }, { key: 'B4', title: 'Умножение' }, { key: 'B5', title: 'Степенуване' }],
+  'Многочлени': [{ key: 'C6', title: 'Квадрат на двучлен' }, { key: 'C7', title: 'Разлика на квадрати' }, { key: 'C11', title: 'Общ множител' }],
   'Действия с многочлени': [{ key: 'C3', title: 'Събиране и изваждане' }, { key: 'C4', title: 'Многочлен по едночлен' }, { key: 'C5', title: 'Многочлен по многочлен' }],
+  'Обобщителни тестове': [{ key: 'D1', title: 'Карта на формулите' }, { key: 'D2', title: 'Типични грешки' }],
 };
 const GROUP_NOTE: Record<string, string> = {
   'Действия с многочлени': 'Тренировки по всяко действие поотделно — с подсказки.',
-  'Подготовка за контролно': 'Като истинско контролно: 20 задачи от трите действия, 40 минути, без подсказки. Реши поне два варианта.',
+  'Обобщителни тестове': 'Смесени задачи от трите теми, без подсказки.',
+  'Подготовка за контролно': 'Като истинско контролно: 20 задачи, 40 минути, без подсказки. Реши поне два варианта.',
 };
+const fmtPct = (p: number) => String(p).replace('.', ',');
 
-/** Tests grouped into the 7-day programme ("Ден N · …" titles) and topic groups ("Тема · …"). */
+/** Tests grouped by topic; each group and each test shows what has already been solved. */
 export function TestsPage() {
   const { data, error, loading, reload } = useApi<TestSummary[]>('/api/student/tests');
+  const [open, setOpen] = useState<Record<string, boolean>>({});
   if (loading && !data) return <Loading />;
   if (!data) return <ErrorNote error={error} onRetry={reload} />;
-  const days = new Map<number, TestSummary[]>();
   const groups = new Map<string, TestSummary[]>();
-  const other: TestSummary[] = [];
   for (const t of data) {
-    const m = /^Ден (\d+) · /.exec(t.title);
-    const g = /^([^·]+) · /.exec(t.title);
-    if (m) days.set(Number(m[1]), [...(days.get(Number(m[1])) ?? []), t]);
-    else if (g) groups.set(g[1].trim(), [...(groups.get(g[1].trim()) ?? []), t]);
-    else other.push(t);
+    const g = /^([^·]+) · /.exec(t.title)?.[1].trim() ?? 'Още тестове';
+    groups.set(g, [...(groups.get(g) ?? []), t]);
   }
+  const order = [...groups.keys()].sort((a, b) => (GROUP_ORDER.indexOf(a) + 1 || 99) - (GROUP_ORDER.indexOf(b) + 1 || 99));
   const done = data.filter((t) => t.completedAttempts > 0).length;
-  const card = (t: TestSummary) => (
-    <div key={t.id} className="card" style={{ marginBottom: 8 }}>
-      <div className="row" style={{ justifyContent: 'space-between' }}>
-        <span className="chip info">{t.kindLabel}</span>
-        {t.completedAttempts > 0 && <span className="chip ok">✓ Решен{t.bestPercent != null ? ` · ${String(t.bestPercent).replace('.', ',')}%` : ''}</span>}
+  const card = (t: TestSummary) => {
+    const solved = t.completedAttempts > 0;
+    return (
+      <div key={t.id} className="card" style={{ marginBottom: 8, borderLeft: `6px solid ${solved ? 'var(--mastered)' : 'var(--border)'}` }}>
+        <div className="row" style={{ justifyContent: 'space-between', flexWrap: 'wrap', gap: 6 }}>
+          <span className="chip info">{t.kindLabel}</span>
+          {solved
+            ? <span className="chip ok">✓ Решен{t.completedAttempts > 1 ? ` ${t.completedAttempts} пъти` : ''}{t.bestPercent != null ? ` · най-добър резултат ${fmtPct(t.bestPercent)}%` : ''}</span>
+            : t.inProgressAttemptId ? <span className="chip warn">Започнат</span> : <span className="chip">Нерешен</span>}
+        </div>
+        <h3 style={{ marginTop: '.5rem' }}>{t.title.replace(/^[^·]+ · /, '')}</h3>
+        <p className="small muted">{t.questionCount} въпроса · {t.timeLimitMin} минути{t.hintPolicy === 'ALLOWED' ? ' · с подсказки' : ''}</p>
+        <Link className={`btn ${solved ? 'secondary' : ''}`} to={`/tests/${t.id}`}>
+          {t.inProgressAttemptId ? 'Продължи' : solved ? 'Реши отново' : 'Започни'}
+        </Link>
       </div>
-      <h3 style={{ marginTop: '.5rem' }}>{t.title.replace(/^[^·]+ · /, '')}</h3>
-      <p className="small muted">{t.questionCount} въпроса · {t.timeLimitMin} минути{t.hintPolicy === 'ALLOWED' ? ' · с подсказки' : ''}</p>
-      <Link className={`btn ${t.completedAttempts > 0 ? 'secondary' : ''}`} to={`/tests/${t.id}`}>
-        {t.inProgressAttemptId ? 'Продължи' : t.completedAttempts > 0 ? 'Реши отново' : 'Започни'}
-      </Link>
-    </div>
-  );
+    );
+  };
   return (
     <div>
       <h1>Тестове</h1>
-      <p className="muted">Програма за 7 дни, тренировки по теми и подготовка за контролно. Решени: {done} от {data.length}.</p>
+      <p className="muted">Тестовете са подредени по теми. Решени: {done} от {data.length}.</p>
       <div className="progress" aria-hidden="true" style={{ marginBottom: '1rem' }}><span style={{ width: `${data.length ? (done / data.length) * 100 : 0}%` }} /></div>
-      {[...days.entries()].sort((a, b) => a[0] - b[0]).map(([day, list]) => (
-        <section key={day} aria-labelledby={`day-${day}`} style={{ marginBottom: '1rem' }}>
-          <h2 id={`day-${day}`}>Ден {day} {list.every((t) => t.completedAttempts > 0) && <span className="chip ok">✓ изпълнен</span>}</h2>
-          {list.map(card)}
-        </section>
-      ))}
-      {[...groups.entries()].map(([name, list]) => (
-        <section key={name} style={{ marginBottom: '1rem' }}>
-          <h2>{name} {list.every((t) => t.completedAttempts > 0) && <span className="chip ok">✓ изпълнено</span>}</h2>
-          {GROUP_NOTE[name] && <p className="small muted">{GROUP_NOTE[name]}</p>}
-          {GROUP_LESSONS[name] && (
-            <div className="row" style={{ flexWrap: 'wrap', gap: 6, marginBottom: 8 }}>
-              <span className="small muted">Преговори уроците:</span>
-              {GROUP_LESSONS[name].map((l) => <Link key={l.key} className="btn secondary" to={`/lesson/${l.key}`}>{l.key} · {l.title}</Link>)}
-            </div>
-          )}
-          {list.map(card)}
-        </section>
-      ))}
-      {other.length > 0 && <section><h2>Още тестове</h2>{other.map(card)}</section>}
+      {order.map((name) => {
+        const list = groups.get(name)!;
+        const solved = list.filter((t) => t.completedAttempts > 0).length;
+        const allDone = solved === list.length;
+        const isOpen = open[name] ?? !allDone;
+        return (
+          <section key={name} style={{ marginBottom: '1rem' }}>
+            <button type="button" className="card" aria-expanded={isOpen} onClick={() => setOpen({ ...open, [name]: !isOpen })}
+              style={{ width: '100%', textAlign: 'left', cursor: 'pointer', marginBottom: 8, color: 'var(--text)', font: 'inherit' }}>
+              <div className="row" style={{ justifyContent: 'space-between', flexWrap: 'wrap', gap: 6 }}>
+                <h2 style={{ margin: 0 }}>{isOpen ? '▾' : '▸'} {name}</h2>
+                <span className={`chip ${allDone ? 'ok' : ''}`}>{allDone ? '✓ ' : ''}Решени {solved} от {list.length}</span>
+              </div>
+              <div className="progress" aria-hidden="true" style={{ marginTop: 8 }}><span style={{ width: `${(solved / list.length) * 100}%` }} /></div>
+            </button>
+            {isOpen && (
+              <>
+                {GROUP_NOTE[name] && <p className="small muted">{GROUP_NOTE[name]}</p>}
+                {GROUP_LESSONS[name] && (
+                  <div className="row" style={{ flexWrap: 'wrap', gap: 6, marginBottom: 8 }}>
+                    <span className="small muted">Преговори уроците:</span>
+                    {GROUP_LESSONS[name].map((l) => <Link key={l.key} className="btn secondary" to={`/lesson/${l.key}`}>{l.key} · {l.title}</Link>)}
+                  </div>
+                )}
+                {list.map(card)}
+              </>
+            )}
+          </section>
+        );
+      })}
       {data.length === 0 && <p>Все още няма публикувани тестове.</p>}
     </div>
   );

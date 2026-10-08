@@ -146,7 +146,11 @@ public class DataSeeder implements ApplicationRunner {
             added[1]++;
         }
         for (SeedTest st : seed.tests()) {
-            if (tests.findByTestKey(st.testKey()).isPresent()) continue;
+            var existing = tests.findByTestKey(st.testKey());
+            if (existing.isPresent()) {
+                if (!st.title().equals(existing.get().getTitle())) existing.get().setTitle(st.title());
+                continue;
+            }
             List<UUID> ids = st.questionKeys().stream()
                     .map(k -> questions.findByQuestionKeyAndStatus(k, ContentStatus.PUBLISHED).orElseThrow().getId()).toList();
             TestDefinition t = tests.save(new TestDefinition(st.testKey(), st.title(), st.kind(), st.path(),
