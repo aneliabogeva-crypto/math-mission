@@ -151,6 +151,7 @@ jobs:
         working-directory: frontend
         env:
           VITE_STANDALONE: '1'
+          VITE_APP_VERSION: ${{ github.sha }}
         run: |
           npm install --no-audit --no-fund
           npm install --no-save @capacitor/core@7 @capacitor/cli@7 @capacitor/android@7

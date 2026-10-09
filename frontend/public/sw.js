@@ -1,10 +1,11 @@
 /* Math Mission service worker.
- * - App shell: cache-first, refreshed in the background.
+ * - Pages (navigation): network-first, so a new version is shown as soon as it is published;
+ *   the cached copy is used only offline. Hashed assets: cache-first (their names change per build).
  * - Lesson and practice-question GETs: network-first with cache fallback, so the currently opened
  *   lesson and its practice items keep working when the connection drops (US-STU-12).
  * - Writes (answers) are never handled here: the app keeps an idempotent outbox and resends them.
  */
-const SHELL = 'mm-shell-v3';
+const SHELL = 'mm-shell-v4';
 const DATA = 'mm-data-v1';
 // Relative to the service worker's own location, so it works at / and under a sub-path.
 const SHELL_URLS = ['./', './index.html', './manifest.webmanifest', './icon.svg', './icon-192.png', './icon-512.png'];
@@ -45,18 +46,25 @@ self.addEventListener('fetch', (e) => {
     return;
   }
 
-  // Navigation and static assets: cache-first for the shell, falling back to index.html for SPA routes.
-  e.respondWith(
-    caches.match(req).then((hit) => {
-      const network = fetch(req).then((res) => {
-        if (res.ok && (req.mode === 'navigate' || url.pathname.includes('/assets/'))) {
-          const copy = res.clone();
-          caches.open(SHELL).then((c) => c.put(req.mode === 'navigate' ? INDEX : req, copy));
-        }
+  if (url.pathname.endsWith('/version.json')) return; // always from the network
+
+  // Navigation: network-first, falling back to the cached index.html offline (SPA routes).
+  if (req.mode === 'navigate') {
+    e.respondWith(
+      fetch(req).then((res) => {
+        if (res.ok) { const copy = res.clone(); caches.open(SHELL).then((c) => c.put(INDEX, copy)); }
         return res;
-      }).catch(() => (req.mode === 'navigate' ? caches.match(INDEX) : undefined));
-      return hit || network;
-    }),
+      }).catch(() => caches.match(INDEX)),
+    );
+    return;
+  }
+
+  // Static assets: cache-first (file names are content-hashed), stored on first use.
+  e.respondWith(
+    caches.match(req).then((hit) => hit || fetch(req).then((res) => {
+      if (res.ok && url.pathname.includes('/assets/')) { const copy = res.clone(); caches.open(SHELL).then((c) => c.put(req, copy)); }
+      return res;
+    })),
   );
 });
 

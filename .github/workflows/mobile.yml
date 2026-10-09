@@ -28,10 +28,12 @@ jobs:
         env:
           VITE_STANDALONE: '1'
           VITE_BASE: /math-mission/
+          VITE_APP_VERSION: ${{ github.sha }}
         run: |
           npm install --no-audit --no-fund
           npm run build
           cp dist/index.html dist/404.html   # client-side routes on GitHub Pages
+          echo "{\"version\":\"$GITHUB_SHA\"}" > dist/version.json   # lets installed copies detect a new version
       - name: Publish to GitHub Pages (gh-pages branch)
         uses: peaceiris/actions-gh-pages@v4
         with:

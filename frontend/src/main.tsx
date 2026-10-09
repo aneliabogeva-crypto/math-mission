@@ -15,7 +15,16 @@ startSync();
 
 const isNativeApp = Boolean((window as Window & { Capacitor?: unknown }).Capacitor);
 if ('serviceWorker' in navigator && import.meta.env.PROD && !isNativeApp) {
-  window.addEventListener('load', () => { void navigator.serviceWorker.register(`${import.meta.env.BASE_URL}sw.js`); });
+  // A new service worker takes over immediately (skipWaiting); reload once so the new version is shown.
+  const hadController = Boolean(navigator.serviceWorker.controller);
+  let reloaded = false;
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    if (hadController && !reloaded) { reloaded = true; window.location.reload(); }
+  });
+  window.addEventListener('load', () => {
+    void navigator.serviceWorker.register(`${import.meta.env.BASE_URL}sw.js`, { updateViaCache: 'none' })
+      .then((reg) => { document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') void reg.update(); }); });
+  });
 }
 
 createRoot(document.getElementById('root')!).render(

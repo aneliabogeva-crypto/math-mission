@@ -2,6 +2,7 @@ import { useEffect, useState, type ReactNode } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { subscribe } from '../offline';
 import { InstallButton } from './InstallButton';
+import { UpdateBanner } from './UpdateBanner';
 import { useSession } from '../session';
 
 const STUDENT_NAV = [
@@ -60,6 +61,7 @@ export function Layout({ children }: { children: ReactNode }) {
         <ThemeToggle />
         {me && <button type="button" className="btn ghost" onClick={() => void signOut()}>Изход</button>}
       </header>
+      <UpdateBanner />
       {!online && (
         <div className="banner offline" role="status">
           <span aria-hidden="true">⚡</span> Няма връзка. Можеш да продължиш — отговорите се пазят на устройството и ще се изпратят автоматично.
