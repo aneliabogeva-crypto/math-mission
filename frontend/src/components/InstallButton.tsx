@@ -28,15 +28,15 @@ export function InstallButton() {
 
   if (evt) {
     return (
-      <button type="button" className="btn ghost" onClick={async () => { await evt.prompt(); await evt.userChoice; setEvt(null); }}>
-        ⤓ Инсталирай
+      <button type="button" className="btn ghost install" aria-label="Инсталирай приложението" onClick={async () => { await evt.prompt(); await evt.userChoice; setEvt(null); }}>
+        <span aria-hidden="true">⤓</span><span className="label">Инсталирай</span>
       </button>
     );
   }
   if (isIos) {
     return (
       <>
-        <button type="button" className="btn ghost" aria-expanded={iosHint} onClick={() => setIosHint((v) => !v)}>⤓ Инсталирай</button>
+        <button type="button" className="btn ghost install" aria-label="Инсталирай приложението" aria-expanded={iosHint} onClick={() => setIosHint((v) => !v)}><span aria-hidden="true">⤓</span><span className="label">Инсталирай</span></button>
         {iosHint && (
           <div className="alert info small" role="status" style={{ position: 'absolute', top: 56, right: 16, left: 16, zIndex: 30 }}>
             Натисни бутона „Сподели“ <span aria-hidden="true">⬆︎</span>, после „Добави към началния екран“.

@@ -23,7 +23,9 @@ function ThemeToggle() {
   }, [theme]);
   const next = theme === 'auto' ? 'dark' : theme === 'dark' ? 'light' : 'auto';
   const label = theme === 'auto' ? 'Тема: автоматична' : theme === 'dark' ? 'Тема: тъмна' : 'Тема: светла';
-  return <button type="button" className="btn ghost" onClick={() => setTheme(next)} aria-label={`${label}. Смени темата.`}>◐</button>;
+  return <button type="button" className="btn ghost theme-toggle" onClick={() => setTheme(next)} aria-label={`${label}. Смени темата.`} title={label}>
+    <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" strokeWidth="2" /><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor" /></svg>
+  </button>;
 }
 
 export function Layout({ children }: { children: ReactNode }) {
@@ -41,10 +43,17 @@ export function Layout({ children }: { children: ReactNode }) {
   };
 
   return (
-    <div className="app">
+    <div className={`app${me?.role === 'STUDENT' && me.status === 'ACTIVE' ? ' has-nav' : ''}`}>
       <a className="skip-link" href="#main">Към съдържанието</a>
       <header className="topbar">
-        <Link className="brand" to="/"><img src={`${import.meta.env.BASE_URL}icon.svg`} alt="" width={28} height={28} /> Math Mission</Link>
+        <Link className="brand" to="/"><img src={`${import.meta.env.BASE_URL}icon.svg`} alt="" width={28} height={28} /> <span className="brand-name">Math Mission</span></Link>
+        {me?.role === 'STUDENT' && me.status === 'ACTIVE' && (
+          <nav className="topnav" aria-label="Основна навигация">
+            {STUDENT_NAV.map((n) => (
+              <NavLink key={n.to} to={n.to} end={n.to === '/'}><span className="icon" aria-hidden="true">{n.icon}</span>{n.label}</NavLink>
+            ))}
+          </nav>
+        )}
         <span className="spacer" />
         {me && me.role !== 'STUDENT' && staffLinks[me.role]?.map((l) => <NavLink key={l.to} className="btn ghost" to={l.to}>{l.label}</NavLink>)}
         <InstallButton />
@@ -61,7 +70,7 @@ export function Layout({ children }: { children: ReactNode }) {
       )}
       <main id="main" tabIndex={-1}>{children}</main>
       {me?.role === 'STUDENT' && me.status === 'ACTIVE' && (
-        <nav className="bottomnav" aria-label="Основна навигация">
+        <nav className="bottomnav" aria-label="Основна навигация (долу)">
           {STUDENT_NAV.map((n) => (
             <NavLink key={n.to} to={n.to} end={n.to === '/'}>
               <span className="icon" aria-hidden="true">{n.icon}</span>{n.label}

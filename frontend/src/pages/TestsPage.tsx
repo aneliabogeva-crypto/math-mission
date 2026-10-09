@@ -80,7 +80,7 @@ export function TestsPage() {
                     {GROUP_LESSONS[name].map((l) => <Link key={l.key} className="btn secondary" to={`/lesson/${l.key}`}>{l.key} · {l.title}</Link>)}
                   </div>
                 )}
-                {list.map(card)}
+                <div className="cards">{list.map(card)}</div>
               </>
             )}
           </section>

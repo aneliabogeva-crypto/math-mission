@@ -103,7 +103,7 @@ export function LessonPlayer() {
                   <thead className="sr-only"><tr><th>Преобразувание</th><th>Защо е вярно</th></tr></thead>
                   <tbody>
                     {ex.steps.map((s, j) => (
-                      <tr key={j}><td className="expr"><MathText>{s.expression}</MathText></td><td className="small">{s.why}</td></tr>
+                      <tr key={j}><td className="expr"><MathText>{s.expression}</MathText></td><td className="small why">{s.why}</td></tr>
                     ))}
                   </tbody>
                 </table>

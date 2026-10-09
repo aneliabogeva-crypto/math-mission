@@ -186,3 +186,69 @@ table.data th, table.data td { padding: .45rem .5rem; border-bottom: 1px solid v
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
+
+/* ------------------------------------------------------------ responsive layout
+   phone (< 600px) · tablet (600–899px) · desktop (≥ 900px: navigation moves to the top bar) */
+h1 { font-size: clamp(1.4rem, 1.1rem + 1.5vw, 2rem); }
+.topbar { min-height: 56px; padding-left: max(16px, env(safe-area-inset-left)); padding-right: max(16px, env(safe-area-inset-right)); }
+.topbar .brand { white-space: nowrap; min-width: 0; }
+.theme-toggle { font-size: 1.3rem; padding: .3rem .6rem; }
+.btn.install .label { margin-left: .25rem; }
+.topnav { display: none; }
+main { padding-left: max(16px, env(safe-area-inset-left)); padding-right: max(16px, env(safe-area-inset-right)); }
+.app:not(.has-nav) main { padding-bottom: 32px; }
+.stop > .btn { flex: none; }
+.cards { display: grid; gap: 0 12px; }
+.option > span:last-child, .stop .title, h1, h2, h3 { overflow-wrap: anywhere; }
+
+@media (max-width: 599px) {
+  .topbar { gap: .25rem; padding-top: .35rem; padding-bottom: .35rem; }
+  .topbar .btn.ghost { padding: .4rem .5rem; }
+  .btn.install .label { display: none; }
+  .card { padding: 14px; }
+  .zone { padding: 12px; }
+  .stop { flex-wrap: wrap; }
+  .stop .body { flex-basis: calc(100% - 56px); }
+  .stop > .btn { margin-left: 52px; }
+  /* worked examples: the step on one line, the reason under it */
+  .steps-table, .steps-table tbody, .steps-table tr, .steps-table td { display: block; width: 100%; }
+  .steps-table tr { border-top: 1px solid var(--border); padding: .4rem 0; }
+  .steps-table td { border: 0; padding: .15rem .25rem; }
+  .steps-table td.expr { overflow-x: auto; }
+  .steps-table td.why { color: var(--muted); }
+  .row > .btn { flex: 1 1 auto; }
+}
+@media (max-width: 359px) {
+  .topbar .brand-name { display: none; }
+  .bottomnav a { font-size: .68rem; }
+  .keyboard { grid-template-columns: repeat(5, 1fr); }
+}
+@media (min-width: 600px) {
+  main { padding-top: 24px; }
+  .bottomnav { left: 50%; right: auto; transform: translateX(-50%); width: min(640px, 100%); border: 1px solid var(--border);
+    border-bottom: 0; border-radius: 16px 16px 0 0; box-shadow: var(--shadow); }
+}
+@media (min-width: 900px) {
+  .topnav { display: flex; gap: 4px; margin-left: 1rem; }
+  .topnav a { display: inline-flex; align-items: center; gap: .4rem; min-height: 44px; padding: .4rem .8rem; border-radius: 10px;
+    color: var(--muted); text-decoration: none; font-weight: 600; }
+  .topnav a:hover { background: var(--surface-2); color: var(--text); }
+  .topnav a[aria-current="page"] { background: var(--info-bg); color: var(--brand); }
+  .bottomnav { display: none; }
+  main { max-width: 1040px; padding-bottom: 48px; }
+  .cards { grid-template-columns: 1fr 1fr; }
+  .stops { grid-template-columns: 1fr 1fr; }
+  .qnav { flex-wrap: wrap; overflow: visible; }
+  .grid.two-lg { grid-template-columns: 1fr 1fr; }
+}
+@media (min-width: 900px) and (max-width: 1099px) {
+  .topnav .icon { display: none; }
+}
+@media (min-width: 1400px) {
+  main { max-width: 1160px; }
+}
+/* landscape phones: keep the bottom bar slim */
+@media (max-height: 480px) and (orientation: landscape) {
+  .bottomnav a { min-height: 44px; flex-direction: row; gap: 6px; }
+  .topbar { position: static; }
+}
