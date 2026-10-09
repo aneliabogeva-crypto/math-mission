@@ -57,7 +57,7 @@ export function AnswerInput({ question, value, onChange, disabled }: {
           <button key={o.id} type="button" role="radio" className="option" aria-checked={value.optionId === o.id}
             disabled={disabled} onClick={() => onChange({ ...value, optionId: o.id })}>
             <span className="letter" aria-hidden="true">{o.id}</span>
-            <MathText>{o.text}</MathText>
+            {/[а-яА-Я]{3,}/.test(o.text) ? <span>{o.text}</span> : <MathText>{o.text}</MathText>}
           </button>
         ))}
       </div>

@@ -5,18 +5,21 @@ import { ErrorNote, Loading } from '../components/Layout';
 import { useApi } from '../session';
 
 /** Topic groups in study order; test titles are "Тема · Име". */
-const GROUP_ORDER = ['Рационални изрази', 'Едночлени', 'Многочлени', 'Действия с многочлени', 'Обобщителни тестове', 'Подготовка за контролно'];
+const GROUP_ORDER = ['Рационални изрази', 'Едночлени', 'Многочлени', 'Действия с многочлени', 'Тъждества и формули', 'Обобщителни тестове', 'Подготовка за контролно'];
 const GROUP_LESSONS: Record<string, { key: string; title: string }[]> = {
   'Рационални изрази': [{ key: 'A2', title: 'Цели и дробни изрази' }, { key: 'A3', title: 'Числена стойност' }],
   'Едночлени': [{ key: 'B3', title: 'Подобни едночлени' }, { key: 'B4', title: 'Умножение' }, { key: 'B5', title: 'Степенуване' }],
   'Многочлени': [{ key: 'C6', title: 'Квадрат на двучлен' }, { key: 'C7', title: 'Разлика на квадрати' }, { key: 'C11', title: 'Общ множител' }],
   'Действия с многочлени': [{ key: 'C3', title: 'Събиране и изваждане' }, { key: 'C4', title: 'Многочлен по едночлен' }, { key: 'C5', title: 'Многочлен по многочлен' }],
+  'Тъждества и формули': [{ key: 'C6', title: 'Квадрат на двучлен' }, { key: 'C7', title: 'Разлика на квадрати' }, { key: 'C8', title: 'Куб на двучлен' },
+    { key: 'C9', title: 'Сбор и разлика на кубове' }, { key: 'C10', title: 'Тъждества' }],
   'Обобщителни тестове': [{ key: 'D1', title: 'Карта на формулите' }, { key: 'D2', title: 'Типични грешки' }],
 };
 const GROUP_NOTE: Record<string, string> = {
   'Действия с многочлени': 'Тренировки по всяко действие поотделно — с подсказки.',
+  'Тъждества и формули': 'Тренировки по всяка формула и по тъждества — с подсказки.',
   'Обобщителни тестове': 'Смесени задачи от трите теми, без подсказки.',
-  'Подготовка за контролно': 'Като истинско контролно: 20 задачи, 40 минути, без подсказки. Реши поне два варианта.',
+  'Подготовка за контролно': 'Като истинско контролно: 20 задачи, 40 минути, без подсказки. За всяка тема реши поне два варианта.',
 };
 const fmtPct = (p: number) => String(p).replace('.', ',');
 
@@ -57,7 +60,7 @@ export function TestsPage() {
       <p className="muted">Тестовете са подредени по теми. Решени: {done} от {data.length}.</p>
       <div className="progress" aria-hidden="true" style={{ marginBottom: '1rem' }}><span style={{ width: `${data.length ? (done / data.length) * 100 : 0}%` }} /></div>
       {order.map((name) => {
-        const list = groups.get(name)!;
+        const list = [...groups.get(name)!].sort((a, b) => (name === 'Подготовка за контролно' ? a.title.localeCompare(b.title, 'bg', { numeric: true }) : 0) || a.key.localeCompare(b.key));
         const solved = list.filter((t) => t.completedAttempts > 0).length;
         const allDone = solved === list.length;
         const isOpen = open[name] ?? !allDone;

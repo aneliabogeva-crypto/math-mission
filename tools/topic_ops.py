@@ -395,6 +395,7 @@ def build(existing_prompts):
                 for attempt in range(60):
                     fn = pool[(i // len(pools) + attempt) % len(pool)]
                     k = f"{key}-{len(items) + 1:02d}"
+                    g.SIDE.pop(k, None)  # a rejected earlier attempt must not leave its expected value behind
                     try:
                         qd = fn(rng, k)
                     except (ValueError, ZeroDivisionError, KeyError):
