@@ -157,6 +157,7 @@ textarea { min-height: 88px; resize: vertical; }
 .stop .num { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; font-weight: 800; color: #fff; background: var(--zone); flex: none; }
 .stop .body { flex: 1; min-width: 0; }
 .stop .title { font-weight: 700; }
+.zone-T { --zone: var(--brand); } .zone h3 { font-size: 1rem; color: var(--muted); margin: .5rem 0; }
 .zone-A { --zone: var(--rational); } .zone-B { --zone: var(--monomial); } .zone-C { --zone: var(--polynomial); } .zone-D { --zone: var(--revision); }
 
 /* ------------------------------------------------------------ helper character */
@@ -252,3 +253,4 @@ main { padding-left: max(16px, env(safe-area-inset-left)); padding-right: max(16
   .bottomnav a { min-height: 44px; flex-direction: row; gap: 6px; }
   .topbar { position: static; }
 }
+.zone h2[id] { scroll-margin-top: 72px; }

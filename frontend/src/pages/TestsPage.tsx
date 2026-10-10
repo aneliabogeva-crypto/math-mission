@@ -3,24 +3,10 @@ import { useState } from 'react';
 import { api, ApiError, uuid, type AttemptView, type TestSummary } from '../api';
 import { ErrorNote, Loading } from '../components/Layout';
 import { useApi } from '../session';
+import { GROUP_LESSONS, GROUP_NOTE } from '../topics';
 
 /** Topic groups in study order; test titles are "Тема · Име". */
 const GROUP_ORDER = ['Рационални изрази', 'Едночлени', 'Многочлени', 'Действия с многочлени', 'Тъждества и формули', 'Обобщителни тестове', 'Подготовка за контролно'];
-const GROUP_LESSONS: Record<string, { key: string; title: string }[]> = {
-  'Рационални изрази': [{ key: 'A2', title: 'Цели и дробни изрази' }, { key: 'A3', title: 'Числена стойност' }],
-  'Едночлени': [{ key: 'B3', title: 'Подобни едночлени' }, { key: 'B4', title: 'Умножение' }, { key: 'B5', title: 'Степенуване' }],
-  'Многочлени': [{ key: 'C6', title: 'Квадрат на двучлен' }, { key: 'C7', title: 'Разлика на квадрати' }, { key: 'C11', title: 'Общ множител' }],
-  'Действия с многочлени': [{ key: 'C3', title: 'Събиране и изваждане' }, { key: 'C4', title: 'Многочлен по едночлен' }, { key: 'C5', title: 'Многочлен по многочлен' }],
-  'Тъждества и формули': [{ key: 'C6', title: 'Квадрат на двучлен' }, { key: 'C7', title: 'Разлика на квадрати' }, { key: 'C8', title: 'Куб на двучлен' },
-    { key: 'C9', title: 'Сбор и разлика на кубове' }, { key: 'C10', title: 'Тъждества' }],
-  'Обобщителни тестове': [{ key: 'D1', title: 'Карта на формулите' }, { key: 'D2', title: 'Типични грешки' }],
-};
-const GROUP_NOTE: Record<string, string> = {
-  'Действия с многочлени': 'Тренировки по всяко действие поотделно — с подсказки.',
-  'Тъждества и формули': 'Тренировки по всяка формула и по тъждества — с подсказки.',
-  'Обобщителни тестове': 'Смесени задачи от трите теми, без подсказки.',
-  'Подготовка за контролно': 'Като истинско контролно: 20 задачи, 40 минути, без подсказки. За всяка тема реши поне два варианта.',
-};
 const fmtPct = (p: number) => String(p).replace('.', ',');
 
 /** Tests grouped by topic; each group and each test shows what has already been solved. */
@@ -34,7 +20,9 @@ export function TestsPage() {
     const g = /^([^·]+) · /.exec(t.title)?.[1].trim() ?? 'Още тестове';
     groups.set(g, [...(groups.get(g) ?? []), t]);
   }
-  const order = [...groups.keys()].sort((a, b) => (GROUP_ORDER.indexOf(a) + 1 || 99) - (GROUP_ORDER.indexOf(b) + 1 || 99));
+  // New topics (not listed yet) go before the summary tests and the class-test preparation.
+  const rank = (g: string) => (GROUP_ORDER.includes(g) ? GROUP_ORDER.indexOf(g) : GROUP_ORDER.indexOf('Обобщителни тестове') - 0.5);
+  const order = [...groups.keys()].sort((a, b) => rank(a) - rank(b));
   const done = data.filter((t) => t.completedAttempts > 0).length;
   const card = (t: TestSummary) => {
     const solved = t.completedAttempts > 0;
