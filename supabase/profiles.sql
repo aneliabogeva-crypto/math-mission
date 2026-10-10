@@ -1,6 +1,6 @@
 -- Math Mission: learner accounts (e-mail + password) in Supabase.
 -- Passwords are handled only by Supabase Auth (stored hashed in auth.users) — never in this table.
--- Run once in the Supabase project: Dashboard → SQL Editor → New query → paste → Run.
+-- Project "math-mission" (acdzoowaixgccjaffzza). Applied 2026-10-10 as migration "create_profiles".
 
 create table if not exists public.profiles (
   id          uuid primary key references auth.users (id) on delete cascade,

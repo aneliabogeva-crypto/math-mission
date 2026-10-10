@@ -1,0 +1,28 @@
+name: Supabase check
+
+# Read-only check of the accounts backend: the publishable key works, the auth settings are as expected
+# and the profiles table cannot be read without signing in (row-level security).
+on:
+  push:
+    branches: [main]
+    paths: ['supabase/**', 'frontend/src/cloud.ts', '.github/workflows/supabase-check.yml']
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    env:
+      URL: https://acdzoowaixgccjaffzza.supabase.co
+      KEY: sb_publishable_x-ASFz6shEQZIIG6gz9Bcg_X7wFKxau
+    steps:
+      - name: Auth settings
+        run: |
+          s=$(curl -sS "$URL/auth/v1/settings" -H "apikey: $KEY")
+          echo "$s" | jq '{email_enabled: .external.email, confirm_email_off: .mailer_autoconfirm, signup_disabled: .disable_signup}'
+          echo "::notice title=Auth settings::$(echo "$s" | jq -c '{email: .external.email, autoconfirm: .mailer_autoconfirm, signup_disabled: .disable_signup}')"
+      - name: Profiles are private without sign-in
+        run: |
+          code=$(curl -sS -o body.txt -w '%{http_code}' "$URL/rest/v1/profiles?select=id&limit=1" -H "apikey: $KEY")
+          echo "HTTP $code: $(cat body.txt)"
+          echo "::notice title=Anonymous read of profiles::HTTP $code $(head -c 200 body.txt)"
+          [ "$code" = "401" ] || [ "$code" = "403" ] || [ "$(cat body.txt)" = "[]" ]

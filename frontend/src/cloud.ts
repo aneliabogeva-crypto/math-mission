@@ -4,8 +4,9 @@
 // Learning progress stays on the device (local mode); the account links the device profile to the e-mail.
 import { STANDALONE } from './api';
 
-export const SUPABASE_URL: string = import.meta.env.VITE_SUPABASE_URL || 'https://udbkecvhkzrkpjcstfmz.supabase.co';
-export const SUPABASE_KEY: string = import.meta.env.VITE_SUPABASE_KEY || '';
+export const SUPABASE_URL: string = import.meta.env.VITE_SUPABASE_URL || 'https://acdzoowaixgccjaffzza.supabase.co';
+// Publishable key of the "math-mission" Supabase project: public by design (all data is protected by row-level security).
+export const SUPABASE_KEY: string = import.meta.env.VITE_SUPABASE_KEY || 'sb_publishable_x-ASFz6shEQZIIG6gz9Bcg_X7wFKxau';
 /** Accounts are used in the phone/web version once a project key is configured. */
 export const CLOUD = STANDALONE && Boolean(SUPABASE_KEY);
 
@@ -41,6 +42,7 @@ const MESSAGES: [RegExp, string][] = [
   [/rate limit|too many|over_email_send_rate_limit|security purposes/i, 'Твърде много опити. Изчакай малко и опитай пак.'],
   [/same.?password|different from the old/i, 'Новата парола трябва да е различна от старата.'],
   [/expired|invalid.*token|jwt/i, 'Връзката е изтекла. Поискай нова от „Забравена парола“.'],
+  [/not authorized|sending.*(confirmation|recovery)?.*email|error sending/i, 'В момента не можем да изпратим писмо до този имейл. Опитай по-късно или помоли родител да се свърже с учителя.'],
 ];
 
 async function call<T>(path: string, init: { method?: string; body?: unknown; token?: string; prefer?: string } = {}): Promise<T> {
@@ -51,7 +53,8 @@ async function call<T>(path: string, init: { method?: string; body?: unknown; to
       method: init.method ?? (init.body ? 'POST' : 'GET'),
       headers: {
         apikey: SUPABASE_KEY, 'Content-Type': 'application/json',
-        Authorization: `Bearer ${init.token ?? SUPABASE_KEY}`,
+        // Publishable keys go only in "apikey"; Authorization carries a signed-in user's token.
+        ...(init.token ? { Authorization: `Bearer ${init.token}` } : {}),
         ...(init.prefer ? { Prefer: init.prefer } : {}),
       },
       body: init.body ? JSON.stringify(init.body) : undefined,
