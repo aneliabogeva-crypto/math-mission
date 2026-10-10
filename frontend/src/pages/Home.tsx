@@ -1,4 +1,3 @@
-import { CLOUD, getCloudSession } from '../cloud';
 import { Link } from 'react-router-dom';
 import { STANDALONE, type TestSummary } from '../api';
 import { Avatar } from '../components/Avatar';
@@ -75,14 +74,6 @@ export function HomePage() {
               </li>
             ))}
           </ul>
-        </div>
-      )}
-
-      {CLOUD && !getCloudSession() && (
-        <div className="card accent">
-          <h2>Запази профила си</h2>
-          <p>Създай вход с имейл и парола — така напредъкът ти няма да се загуби и ще можеш да смениш паролата, ако я забравиш.</p>
-          <Link className="btn" to="/account">Създай вход с имейл</Link>
         </div>
       )}
 

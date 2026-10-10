@@ -21,18 +21,18 @@ const passwordProblem = (p: string, again: string) =>
 async function openOnDevice(s: CloudSession, signIn: (t: string) => Promise<Me | null>, me: Me | null): Promise<'done' | 'onboard'> {
   const linked = linkedLocalId(s.user.id);
   if (linked && (await signIn(linked))) return 'done';
+  // A learner already using this device (or one waiting for e-mail confirmation) keeps their progress.
+  const waiting = me?.role === 'STUDENT' ? me.id : pendingLink();
   const profile: Profile | null = await getProfile(s);
-  if (!profile) {
-    // A device profile that was waiting for this account (registered from "Запази профила си").
-    const waiting = pendingLink() ?? (me?.role === 'STUDENT' ? me.id : null);
-    if (waiting && (await signIn(waiting))) {
+  if (waiting && (await signIn(waiting))) {
+    if (!profile) {
       const m = await api<Me>('/api/me');
       await saveProfile(s, { nickname: m.displayName, avatar: m.avatar ?? 'fox' });
-      linkLocal(s.user.id, waiting); setPendingLink(null);
-      return 'done';
     }
-    return 'onboard';
+    linkLocal(s.user.id, waiting); setPendingLink(null);
+    return 'done';
   }
+  if (!profile) return 'onboard';
   const r = await api<{ token: string }>('/api/auth/student', { method: 'POST',
     body: { nickname: profile.nickname, avatar: profile.avatar, goal: profile.goal, confidence: profile.confidence, ageBand: profile.age_band } });
   linkLocal(s.user.id, r.token);
@@ -59,7 +59,7 @@ function PasswordFields({ p, setP, again, setAgain, label = 'Парола' }: { 
 }
 
 /** Sign in, registration, forgotten password and new password — accounts with e-mail and password. */
-export function CloudWelcome({ initial = 'login', onDone }: { initial?: Mode; onDone?: () => void } = {}) {
+export function CloudWelcome({ initial = 'login', onDone, notice }: { initial?: Mode; onDone?: () => void; notice?: string } = {}) {
   const { me, signIn } = useSession();
   const nav = useNavigate();
   const [mode, setMode] = useState<Mode>('loading');
@@ -108,7 +108,7 @@ export function CloudWelcome({ initial = 'login', onDone }: { initial?: Mode; on
 
   return (
     <div className="stack" style={{ maxWidth: 480, margin: '0 auto' }}>
-      <Helper>{mode === 'register' ? 'Създай профил с имейл и парола — така напредъкът ти е защитен.' : 'Здравей! Аз съм Компи. Влез, за да продължим.'}</Helper>
+      <Helper>{notice ?? (mode === 'register' ? 'Създай профил с имейл и парола — така напредъкът ти е защитен.' : 'Здравей! Аз съм Компи. Влез, за да продължим.')}</Helper>
 
       {mode === 'login' && (
         <form className="card" onSubmit={submit(async () => proceed(await signInWithPassword(email, password)))}>

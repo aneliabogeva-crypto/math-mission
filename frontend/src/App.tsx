@@ -19,7 +19,7 @@ import { TeacherPage } from './pages/TeacherPage';
 import { TestIntro, TestsPage } from './pages/TestsPage';
 import { Welcome } from './pages/Welcome';
 import { AccountPage, CloudWelcome } from './pages/Account';
-import { CLOUD, URL_AUTH } from './cloud';
+import { CLOUD, URL_AUTH, getCloudSession } from './cloud';
 import { useState } from 'react';
 import { useSession } from './session';
 import type { Role } from './api';
@@ -27,9 +27,18 @@ import type { Role } from './api';
 const HOME_BY_ROLE: Record<Role, string> = { STUDENT: '/', TEACHER: '/teacher', GUARDIAN: '/guardian', AUTHOR: '/content', REVIEWER: '/content', ADMIN: '/admin' };
 
 function Only({ roles, children }: { roles: Role[]; children: JSX.Element }) {
-  const { me } = useSession();
+  const { me, signOut } = useSession();
   if (!me) return <Navigate to="/welcome" replace />;
   if (!roles.includes(me.role)) return <Navigate to={HOME_BY_ROLE[me.role]} replace />;
+  // Only accounts with e-mail and password: a device-only profile must be linked to an account first.
+  if (CLOUD && me.role === 'STUDENT' && !getCloudSession()) {
+    return (
+      <>
+        <CloudWelcome initial="register" notice={`Вече се влиза само с имейл и парола. Създай вход за профила „${me.displayName}“ — напредъкът ти се запазва. Ако вече имаш профил с имейл, натисни „Имам профил — вход“.`} />
+        <p className="small" style={{ textAlign: 'center' }}>Това не е твоят профил? <button type="button" className="btn ghost" onClick={() => void signOut()}>Изход</button></p>
+      </>
+    );
+  }
   if (me.role === 'STUDENT' && me.status !== 'ACTIVE') return <PendingConsent />;
   return children;
 }
@@ -63,7 +72,7 @@ export function App() {
       <Routes>
         <Route path="/welcome" element={me ? <Navigate to={HOME_BY_ROLE[me.role]} replace /> : CLOUD ? <CloudWelcome /> : <Welcome />} />
         <Route path="/account" element={<Only roles={S}><AccountPage /></Only>} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={CLOUD ? <Navigate to="/welcome" replace /> : <Login />} />
         <Route path="/consent/:code" element={<ConsentPage />} />
         <Route path="/" element={<Only roles={S}><HomePage /></Only>} />
         <Route path="/map" element={<Only roles={S}><MapPage /></Only>} />

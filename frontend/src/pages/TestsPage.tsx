@@ -1,82 +1,30 @@
-import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { useState } from 'react';
 import { api, ApiError, uuid, type AttemptView, type TestSummary } from '../api';
 import { ErrorNote, Loading } from '../components/Layout';
 import { useApi } from '../session';
-import { GROUP_LESSONS, GROUP_NOTE } from '../topics';
+import { TOPICS, placeTests } from '../topics';
+import { TestRow, TopicView } from '../components/TopicView';
+import curriculum from '../local/data/curriculum.json';
 
-/** Topic groups in study order; test titles are "Тема · Име". */
-const GROUP_ORDER = ['Рационални изрази', 'Едночлени', 'Многочлени', 'Действия с многочлени', 'Тъждества и формули', 'Обобщителни тестове', 'Подготовка за контролно'];
-const fmtPct = (p: number) => String(p).replace('.', ',');
+const LESSON_TITLES = new Map((curriculum as { lessons: { key: string; title: string }[] }).lessons.map((l) => [l.key, l.title]));
 
-/** Tests grouped by topic; each group and each test shows what has already been solved. */
+/** Tests by topic: under each lesson its own tests, at the end of the topic the summary tests and class-test variants. */
 export function TestsPage() {
   const { data, error, loading, reload } = useApi<TestSummary[]>('/api/student/tests');
-  const [open, setOpen] = useState<Record<string, boolean>>({});
   if (loading && !data) return <Loading />;
   if (!data) return <ErrorNote error={error} onRetry={reload} />;
-  const groups = new Map<string, TestSummary[]>();
-  for (const t of data) {
-    const g = /^([^·]+) · /.exec(t.title)?.[1].trim() ?? 'Още тестове';
-    groups.set(g, [...(groups.get(g) ?? []), t]);
-  }
-  // New topics (not listed yet) go before the summary tests and the class-test preparation.
-  const rank = (g: string) => (GROUP_ORDER.includes(g) ? GROUP_ORDER.indexOf(g) : GROUP_ORDER.indexOf('Обобщителни тестове') - 0.5);
-  const order = [...groups.keys()].sort((a, b) => rank(a) - rank(b));
+  const placed = placeTests(data);
   const done = data.filter((t) => t.completedAttempts > 0).length;
-  const card = (t: TestSummary) => {
-    const solved = t.completedAttempts > 0;
-    return (
-      <div key={t.id} className="card" style={{ marginBottom: 8, borderLeft: `6px solid ${solved ? 'var(--mastered)' : 'var(--border)'}` }}>
-        <div className="row" style={{ justifyContent: 'space-between', flexWrap: 'wrap', gap: 6 }}>
-          <span className="chip info">{t.kindLabel}</span>
-          {solved
-            ? <span className="chip ok">✓ Решен{t.completedAttempts > 1 ? ` ${t.completedAttempts} пъти` : ''}{t.bestPercent != null ? ` · най-добър резултат ${fmtPct(t.bestPercent)}%` : ''}</span>
-            : t.inProgressAttemptId ? <span className="chip warn">Започнат</span> : <span className="chip">Нерешен</span>}
-        </div>
-        <h3 style={{ marginTop: '.5rem' }}>{t.title.replace(/^[^·]+ · /, '')}</h3>
-        <p className="small muted">{t.questionCount} въпроса · {t.timeLimitMin} минути{t.hintPolicy === 'ALLOWED' ? ' · с подсказки' : ''}</p>
-        <Link className={`btn ${solved ? 'secondary' : ''}`} to={`/tests/${t.id}`}>
-          {t.inProgressAttemptId ? 'Продължи' : solved ? 'Реши отново' : 'Започни'}
-        </Link>
-      </div>
-    );
-  };
   return (
     <div>
       <h1>Тестове</h1>
-      <p className="muted">Тестовете са подредени по теми. Решени: {done} от {data.length}.</p>
+      <p className="muted">Подредени по теми: тестовете към всеки урок, а накрая на темата — обобщаващите тестове. Решени: {done} от {data.length}.</p>
       <div className="progress" aria-hidden="true" style={{ marginBottom: '1rem' }}><span style={{ width: `${data.length ? (done / data.length) * 100 : 0}%` }} /></div>
-      {order.map((name) => {
-        const list = [...groups.get(name)!].sort((a, b) => (name === 'Подготовка за контролно' ? a.title.localeCompare(b.title, 'bg', { numeric: true }) : 0) || a.key.localeCompare(b.key));
-        const solved = list.filter((t) => t.completedAttempts > 0).length;
-        const allDone = solved === list.length;
-        const isOpen = open[name] ?? !allDone;
-        return (
-          <section key={name} style={{ marginBottom: '1rem' }}>
-            <button type="button" className="card" aria-expanded={isOpen} onClick={() => setOpen({ ...open, [name]: !isOpen })}
-              style={{ width: '100%', textAlign: 'left', cursor: 'pointer', marginBottom: 8, color: 'var(--text)', font: 'inherit' }}>
-              <div className="row" style={{ justifyContent: 'space-between', flexWrap: 'wrap', gap: 6 }}>
-                <h2 style={{ margin: 0 }}>{isOpen ? '▾' : '▸'} {name}</h2>
-                <span className={`chip ${allDone ? 'ok' : ''}`}>{allDone ? '✓ ' : ''}Решени {solved} от {list.length}</span>
-              </div>
-              <div className="progress" aria-hidden="true" style={{ marginTop: 8 }}><span style={{ width: `${(solved / list.length) * 100}%` }} /></div>
-            </button>
-            {isOpen && (
-              <>
-                {GROUP_NOTE[name] && <p className="small muted">{GROUP_NOTE[name]}</p>}
-                {GROUP_LESSONS[name] && (
-                  <div className="row" style={{ flexWrap: 'wrap', gap: 6, marginBottom: 8 }}>
-                    <span className="small muted">Преговори уроците:</span>
-                    {GROUP_LESSONS[name].map((l) => <Link key={l.key} className="btn secondary" to={`/lesson/${l.key}`}>{l.key} · {l.title}</Link>)}
-                  </div>
-                )}
-                <div className="cards">{list.map(card)}</div>
-              </>
-            )}
-          </section>
-        );
-      })}
+      {TOPICS.map((t, i) => <TopicView key={t.id} topic={t} index={i + 1} placed={placed} titles={LESSON_TITLES} testsOnly />)}
+      {placed.other.length > 0 && (
+        <section className="zone"><h2>Още тестове</h2><ul className="test-list">{placed.other.map((t) => <TestRow key={t.id} t={t} />)}</ul></section>
+      )}
       {data.length === 0 && <p>Все още няма публикувани тестове.</p>}
     </div>
   );
