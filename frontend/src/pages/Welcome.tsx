@@ -4,6 +4,7 @@ import { api, ApiError } from '../api';
 import { Avatar, AVATARS } from '../components/Avatar';
 import { Helper } from '../components/Helper';
 import { useSession } from '../session';
+import { linkLocal, saveProfile, type CloudSession } from '../cloud';
 
 const GOALS = [
   { id: 'CLASSROOM', label: 'Подготовка за класни работи' },
@@ -14,7 +15,7 @@ const GOALS = [
 interface SignupResult { token: string; recoveryCode: string; status: string; consentCode?: string }
 
 /** US-STU-01: nickname, avatar and goal only — no real name, phone, photo or date of birth. */
-export function Welcome() {
+export function Welcome({ cloud }: { cloud?: CloudSession } = {}) {
   const { signIn } = useSession();
   const nav = useNavigate();
   const [step, setStep] = useState(0);
@@ -32,6 +33,11 @@ export function Welcome() {
     setError(null);
     try {
       const r = await api<SignupResult>('/api/auth/student', { method: 'POST', body: { nickname, avatar, goal, confidence, ageBand } });
+      if (cloud) {
+        // Save the profile to the account so the same e-mail and password open it on any device.
+        await saveProfile(cloud, { nickname: nickname.trim(), avatar, age_band: ageBand || undefined, goal, confidence });
+        linkLocal(cloud.user.id, r.token);
+      }
       setDone(r);
     } catch (e) {
       setError((e as ApiError).message);
@@ -43,12 +49,24 @@ export function Welcome() {
   if (done) {
     return (
       <div className="stack">
-        <Helper>Профилът е създаден! Запиши този код — с него влизаш от друго устройство.</Helper>
-        <div className="card accent">
-          <h2>Твоят код за вход</h2>
-          <p className="math-block" style={{ letterSpacing: '.1em' }}>{done.recoveryCode}</p>
-          <p className="small muted">Пази го като парола. Не го споделяй с други ученици.</p>
-        </div>
+        {cloud ? (
+          <>
+            <Helper>Профилът е създаден и е запазен към имейла ти.</Helper>
+            <div className="card accent">
+              <h2>Вход от всяко устройство</h2>
+              <p>Влизаш с <strong>{cloud.user.email}</strong> и паролата си. Ако я забравиш, натисни „Забравена парола“ на екрана за вход.</p>
+            </div>
+          </>
+        ) : (
+          <>
+            <Helper>Профилът е създаден! Запиши този код — с него влизаш от друго устройство.</Helper>
+            <div className="card accent">
+              <h2>Твоят код за вход</h2>
+              <p className="math-block" style={{ letterSpacing: '.1em' }}>{done.recoveryCode}</p>
+              <p className="small muted">Пази го като парола. Не го споделяй с други ученици.</p>
+            </div>
+          </>
+        )}
         {done.status === 'PENDING_CONSENT' ? (
           <div className="card">
             <h2>Нужно е съгласие от родител</h2>
@@ -140,7 +158,7 @@ export function Welcome() {
           </>
         )}
       </div>
-      <p className="small">Имаш профил? <Link to="/login">Влез с код</Link> · Учител или родител? <Link to="/login">Вход</Link></p>
+      {!cloud && <p className="small">Имаш профил? <Link to="/login">Влез с код</Link> · Учител или родител? <Link to="/login">Вход</Link></p>}
     </div>
   );
 }
@@ -149,6 +167,7 @@ function ChildPrivacy() {
   return (
     <ul>
       <li>Учиш с прякор и аватар — без истинско име, телефон или снимка.</li>
+      <li>Имейлът се използва само за вход и за нова парола. Паролата се пази защитено и никой не може да я прочете.</li>
       <li>Пазим отговорите и напредъка ти, за да ти препоръчваме какво да упражниш.</li>
       <li>Други ученици не виждат резултатите ти. Няма реклами.</li>
     </ul>

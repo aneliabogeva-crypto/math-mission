@@ -18,6 +18,9 @@ import { ResultPage } from './pages/ResultPage';
 import { TeacherPage } from './pages/TeacherPage';
 import { TestIntro, TestsPage } from './pages/TestsPage';
 import { Welcome } from './pages/Welcome';
+import { AccountPage, CloudWelcome } from './pages/Account';
+import { CLOUD, URL_AUTH } from './cloud';
+import { useState } from 'react';
 import { useSession } from './session';
 import type { Role } from './api';
 
@@ -50,12 +53,16 @@ function PendingConsent() {
 
 export function App() {
   const { me, loading } = useSession();
+  // A "new password" link from the e-mail opens the reset form whatever page it lands on.
+  const [recovering, setRecovering] = useState(() => CLOUD && URL_AUTH.type === 'recovery');
   if (loading) return <Layout><Loading /></Layout>;
+  if (recovering) return <Layout><CloudWelcome onDone={() => setRecovering(false)} /></Layout>;
   const S: Role[] = ['STUDENT'];
   return (
     <Layout>
       <Routes>
-        <Route path="/welcome" element={me ? <Navigate to={HOME_BY_ROLE[me.role]} replace /> : <Welcome />} />
+        <Route path="/welcome" element={me ? <Navigate to={HOME_BY_ROLE[me.role]} replace /> : CLOUD ? <CloudWelcome /> : <Welcome />} />
+        <Route path="/account" element={<Only roles={S}><AccountPage /></Only>} />
         <Route path="/login" element={<Login />} />
         <Route path="/consent/:code" element={<ConsentPage />} />
         <Route path="/" element={<Only roles={S}><HomePage /></Only>} />

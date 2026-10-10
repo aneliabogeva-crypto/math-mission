@@ -1,6 +1,7 @@
 import { createContext, useCallback, useContext, useEffect, useState, type ReactNode } from 'react';
 import { api, ApiError, getToken, setToken, type Me } from './api';
 import { clearOutbox } from './offline';
+import { CLOUD, cloudSignOut } from './cloud';
 
 interface Session {
   me: Me | null;
@@ -42,6 +43,7 @@ export function SessionProvider({ children }: { children: ReactNode }) {
   const signOut = useCallback(async () => {
     try { await api('/api/me/logout', { method: 'POST' }); } catch { /* offline logout still clears the device */ }
     setToken(null);
+    if (CLOUD) await cloudSignOut();
     clearOutbox();
     try { localStorage.removeItem('mm.me'); } catch { /* ignore */ }
     navigator.serviceWorker?.controller?.postMessage('logout');
