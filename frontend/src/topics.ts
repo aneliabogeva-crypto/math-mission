@@ -70,7 +70,8 @@ export const TOPICS: TopicDef[] = [
   },
   {
     id: 'T5', name: 'Разлагане на множители', colour: '--t5', lessons: ['C11', 'C12', 'C13'],
-    lessonTests: {}, summaryTests: [], examTests: [],
+    lessonTests: { C11: ['FAC-1A', 'FAC-1B'], C12: ['FAC-2A', 'FAC-2B'], C13: ['FAC-3A', 'FAC-3B'] },
+    summaryTests: [], examTests: ['FAC-K1', 'FAC-K2', 'FAC-K3', 'FAC-K4'],
     keyPoints: [
       'Първо изнеси общия множител: ab + ac = a(b + c).',
       'После провери за формула: a² − b², a² ± 2ab + b², a³ ± b³.',

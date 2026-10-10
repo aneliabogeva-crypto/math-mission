@@ -337,6 +337,9 @@ tests += ot
 import topic_formulas
 fq, ft = topic_formulas.build(all_prompts | {x["draft"]["prompt"]["text"] for x in lq + oq})
 tests += ft
+import topic_factor
+xq, xt = topic_factor.build(all_prompts | {x["draft"]["prompt"]["text"] for x in lq + oq + fq})
+tests += xt
 # Tests are grouped by topic ("Тема · Име") — no day-by-day programme.
 TOPIC_TITLES = {
   "D1-A": "Рационални изрази · Тест 1", "D3-A": "Рационални изрази · Тест 2", "D4-A": "Рационални изрази · Тест 3",
@@ -347,7 +350,7 @@ TOPIC_TITLES = {
 for t_ in tests:
     t_["title"] = TOPIC_TITLES.get(t_["testKey"], t_["title"])
     assert not t_["title"].startswith("Ден"), t_["testKey"]
-out = {"questions": lesson_questions + T + gen_q + lq + oq + fq, "lessons": [lesson] + ll, "tests": tests, "blueprints": blueprints}
+out = {"questions": lesson_questions + T + gen_q + lq + oq + fq + xq, "lessons": [lesson] + ll, "tests": tests, "blueprints": blueprints}
 with open(os.path.join(os.path.dirname(__file__), "generated-checks.json"), "w", encoding="utf-8") as f:
     json.dump(gen_tests.SIDE, f, ensure_ascii=False)
 path = os.path.join(os.path.dirname(__file__), "..", "backend", "src", "main", "resources", "seed", "content.json")

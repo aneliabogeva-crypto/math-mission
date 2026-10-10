@@ -42,6 +42,10 @@ for (const q of qs) {
       if (o.id !== k.correctOptionId && check('SINGLE_CHOICE', k, 1, { optionId: o.id }).status === 'CORRECT') err(q.key, `wrong option ${o.id} scores correct`);
       if (o.id !== k.correctOptionId && !(k.distractors ?? []).some((x) => x.match === o.id && x.explanation)) err(q.key, `option ${o.id} lacks explanation`);
     }
+    const correctOpt = opts.find((o) => o.id === k.correctOptionId);
+    if (/^Разложи/.test(d.prompt.text) && correctOpt && tryParse(correctOpt.text) && /\(/.test(correctOpt.text) && !isFullyFactorised(correctOpt.text)) {
+      err(q.key, `correct option "${correctOpt.text}" is not a complete factorisation`);
+    }
     const exp = expect[q.key];
     if (exp !== undefined) {
       const correctText = opts.find((o) => o.id === k.correctOptionId)!.text;

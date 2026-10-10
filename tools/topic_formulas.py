@@ -1,6 +1,7 @@
 # Topic "Тъждества и формули": practice tests for the formulas for abbreviated multiplication
 # (square of a binomial, difference of squares, cubes) and identities, plus class-test preparation.
 # Answers are computed exactly; validate_content.ts re-checks every item with the app's engine.
+import math
 import random
 
 import gen_tests as g
@@ -125,6 +126,18 @@ def ds_mc(rng, key):
 
 def ds_factor_mc(rng, key):
     k, m = nz(rng, 1, 6), nz(rng, 1, 9)
+    return ds_factor_core(rng, key, k, m)
+
+
+def ds_factor_ok(rng, key):
+    """Like ds_factor_mc, but k and m are coprime, so (kx − m)(kx + m) is a complete factorisation."""
+    k, m = nz(rng, 1, 6), nz(rng, 1, 9)
+    if math.gcd(k, m) != 1:
+        raise ValueError
+    return ds_factor_core(rng, key, k, m)
+
+
+def ds_factor_core(rng, key, k, m):
     a = P.mono(k, x=1)
     target = a * a - P.const(m * m)
     good = f"({lin(k, -m).fmt()})({lin(k, m).fmt()})"
@@ -357,6 +370,36 @@ def sig(qd):
     return p["text"] + "|" + "|".join(o["text"] for o in p.get("options", []))
 
 
+def repair_factorisations(questions, tests, taken):
+    """Replaces "difference of squares" items whose answer (kx − m)(kx + m) still has a common factor
+    (e.g. 16x² − 16) with a coprime variant; every other item stays exactly as published."""
+    import re
+    test_of = {k: t["testKey"] for t in tests for k in t["questionKeys"]}
+    texts = {}
+    for q_ in questions:
+        texts.setdefault(test_of.get(q_["key"]), set()).add(q_["draft"]["prompt"]["text"].lower())
+    for i, q_ in enumerate(questions):
+        m_ = re.match(r"Разложи на множители: (\d*)x² − (\d+)$", q_["draft"]["prompt"]["text"])
+        if not m_ or not q_["draft"]["prompt"].get("options"):
+            continue
+        k, m = math.isqrt(int(m_.group(1) or 1)), math.isqrt(int(m_.group(2)))
+        if math.gcd(k, m) == 1:
+            continue
+        own = texts[test_of.get(q_["key"])]
+        for kk, mm in [(k // math.gcd(k, m), mm) for mm in range(1, 10)] + [(kk, mm) for kk in range(1, 7) for mm in range(1, 10)]:
+            if math.gcd(kk, mm) != 1:
+                continue
+            try:
+                new = ds_factor_core(random.Random(q_["key"]), q_["key"], kk, mm)
+            except ValueError:
+                continue
+            t = new["draft"]["prompt"]["text"]
+            if t.lower() not in own and sig(new) not in taken:
+                own.discard(q_["draft"]["prompt"]["text"].lower()); own.add(t.lower()); taken.add(sig(new))
+                questions[i] = new
+                break
+
+
 def build(existing_prompts):
     rng = random.Random(20261009)
     seen = set(existing_prompts)
@@ -391,4 +434,5 @@ def build(existing_prompts):
         questions += items
         tests.append({"testKey": key, "title": title, "kind": "THEMATIC", "path": "C", "blueprint": "Тематичен тест (20)",
                       "timeLimitMin": 40, "hintPolicy": hints, "reviewMoment": "AFTER_SUBMIT", "questionKeys": [x["key"] for x in items]})
+    repair_factorisations(questions, tests, seen)
     return questions, tests
