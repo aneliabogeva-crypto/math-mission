@@ -5,6 +5,7 @@ import { AnswerInput, isAnswered } from '../components/AnswerInput';
 import { ErrorNote, Loading } from '../components/Layout';
 import { RichText } from '../components/MathText';
 import { flush, pendingFor, send } from '../offline';
+import { syncAttempts } from '../cloudSync';
 import { useApi } from '../session';
 
 /** FR-05 question player: autosave after each answer, mark for review, scratch area, resume and offline recovery. */
@@ -97,6 +98,7 @@ export function AttemptPlayer() {
     try {
       const r = await api<ResultView>(`/api/student/attempts/${id}/submit`, { method: 'POST' });
       try { localStorage.removeItem(scratchKey); } catch { /* ignore */ }
+      void syncAttempts(); // send the result to the account (for the administrator)
       nav(`/result/${r.attemptId}`);
     } catch (e) { setSubmitError((e as ApiError).message); }
   }

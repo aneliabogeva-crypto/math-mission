@@ -27,7 +27,7 @@ const read = <T,>(k: string): T | null => { try { return JSON.parse(localStorage
 const write = (k: string, v: unknown) => { try { if (v == null) localStorage.removeItem(k); else localStorage.setItem(k, JSON.stringify(v)); } catch { /* ignore */ } };
 
 export const getCloudSession = () => read<CloudSession>(SESSION_KEY);
-const setCloudSession = (s: CloudSession | null) => write(SESSION_KEY, s);
+const setCloudSession = (s: CloudSession | null) => { write(SESSION_KEY, s); window.dispatchEvent(new Event('mm-cloud-changed')); };
 
 /** Which on-device profile belongs to which account (so the same e-mail reopens the same progress). */
 export const linkedLocalId = (uid: string) => read<Record<string, string>>(LINKS_KEY)?.[uid];
@@ -115,6 +115,7 @@ export async function currentSession(): Promise<CloudSession | null> {
 export async function cloudSignOut() {
   const s = getCloudSession();
   setCloudSession(null);
+  write(ADMIN_KEY, null);
   if (s && navigator.onLine) { try { await call('/auth/v1/logout', { method: 'POST', token: s.access_token }); } catch { /* already signed out */ } }
 }
 
@@ -124,7 +125,7 @@ export async function getProfile(s: CloudSession): Promise<Profile | null> {
 }
 
 export async function saveProfile(s: CloudSession, p: Omit<Profile, 'id'>) {
-  await call('/rest/v1/profiles?on_conflict=id', { body: { id: s.user.id, ...p, updated_at: new Date().toISOString() }, token: s.access_token,
+  await call('/rest/v1/profiles?on_conflict=id', { body: { id: s.user.id, ...p, email: s.user.email, updated_at: new Date().toISOString() }, token: s.access_token,
     prefer: 'resolution=merge-duplicates,return=minimal' });
 }
 
@@ -156,3 +157,40 @@ export const URL_AUTH: { type?: string; error?: string } = (() => {
 export const PENDING_LINK_KEY = 'mm.cloud.pendingLink';
 export const pendingLink = () => read<string>(PENDING_LINK_KEY);
 export const setPendingLink = (localId: string | null) => write(PENDING_LINK_KEY, localId);
+
+
+// ------------------------------------------------------------------ results and the administrator's view
+
+/** One submitted test, as stored for the administrator (answers, correct answers and mistakes per question). */
+export interface AttemptItem { n: number; key: string; skill?: string; prompt: string; options?: string[]; answer: string; correct?: string;
+  status: string; points?: number; max: number; misconception?: string; feedback?: string }
+export interface AttemptRecord { id: string; user_id: string; test_key: string; test_title: string; started_at?: string; submitted_at: string;
+  points?: number; max_points?: number; percent?: number; grade?: number; grade_label?: string;
+  items?: AttemptItem[]; misconceptions?: { label: string; count: number }[] }
+export interface AdminProfile extends Profile { email?: string; created_at?: string }
+
+const ADMIN_KEY = 'mm.cloud.admin';
+/** True when the signed-in account is the administrator (checked with the server at sign-in). */
+export const isCloudAdmin = () => { const s = getCloudSession(); return Boolean(s && read<string>(ADMIN_KEY) === s.user.id); };
+export const setCloudAdmin = (uid: string | null) => { write(ADMIN_KEY, uid); window.dispatchEvent(new Event('mm-cloud-changed')); };
+
+export async function checkAdmin(s: CloudSession): Promise<boolean> {
+  const r = await call<boolean>('/rest/v1/rpc/is_admin', { body: {}, token: s.access_token });
+  setCloudAdmin(r === true ? s.user.id : null);
+  return r === true;
+}
+
+export async function pushAttempt(s: CloudSession, a: Omit<AttemptRecord, 'user_id'>) {
+  await call('/rest/v1/test_attempts?on_conflict=user_id,id', { body: { ...a, user_id: s.user.id }, token: s.access_token,
+    prefer: 'resolution=ignore-duplicates,return=minimal' });
+}
+
+export const adminProfiles = (s: CloudSession) =>
+  call<AdminProfile[]>('/rest/v1/profiles?select=id,nickname,avatar,age_band,goal,confidence,email,created_at&order=created_at.desc', { token: s.access_token });
+
+export const adminAttempts = (s: CloudSession, filter = '') =>
+  call<AttemptRecord[]>(`/rest/v1/test_attempts?select=id,user_id,test_key,test_title,started_at,submitted_at,points,max_points,percent,grade,grade_label,misconceptions${filter ? '&' + filter : ''}&order=submitted_at.desc`,
+    { token: s.access_token });
+
+export const adminAttemptsWithItems = (s: CloudSession, filter: string) =>
+  call<AttemptRecord[]>(`/rest/v1/test_attempts?select=*&${filter}&order=submitted_at.desc`, { token: s.access_token });

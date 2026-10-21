@@ -292,3 +292,23 @@ main { padding-left: max(16px, env(safe-area-inset-left)); padding-right: max(16
   .topic .stops { padding: 8px; }
 }
 @media (min-width: 900px) { .topic .stops { grid-template-columns: 1fr; } .lesson-tests .test-list { grid-template-columns: 1fr 1fr; } }
+
+/* ------------------------------------------------------------ administrator's overview */
+.admin-list { list-style: none; padding: 0; margin: 0; }
+.admin-row { display: flex; gap: .75rem; align-items: center; }
+.admin-row .body { flex: 1; min-width: 0; }
+.admin-row .title { font-weight: 700; font-size: 1.05rem; }
+.admin-items { list-style: none; padding: 0; margin: 0; }
+.admin-item { border-left: 6px solid var(--border); }
+.admin-item.is-ok { border-left-color: var(--mastered); }
+.admin-item.is-partial { border-left-color: var(--revision); }
+.admin-item.is-bad { border-left-color: #c2410c; }
+.answer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: .5rem 0; }
+.answer-grid > div { background: var(--surface-2); border-radius: 10px; padding: .5rem .6rem; overflow-x: auto; }
+.big { font-size: 1.6rem; font-weight: 800; }
+.bars { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
+.bars li { display: grid; grid-template-columns: minmax(120px, 40%) 1fr auto; gap: 8px; align-items: center; }
+.bar { display: block; height: 10px; border-radius: 999px; background: var(--surface-2); overflow: hidden; }
+.bar > span { display: block; height: 100%; background: var(--brand); }
+.chip.grade-ok { background: var(--ok-bg); } .chip.grade-info { background: var(--info-bg); } .chip.grade-warn { background: var(--warn-bg); } .chip.grade-bad { background: var(--bad-bg); }
+@media (max-width: 599px) { .answer-grid { grid-template-columns: 1fr; } .bars li { grid-template-columns: 1fr auto; } .bars .bar { grid-column: 1 / -1; } .admin-row { flex-wrap: wrap; } }

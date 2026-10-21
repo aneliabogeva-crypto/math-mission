@@ -19,8 +19,10 @@ import { TeacherPage } from './pages/TeacherPage';
 import { TestIntro, TestsPage } from './pages/TestsPage';
 import { Welcome } from './pages/Welcome';
 import { AccountPage, CloudWelcome } from './pages/Account';
-import { CLOUD, URL_AUTH, getCloudSession } from './cloud';
-import { useState } from 'react';
+import { CLOUD, URL_AUTH, checkAdmin, currentSession, getCloudSession, isCloudAdmin } from './cloud';
+import { useEffect, useState } from 'react';
+import { syncAttempts } from './cloudSync';
+import { AdminAttempt, AdminChild, AdminChildren, AdminTest, AdminTests } from './pages/AdminCloud';
 import { useSession } from './session';
 import type { Role } from './api';
 
@@ -64,8 +66,42 @@ export function App() {
   const { me, loading } = useSession();
   // A "new password" link from the e-mail opens the reset form whatever page it lands on.
   const [recovering, setRecovering] = useState(() => CLOUD && URL_AUTH.type === 'recovery');
+  // Re-render when the account changes (sign-in, sign-out, administrator check).
+  const [, setTick] = useState(0);
+  useEffect(() => {
+    const f = () => setTick((t) => t + 1);
+    window.addEventListener('mm-cloud-changed', f);
+    return () => window.removeEventListener('mm-cloud-changed', f);
+  }, []);
+  // An account that is already signed in learns whether it is the administrator (e.g. after an update).
+  useEffect(() => {
+    if (!CLOUD || !getCloudSession()) return;
+    void currentSession().then((cs) => (cs ? checkAdmin(cs) : false)).catch(() => undefined);
+  }, []);
+  // Learners' submitted tests are sent to the account at start-up and whenever the connection returns.
+  useEffect(() => {
+    if (!CLOUD || me?.role !== 'STUDENT') return;
+    void syncAttempts();
+    const f = () => void syncAttempts();
+    window.addEventListener('online', f);
+    return () => window.removeEventListener('online', f);
+  }, [me]);
   if (loading) return <Layout><Loading /></Layout>;
   if (recovering) return <Layout><CloudWelcome onDone={() => setRecovering(false)} /></Layout>;
+  if (CLOUD && isCloudAdmin()) {
+    return (
+      <Layout>
+        <Routes>
+          <Route path="/admin/children" element={<AdminChildren />} />
+          <Route path="/admin/child/:id" element={<AdminChild />} />
+          <Route path="/admin/attempt/:uid/:id" element={<AdminAttempt />} />
+          <Route path="/admin/tests" element={<AdminTests />} />
+          <Route path="/admin/test/:key" element={<AdminTest />} />
+          <Route path="*" element={<Navigate to="/admin/children" replace />} />
+        </Routes>
+      </Layout>
+    );
+  }
   const S: Role[] = ['STUDENT'];
   return (
     <Layout>

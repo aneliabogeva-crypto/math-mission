@@ -107,7 +107,7 @@ export interface AttemptView {
 }
 
 export interface ResultView {
-  attemptId: string; title: string; kindLabel: string; points: number; maxPoints: number; percent: number;
+  attemptId: string; testId?: string; title: string; kindLabel: string; points: number; maxPoints: number; percent: number;
   grade?: number; gradeLabel?: string; disclaimer: string; scoringSource: string;
   skills: { skill: string; title: string; points: number; maxPoints: number; percent: number; lessonKey?: string }[];
   misconceptions: { code: string; label: string; count: number; lessonKey: string }[];

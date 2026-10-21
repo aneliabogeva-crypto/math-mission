@@ -2,7 +2,7 @@ import { useEffect, useState, type FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { api, type Me } from '../api';
 import {
-  CloudError, URL_AUTH, currentSession, getProfile, linkLocal, linkedLocalId, pendingLink, saveProfile, sendPasswordReset,
+  CloudError, URL_AUTH, checkAdmin, currentSession, getProfile, linkLocal, linkedLocalId, pendingLink, saveProfile, sendPasswordReset,
   setPendingLink, signInWithPassword, signUp, updatePassword, type CloudSession, type Profile,
 } from '../cloud';
 import { Helper } from '../components/Helper';
@@ -74,6 +74,8 @@ export function CloudWelcome({ initial = 'login', onDone, notice }: { initial?: 
 
   async function proceed(s: CloudSession) {
     setSession(s);
+    // The administrator's account opens the overview of the learners, not a learner profile.
+    if (await checkAdmin(s).catch(() => false)) { onDone?.(); nav('/admin/children', { replace: true }); return; }
     const r = await openOnDevice(s, signIn, me);
     if (r === 'done') { onDone?.(); nav('/', { replace: true }); } else setMode('onboard');
   }

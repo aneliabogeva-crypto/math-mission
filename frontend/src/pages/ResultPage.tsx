@@ -4,7 +4,7 @@ import { ErrorNote, Loading } from '../components/Layout';
 import { MathText, RichText } from '../components/MathText';
 import { useApi } from '../session';
 
-function answerText(a?: AnswerPayload, options?: { id: string; text: string }[]): string {
+export function answerText(a?: AnswerPayload, options?: { id: string; text: string }[]): string {
   if (!a) return '—';
   if (a.optionId) { const o = options?.find((x) => x.id === a.optionId); return o ? `${o.id}) ${o.text}` : a.optionId; }
   if (a.value) return a.value;

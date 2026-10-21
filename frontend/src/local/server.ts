@@ -218,7 +218,7 @@ function resultView(a: Attempt) {
       feedback: it.feedback, misconception: it.misconception ? MISCONCEPTION_BG[it.misconception] : undefined, correctAnswer: correctAnswer(q),
       solution: q.key.solution, theoryLessonKey: stopBySkill(q.skill)?.key, scoredBy: 'Автоматична проверка' };
   });
-  return { attemptId: a.id, title: t.title, kindLabel: kindLabel(t.kind), points: a.points, maxPoints: a.maxPoints, percent: a.percent, grade: a.grade,
+  return { attemptId: a.id, testId: a.testId, title: t.title, kindLabel: kindLabel(t.kind), points: a.points, maxPoints: a.maxPoints, percent: a.percent, grade: a.grade,
     gradeLabel: GRADING.find((g) => g.grade === a.grade)?.labelBg, disclaimer: NOT_OFFICIAL, scoringSource: a.scoringSource,
     skills: [...skill.entries()].map(([s, [p, m]]) => ({ skill: s, title: skillTitle(s), points: round(p), maxPoints: m, percent: m ? Math.round((p / m) * 100) : 0, lessonKey: stopBySkill(s)?.key })),
     misconceptions: [...misc.entries()].sort((x, y) => y[1] - x[1]).map(([c, n]) => ({ code: c, label: MISCONCEPTION_BG[c], count: n, lessonKey: MISTAKE_LESSON[c] })),

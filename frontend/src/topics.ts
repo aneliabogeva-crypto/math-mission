@@ -57,8 +57,11 @@ export const TOPICS: TopicDef[] = [
   },
   {
     id: 'T4', name: 'Формули за съкратено умножение и тъждества', colour: '--t4', lessons: ['C6', 'C7', 'C8', 'C9', 'C10'],
-    lessonTests: { C6: ['FRM-1A', 'FRM-1B'], C7: ['FRM-2A', 'FRM-2B'], C9: ['FRM-3A', 'FRM-3B'], C10: ['FRM-4A', 'FRM-4B'] },
-    summaryTests: [], examTests: ['FRM-K1', 'FRM-K2', 'FRM-K3', 'FRM-K4'],
+    lessonTests: {
+      C6: ['FML-1A', 'FML-1B', 'FML-2A', 'FML-2B', 'FRM-1A', 'FRM-1B'], C7: ['FML-3A', 'FML-3B', 'FRM-2A', 'FRM-2B'],
+      C8: ['FML-4A', 'FML-4B', 'FML-5A', 'FML-5B'], C9: ['FML-6A', 'FML-6B', 'FML-7A', 'FML-7B', 'FRM-3A', 'FRM-3B'], C10: ['FRM-4A', 'FRM-4B'],
+    },
+    summaryTests: ['FML-MA', 'FML-MB'], examTests: ['FRM-K1', 'FRM-K2', 'FRM-K3', 'FRM-K4'],
     keyPoints: [
       'Средният член на (a ± b)² е удвоеното произведение 2ab — не го забравяй.',
       'Разлика по сбор дава разлика на квадрати.',
@@ -115,6 +118,7 @@ export function placeTests(tests: TestSummary[]): Placed {
 export function testLabel(t: TestSummary, topic?: TopicDef): string {
   const [group, rest] = t.title.includes(' · ') ? t.title.split(' · ', 2) : ['', t.title];
   if (/вариант \d+/.test(rest)) return `Контролно — ${rest.match(/вариант \d+/)![0]}`;
+  if (/упражнение \d+/.test(rest)) return rest;
   const training = rest.match(/тренировка \d+/);
   if (training) return training[0].replace(/^т/, 'Т');
   if (topic && (group === topic.name || topic.id === 'T1' || topic.id === 'T2')) return rest.replace(/^Тест/, 'Обобщаващ тест');

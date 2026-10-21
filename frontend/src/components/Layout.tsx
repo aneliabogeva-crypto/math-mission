@@ -4,7 +4,7 @@ import { subscribe } from '../offline';
 import { InstallButton } from './InstallButton';
 import { UpdateBanner } from './UpdateBanner';
 import { useSession } from '../session';
-import { CLOUD } from '../cloud';
+import { CLOUD, isCloudAdmin } from '../cloud';
 
 const STUDENT_NAV = [
   { to: '/', label: 'Начало', icon: '⌂' },
@@ -60,6 +60,8 @@ export function Layout({ children }: { children: ReactNode }) {
         {me && me.role !== 'STUDENT' && staffLinks[me.role]?.map((l) => <NavLink key={l.to} className="btn ghost" to={l.to}>{l.label}</NavLink>)}
         <InstallButton />
         <ThemeToggle />
+        {CLOUD && isCloudAdmin() && <span className="chip info">Администратор</span>}
+        {CLOUD && isCloudAdmin() && <button type="button" className="btn ghost" onClick={() => void signOut()}>Изход</button>}
         {me && CLOUD && me.role === 'STUDENT'
           ? <NavLink className="btn ghost" to="/account">Профил</NavLink>
           : me && <button type="button" className="btn ghost" onClick={() => void signOut()}>Изход</button>}
