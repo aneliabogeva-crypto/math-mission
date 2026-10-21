@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ErrorNote, Loading } from '../components/Layout';
 
 import { useApi } from '../session';
+import { ALL_FORMULAS, FORMULA_CONSEQUENCES } from '../topics';
 
 interface Entry { id: string; path: string; kind: string; title: string; formula: string; spoken: string; meaning: string;
   conditions: string; example: string; commonMistake: string; lessonKey: string; academicYear: string }
@@ -23,6 +24,15 @@ export function ReferencePage() {
           </select>
         </label>
       </div>
+      {!q && (path === '' || path === 'C') && (
+        <article className="card formula-sheet">
+          <h2>Всички формули за съкратено умножение</h2>
+          <ol>{ALL_FORMULAS.map((f) => <li key={f} className="math-block">{f}</li>)}</ol>
+          <h3>Следствия</h3>
+          <ul>{FORMULA_CONSEQUENCES.map((f) => <li key={f} className="math">{f}</li>)}</ul>
+          <p className="small muted">Прочетени отдясно наляво, формулите служат за разлагане на множители.</p>
+        </article>
+      )}
       {loading && !data && <Loading />}
       <ErrorNote error={error} onRetry={reload} />
       {data?.map((e) => (

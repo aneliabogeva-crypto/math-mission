@@ -18,6 +18,24 @@ export interface TopicDef {
   formulas?: string[];
 }
 
+/** All formulas for abbreviated multiplication (7th grade), as shown in summaries and on the formula page. */
+export const ALL_FORMULAS = [
+  '(a + b)² = a² + 2ab + b²',
+  '(a − b)² = a² − 2ab + b²',
+  '(a − b)(a + b) = a² − b²',
+  '(a + b)³ = a³ + 3a²b + 3ab² + b³',
+  '(a − b)³ = a³ − 3a²b + 3ab² − b³',
+  'a³ + b³ = (a + b)(a² − ab + b²)',
+  'a³ − b³ = (a − b)(a² + ab + b²)',
+  '(a + b + c)² = a² + b² + c² + 2ab + 2bc + 2ac',
+];
+export const FORMULA_CONSEQUENCES = [
+  'a² + b² = (a + b)² − 2ab = (a − b)² + 2ab',
+  '(a + b)² − (a − b)² = 4ab',
+  '(a + b)² + (a − b)² = 2(a² + b²)',
+  '(a − b)² = (b − a)²',
+];
+
 export const TOPICS: TopicDef[] = [
   {
     id: 'T1', name: 'Рационални изрази', colour: '--t1', lessons: ['A1', 'A2', 'A3', 'A4', 'A5'],
@@ -58,8 +76,8 @@ export const TOPICS: TopicDef[] = [
   {
     id: 'T4', name: 'Формули за съкратено умножение и тъждества', colour: '--t4', lessons: ['C6', 'C7', 'C8', 'C9', 'C10'],
     lessonTests: {
-      C6: ['FML-1A', 'FML-1B', 'FML-2A', 'FML-2B', 'FRM-1A', 'FRM-1B'], C7: ['FML-3A', 'FML-3B', 'FRM-2A', 'FRM-2B'],
-      C8: ['FML-4A', 'FML-4B', 'FML-5A', 'FML-5B'], C9: ['FML-6A', 'FML-6B', 'FML-7A', 'FML-7B', 'FRM-3A', 'FRM-3B'], C10: ['FRM-4A', 'FRM-4B'],
+      C6: ['FML-1A', 'FML-1B', 'FML-2A', 'FML-2B', 'FML-8A', 'FML-8B', 'FRM-1A', 'FRM-1B'], C7: ['FML-3A', 'FML-3B', 'FRM-2A', 'FRM-2B'],
+      C8: ['FML-4A', 'FML-4B', 'FML-5A', 'FML-5B'], C9: ['FML-6A', 'FML-6B', 'FML-7A', 'FML-7B', 'FRM-3A', 'FRM-3B'], C10: ['FML-9A', 'FML-9B', 'FRM-4A', 'FRM-4B'],
     },
     summaryTests: ['FML-MA', 'FML-MB'], examTests: ['FRM-K1', 'FRM-K2', 'FRM-K3', 'FRM-K4'],
     keyPoints: [
@@ -67,9 +85,11 @@ export const TOPICS: TopicDef[] = [
       'Разлика по сбор дава разлика на квадрати.',
       'В (a ± b)³ коефициентите са 1, 3, 3, 1.',
       'При a³ ± b³ средният член в непълния квадрат е ab, с обратния знак.',
+      'Квадрат на тричлен: квадратите на трите члена плюс удвоените произведения на всяка двойка.',
+      'Следствия: a² + b² = (a + b)² − 2ab, (a + b)² − (a − b)² = 4ab — помагат, когато знаем a + b и ab.',
       'Тъждество е равенство, вярно за всички стойности. Доказваме го, като преобразуваме едната страна до другата.',
     ],
-    formulas: ['(a ± b)² = a² ± 2ab + b²', '(a − b)(a + b) = a² − b²', '(a ± b)³ = a³ ± 3a²b + 3ab² ± b³', 'a³ + b³ = (a + b)(a² − ab + b²)', 'a³ − b³ = (a − b)(a² + ab + b²)'],
+    formulas: ALL_FORMULAS,
   },
   {
     id: 'T5', name: 'Разлагане на множители', colour: '--t5', lessons: ['C11', 'C12', 'C13'],
@@ -118,9 +138,7 @@ export function placeTests(tests: TestSummary[]): Placed {
 export function testLabel(t: TestSummary, topic?: TopicDef): string {
   const [group, rest] = t.title.includes(' · ') ? t.title.split(' · ', 2) : ['', t.title];
   if (/вариант \d+/.test(rest)) return `Контролно — ${rest.match(/вариант \d+/)![0]}`;
-  if (/упражнение \d+/.test(rest)) return rest;
-  const training = rest.match(/тренировка \d+/);
-  if (training) return training[0].replace(/^т/, 'Т');
+  if (/упражнение \d+|тренировка \d+/.test(rest)) return rest;
   if (topic && (group === topic.name || topic.id === 'T1' || topic.id === 'T2')) return rest.replace(/^Тест/, 'Обобщаващ тест');
   return group && group !== 'Обобщителни тестове' ? `${group} — ${rest.toLowerCase()}` : rest;
 }

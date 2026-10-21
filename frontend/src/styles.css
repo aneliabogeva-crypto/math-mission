@@ -320,3 +320,7 @@ main { padding-left: max(16px, env(safe-area-inset-left)); padding-right: max(16
 .options-key li { padding: .35rem .6rem; border-radius: 8px; background: var(--surface-2); }
 .options-key li.correct { background: var(--ok-bg); border: 1px solid var(--mastered); }
 .admin-nav a[aria-current="page"] { border-color: var(--brand); background: var(--info-bg); }
+
+.formula-sheet ol { padding-left: 1.4rem; margin: .3rem 0; }
+.formula-sheet li.math-block { font-size: 1.15rem; white-space: normal; padding: .15rem 0; }
+.formula-sheet ul { padding-left: 1.2rem; }

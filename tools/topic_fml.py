@@ -397,6 +397,241 @@ def sc_structured(s, rng, key):
              solution=f"а) A = {A.fmt()}; б) {val(A.eval(x=v))}; в) 0, защото x {sg(s)} {b} = 0.", rubric="По 1 т. за всяка вярна част.")
 
 
+# ------------------------------------------------------------------ (a + b + c)² — квадрат на тричлен
+
+TR = "C.square-binomial"
+Z = P.mono(1, z=1)
+
+
+def tri_expand_mc(rng, key):
+    k = nz(rng, -6, 6)
+    p = X + Y + P.const(k)
+    r = p ** 2
+    no_double = X * X + Y * Y + P.const(k * k)
+    single = no_double + X * Y + P.mono(k, x=1) + P.mono(k, y=1)
+    one_double = no_double + 2 * X * Y
+    wrongs = [(no_double.fmt(), "FORMULA_APPLICATION", "Липсват удвоените произведения 2ab + 2bc + 2ac."),
+              (single.fmt(), "FORMULA_APPLICATION", "Всяко произведение на два различни члена е удвоено: 2xy, 2·x·" + paren(k) + ", 2·y·" + paren(k) + "."),
+              (one_double.fmt(), "FORMULA_APPLICATION", "Удвоените произведения са три: на всяка двойка членове.")]
+    return mc(rng, key, TR, "Прилага формулата (a + b + c)²", "INTERMEDIATE", "FORMULA_APPLICATION", f"({p.fmt()})² е равно на:", r.fmt(), wrongs,
+              ["(a + b + c)² = a² + b² + c² + 2ab + 2bc + 2ac.", f"a = x, b = y, c = {val(k)}.", "Квадратите на трите члена и удвоените произведения на всяка двойка."],
+              f"({p.fmt()})² = x² + y² + {k * k} + 2xy + 2·x·{paren(k)} + 2·y·{paren(k)} = {r.fmt()}.", "C", expect=r.fmt(False))
+
+
+def tri_missing_mc(rng, key):
+    k = nz(rng, 2, 9)
+    p = X + Y + P.const(k)
+    missing = P.mono(2 * k, y=1)
+    wrongs = [(P.mono(k, y=1).fmt(), "FORMULA_APPLICATION", f"Произведението е удвоено: 2·y·{k}."),
+              (P.mono(k * k, y=1).fmt(), "FORMULA_APPLICATION", f"{k * k} е квадратът на {k}; липсва удвоеното произведение 2·y·{k}."),
+              ((2 * X * Y).fmt(), "FORMULA_APPLICATION", "2xy вече е написано — липсва произведението на y и " + str(k) + ".")]
+    return mc(rng, key, TR, "Допълва формулата (a + b + c)²", "INTERMEDIATE", "FORMULA_APPLICATION",
+              f"Кой член липсва: (x + y + {k})² = x² + y² + {k * k} + 2xy + {2 * k}x + ···?", missing.fmt(), wrongs,
+              ["Удвоените произведения са на всяка двойка: xy, x·" + str(k) + ", y·" + str(k) + ".", f"2xy и {2 * k}x вече ги има.", f"Липсва 2·y·{k}."],
+              f"Липсва удвоеното произведение 2·y·{k} = {missing.fmt()}.", "C", expect=missing.fmt(False))
+
+
+def tri_two_var_mc(rng, key):
+    a, k = nz(rng, 2, 4), nz(rng, 1, 5)
+    s = rng.choice([1, -1])
+    p = X + P.mono(a, y=1) + P.const(s * k)
+    r = p ** 2
+    wrongs = [((X * X + P.mono(a * a, y=2) + P.const(k * k)).fmt(), "FORMULA_APPLICATION", "Липсват удвоените произведения."),
+              ((X * X + P.mono(a, y=2) + P.const(k * k) + P.mono(2 * a, x=1, y=1) + P.mono(2 * s * k, x=1) + P.mono(2 * a * s * k, y=1)).fmt(), "FORMULA_APPLICATION",
+               f"({P.mono(a, y=1).fmt()})² = {P.mono(a * a, y=2).fmt()} — на квадрат е и коефициентът."),
+              ((X * X + P.mono(a * a, y=2) + P.const(k * k) + P.mono(2 * a, x=1, y=1) - P.mono(2 * s * k, x=1) - P.mono(2 * a * s * k, y=1)).fmt(), "SIGN",
+               f"Произведенията с {val(s * k)} носят неговия знак.")]
+    return mc(rng, key, TR, "Прилага формулата (a + b + c)²", "ADVANCED", "FORMULA_APPLICATION", f"({p.fmt()})² е равно на:", r.fmt(), wrongs,
+              ["(a + b + c)² = a² + b² + c² + 2ab + 2bc + 2ac.", f"a = x, b = {P.mono(a, y=1).fmt()}, c = {val(s * k)}.", "Внимавай за знака на c."],
+              f"({p.fmt()})² = {r.fmt()}.", "C", expect=r.fmt(False))
+
+
+def tri_sum_value_mc(rng, key):
+    a, b, c = rng.sample(range(1, 7), 3)
+    s1, s2 = a + b + c, a * b + b * c + c * a
+    ans = a * a + b * b + c * c
+    wrongs = [(str(s1 * s1), "FORMULA_APPLICATION", "(a + b + c)² съдържа и 2(ab + bc + ca) — трябва да ги извадиш."),
+              (str(s1 * s1 - s2), "FORMULA_APPLICATION", "Удвоените произведения са 2(ab + bc + ca), а не ab + bc + ca."),
+              (str(s1 * s1 + 2 * s2), "SIGN", "Удвоените произведения се изваждат: a² + b² + c² = (a + b + c)² − 2(ab + bc + ca).")]
+    return mc(rng, key, TR, "Използва формулата (a + b + c)² в обратна посока", "ADVANCED", "FORMULA_APPLICATION",
+              f"Ако a + b + c = {s1} и ab + bc + ca = {s2}, колко е a² + b² + c²?", str(ans), wrongs,
+              ["(a + b + c)² = a² + b² + c² + 2(ab + bc + ca).", f"{s1}² = a² + b² + c² + 2·{s2}.", f"a² + b² + c² = {s1 * s1} − {2 * s2}."],
+              f"a² + b² + c² = (a + b + c)² − 2(ab + bc + ca) = {s1 * s1} − {2 * s2} = {ans}.", "C", expect=str(ans))
+
+
+def tri_expr(rng, key, pts=2):
+    k = nz(rng, -7, 7)
+    p = X + Y + P.const(k)
+    r = p ** 2
+    return q(key, TR, "Прилага формулата (a + b + c)²", "EXPRESSION", "INTERMEDIATE", 90, pts, "FORMULA_APPLICATION",
+             f"Повдигни на квадрат и запиши в нормален вид: ({p.fmt()})²", "C", answer=r.fmt(False), form="NORMAL_FORM",
+             distractors=[{"match": (X * X + Y * Y + P.const(k * k)).fmt(False), "misconception": "FORMULA_APPLICATION", "explanation": "Липсват удвоените произведения на всяка двойка членове."}],
+             hints=["(a + b + c)² = a² + b² + c² + 2ab + 2bc + 2ac.", f"c = {val(k)}.", f"2xy, 2·x·{paren(k)} = {val(2 * k)}x, 2·y·{paren(k)} = {val(2 * k)}y."],
+             solution=f"({p.fmt()})² = {r.fmt()}.")
+
+
+def tri_sum_value(rng, key, pts=2):
+    a, b, c = rng.sample(range(-5, 8), 3)
+    s1, s2 = a + b + c, a * b + b * c + c * a
+    if s1 == 0:
+        raise ValueError
+    ans = a * a + b * b + c * c
+    return q(key, TR, "Използва формулата (a + b + c)² в обратна посока", "NUMERIC", "ADVANCED", 90, pts, "FORMULA_APPLICATION",
+             f"Ако a + b + c = {val(s1)} и ab + bc + ca = {val(s2)}, намери a² + b² + c².", "C", answer=str(ans),
+             distractors=[{"match": str(s1 * s1), "misconception": "FORMULA_APPLICATION", "explanation": "Извади удвоените произведения 2(ab + bc + ca)."}],
+             hints=["(a + b + c)² = a² + b² + c² + 2(ab + bc + ca).", f"{paren(s1)}² = {s1 * s1}.", f"a² + b² + c² = {s1 * s1} − 2·{paren(s2)}."],
+             solution=f"a² + b² + c² = {paren(s1)}² − 2·{paren(s2)} = {s1 * s1} − {val(2 * s2)} = {ans}.")
+
+
+def tri_number(rng, key, pts=1):
+    n = rng.choice([111, 121, 112, 211, 221, 212, 122, 131, 113, 311])
+    h, t, u = n // 100, (n // 10) % 10, n % 10
+    return q(key, TR, "Пресмята рационално с формула", "NUMERIC", "ADVANCED", 90, pts, "FORMULA_APPLICATION",
+             f"Пресметни с формулата за квадрат на тричлен: {n}² = ({h * 100} + {t * 10} + {u})²", "C", answer=str(n * n),
+             distractors=[{"match": str((h * 100) ** 2 + (t * 10) ** 2 + u * u), "misconception": "FORMULA_APPLICATION", "explanation": "Липсват удвоените произведения."}],
+             hints=["(a + b + c)² = a² + b² + c² + 2ab + 2bc + 2ac.", f"a = {h * 100}, b = {t * 10}, c = {u}.",
+                    f"{(h * 100) ** 2} + {(t * 10) ** 2} + {u * u} + {2 * h * 100 * t * 10} + {2 * t * 10 * u} + {2 * h * 100 * u}."],
+             solution=f"{n}² = {(h * 100) ** 2} + {(t * 10) ** 2} + {u * u} + {2 * h * 100 * t * 10} + {2 * t * 10 * u} + {2 * h * 100 * u} = {n * n}.")
+
+
+def tri_steps(rng, key):
+    k = nz(rng, 1, 7)
+    res = (X + Y + P.const(k)) ** 2 - (X + Y) ** 2
+    wrong = X * X + Y * Y + P.const(k * k) - (X + Y) ** 2
+    return steps(key, TR, f"Опрости стъпка по стъпка: (x + y + {k})² − (x + y)²", f"(x+y+{k})^2-(x+y)^2", res, wrong,
+                 "(x + y + k)² има и удвоени произведения.",
+                 ["Разкрий (x + y + " + str(k) + ")² по формулата за квадрат на тричлен.", "(x + y)² = x² + 2xy + y².", "x², y² и 2xy се унищожават."],
+                 f"= x² + y² + {k * k} + 2xy + {2 * k}x + {2 * k}y − x² − 2xy − y² = {res.fmt()}.")
+
+
+def tri_structured(rng, key):
+    k, v = nz(rng, 1, 3), nz(rng, -2, 2)
+    A = (X * X + P.mono(k, x=1) + P.const(1)) ** 2
+    c2 = A.t.get((("x", 2),), 0)
+    return q(key, TR, "Прилага формулата (a + b + c)²", "STRUCTURED", "ADVANCED", 240, 3, "FORMULA_APPLICATION",
+             f"Даден е изразът A = (x² + {'' if k == 1 else k}x + 1)². Ще пресмятаме и при x = {val(v)}.", "C",
+             part_prompts=[{"id": "a", "label": "а) Запиши A в нормален вид", "type": "EXPRESSION", "points": 1},
+                           {"id": "b", "label": "б) Коефициентът пред x²", "type": "NUMERIC", "points": 1},
+                           {"id": "c", "label": f"в) Стойността на A при x = {val(v)}", "type": "NUMERIC", "points": 1}],
+             parts=[{"id": "a", "type": "EXPRESSION", "answer": A.fmt(False), "form": "NORMAL_FORM", "points": 1},
+                    {"id": "b", "type": "NUMERIC", "answer": val(c2, False), "points": 1},
+                    {"id": "c", "type": "NUMERIC", "answer": val(A.eval(x=v), False), "points": 1}],
+             distractors=[{"match": (P.mono(1, x=4) + P.mono(k * k, x=2) + P.const(1)).fmt(False), "misconception": "FORMULA_APPLICATION", "explanation": "Липсват удвоените произведения."}],
+             hints=["a = x², b = " + P.mono(k, x=1).fmt() + ", c = 1.", f"Членове с x²: ({P.mono(k, x=1).fmt()})² и 2·x²·1.", "За в) пресметни скобата и я повдигни на квадрат."],
+             solution=f"а) A = {A.fmt()}; б) {k * k} + 2 = {val(c2)}; в) ({val(v * v + k * v + 1)})² = {val(A.eval(x=v))}.", rubric="По 1 т. за всяка вярна част.")
+
+
+# ------------------------------------------------------------------ следствия от формулите
+
+CS = "C.identities"
+
+
+def cons_4ab_mc(rng, key):
+    k = nz(rng, 2, 9)
+    r = (X + P.const(k)) ** 2 - (X - P.const(k)) ** 2
+    wrongs = [("0", "FORMULA_APPLICATION", "Удвоените произведения са с различни знаци — при изваждане те се събират."),
+              (P.mono(2 * k, x=1).fmt(), "FORMULA_APPLICATION", "Удвоеното произведение 2kx се взема два пъти: 4kx."),
+              ((2 * X * X + P.const(2 * k * k)).fmt(), "SIGN", "Това е сборът на двата квадрата, а търсим разликата.")]
+    return mc(rng, key, CS, "Прилага следствия от формулите", "INTERMEDIATE", "FORMULA_APPLICATION",
+              f"(x + {k})² − (x − {k})² е равно на:", r.fmt(), wrongs,
+              ["(a + b)² − (a − b)² = 4ab.", f"a = x, b = {k}.", f"4·x·{k}."],
+              f"(x + {k})² − (x − {k})² = 4·x·{k} = {r.fmt()}.", "C", expect=r.fmt(False))
+
+
+def cons_sum_mc(rng, key):
+    k = nz(rng, 2, 9)
+    r = (X + P.const(k)) ** 2 + (X - P.const(k)) ** 2
+    wrongs = [((2 * X * X).fmt(), "FORMULA_APPLICATION", f"Квадратите {k}² също се събират: 2·{k * k}."),
+              ((2 * X * X + P.mono(4 * k, x=1) + P.const(2 * k * k)).fmt(), "SIGN", "Удвоените произведения +2kx и −2kx се унищожават."),
+              ((X * X + P.const(k * k)).fmt(), "FORMULA_APPLICATION", "Събираме два квадрата: x² + x² = 2x².")]
+    return mc(rng, key, CS, "Прилага следствия от формулите", "INTERMEDIATE", "FORMULA_APPLICATION",
+              f"(x + {k})² + (x − {k})² е равно на:", r.fmt(), wrongs,
+              ["(a + b)² + (a − b)² = 2(a² + b²).", f"a = x, b = {k}.", "Удвоените произведения се унищожават."],
+              f"(x + {k})² + (x − {k})² = 2(x² + {k * k}) = {r.fmt()}.", "C", expect=r.fmt(False))
+
+
+def cons_swap_mc(rng, key):
+    k = nz(rng, 2, 9)
+    r = (P.const(k) - X) ** 2
+    wrongs = [((-(X * X) - P.mono(2 * k, x=1) + P.const(k * k)).fmt(), "SIGN", "Квадратът е винаги с плюс: (−x)² = x²."),
+              ((X * X + P.mono(2 * k, x=1) + P.const(k * k)).fmt(), "SIGN", "(k − x)² = (x − k)² — средният член е с минус."),
+              ((P.const(k * k) - X * X).fmt(), "FORMULA_APPLICATION", "Това е разлика на квадрати, а не квадрат на разлика.")]
+    return mc(rng, key, CS, "Прилага следствия от формулите", "INTERMEDIATE", "SIGN", f"({k} − x)² е равно на:", r.fmt(), wrongs,
+              ["(a − b)² = (b − a)².", f"({k} − x)² = (x − {k})².", f"x² − {2 * k}x + {k * k}."],
+              f"({k} − x)² = (x − {k})² = {r.fmt()}.", "C", expect=r.fmt(False))
+
+
+def cons_ab_mc(rng, key):
+    a, b = rng.sample(range(1, 10), 2)
+    a, b = max(a, b), min(a, b)
+    s, d = a + b, a - b
+    wrongs = [(str(s * s - d * d), "FORMULA_APPLICATION", "(a + b)² − (a − b)² = 4ab — раздели на 4."),
+              (str(s * d), "FORMULA_APPLICATION", f"{s}·{d} = a² − b², а не ab."),
+              (str((s * s - d * d) // 2), "FORMULA_APPLICATION", "Разликата на квадратите е 4ab, не 2ab.")]
+    return mc(rng, key, CS, "Прилага следствия от формулите", "ADVANCED", "FORMULA_APPLICATION",
+              f"Ако a + b = {s} и a − b = {d}, колко е ab?", str(a * b), wrongs,
+              ["(a + b)² − (a − b)² = 4ab.", f"{s}² − {d}² = 4ab.", f"ab = ({s * s} − {d * d}) : 4."],
+              f"4ab = (a + b)² − (a − b)² = {s * s} − {d * d} = {s * s - d * d}, значи ab = {a * b}.", "C", expect=str(a * b))
+
+
+def cons_diff_sq(rng, key, pts=2):
+    a, b = rng.sample(range(1, 10), 2)
+    s, p = a + b, a * b
+    return q(key, CS, "Прилага следствия от формулите", "NUMERIC", "ADVANCED", 90, pts, "FORMULA_APPLICATION",
+             f"Ако a + b = {s} и ab = {p}, намери (a − b)².", "C", answer=str((a - b) ** 2),
+             distractors=[{"match": str(s * s - 2 * p), "misconception": "FORMULA_APPLICATION", "explanation": "Това е a² + b². (a − b)² = (a + b)² − 4ab."}],
+             hints=["(a − b)² = a² − 2ab + b².", "a² + b² = (a + b)² − 2ab.", f"(a − b)² = (a + b)² − 4ab = {s * s} − {4 * p}."],
+             solution=f"(a − b)² = (a + b)² − 4ab = {s * s} − {4 * p} = {(a - b) ** 2}.")
+
+
+def cons_sum_sq(rng, key, pts=2):
+    a, b = rng.sample(range(1, 10), 2)
+    a, b = max(a, b), min(a, b)
+    d, p = a - b, a * b
+    return q(key, CS, "Прилага следствия от формулите", "NUMERIC", "ADVANCED", 90, pts, "FORMULA_APPLICATION",
+             f"Ако a − b = {d} и ab = {p}, намери (a + b)².", "C", answer=str((a + b) ** 2),
+             distractors=[{"match": str(d * d + 2 * p), "misconception": "FORMULA_APPLICATION", "explanation": "Това е a² + b². (a + b)² = (a − b)² + 4ab."}],
+             hints=["(a + b)² = (a − b)² + 4ab.", f"{d}² = {d * d}.", f"{d * d} + 4·{p}."],
+             solution=f"(a + b)² = (a − b)² + 4ab = {d * d} + {4 * p} = {(a + b) ** 2}.")
+
+
+def cons_cubes_sum(rng, key, pts=2):
+    a, b = rng.sample(range(1, 7), 2)
+    s, p = a + b, a * b
+    return q(key, CS, "Прилага следствия от формулите", "NUMERIC", "ADVANCED", 120, pts, "FORMULA_APPLICATION",
+             f"Ако a + b = {s} и ab = {p}, намери a³ + b³.", "C", answer=str(a ** 3 + b ** 3),
+             distractors=[{"match": str(s ** 3), "misconception": "FORMULA_APPLICATION", "explanation": "a³ + b³ = (a + b)³ − 3ab(a + b)."}],
+             hints=["a³ + b³ = (a + b)(a² − ab + b²).", f"a² + b² = {s}² − 2·{p} = {s * s - 2 * p}.", f"a³ + b³ = {s}·({s * s - 2 * p} − {p})."],
+             solution=f"a² + b² = {s * s} − {2 * p} = {s * s - 2 * p}; a³ + b³ = (a + b)(a² − ab + b²) = {s}·{s * s - 3 * p} = {a ** 3 + b ** 3}.")
+
+
+def cons_steps(rng, key):
+    k = nz(rng, 2, 9)
+    res = (X + P.const(k)) ** 2 + (X - P.const(k)) ** 2 - 2 * X * X
+    wrong = (X + P.const(k)) ** 2 - (X - P.const(k)) ** 2 - 2 * X * X
+    return steps(key, CS, f"Опрости стъпка по стъпка: (x + {k})² + (x − {k})² − 2x²", f"(x+{k})^2+(x-{k})^2-2x^2", res, wrong,
+                 "Вторият квадрат се прибавя — знаците в него не се сменят.",
+                 [f"(x + {k})² = x² + {2 * k}x + {k * k}.", f"(x − {k})² = x² − {2 * k}x + {k * k}.", "Удвоените произведения се унищожават."],
+                 f"= x² + {2 * k}x + {k * k} + x² − {2 * k}x + {k * k} − 2x² = {res.fmt()}.")
+
+
+def cons_structured(rng, key):
+    a, b = rng.sample(range(1, 7), 2)
+    s, p = a + b, a * b
+    return q(key, CS, "Прилага следствия от формулите", "STRUCTURED", "ADVANCED", 240, 3, "FORMULA_APPLICATION",
+             f"За числата a и b е известно, че a + b = {s} и ab = {p}.", "C",
+             part_prompts=[{"id": "a", "label": "а) a² + b²", "type": "NUMERIC", "points": 1},
+                           {"id": "b", "label": "б) (a − b)²", "type": "NUMERIC", "points": 1},
+                           {"id": "c", "label": "в) a³ + b³", "type": "NUMERIC", "points": 1}],
+             parts=[{"id": "a", "type": "NUMERIC", "answer": str(a * a + b * b), "points": 1},
+                    {"id": "b", "type": "NUMERIC", "answer": str((a - b) ** 2), "points": 1},
+                    {"id": "c", "type": "NUMERIC", "answer": str(a ** 3 + b ** 3), "points": 1}],
+             distractors=[{"match": str(s * s), "misconception": "FORMULA_APPLICATION", "explanation": "(a + b)² ≠ a² + b² — извади 2ab."}],
+             hints=["a² + b² = (a + b)² − 2ab.", "(a − b)² = (a + b)² − 4ab.", "a³ + b³ = (a + b)(a² − ab + b²)."],
+             solution=f"а) {s * s} − {2 * p} = {a * a + b * b}; б) {s * s} − {4 * p} = {(a - b) ** 2}; в) {s}·({a * a + b * b} − {p}) = {a ** 3 + b ** 3}.",
+             rubric="По 1 т. за всяка вярна част.")
+
+
 # ------------------------------------------------------------------ tests
 
 def pools(f):
@@ -413,6 +648,10 @@ def pools(f):
         return ([partial(cube_mc, s), partial(cube_kx_mc, s), partial(cube_missing_mc, s), partial(cube_number_mc, s)],
                 [partial(cube_expr, s), partial(cube_number, s)],
                 [partial(cube_steps, s), partial(cube_structured, s)])
+    if f == "TRI":
+        return ([tri_expand_mc, tri_missing_mc, tri_two_var_mc, tri_sum_value_mc], [tri_expr, tri_sum_value, tri_number], [tri_steps, tri_structured])
+    if f == "CONS":
+        return ([cons_4ab_mc, cons_sum_mc, cons_swap_mc, cons_ab_mc], [cons_diff_sq, cons_sum_sq, cons_cubes_sum], [cons_steps, cons_structured])
     s = 1 if f == "SC+" else -1
     return ([partial(sc_product_mc, s), partial(sc_factor_mc, s), partial(sc_second_factor_mc, s)],
             [partial(sc_factor_expr, s), partial(sc_expand_expr, s), partial(sc_number, s)],
@@ -426,6 +665,11 @@ TESTS = [(f"FML-{i + 1}{v}", [f], f"{TOPIC} · {name} — упражнение {
          for i, (f, name) in enumerate(FORMULAS) for n, v in ((1, "A"), (2, "B"))]
 TESTS += [("FML-MA", [f for f, _ in FORMULAS], f"{TOPIC} · Всички формули — смесено упражнение 1", "ALLOWED"),
           ("FML-MB", [f for f, _ in FORMULAS], f"{TOPIC} · Всички формули — смесено упражнение 2", "NONE")]
+# Added later (kept at the end so the tests above stay exactly as published).
+TESTS += [("FML-8A", ["TRI"], f"{TOPIC} · Квадрат на тричлен (a + b + c)² — упражнение 1", "ALLOWED"),
+          ("FML-8B", ["TRI"], f"{TOPIC} · Квадрат на тричлен (a + b + c)² — упражнение 2", "ALLOWED"),
+          ("FML-9A", ["CONS"], f"{TOPIC} · Следствия от формулите — упражнение 1", "ALLOWED"),
+          ("FML-9B", ["CONS"], f"{TOPIC} · Следствия от формулите — упражнение 2", "ALLOWED")]
 
 
 def build(existing_prompts):
