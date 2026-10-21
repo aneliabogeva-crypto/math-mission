@@ -235,7 +235,7 @@ export function AdminTest() {
   const qs = new Map<string, { it: AttemptItem; total: number; ok: number; answers: Map<string, number>; who: string[] }>();
   for (const a of attempts) {
     for (const it of a.items ?? []) {
-      const e = qs.get(it.key) ?? { it, total: 0, ok: 0, answers: new Map(), who: [] };
+      const e = qs.get(it.key) ?? { it, total: 0, ok: 0, answers: new Map<string, number>(), who: [] as string[] };
       e.total++;
       if (it.status === 'CORRECT') e.ok++;
       else { e.answers.set(it.answer || '—', (e.answers.get(it.answer || '—') ?? 0) + 1); e.who.push(names.get(a.user_id) ?? '?'); }
