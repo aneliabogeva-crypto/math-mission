@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { CLOUD, isCloudAdmin } from '../cloud';
 import { STANDALONE, type TestSummary } from '../api';
 import { Avatar } from '../components/Avatar';
 import { Helper } from '../components/Helper';
@@ -44,6 +45,18 @@ export function HomePage() {
           </div>
         </div>
       </div>
+
+      {CLOUD && isCloudAdmin() && (
+        <div className="card admin-card">
+          <h2>★ Администрация</h2>
+          <p className="small muted">Само за теб: резултатите на децата и цялото публикувано съдържание.</p>
+          <div className="row">
+            <Link className="btn" to="/admin/children">Деца и резултати</Link>
+            <Link className="btn secondary" to="/admin/tests">Резултати по тестове</Link>
+            <Link className="btn secondary" to="/admin/content">Уроци и тестове (съдържание)</Link>
+          </div>
+        </div>
+      )}
 
       {data.corrections.length > 0 && (
         <div className="alert info" role="status"><strong>Корекция на резултат</strong>{data.corrections.map((m, i) => <p key={i}>{m}</p>)}</div>

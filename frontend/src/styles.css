@@ -313,7 +313,7 @@ main { padding-left: max(16px, env(safe-area-inset-left)); padding-right: max(16
 .chip.grade-ok { background: var(--ok-bg); } .chip.grade-info { background: var(--info-bg); } .chip.grade-warn { background: var(--warn-bg); } .chip.grade-bad { background: var(--bad-bg); }
 @media (max-width: 599px) { .answer-grid { grid-template-columns: 1fr; } .bars li { grid-template-columns: 1fr auto; } .bars .bar { grid-column: 1 / -1; } .admin-row { flex-wrap: wrap; } }
 
-@media (max-width: 599px) { .admin-link .label { display: none; } .admin-link { font-size: 1.2rem; } }
+@media (max-width: 599px) { .admin-link .label::before { content: 'Админ'; font-size: .9rem; } .admin-link .label { font-size: 0; } }
 .admin-link { color: var(--revision); }
 
 .options-key { list-style: none; padding: 0; margin: .3rem 0; display: grid; gap: 4px; }
@@ -324,3 +324,7 @@ main { padding-left: max(16px, env(safe-area-inset-left)); padding-right: max(16
 .formula-sheet ol { padding-left: 1.4rem; margin: .3rem 0; }
 .formula-sheet li.math-block { font-size: 1.15rem; white-space: normal; padding: .15rem 0; }
 .formula-sheet ul { padding-left: 1.2rem; }
+
+.admin-card { border: 2px solid var(--revision); background: color-mix(in srgb, var(--revision) 8%, var(--surface)); }
+.admin-card h2 { color: var(--revision); }
+@media (max-width: 599px) { .topbar:has(.admin-link) .brand-name { display: none; } }
