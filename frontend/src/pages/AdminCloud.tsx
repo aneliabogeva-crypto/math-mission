@@ -1,5 +1,9 @@
-import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useEffect, useState, type CSSProperties } from 'react';
+import { Link, NavLink, useParams } from 'react-router-dom';
+import contentJson from '../local/data/content.json';
+import curriculumJson from '../local/data/curriculum.json';
+import lessonKeys from '../local/data/lesson-keys.json';
+import { TOPICS } from '../topics';
 import { Avatar } from '../components/Avatar';
 import { ErrorNote, Loading } from '../components/Layout';
 import { MathText, RichText } from '../components/MathText';
@@ -60,9 +64,11 @@ function MistakeSummary({ attempts }: { attempts: AttemptRecord[] }) {
 
 export function AdminNav() {
   return (
-    <nav className="row" aria-label="Администрация" style={{ marginBottom: '1rem' }}>
-      <Link className="btn secondary" to="/admin/children">Деца</Link>
-      <Link className="btn secondary" to="/admin/tests">Тестове</Link>
+    <nav className="row admin-nav" aria-label="Администрация" style={{ marginBottom: '1rem' }}>
+      <NavLink className="btn secondary" to="/admin/children">Деца</NavLink>
+      <NavLink className="btn secondary" to="/admin/tests">Резултати по тестове</NavLink>
+      <NavLink className="btn secondary" to="/admin/content">Съдържание</NavLink>
+      <Link className="btn ghost" to="/">← Към приложението</Link>
     </nav>
   );
 }
@@ -278,6 +284,120 @@ export function AdminTest() {
             )}
           </li>
         ))}
+      </ol>
+    </div>
+  );
+}
+
+
+// ------------------------------------------------------------------ published content (lessons and tests with answer keys)
+
+interface CQ { key: string; draft: { skill: string; responseType: string; maxPoints: number; difficulty: string; hints: string[];
+  prompt: { text: string; options?: { id: string; text: string }[]; parts?: { id: string; label: string }[]; startExpression?: string };
+  key: { correctOptionId?: string; answer?: string; parts?: { id: string; answer: string }[]; solution: string } } }
+interface CT { testKey: string; title: string; kind: string; timeLimitMin: number; hintPolicy: string; questionKeys: string[] }
+const CONTENT = contentJson as unknown as { questions: CQ[]; tests: CT[] };
+const QMAP = new Map(CONTENT.questions.map((q) => [q.key, q]));
+const TMAP = new Map(CONTENT.tests.map((t) => [t.testKey, t]));
+const LTITLE = new Map((curriculumJson as { lessons: { key: string; title: string }[] }).lessons.map((l) => [l.key, l.title]));
+const PUBLISHED = new Set(lessonKeys as string[]);
+const RT: Record<string, string> = { SINGLE_CHOICE: 'избор', NUMERIC: 'число', EXPRESSION: 'израз', STEPS: 'стъпки', STRUCTURED: 'с подточки', FREE_TEXT: 'свободен текст' };
+const pretty = (s: string) => s.replace(/\^(\d)/g, (_, d: string) => '⁰¹²³⁴⁵⁶⁷⁸⁹'[Number(d)]).replace(/\*/g, '·').replace(/-/g, ' − ').replace(/\+/g, ' + ').replace(/\( − /g, '(−');
+
+function TestLine({ t }: { t: CT }) {
+  return (
+    <li className="test-row">
+      <div className="body">
+        <div className="title">{t.title.replace(/^[^·]+ · /, '')}</div>
+        <div className="small muted">{t.questionKeys.length} въпроса · {t.timeLimitMin} мин. · {t.hintPolicy === 'ALLOWED' ? 'с подсказки' : 'без подсказки'}</div>
+      </div>
+      <Link className="btn secondary" to={`/admin/content/${t.testKey}`}>Въпроси и отговори</Link>
+    </li>
+  );
+}
+
+/** Everything that is published: topics, lessons and tests, in the order the learners see them. */
+export function AdminContent() {
+  const shown = new Set<string>();
+  const total = CONTENT.tests.length;
+  return (
+    <div>
+      <h1>Съдържание</h1>
+      <AdminNav />
+      <p className="muted">Публикувани: {PUBLISHED.size} урока · {total} теста · {CONTENT.questions.length} задачи. Уроците се отварят както ги виждат децата; при тестовете виждаш всички въпроси с верните отговори и решенията.</p>
+      {TOPICS.map((topic, i) => {
+        const lessonTests = (k: string) => (topic.lessonTests[k] ?? []).map((key) => TMAP.get(key)).filter((t): t is CT => Boolean(t));
+        const summary = [...topic.summaryTests, ...topic.examTests].map((key) => TMAP.get(key)).filter((t): t is CT => Boolean(t));
+        [...topic.lessons.flatMap((k) => topic.lessonTests[k] ?? []), ...topic.summaryTests, ...topic.examTests].forEach((k) => shown.add(k));
+        return (
+          <section key={topic.id} className="zone topic" style={{ '--zone': `var(${topic.colour})` } as CSSProperties}>
+            <div className="topic-head"><span className="topic-num">{i + 1}</span><span className="topic-name"><h2>Тема {i + 1}. {topic.name}</h2>
+              <span className="small muted">{topic.lessons.length} урока · {topic.lessons.reduce((n, k) => n + lessonTests(k).length, 0) + summary.length} теста</span></span></div>
+            <ol className="stops">
+              {topic.lessons.map((k, j) => (
+                <li key={k} className="lesson-item">
+                  <div className="stop">
+                    <span className="num" aria-hidden="true">{j + 1}</span>
+                    <div className="body"><div className="title">{LTITLE.get(k) ?? k}</div><div className="small muted">Урок {k}{PUBLISHED.has(k) ? '' : ' · не е публикуван'}</div></div>
+                    {PUBLISHED.has(k) && <Link className="btn secondary" to={`/lesson/${k}`}>Отвори урока</Link>}
+                  </div>
+                  {lessonTests(k).length > 0 && <div className="lesson-tests"><ul className="test-list">{lessonTests(k).map((t) => <TestLine key={t.testKey} t={t} />)}</ul></div>}
+                </li>
+              ))}
+            </ol>
+            {summary.length > 0 && <div className="topic-summary"><h3>Обобщаващи тестове и контролно</h3><ul className="test-list">{summary.map((t) => <TestLine key={t.testKey} t={t} />)}</ul></div>}
+          </section>
+        );
+      })}
+      {CONTENT.tests.some((t) => !shown.has(t.testKey)) && (
+        <section className="zone"><h2>Други тестове</h2><ul className="test-list">{CONTENT.tests.filter((t) => !shown.has(t.testKey)).map((t) => <TestLine key={t.testKey} t={t} />)}</ul></section>
+      )}
+    </div>
+  );
+}
+
+/** One published test: every question with its answer key, hints and full solution. */
+export function AdminContentTest() {
+  const { key } = useParams();
+  const t = TMAP.get(key ?? '');
+  if (!t) return <ErrorNote error={{ message: 'Тестът не е намерен.' }} />;
+  return (
+    <div className="stack">
+      <AdminNav />
+      <Link to="/admin/content">← Съдържание</Link>
+      <h1>{t.title}</h1>
+      <p className="muted">{t.questionKeys.length} въпроса · {t.timeLimitMin} минути · {t.hintPolicy === 'ALLOWED' ? 'с подсказки' : 'без подсказки'} · <Link to={`/tests/${t.testKey}`}>Реши го като ученик</Link></p>
+      <ol className="admin-items">
+        {t.questionKeys.map((k, i) => {
+          const q = QMAP.get(k);
+          if (!q) return null;
+          const d = q.draft;
+          return (
+            <li key={k} className="card admin-item is-ok">
+              <div className="row" style={{ justifyContent: 'space-between' }}>
+                <strong>Въпрос {i + 1}</strong>
+                <span className="small muted">{RT[d.responseType] ?? d.responseType} · {d.maxPoints} т.</span>
+              </div>
+              <p><RichText text={d.prompt.text} /></p>
+              {d.prompt.startExpression && <p className="small">Начален израз: <span className="math">{pretty(d.prompt.startExpression)}</span></p>}
+              {d.prompt.options && (
+                <ul className="options-key">
+                  {d.prompt.options.map((o) => (
+                    <li key={o.id} className={o.id === d.key.correctOptionId ? 'correct' : ''}>
+                      {o.id}) <MathText>{o.text}</MathText>{o.id === d.key.correctOptionId && <strong> ✓ верен</strong>}
+                    </li>
+                  ))}
+                </ul>
+              )}
+              {!d.prompt.options && d.key.answer && <p>Верен отговор: <strong className="math">{pretty(d.key.answer)}</strong></p>}
+              {d.key.parts && d.prompt.parts && (
+                <ul className="small">{d.prompt.parts.map((p) => <li key={p.id}>{p.label}: <strong className="math">{pretty(d.key.parts!.find((x) => x.id === p.id)?.answer ?? '')}</strong></li>)}</ul>
+              )}
+              <div className="alert ok small"><strong>Решение:</strong> <RichText text={d.key.solution} /></div>
+              <details className="small"><summary>Подсказки</summary><ol>{d.hints.map((h) => <li key={h}><RichText text={h} /></li>)}</ol></details>
+            </li>
+          );
+        })}
       </ol>
     </div>
   );

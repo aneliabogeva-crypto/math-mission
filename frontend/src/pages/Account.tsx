@@ -75,7 +75,8 @@ export function CloudWelcome({ initial = 'login', onDone, notice }: { initial?: 
   async function proceed(s: CloudSession) {
     setSession(s);
     // The administrator's account opens the overview of the learners, not a learner profile.
-    if (await checkAdmin(s).catch(() => false)) { onDone?.(); nav('/admin/children', { replace: true }); return; }
+    // The administrator also uses the app as a learner; the administration pages are added to the menu.
+    await checkAdmin(s).catch(() => false);
     const r = await openOnDevice(s, signIn, me);
     if (r === 'done') { onDone?.(); nav('/', { replace: true }); } else setMode('onboard');
   }

@@ -60,8 +60,8 @@ export function Layout({ children }: { children: ReactNode }) {
         {me && me.role !== 'STUDENT' && staffLinks[me.role]?.map((l) => <NavLink key={l.to} className="btn ghost" to={l.to}>{l.label}</NavLink>)}
         <InstallButton />
         <ThemeToggle />
-        {CLOUD && isCloudAdmin() && <span className="chip info">Администратор</span>}
-        {CLOUD && isCloudAdmin() && <button type="button" className="btn ghost" onClick={() => void signOut()}>Изход</button>}
+        {CLOUD && isCloudAdmin() && <NavLink className="btn ghost admin-link" to="/admin/children"><span aria-hidden="true">★</span><span className="label">Администрация</span></NavLink>}
+        {CLOUD && isCloudAdmin() && !me && <button type="button" className="btn ghost" onClick={() => void signOut()}>Изход</button>}
         {me && CLOUD && me.role === 'STUDENT'
           ? <NavLink className="btn ghost" to="/account">Профил</NavLink>
           : me && <button type="button" className="btn ghost" onClick={() => void signOut()}>Изход</button>}

@@ -22,7 +22,7 @@ import { AccountPage, CloudWelcome } from './pages/Account';
 import { CLOUD, URL_AUTH, checkAdmin, currentSession, getCloudSession, isCloudAdmin } from './cloud';
 import { useEffect, useState } from 'react';
 import { syncAttempts } from './cloudSync';
-import { AdminAttempt, AdminChild, AdminChildren, AdminTest, AdminTests } from './pages/AdminCloud';
+import { AdminAttempt, AdminChild, AdminChildren, AdminContent, AdminContentTest, AdminTest, AdminTests } from './pages/AdminCloud';
 import { useSession } from './session';
 import type { Role } from './api';
 
@@ -43,6 +43,10 @@ function Only({ roles, children }: { roles: Role[]; children: JSX.Element }) {
   }
   if (me.role === 'STUDENT' && me.status !== 'ACTIVE') return <PendingConsent />;
   return children;
+}
+
+function AdminOnly({ children }: { children: JSX.Element }) {
+  return CLOUD && isCloudAdmin() ? children : <Navigate to="/" replace />;
 }
 
 function PendingConsent() {
@@ -88,26 +92,20 @@ export function App() {
   }, [me]);
   if (loading) return <Layout><Loading /></Layout>;
   if (recovering) return <Layout><CloudWelcome onDone={() => setRecovering(false)} /></Layout>;
-  if (CLOUD && isCloudAdmin()) {
-    return (
-      <Layout>
-        <Routes>
-          <Route path="/admin/children" element={<AdminChildren />} />
-          <Route path="/admin/child/:id" element={<AdminChild />} />
-          <Route path="/admin/attempt/:uid/:id" element={<AdminAttempt />} />
-          <Route path="/admin/tests" element={<AdminTests />} />
-          <Route path="/admin/test/:key" element={<AdminTest />} />
-          <Route path="*" element={<Navigate to="/admin/children" replace />} />
-        </Routes>
-      </Layout>
-    );
-  }
   const S: Role[] = ['STUDENT'];
   return (
     <Layout>
       <Routes>
         <Route path="/welcome" element={me ? <Navigate to={HOME_BY_ROLE[me.role]} replace /> : CLOUD ? <CloudWelcome /> : <Welcome />} />
         <Route path="/account" element={<Only roles={S}><AccountPage /></Only>} />
+        {/* The administrator sees the whole app like a learner, plus these pages. */}
+        <Route path="/admin/children" element={<AdminOnly><AdminChildren /></AdminOnly>} />
+        <Route path="/admin/child/:id" element={<AdminOnly><AdminChild /></AdminOnly>} />
+        <Route path="/admin/attempt/:uid/:id" element={<AdminOnly><AdminAttempt /></AdminOnly>} />
+        <Route path="/admin/tests" element={<AdminOnly><AdminTests /></AdminOnly>} />
+        <Route path="/admin/test/:key" element={<AdminOnly><AdminTest /></AdminOnly>} />
+        <Route path="/admin/content" element={<AdminOnly><AdminContent /></AdminOnly>} />
+        <Route path="/admin/content/:key" element={<AdminOnly><AdminContentTest /></AdminOnly>} />
         <Route path="/login" element={CLOUD ? <Navigate to="/welcome" replace /> : <Login />} />
         <Route path="/consent/:code" element={<ConsentPage />} />
         <Route path="/" element={<Only roles={S}><HomePage /></Only>} />

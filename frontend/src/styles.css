@@ -312,3 +312,11 @@ main { padding-left: max(16px, env(safe-area-inset-left)); padding-right: max(16
 .bar > span { display: block; height: 100%; background: var(--brand); }
 .chip.grade-ok { background: var(--ok-bg); } .chip.grade-info { background: var(--info-bg); } .chip.grade-warn { background: var(--warn-bg); } .chip.grade-bad { background: var(--bad-bg); }
 @media (max-width: 599px) { .answer-grid { grid-template-columns: 1fr; } .bars li { grid-template-columns: 1fr auto; } .bars .bar { grid-column: 1 / -1; } .admin-row { flex-wrap: wrap; } }
+
+@media (max-width: 599px) { .admin-link .label { display: none; } .admin-link { font-size: 1.2rem; } }
+.admin-link { color: var(--revision); }
+
+.options-key { list-style: none; padding: 0; margin: .3rem 0; display: grid; gap: 4px; }
+.options-key li { padding: .35rem .6rem; border-radius: 8px; background: var(--surface-2); }
+.options-key li.correct { background: var(--ok-bg); border: 1px solid var(--mastered); }
+.admin-nav a[aria-current="page"] { border-color: var(--brand); background: var(--info-bg); }
