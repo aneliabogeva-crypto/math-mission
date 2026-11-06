@@ -92,17 +92,22 @@ export const TOPICS: TopicDef[] = [
     formulas: ALL_FORMULAS,
   },
   {
-    id: 'T5', name: 'Разлагане на множители', colour: '--t5', lessons: ['C11', 'C12', 'C13'],
-    lessonTests: { C11: ['FAC-1A', 'FAC-1B'], C12: ['FAC-2A', 'FAC-2B'], C13: ['FAC-3A', 'FAC-3B'] },
-    summaryTests: [], examTests: ['FAC-K1', 'FAC-K2', 'FAC-K3', 'FAC-K4'],
+    id: 'T5', name: 'Разлагане на множители', colour: '--t5', lessons: ['C11', 'C12', 'C14', 'C15', 'C13'],
+    lessonTests: {
+      C11: ['FAC-1A', 'FAC-1B'], C12: ['FAC-4A', 'FAC-4B'], C14: ['FAC-5A', 'FAC-5B', 'FAC-2A', 'FAC-2B'],
+      C15: ['FAC-6A', 'FAC-6B'], C13: ['FAC-3A', 'FAC-3B'],
+    },
+    summaryTests: [], examTests: ['FAC-K1', 'FAC-K2', 'FAC-K3', 'FAC-K4', 'FAC-X1', 'FAC-X2', 'FAC-X3', 'FAC-X4'],
     keyPoints: [
-      'Първо изнеси общия множител: ab + ac = a(b + c).',
-      'После провери за формула: a² − b², a² ± 2ab + b², a³ ± b³.',
-      'При четири члена опитай групиране.',
-      'Проверка: умножи обратно — трябва да получиш началния израз.',
-      'Разлагането помага за бързо пресмятане: 98² − 4 = (98 − 2)(98 + 2) = 9600.',
+      'Разлагане на множители = записване на многочлена като произведение.',
+      'Изнасяне на общ множител: НОД на коефициентите и общите букви с най-малките им показатели — ab + ac = a(b + c).',
+      'Чрез формули: a² − b², a² ± 2ab + b², a³ ± b³ — прочети формулата отдясно наляво. Сборът a² + b² не се разлага.',
+      'Чрез групиране: раздели членовете на групи, изнеси от всяка общия множител и после общата скоба. При минус пред групата знаците в скобата се сменят.',
+      'Тричлен x² + bx + c: раздели средния член на два — търси числа с произведение c и сбор b.',
+      'Комбинирано: първо общ множител, после формула или групиране; разлагай докрай — нито един множител да не се разлага повече.',
+      'Проверка: умножи обратно. Приложения: рационално пресмятане (98² − 4 = 96·100), уравнения (произведение = 0), делимост.',
     ],
-    formulas: ['ab + ac = a(b + c)', 'a² − b² = (a − b)(a + b)', 'a² ± 2ab + b² = (a ± b)²'],
+    formulas: ['ab + ac = a(b + c)', 'a² − b² = (a − b)(a + b)', 'a² ± 2ab + b² = (a ± b)²', 'a³ + b³ = (a + b)(a² − ab + b²)', 'a³ − b³ = (a − b)(a² + ab + b²)', 'ax + ay + bx + by = (x + y)(a + b)'],
   },
   {
     id: 'T6', name: 'Обобщителен преговор', colour: '--t6', lessons: ['D1', 'D2', 'D3'],
@@ -137,7 +142,7 @@ export function placeTests(tests: TestSummary[]): Placed {
 /** Short label for a test inside its topic. */
 export function testLabel(t: TestSummary, topic?: TopicDef): string {
   const [group, rest] = t.title.includes(' · ') ? t.title.split(' · ', 2) : ['', t.title];
-  if (/вариант \d+/.test(rest)) return `Контролно — ${rest.match(/вариант \d+/)![0]}`;
+  if (/вариант \d+/.test(rest)) return `Контролно${/отличен/.test(rest) ? ' за отличен' : ''} — ${rest.match(/вариант \d+/)![0]}`;
   if (/упражнение \d+|тренировка \d+/.test(rest)) return rest;
   if (topic && (group === topic.name || topic.id === 'T1' || topic.id === 'T2')) return rest.replace(/^Тест/, 'Обобщаващ тест');
   return group && group !== 'Обобщителни тестове' ? `${group} — ${rest.toLowerCase()}` : rest;

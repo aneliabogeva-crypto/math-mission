@@ -331,6 +331,9 @@ tests += gen_t
 import lessons as lessons_mod
 all_prompts = {x["draft"]["prompt"]["text"] for x in lesson_questions + T + gen_q}
 lq, ll = lessons_mod.build(all_prompts)
+# Lessons added later (C14, C15) must not change what the older generators skip as duplicates.
+lq_new = [x for x in lq if x["key"].startswith(("LC14-", "LC15-"))]
+lq_all, lq = lq, [x for x in lq if x not in lq_new]
 import topic_ops
 oq, ot = topic_ops.build(all_prompts | {x["draft"]["prompt"]["text"] for x in lq})
 tests += ot
@@ -343,6 +346,10 @@ tests += xt
 import topic_fml
 mq, mt = topic_fml.build(all_prompts | {x["draft"]["prompt"]["text"] for x in lq + oq + fq + xq})
 tests += mt
+lq = lq_all
+import topic_factor2
+yq, yt = topic_factor2.build(all_prompts | {x["draft"]["prompt"]["text"] for x in lq + oq + fq + xq + mq})
+tests += yt
 # Tests are grouped by topic ("Тема · Име") — no day-by-day programme.
 TOPIC_TITLES = {
   "D1-A": "Рационални изрази · Тест 1", "D3-A": "Рационални изрази · Тест 2", "D4-A": "Рационални изрази · Тест 3",
@@ -353,7 +360,7 @@ TOPIC_TITLES = {
 for t_ in tests:
     t_["title"] = TOPIC_TITLES.get(t_["testKey"], t_["title"])
     assert not t_["title"].startswith("Ден"), t_["testKey"]
-out = {"questions": lesson_questions + T + gen_q + lq + oq + fq + xq + mq, "lessons": [lesson] + ll, "tests": tests, "blueprints": blueprints}
+out = {"questions": lesson_questions + T + gen_q + lq + oq + fq + xq + mq + yq, "lessons": [lesson] + ll, "tests": tests, "blueprints": blueprints}
 with open(os.path.join(os.path.dirname(__file__), "generated-checks.json"), "w", encoding="utf-8") as f:
     json.dump(gen_tests.SIDE, f, ensure_ascii=False)
 path = os.path.join(os.path.dirname(__file__), "..", "backend", "src", "main", "resources", "seed", "content.json")
