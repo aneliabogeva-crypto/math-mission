@@ -1,0 +1,73 @@
+/* Math Mission service worker.
+ * - Pages (navigation): network-first, so a new version is shown as soon as it is published;
+ *   the cached copy is used only offline. Hashed assets: cache-first (their names change per build).
+ * - Lesson and practice-question GETs: network-first with cache fallback, so the currently opened
+ *   lesson and its practice items keep working when the connection drops (US-STU-12).
+ * - Writes (answers) are never handled here: the app keeps an idempotent outbox and resends them.
+ */
+const SHELL = 'mm-shell-v4';
+const DATA = 'mm-data-v1';
+// Relative to the service worker's own location, so it works at / and under a sub-path.
+const SHELL_URLS = ['./', './index.html', './manifest.webmanifest', './icon.svg', './icon-192.png', './icon-512.png'];
+const INDEX = new URL('./index.html', self.location).pathname;
+
+self.addEventListener('install', (e) => {
+  e.waitUntil(caches.open(SHELL).then((c) => c.addAll(SHELL_URLS)).then(() => self.skipWaiting()));
+});
+
+self.addEventListener('activate', (e) => {
+  e.waitUntil(
+    caches.keys().then((keys) => Promise.all(keys.filter((k) => ![SHELL, DATA].includes(k)).map((k) => caches.delete(k))))
+      .then(() => self.clients.claim()),
+  );
+});
+
+const CACHEABLE_API = [/^\/api\/student\/lessons\/[^/]+$/, /^\/api\/student\/practice\/[^/]+$/, /^\/api\/student\/reference/,
+  /^\/api\/student\/map$/, /^\/api\/student\/attempts\/[^/]+$/];
+
+self.addEventListener('fetch', (e) => {
+  const req = e.request;
+  if (req.method !== 'GET') return;
+  const url = new URL(req.url);
+  if (url.origin !== self.location.origin) return;
+
+  if (url.pathname.includes('/api/')) {
+    if (!CACHEABLE_API.some((r) => r.test(url.pathname))) return;
+    e.respondWith(
+      fetch(req).then((res) => {
+        if (res.ok) {
+          const copy = res.clone();
+          caches.open(DATA).then((c) => c.put(req, copy));
+        }
+        return res;
+      }).catch(() => caches.match(req).then((m) => m || new Response(JSON.stringify({ code: 'OFFLINE', message: 'Няма връзка.' }),
+        { status: 503, headers: { 'Content-Type': 'application/json' } }))),
+    );
+    return;
+  }
+
+  if (url.pathname.endsWith('/version.json')) return; // always from the network
+
+  // Navigation: network-first, falling back to the cached index.html offline (SPA routes).
+  if (req.mode === 'navigate') {
+    e.respondWith(
+      fetch(req).then((res) => {
+        if (res.ok) { const copy = res.clone(); caches.open(SHELL).then((c) => c.put(INDEX, copy)); }
+        return res;
+      }).catch(() => caches.match(INDEX)),
+    );
+    return;
+  }
+
+  // Static assets: cache-first (file names are content-hashed), stored on first use.
+  e.respondWith(
+    caches.match(req).then((hit) => hit || fetch(req).then((res) => {
+      if (res.ok && url.pathname.includes('/assets/')) { const copy = res.clone(); caches.open(SHELL).then((c) => c.put(req, copy)); }
+      return res;
+    })),
+  );
+});
+
+self.addEventListener('message', (e) => {
+  if (e.data === 'logout') caches.delete(DATA); // never keep one learner's data for the next user of a device
+});
